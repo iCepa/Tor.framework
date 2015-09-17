@@ -1,0 +1,12 @@
+[submodule "Tor/libevent"]
+	path = Tor/libevent
+	url = git://levent.git.sourceforge.net/gitroot/levent/libevent
+    ignore = dirty
+[submodule "Tor/tor"]
+	path = Tor/tor
+	url = https://git.torproject.org/tor.git
+[submodule "Tor/openssl"]
+	path = Tor/openssl
+	url = git://git.openssl.org/openssl.git
+    ignore = dirty
+
