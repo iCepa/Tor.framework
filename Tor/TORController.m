@@ -17,7 +17,7 @@ const char tor_git_revision[] =
 #endif
 "";
 
-typedef BOOL (^TORObserverBlock)(NSUInteger code, NSData *data, BOOL *stop);
+typedef BOOL (^TORObserverBlock)(NSArray<NSNumber *> *codes, NSArray<NSData *> *lines, BOOL *stop);
 
 static NSString * const TORControllerMidReplyLineSeparator = @"-";
 static NSString * const TORControllerDataReplyLineSeparator = @"+";
@@ -79,6 +79,8 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
         dispatch_io_close(_channel, DISPATCH_IO_STOP);
 }
 
+#pragma mark - Connecting
+
 - (BOOL)isConnected {
     return (_channel != nil);
 }
@@ -138,7 +140,8 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
                              TORControllerEndReplyLineSeparator, nil];
     
     __block NSMutableData *buffer = [NSMutableData new];
-    __block NSMutableData *command = nil;
+    __block NSMutableArray<NSNumber *> *codes = [NSMutableArray new];
+    __block NSMutableArray<NSData *> *lines = [NSMutableArray new];
     __block BOOL dataBlock = NO;
     
     dispatch_io_set_low_water(_channel, 1);
@@ -158,7 +161,13 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
                 if ([lineData isEqualToData:[NSData dataWithBytes:"." length:1]]) {
                     dataBlock = NO;
                 } else {
-                    [command appendData:lineData];
+                    NSMutableData *lastData = lines.lastObject.mutableCopy;
+                    if (lastData) {
+                        [lastData appendData:lineData];
+                        [lines replaceObjectAtIndex:(lines.count - 1) withObject:lastData];
+                    } else {
+                        [lines addObject:lineData];
+                    }
                 }
                 continue;
             }
@@ -176,20 +185,19 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
             
             buffer = [[buffer subdataWithRange:remainingRange] mutableCopy];
             remainingRange.location = 0;
-            
-            if (!command)
-                command = [NSMutableData new];
-            
-            [command appendData:[lineData subdataWithRange:NSMakeRange(4, lineData.length - 4)]];
+
+            [codes addObject:@(statusCodeString.integerValue)];
+            [lines addObject:[lineData subdataWithRange:NSMakeRange(4, lineData.length - 4)]];
             
             if ([lineTypeString isEqualToString:TORControllerDataReplyLineSeparator]) {
                 dataBlock = YES;
             }
             
             if ([lineTypeString isEqualToString:TORControllerEndReplyLineSeparator]) {
-                NSUInteger statusCode = [statusCodeString integerValue];
-                NSData *commandData = [command copy];
-                command = nil;
+                NSArray<NSNumber *> *commandCodes = [codes copy];
+                NSArray<NSData *> *commandLines = [lines copy];
+                codes = [NSMutableArray new];
+                lines = [NSMutableArray new];
                 
                 TORController *strongSelf = weakSelf;
                 if (!strongSelf)
@@ -197,7 +205,7 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
                 
                 for (TORObserverBlock observer in [strongSelf->_blocks copy]) {
                     BOOL stop = NO;
-                    BOOL handled = observer(statusCode, commandData, &stop);
+                    BOOL handled = observer(commandCodes, commandLines, &stop);
                     if (stop)
                         [strongSelf->_blocks removeObject:observer];
                     if (handled)
@@ -210,7 +218,7 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
     return YES;
 }
 
-#pragma mark - Receiving
+#pragma mark - Receiving Responses
 
 - (id)addObserverForCircuitEstablished:(void (^)(BOOL established))block {
     NSParameterAssert(block);
@@ -231,11 +239,11 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
 
 - (id)addObserverForStatusEvents:(BOOL (^)(NSString *type, NSString *severity, NSString *action, NSDictionary *arguments))block {
     NSParameterAssert(block);
-    return [self addObserver:^(NSUInteger code, NSData *data, BOOL *stop) {
-        if (code != 650)
+    return [self addObserver:^(NSArray<NSNumber *> *codes, NSArray<NSData *> *lines, BOOL *stop) {
+        if (codes.firstObject.integerValue != 650)
             return NO;
         
-        NSString *replyString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSString *replyString = [[NSString alloc] initWithData:lines.firstObject encoding:NSUTF8StringEncoding];
         if (![replyString hasPrefix:@"STATUS_"])
             return NO;
         
@@ -273,24 +281,106 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
     });
 }
 
-#pragma mark - Sending
+#pragma mark - Sending Commands
 
 - (void)authenticateWithData:(NSData *)data completion:(void (^)(BOOL success, NSString *message))completion {
     NSMutableString *hexString = [NSMutableString new];
     for (NSUInteger idx = 0; idx < data.length; idx++)
         [hexString appendFormat:@"%02x", ((const unsigned char *)data.bytes)[idx]];
     
-    [self sendCommand:@"AUTHENTICATE" arguments:(hexString.length ? @[hexString] : nil) data:nil observer:^BOOL(NSUInteger code, NSData *data, BOOL *stop) {
+    [self sendCommand:@"AUTHENTICATE" arguments:(hexString.length ? @[hexString] : nil) data:nil observer:^BOOL(NSArray<NSNumber *> *codes, NSArray<NSData *> *lines, BOOL *stop) {
+        NSUInteger code = codes.firstObject.unsignedIntegerValue;
         if (code != 250 && code != 515)
             return NO;
         
-        NSString *message = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSString *message = [[NSString alloc] initWithData:lines.firstObject encoding:NSUTF8StringEncoding];
         BOOL success = (code == 250 && [message isEqualToString:@"OK"]);
         if (completion)
             completion(success, success ? nil : message);
         
         *stop = YES;
         return YES;
+    }];
+}
+
+- (void)getInfoForKeys:(NSArray *)keys completion:(void (^)(NSArray *values))completion {
+    [self sendCommand:@"GETINFO" arguments:keys data:nil observer:^BOOL(NSArray<NSNumber *> *codes, NSArray<NSData *> *lines, BOOL *stop) {
+        if ((lines.count - 1) != keys.count)
+            return NO;
+        
+        NSMutableArray *strings = [NSMutableArray new];
+        for (NSData *line in lines) {
+            NSString *string = [[NSString alloc] initWithData:line encoding:NSUTF8StringEncoding];
+            if (!string)
+                return NO;
+            
+            [strings addObject:string];
+        }
+        
+        if (codes.lastObject.integerValue != 250 || ![strings.lastObject isEqualToString:@"OK"])
+            return NO;
+        
+        NSMutableDictionary *info = [NSMutableDictionary new];
+        for (NSUInteger idx = 0; idx < strings.count - 1; idx++) {
+            NSUInteger code = codes[idx].unsignedIntegerValue;
+            if (code == 250) {
+                NSString *pair = strings[idx];
+                NSArray *components = [pair componentsSeparatedByString:@"="];
+                if (components.count == 2) {
+                    NSCharacterSet *quotes = [NSCharacterSet characterSetWithCharactersInString:@"\""];
+                    NSString *key = [components[0] stringByTrimmingCharactersInSet:quotes];
+                    NSString *value = [components[1] stringByTrimmingCharactersInSet:quotes];
+                    if ([keys containsObject:key]) {
+                        [info setObject:value forKeyedSubscript:key];
+                    }
+                }
+            }
+        }
+        
+        NSMutableArray *values = [NSMutableArray new];
+        for (NSString *key in keys)
+            [values addObject:([info objectForKey:key] ?: [NSNull null])];
+        
+        if (completion)
+            completion(values);
+        
+        *stop = YES;
+        return YES;
+    }];
+}
+
+- (void)getSessionConfiguration:(void (^)(NSURLSessionConfiguration *configuration))completion {
+    [self getInfoForKeys:@[@"net/listeners/socks"] completion:^(NSArray *values) {
+        if (values.count != 1) {
+            if (completion)
+                completion(nil);
+            return;
+        }
+        
+        NSArray *components = [values.firstObject componentsSeparatedByString:@":"];
+        if (components.count != 2) {
+            if (completion)
+                completion(nil);
+            return;
+        }
+        
+        if ([components[0] isEqualToString:@"unix"]) {
+            if (completion)
+                completion(nil);
+            return;
+        }
+        
+        if ([components[1] rangeOfCharacterFromSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]].location != NSNotFound) {
+            if (completion)
+                completion(nil);
+            return;
+        }
+
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        configuration.connectionProxyDictionary = @{(id)kCFProxyTypeKey: (id)kCFProxyTypeSOCKS,
+                                                    (id)kCFStreamPropertySOCKSProxyHost: components[0],
+                                                    (id)kCFStreamPropertySOCKSProxyPort: @([components[1] integerValue])};
+        completion(configuration);
     }];
 }
 

@@ -19,6 +19,8 @@
 
 // Commands
 - (void)authenticateWithData:(NSData *)data completion:(void (^)(BOOL success, NSString *message))completion;
+- (void)getInfoForKeys:(NSArray *)keys completion:(void (^)(NSArray *values))completion;
+- (void)getSessionConfiguration:(void (^)(NSURLSessionConfiguration *configuration))completion;
 
 // Observers
 - (id)addObserverForCircuitEstablished:(void (^)(BOOL established))block;
