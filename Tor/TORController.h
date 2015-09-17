@@ -19,6 +19,7 @@
 
 // Commands
 - (void)authenticateWithData:(NSData *)data completion:(void (^)(BOOL success, NSString *message))completion;
+- (void)listenForEvents:(NSArray *)events completion:(void (^)(BOOL success, NSString *message))completion;
 - (void)getInfoForKeys:(NSArray *)keys completion:(void (^)(NSArray *values))completion;
 - (void)getSessionConfiguration:(void (^)(NSURLSessionConfiguration *configuration))completion;
 

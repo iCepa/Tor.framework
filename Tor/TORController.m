@@ -28,6 +28,7 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
     in_port_t _port;
     dispatch_io_t _channel;
     NSMutableArray *_blocks;
+    NSOrderedSet *_events;
 }
 
 + (dispatch_queue_t)controlQueue {
@@ -37,15 +38,6 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
         controlQueue = dispatch_queue_create("org.torproject.ios.control", DISPATCH_QUEUE_SERIAL);
     });
     return controlQueue;
-}
-
-+ (dispatch_queue_t)eventQueue {
-    static dispatch_queue_t eventQueue = NULL;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        eventQueue = dispatch_queue_create("org.torproject.ios.events", DISPATCH_QUEUE_SERIAL);
-    });
-    return eventQueue;
 }
 
 - (instancetype)initWithControlSocketPath:(NSString *)path {
@@ -70,6 +62,7 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
     self = [super init];
     if (self) {
         _blocks = [NSMutableArray new];
+        _events = [NSOrderedSet new];
     }
     return self;
 }
@@ -222,8 +215,10 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
 
 - (id)addObserverForCircuitEstablished:(void (^)(BOOL established))block {
     NSParameterAssert(block);
-    return [self addObserverForStatusEvents:^(NSString *type, NSString *severity, NSString *action, NSDictionary *arguments) {
-        if ([type isEqualToString:@"STATUS_CLIENT"]) {
+    
+    NSString *event = @"STATUS_CLIENT";
+    id observer = [self addObserverForStatusEvents:^(NSString *type, NSString *severity, NSString *action, NSDictionary *arguments) {
+        if ([type isEqualToString:event]) {
             if ([action isEqualToString:@"CIRCUIT_ESTABLISHED"]) {
                 block(YES);
                 return YES;
@@ -235,6 +230,31 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
         
         return NO;
     }];
+    
+    void (^completion)(BOOL, NSString *) = ^(BOOL success, NSString *message) {
+        if (!success)
+            [self removeObserver:observer];
+        
+        [self getInfoForKeys:@[@"status/circuit-established"] completion:^(NSArray *values) {
+            if (values.count != 1)
+                return [self removeObserver:observer];
+            
+            if (block)
+                block([values[0] boolValue]);
+        }];
+    };
+    
+    dispatch_async([[self class] controlQueue], ^{
+        if ([_events containsObject:event]) {
+            completion(YES, nil);
+        } else {
+            NSMutableOrderedSet *events = [_events mutableCopy];
+            [events addObject:event];
+            [self listenForEvents:events.array completion:completion];
+        }
+    });
+    
+    return observer;
 }
 
 - (id)addObserverForStatusEvents:(BOOL (^)(NSString *type, NSString *severity, NSString *action, NSDictionary *arguments))block {
@@ -295,6 +315,24 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
         
         NSString *message = [[NSString alloc] initWithData:lines.firstObject encoding:NSUTF8StringEncoding];
         BOOL success = (code == 250 && [message isEqualToString:@"OK"]);
+        if (completion)
+            completion(success, success ? nil : message);
+        
+        *stop = YES;
+        return YES;
+    }];
+}
+
+- (void)listenForEvents:(NSArray *)events completion:(void (^)(BOOL success, NSString *message))completion {
+    [self sendCommand:@"SETEVENTS" arguments:events data:nil observer:^BOOL(NSArray<NSNumber *> *codes, NSArray<NSData *> *lines, BOOL *stop) {
+        NSUInteger code = codes.firstObject.unsignedIntegerValue;
+        if (code != 250 && code != 552)
+            return NO;
+        
+        NSString *message = [[NSString alloc] initWithData:lines.firstObject encoding:NSUTF8StringEncoding];
+        BOOL success = (code == 250 && [message isEqualToString:@"OK"]);
+        if (success)
+            _events = [NSOrderedSet orderedSetWithArray:events];
         if (completion)
             completion(success, success ? nil : message);
         
