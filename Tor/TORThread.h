@@ -8,13 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class TORConfiguration;
 
 @interface TORThread : NSThread
 
-+ (instancetype)torThread;
++ (nullable instancetype)torThread;
 
-- (instancetype)initWithConfiguration:(TORConfiguration *)configuration;
-- (instancetype)initWithArguments:(NSArray *)arguments NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithConfiguration:(nullable TORConfiguration *)configuration;
+- (instancetype)initWithArguments:(nullable NSArray *)arguments NS_DESIGNATED_INITIALIZER;
 
 @end
+
+NS_ASSUME_NONNULL_END

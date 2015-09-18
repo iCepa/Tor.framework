@@ -8,6 +8,8 @@
 
 #import <Tor/Tor.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 TOR_EXTERN NSString * const TORControllerErrorDomain;
 
 @interface TORController : NSObject
@@ -31,3 +33,5 @@ TOR_EXTERN NSString * const TORControllerErrorDomain;
 - (void)removeObserver:(id)observer;
 
 @end
+
+NS_ASSUME_NONNULL_END

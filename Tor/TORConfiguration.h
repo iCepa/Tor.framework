@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface TORConfiguration : NSObject
 
 @property (nonatomic, copy) NSString *dataDirectory;
@@ -27,3 +29,5 @@
 - (void)loadFromFileURL:(NSURL *)fileURL;
 
 @end
+
+NS_ASSUME_NONNULL_END
