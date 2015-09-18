@@ -43,9 +43,11 @@
 
 - (void)testCookieAuthenticationFailure {
     XCTestExpectation *expectation = [self expectationWithDescription:@"authenticate callback"];
-    [self.controller authenticateWithData:[@"invalid" dataUsingEncoding:NSUTF8StringEncoding] completion:^(BOOL success, NSString *message) {
+    [self.controller authenticateWithData:[@"invalid" dataUsingEncoding:NSUTF8StringEncoding] completion:^(BOOL success, NSError *error) {
         XCTAssertFalse(success);
-        XCTAssertNotNil(message);
+        XCTAssertEqualObjects(error.domain, TORControllerErrorDomain);
+        XCTAssertNotEqual(error.code, 250);
+        XCTAssertGreaterThan(error.localizedDescription.length, 0);
         [expectation fulfill];
     }];
     
@@ -57,9 +59,9 @@
     
     NSString *cookiePath = [[[[self class] configuration] dataDirectory] stringByAppendingPathComponent:@"control_auth_cookie"];
     NSData *cookie = [NSData dataWithContentsOfFile:cookiePath];
-    [self.controller authenticateWithData:cookie completion:^(BOOL success, NSString *message) {
+    [self.controller authenticateWithData:cookie completion:^(BOOL success, NSError *error) {
         XCTAssertTrue(success);
-        XCTAssertNil(message);
+        XCTAssertNil(error);
         [expectation fulfill];
     }];
     

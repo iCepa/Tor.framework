@@ -6,7 +6,9 @@
 //
 //
 
-#import <Foundation/Foundation.h>
+#import <Tor/Tor.h>
+
+TOR_EXTERN NSString * const TORControllerErrorDomain;
 
 @interface TORController : NSObject
 
@@ -18,8 +20,8 @@
 - (BOOL)connect:(out NSError **)error;
 
 // Commands
-- (void)authenticateWithData:(NSData *)data completion:(void (^)(BOOL success, NSString *message))completion;
-- (void)listenForEvents:(NSArray *)events completion:(void (^)(BOOL success, NSString *message))completion;
+- (void)authenticateWithData:(NSData *)data completion:(void (^)(BOOL success, NSError *error))completion;
+- (void)listenForEvents:(NSArray *)events completion:(void (^)(BOOL success, NSError *error))completion;
 - (void)getInfoForKeys:(NSArray *)keys completion:(void (^)(NSArray *values))completion;
 - (void)getSessionConfiguration:(void (^)(NSURLSessionConfiguration *configuration))completion;
 

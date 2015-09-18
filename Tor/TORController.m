@@ -19,6 +19,8 @@ const char tor_git_revision[] =
 
 typedef BOOL (^TORObserverBlock)(NSArray<NSNumber *> *codes, NSArray<NSData *> *lines, BOOL *stop);
 
+NSString * const TORControllerErrorDomain = @"TORControllerErrorDomain";
+
 static NSString * const TORControllerMidReplyLineSeparator = @"-";
 static NSString * const TORControllerDataReplyLineSeparator = @"+";
 static NSString * const TORControllerEndReplyLineSeparator = @" ";
@@ -231,7 +233,7 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
         return NO;
     }];
     
-    void (^completion)(BOOL, NSString *) = ^(BOOL success, NSString *message) {
+    void (^completion)(BOOL, NSError *) = ^(BOOL success, NSError *error) {
         if (!success)
             [self removeObserver:observer];
         
@@ -303,7 +305,7 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
 
 #pragma mark - Sending Commands
 
-- (void)authenticateWithData:(NSData *)data completion:(void (^)(BOOL success, NSString *message))completion {
+- (void)authenticateWithData:(NSData *)data completion:(void (^)(BOOL success, NSError *error))completion {
     NSMutableString *hexString = [NSMutableString new];
     for (NSUInteger idx = 0; idx < data.length; idx++)
         [hexString appendFormat:@"%02x", ((const unsigned char *)data.bytes)[idx]];
@@ -314,27 +316,29 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
             return NO;
         
         NSString *message = [[NSString alloc] initWithData:lines.firstObject encoding:NSUTF8StringEncoding];
+        NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:message, NSLocalizedDescriptionKey, nil];
         BOOL success = (code == 250 && [message isEqualToString:@"OK"]);
         if (completion)
-            completion(success, success ? nil : message);
+            completion(success, success ? nil : [NSError errorWithDomain:TORControllerErrorDomain code:code userInfo:userInfo]);
         
         *stop = YES;
         return YES;
     }];
 }
 
-- (void)listenForEvents:(NSArray *)events completion:(void (^)(BOOL success, NSString *message))completion {
+- (void)listenForEvents:(NSArray *)events completion:(void (^)(BOOL success, NSError *error))completion {
     [self sendCommand:@"SETEVENTS" arguments:events data:nil observer:^BOOL(NSArray<NSNumber *> *codes, NSArray<NSData *> *lines, BOOL *stop) {
         NSUInteger code = codes.firstObject.unsignedIntegerValue;
         if (code != 250 && code != 552)
             return NO;
         
         NSString *message = [[NSString alloc] initWithData:lines.firstObject encoding:NSUTF8StringEncoding];
+        NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:message, NSLocalizedDescriptionKey, nil];
         BOOL success = (code == 250 && [message isEqualToString:@"OK"]);
         if (success)
             _events = [NSOrderedSet orderedSetWithArray:events];
         if (completion)
-            completion(success, success ? nil : message);
+            completion(success, success ? nil : [NSError errorWithDomain:TORControllerErrorDomain code:code userInfo:userInfo]);
         
         *stop = YES;
         return YES;
