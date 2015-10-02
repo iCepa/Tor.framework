@@ -47,7 +47,7 @@
         XCTAssertFalse(success);
         XCTAssertEqualObjects(error.domain, TORControllerErrorDomain);
         XCTAssertNotEqual(error.code, 250);
-        XCTAssertGreaterThan(error.localizedDescription.length, 0);
+        XCTAssertGreaterThan(error.localizedDescription, @"Authentication failed: Wrong length on authentication cookie.");
         [expectation fulfill];
     }];
     
@@ -66,6 +66,39 @@
     }];
     
     [self waitForExpectationsWithTimeout:1.0f handler:nil];
+}
+
+- (void)testSessionConfiguration {
+    XCTestExpectation *expectation = [self expectationWithDescription:@"tor callback"];
+    
+    TORController *controller = self.controller;
+
+    void (^test)() = ^{
+        [controller getSessionConfiguration:^(NSURLSessionConfiguration *configuration) {
+            NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+            [[session dataTaskWithURL:[NSURL URLWithString:@"https://facebookcorewwwi.onion/"] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                XCTAssertEqual([(NSHTTPURLResponse *)response statusCode], 200);
+                XCTAssertNil(error);
+                [expectation fulfill];
+            }] resume];
+        }];
+    };
+    
+    NSString *cookiePath = [[[[self class] configuration] dataDirectory] stringByAppendingPathComponent:@"control_auth_cookie"];
+    NSData *cookie = [NSData dataWithContentsOfFile:cookiePath];
+    [controller authenticateWithData:cookie completion:^(BOOL success, NSError *error) {
+        if (!success)
+            return;
+        
+        [controller addObserverForCircuitEstablished:^(BOOL established) {
+            if (!established)
+                return;
+            
+            test();
+        }];
+    }];
+    
+    [self waitForExpectationsWithTimeout:120.0f handler:nil];
 }
 
 @end
