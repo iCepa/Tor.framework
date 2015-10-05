@@ -5,6 +5,22 @@
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D0FBEC6C1B79BAD7005C7577"
+               BuildableName = "Tor.framework"
+               BlueprintName = "Tor-iOS"
+               ReferencedContainer = "container:Tor.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
    </BuildAction>
    <TestAction
       buildConfiguration = "Debug"
@@ -12,16 +28,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D0FBEC7B1B79BB01005C7577"
-               BuildableName = "TorTests.xctest"
-               BlueprintName = "TorTests"
-               ReferencedContainer = "container:Tor.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <AdditionalOptions>
       </AdditionalOptions>
@@ -36,6 +42,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "D0FBEC6C1B79BAD7005C7577"
+            BuildableName = "Tor.framework"
+            BlueprintName = "Tor-iOS"
+            ReferencedContainer = "container:Tor.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -45,6 +60,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "D0FBEC6C1B79BAD7005C7577"
+            BuildableName = "Tor.framework"
+            BlueprintName = "Tor-iOS"
+            ReferencedContainer = "container:Tor.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

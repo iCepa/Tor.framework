@@ -6,9 +6,8 @@
 //
 //
 
-#include <or/or.h>
-
-#import "TORController.h"
+#if TARGET_OS_IPHONE
+#import <or/or.h>
 #import "TORThread.h"
 
 const char tor_git_revision[] =
@@ -16,6 +15,12 @@ const char tor_git_revision[] =
 #include "micro-revision.i"
 #endif
 "";
+#else
+#import <arpa/inet.h>
+#import <sys/un.h>
+#endif
+
+#import "TORController.h"
 
 typedef BOOL (^TORObserverBlock)(NSArray<NSNumber *> *codes, NSArray<NSData *> *lines, BOOL *stop);
 

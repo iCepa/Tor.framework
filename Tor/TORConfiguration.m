@@ -6,11 +6,11 @@
 //  Copyright © 2015 Conrad Kramer. All rights reserved.
 //
 
+#if TARGET_OS_IPHONE
 #include <or/or.h>
 #include <or/config.h>
 #include <or/confparse.h>
-
-#import <objc/runtime.h>
+#endif
 
 #import "TORConfiguration.h"
 
@@ -74,6 +74,7 @@
     return [[self.options objectForKey:@"CookieAuthentication"] boolValue];
 }
 
+#if TARGET_OS_IPHONE
 - (void)loadFromData:(NSData *)data {
     NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     if (!string)
@@ -101,5 +102,6 @@
 - (void)loadFromFileURL:(NSURL *)fileURL {
     [self loadFromData:[NSData dataWithContentsOfURL:fileURL]];
 }
+#endif
 
 @end

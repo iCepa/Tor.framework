@@ -25,8 +25,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSDictionary<NSString *, NSString *> *options;
 @property (nonatomic, copy) NSArray<NSString *> *arguments;
 
+#if TARGET_OS_IPHONE
 - (void)loadFromData:(NSData *)data;
 - (void)loadFromFileURL:(NSURL *)fileURL;
+#endif
 
 @end
 
