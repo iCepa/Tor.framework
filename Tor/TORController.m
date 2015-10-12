@@ -6,6 +6,8 @@
 //
 //
 
+#import "TORController.h"
+
 #if TARGET_OS_IPHONE
 #import <or/or.h>
 #import "TORThread.h"
@@ -20,8 +22,6 @@ const char tor_git_revision[] =
 #import <sys/un.h>
 #endif
 
-#import "TORController.h"
-
 typedef BOOL (^TORObserverBlock)(NSArray<NSNumber *> *codes, NSArray<NSData *> *lines, BOOL *stop);
 
 NSString * const TORControllerErrorDomain = @"TORControllerErrorDomain";
@@ -31,7 +31,8 @@ static NSString * const TORControllerDataReplyLineSeparator = @"+";
 static NSString * const TORControllerEndReplyLineSeparator = @" ";
 
 @implementation TORController {
-    NSString *_path;
+    NSURL *_url;
+    NSString *_host;
     in_port_t _port;
     dispatch_io_t _channel;
     NSMutableArray *_blocks;
@@ -47,18 +48,21 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
     return controlQueue;
 }
 
-- (instancetype)initWithControlSocketPath:(NSString *)path {
+- (instancetype)initWithSocketURL:(NSURL *)url {
+    NSParameterAssert(url.fileURL);
     self = [self init];
     if (self) {
-        _path = [path copy];
+        _url = [url copy];
         [self connect:nil];
     }
     return self;
 }
 
-- (instancetype)initWithControlSocketPort:(in_port_t)port {
+- (instancetype)initWithSocketHost:(NSString *)host port:(in_port_t)port {
+    NSParameterAssert(host && port);
     self = [self init];
     if (self) {
+        _host = [host copy];
         _port = port;
         [self connect:nil];
     }
@@ -91,10 +95,10 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
     
     int sock = -1;
     
-    if (_path) {
+    if (_url) {
         struct sockaddr_un control_addr = {};
         control_addr.sun_family = AF_UNIX;
-        strncpy(control_addr.sun_path, _path.fileSystemRepresentation, sizeof(control_addr.sun_path) - 1);
+        strncpy(control_addr.sun_path, _url.fileSystemRepresentation, sizeof(control_addr.sun_path) - 1);
         control_addr.sun_len = SUN_LEN(&control_addr);
         
         sock = socket(AF_UNIX, SOCK_STREAM, 0);
@@ -104,11 +108,18 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
                 *error = [NSError errorWithDomain:NSPOSIXErrorDomain code:errno userInfo:nil];
             return NO;
         }
-    } else if (_port) {
+    } else if (_host && _port) {
+        struct in_addr addr;
+        if (inet_aton(_host.UTF8String, &addr) == 0) {
+            if (error)
+                *error = [NSError errorWithDomain:NSPOSIXErrorDomain code:errno userInfo:nil];
+            return NO;
+        }
+        
         struct sockaddr_in control_addr = {};
         control_addr.sin_family = AF_INET;
         control_addr.sin_port = htons(_port);
-        control_addr.sin_addr.s_addr = INADDR_LOOPBACK;
+        control_addr.sin_addr = addr;
         control_addr.sin_len = (__uint8_t)sizeof(control_addr);
         
         sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
@@ -148,7 +159,7 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
     dispatch_io_read(_channel, 0, SIZE_MAX, [[self class] controlQueue], ^(bool done, dispatch_data_t data, int error) {
         [buffer appendData:(NSData *)data];
         
-        NSRange separatorRange = NSMakeRange(NSNotFound, 1);
+        NSRange separatorRange;
         NSRange remainingRange = NSMakeRange(0, buffer.length);
         while ((separatorRange = [buffer rangeOfData:separator options:0 range:remainingRange]).location != NSNotFound) {
             NSUInteger lineLength = separatorRange.location - remainingRange.location;
@@ -302,7 +313,9 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
 }
 
 - (void)removeObserver:(id)observer {
-    NSParameterAssert(observer);
+    if (!observer)
+        return;
+    
     dispatch_async([[self class] controlQueue], ^{
         [_blocks removeObject:observer];
     });

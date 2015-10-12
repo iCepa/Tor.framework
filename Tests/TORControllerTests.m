@@ -18,10 +18,19 @@
 @implementation TORControllerTests
 
 + (TORConfiguration *)configuration {
+    NSString *homeDirectory = nil;
+    for (NSString *variable in @[@"IPHONE_SIMULATOR_HOST_HOME", @"SIMULATOR_HOST_HOME"]) {
+        char *value = getenv(variable.UTF8String);
+        if (value) {
+            homeDirectory = @(value);
+            break;
+        }
+    }
+    
     TORConfiguration *configuration = [TORConfiguration new];
-    configuration.cookieAuthentication = YES;
-    configuration.dataDirectory = NSTemporaryDirectory();
-    configuration.controlSocket = @"/Users/conradev/.Trash/control_port";
+    configuration.cookieAuthentication = @YES;
+    configuration.dataDirectory = [NSURL fileURLWithPath:NSTemporaryDirectory()];
+    configuration.controlSocket = [[NSURL fileURLWithPath:homeDirectory] URLByAppendingPathComponent:@".Trash/control_port"];
     configuration.arguments = @[@"--ignore-missing-torrc"];
     return configuration;
 }
@@ -38,7 +47,7 @@
 - (void)setUp {
     [super setUp];
     
-    self.controller = [[TORController alloc] initWithControlSocketPath:[[[self class] configuration] controlSocket]];
+    self.controller = [[TORController alloc] initWithSocketURL:[[[self class] configuration] controlSocket]];
 }
 
 - (void)testCookieAuthenticationFailure {
@@ -57,8 +66,8 @@
 - (void)testCookieAuthenticationSuccess {
     XCTestExpectation *expectation = [self expectationWithDescription:@"authenticate callback"];
     
-    NSString *cookiePath = [[[[self class] configuration] dataDirectory] stringByAppendingPathComponent:@"control_auth_cookie"];
-    NSData *cookie = [NSData dataWithContentsOfFile:cookiePath];
+    NSURL *cookieURL = [[[[self class] configuration] dataDirectory] URLByAppendingPathComponent:@"control_auth_cookie"];
+    NSData *cookie = [NSData dataWithContentsOfURL:cookieURL];
     [self.controller authenticateWithData:cookie completion:^(BOOL success, NSError *error) {
         XCTAssertTrue(success);
         XCTAssertNil(error);
@@ -84,8 +93,8 @@
         }];
     };
     
-    NSString *cookiePath = [[[[self class] configuration] dataDirectory] stringByAppendingPathComponent:@"control_auth_cookie"];
-    NSData *cookie = [NSData dataWithContentsOfFile:cookiePath];
+    NSURL *cookieURL = [[[[self class] configuration] dataDirectory] URLByAppendingPathComponent:@"control_auth_cookie"];
+    NSData *cookie = [NSData dataWithContentsOfURL:cookieURL];
     [controller authenticateWithData:cookie completion:^(BOOL success, NSError *error) {
         if (!success)
             return;

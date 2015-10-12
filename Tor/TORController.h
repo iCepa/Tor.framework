@@ -16,21 +16,21 @@ TOR_EXTERN NSString * const TORControllerErrorDomain;
 
 @property (nonatomic, readonly, getter=isConnected) BOOL connected;
 
-- (instancetype)initWithControlSocketPath:(NSString *)path;
-- (instancetype)initWithControlSocketPort:(in_port_t)port;
+- (instancetype)initWithSocketURL:(NSURL *)url;
+- (instancetype)initWithSocketHost:(NSString *)host port:(in_port_t)port;
 
 - (BOOL)connect:(out NSError **)error;
 
 // Commands
-- (void)authenticateWithData:(NSData *)data completion:(void (^)(BOOL success, NSError *error))completion;
-- (void)listenForEvents:(NSArray *)events completion:(void (^)(BOOL success, NSError *error))completion;
+- (void)authenticateWithData:(NSData *)data completion:(void (^__nullable)(BOOL success, NSError * __nullable error))completion;
+- (void)listenForEvents:(NSArray *)events completion:(void (^__nullable)(BOOL success, NSError * __nullable error))completion;
 - (void)getInfoForKeys:(NSArray *)keys completion:(void (^)(NSArray *values))completion;
 - (void)getSessionConfiguration:(void (^)(NSURLSessionConfiguration *configuration))completion;
 
 // Observers
 - (id)addObserverForCircuitEstablished:(void (^)(BOOL established))block;
-- (id)addObserverForStatusEvents:(BOOL (^)(NSString *type, NSString *severity, NSString *action, NSDictionary *arguments))block;
-- (void)removeObserver:(id)observer;
+- (id)addObserverForStatusEvents:(BOOL (^)(NSString *type, NSString *severity, NSString *action, NSDictionary * __nullable arguments))block;
+- (void)removeObserver:(nullable id)observer;
 
 @end
 

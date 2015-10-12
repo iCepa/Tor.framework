@@ -12,23 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TORConfiguration : NSObject
 
-@property (nonatomic, copy) NSString *dataDirectory;
-@property (nonatomic, copy) NSString *controlSocket;
+@property (nonatomic, copy, nullable) NSURL *dataDirectory;
+@property (nonatomic, copy, nullable) NSURL *controlSocket;
+@property (nonatomic, copy, nullable) NSURL *socksURL;
+@property (nonatomic, copy, nullable) NSNumber *cookieAuthentication;
 
-@property (nonatomic, copy) NSString *socksPath;
-@property (nonatomic, copy) NSString *socksHost;
-@property (nonatomic) in_port_t socksPort;
-
-@property (nonatomic) BOOL cookieAuthentication;
-
-
-@property (nonatomic, copy) NSDictionary<NSString *, NSString *> *options;
-@property (nonatomic, copy) NSArray<NSString *> *arguments;
-
-#if TARGET_OS_IPHONE
-- (void)loadFromData:(NSData *)data;
-- (void)loadFromFileURL:(NSURL *)fileURL;
-#endif
+@property (nonatomic, copy, null_resettable) NSDictionary<NSString *, NSString *> *options;
+@property (nonatomic, copy, null_resettable) NSArray<NSString *> *arguments;
 
 @end
 
