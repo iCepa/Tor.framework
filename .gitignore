@@ -1,4 +1,6 @@
 xcuserdata
 micro-revision.i
 orconfig.h
+*.xcscmblueprint
+*.xccheckout
 
