@@ -17,6 +17,6 @@
 #import <Tor/TORController.h>
 #import <Tor/TORConfiguration.h>
 
-#ifdef TARGET_OS_PHONE
+#ifdef TARGET_OS_IPHONE
 #import <Tor/TORThread.h>
 #endif
