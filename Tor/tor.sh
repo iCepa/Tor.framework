@@ -29,6 +29,7 @@ if [ ${ACTION:-build} = "clean" ] || [ $REBUILD = 1 ]; then
     rm "${BUILT_PRODUCTS_DIR}/libtor.a" 2>/dev/null
     rm "${BUILT_PRODUCTS_DIR}/libor"*.a 2>/dev/null
     rm "${BUILT_PRODUCTS_DIR}/libcurve25519_donna.a" 2>/dev/null
+    rm "${BUILT_PRODUCTS_DIR}/libed25519"*.a 2>/dev/null
 fi
 
 if [ $REBUILD = 0 ]; then
@@ -52,7 +53,7 @@ do
     HOST=$(xcrun --sdk ${PLATFORM_NAME} clang -arch $ARCH -v 2>&1 | grep Target | sed -e 's/Target: //')
     ./configure --disable-tool-name-check --host="${HOST}" --enable-static-openssl --enable-static-libevent --disable-asciidoc --disable-system-torrc --disable-gcc-hardening --disable-linker-hardening --prefix="${CONFIGURATION_TEMP_DIR}/tor-${ARCH}" --with-libevent-dir="${CONFIGURATION_TEMP_DIR}/libevent-${ARCH}" --with-openssl-dir="${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}" CC="xcrun --sdk ${PLATFORM_NAME} clang -arch ${ARCH}" CFLAGS="${OTHER_CFLAGS} ${BITCODE_FLAGS} -I${PSEUDO_SYS_INCLUDE_DIR} -isysroot ${SDKROOT}" CPPLAGS="${OTHER_CFLAGS} ${BITCODE_FLAGS} -I${PSEUDO_SYS_INCLUDE_DIR} -isysroot ${SDKROOT}" ac_cv_func__NSGetEnviron="no" LDFLAGS="-lz ${OTHER_LDFLAGS} ${BITCODE_FLAGS}"
     make -j$(sysctl hw.ncpu | awk '{print $2}')
-    for LIBRARY in src/common/*.a src/or/*.a;
+    for LIBRARY in src/common/*.a src/or/*.a src/ext/ed25519/donna/*.a src/ext/ed25519/ref10/*.a src/trunnel/*.a;
     do
         cp $LIBRARY "${BUILT_PRODUCTS_DIR}/$(basename ${LIBRARY} .a).${ARCH}.a"
     done
@@ -68,7 +69,11 @@ xcrun --sdk $PLATFORM_NAME lipo -create "${BUILT_PRODUCTS_DIR}/libtor."*.a -outp
 xcrun --sdk $PLATFORM_NAME lipo -create "${BUILT_PRODUCTS_DIR}/libor."*.a -output "${BUILT_PRODUCTS_DIR}/libor.a"
 xcrun --sdk $PLATFORM_NAME lipo -create "${BUILT_PRODUCTS_DIR}/libor-event."*.a -output "${BUILT_PRODUCTS_DIR}/libor-event.a"
 xcrun --sdk $PLATFORM_NAME lipo -create "${BUILT_PRODUCTS_DIR}/libor-crypto."*.a -output "${BUILT_PRODUCTS_DIR}/libor-crypto.a"
+xcrun --sdk $PLATFORM_NAME lipo -create "${BUILT_PRODUCTS_DIR}/libor-trunnel."*.a -output "${BUILT_PRODUCTS_DIR}/libor-trunnel.a"
 xcrun --sdk $PLATFORM_NAME lipo -create "${BUILT_PRODUCTS_DIR}/libcurve25519_donna."*.a -output "${BUILT_PRODUCTS_DIR}/libcurve25519_donna.a"
-rm "${BUILT_PRODUCTS_DIR}/libtor."*.a
+xcrun --sdk $PLATFORM_NAME lipo -create "${BUILT_PRODUCTS_DIR}/libed25519_donna."*.a -output "${BUILT_PRODUCTS_DIR}/libed25519_donna.a"
+xcrun --sdk $PLATFORM_NAME lipo -create "${BUILT_PRODUCTS_DIR}/libed25519_ref10."*.a -output "${BUILT_PRODUCTS_DIR}/libed25519_ref10.a"
+rm "${BUILT_PRODUCTS_DIR}/libtor"*.*.a
 rm "${BUILT_PRODUCTS_DIR}/libor"*.*.a
 rm "${BUILT_PRODUCTS_DIR}/libcurve25519_donna."*.a
+rm "${BUILT_PRODUCTS_DIR}/libed25519"*.*.a

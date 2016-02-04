@@ -3,7 +3,7 @@
 //  Tor
 //
 //  Created by Conrad Kramer on 8/10/15.
-//  Copyright © 2015 Conrad Kramer. All rights reserved.
+//
 //
 
 #import <Foundation/Foundation.h>

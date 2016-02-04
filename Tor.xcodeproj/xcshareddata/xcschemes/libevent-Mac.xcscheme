@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D0FBEC6C1B79BAD7005C7577"
-               BuildableName = "Tor.framework"
-               BlueprintName = "Tor-iOS"
+               BlueprintIdentifier = "D0198AA01C63DE2100EA0043"
+               BuildableName = "libevent-Mac"
+               BlueprintName = "libevent-Mac"
                ReferencedContainer = "container:Tor.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D0FBEC6C1B79BAD7005C7577"
-            BuildableName = "Tor.framework"
-            BlueprintName = "Tor-iOS"
+            BlueprintIdentifier = "D0198AA01C63DE2100EA0043"
+            BuildableName = "libevent-Mac"
+            BlueprintName = "libevent-Mac"
             ReferencedContainer = "container:Tor.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -63,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D0FBEC6C1B79BAD7005C7577"
-            BuildableName = "Tor.framework"
-            BlueprintName = "Tor-iOS"
+            BlueprintIdentifier = "D0198AA01C63DE2100EA0043"
+            BuildableName = "libevent-Mac"
+            BlueprintName = "libevent-Mac"
             ReferencedContainer = "container:Tor.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

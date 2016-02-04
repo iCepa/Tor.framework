@@ -6,11 +6,11 @@ Tor.framework is the easiest way to embed Tor in your iOS application. The API i
 
 Currently, the framework compiles in static versions of `tor`, `libevent` and `openssl`:
 
-|          |          |
-|:-------- | --------:|
-| tor      | 0.2.6.10 |
-| libevent | 2.0.22   |
-| OpenSSL  | 1.0.2d   |
+|          |         |
+|:-------- | -------:|
+| tor      | 0.2.7.6 |
+| libevent | 2.0.22  |
+| OpenSSL  | 1.0.2f  |
 
 ## Requirements
 

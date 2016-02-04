@@ -1,5 +1,5 @@
 //
-//  TorController.m
+//  TORController.m
 //  Tor
 //
 //  Created by Conrad Kramer on 5/10/14.
@@ -8,7 +8,6 @@
 
 #import "TORController.h"
 
-#if TARGET_OS_IPHONE
 #import <or/or.h>
 #import "TORThread.h"
 
@@ -17,10 +16,6 @@ const char tor_git_revision[] =
 #include "micro-revision.i"
 #endif
 "";
-#else
-#import <arpa/inet.h>
-#import <sys/un.h>
-#endif
 
 typedef BOOL (^TORObserverBlock)(NSArray<NSNumber *> *codes, NSArray<NSData *> *lines, BOOL *stop);
 
@@ -390,9 +385,11 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
                     NSCharacterSet *quotes = [NSCharacterSet characterSetWithCharactersInString:@"\""];
                     NSString *key = [components[0] stringByTrimmingCharactersInSet:quotes];
                     NSString *value = [components[1] stringByTrimmingCharactersInSet:quotes];
-                    if ([keys containsObject:key]) {
+                    if (![keys containsObject:key])
+                        return NO;
+                    
+                    if ([keys containsObject:key])
                         [info setObject:value forKeyedSubscript:key];
-                    }
                 }
             }
         }
@@ -411,30 +408,18 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
 
 - (void)getSessionConfiguration:(void (^)(NSURLSessionConfiguration *configuration))completion {
     [self getInfoForKeys:@[@"net/listeners/socks"] completion:^(NSArray *values) {
-        if (values.count != 1) {
-            if (completion)
-                completion(nil);
-            return;
-        }
+        if (values.count != 1)
+            return completion(nil);
         
         NSArray *components = [values.firstObject componentsSeparatedByString:@":"];
-        if (components.count != 2) {
-            if (completion)
-                completion(nil);
-            return;
-        }
+        if (components.count != 2)
+            return completion(nil);
         
-        if ([components[0] isEqualToString:@"unix"]) {
-            if (completion)
-                completion(nil);
-            return;
-        }
+        if ([components[0] isEqualToString:@"unix"])
+            return completion(nil); // TODO: Provide error
         
-        if ([components[1] rangeOfCharacterFromSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]].location != NSNotFound) {
-            if (completion)
-                completion(nil);
-            return;
-        }
+        if ([components[1] rangeOfCharacterFromSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]].location != NSNotFound)
+            return completion(nil);
 
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         configuration.connectionProxyDictionary = @{(id)kCFProxyTypeKey: (id)kCFProxyTypeSOCKS,

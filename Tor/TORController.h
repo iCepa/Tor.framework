@@ -24,7 +24,7 @@ TOR_EXTERN NSString * const TORControllerErrorDomain;
 // Commands
 - (void)authenticateWithData:(NSData *)data completion:(void (^__nullable)(BOOL success, NSError * __nullable error))completion;
 - (void)listenForEvents:(NSArray *)events completion:(void (^__nullable)(BOOL success, NSError * __nullable error))completion;
-- (void)getInfoForKeys:(NSArray *)keys completion:(void (^)(NSArray *values))completion;
+- (void)getInfoForKeys:(NSArray *)keys completion:(void (^)(NSArray *values))completion; // TODO: Provide errors
 - (void)getSessionConfiguration:(void (^)(NSURLSessionConfiguration *configuration))completion;
 
 // Observers

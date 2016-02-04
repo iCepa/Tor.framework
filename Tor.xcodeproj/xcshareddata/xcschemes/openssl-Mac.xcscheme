@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0710"
+   LastUpgradeVersion = "0720"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D0FBEC871B79BC19005C7577"
-               BuildableName = "tor"
-               BlueprintName = "tor"
+               BlueprintIdentifier = "D0198A9C1C63DA5D00EA0043"
+               BuildableName = "openssl-Mac"
+               BlueprintName = "openssl-Mac"
                ReferencedContainer = "container:Tor.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D0FBEC871B79BC19005C7577"
-            BuildableName = "tor"
-            BlueprintName = "tor"
+            BlueprintIdentifier = "D0198A9C1C63DA5D00EA0043"
+            BuildableName = "openssl-Mac"
+            BlueprintName = "openssl-Mac"
             ReferencedContainer = "container:Tor.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -63,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D0FBEC871B79BC19005C7577"
-            BuildableName = "tor"
-            BlueprintName = "tor"
+            BlueprintIdentifier = "D0198A9C1C63DA5D00EA0043"
+            BuildableName = "openssl-Mac"
+            BlueprintName = "openssl-Mac"
             ReferencedContainer = "container:Tor.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
