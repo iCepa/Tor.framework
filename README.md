@@ -44,24 +44,29 @@ Here is an example of integrating Tor with `NSURLSession`:
 
 ```objc
 TORConfiguration *configuration = [TORConfiguration new];
-configuration.cookieAuthentication = YES;
-configuration.dataDirectory = NSTemporaryDirectory();
-configuration.controlSocket = [configuration.dataDirectory stringByAppendingPathComponent:@"control_port"];
+configuration.cookieAuthentication = @(YES);
+configuration.dataDirectory = [NSURL URLWithString:NSTemporaryDirectory()];
+configuration.controlSocket = [configuration.dataDirectory URLByAppendingPathComponent:@"control_port"];
 configuration.arguments = @[@"--ignore-missing-torrc"];
 
 TORThread *thread = [[TORThread alloc] initWithConfiguration:configuration];
 [thread start];
 
-NSString *cookiePath = [configuration.dataDirectory stringByAppendingPathComponent:@"control_auth_cookie"];
-NSData *cookie = [NSData dataWithContentsOfFile:cookiePath];
-TORController *controller = [[TORController alloc] initWithControlSocketPath:configuration.controlSocket];
+NSURL *cookieURL = [configuration.dataDirectory URLByAppendingPathComponent:@"control_auth_cookie"];
+NSData *cookie = [NSData dataWithContentsOfURL:cookieURL];
+TORController *controller = [[TORController alloc] initWithSocketURL:configuration.controlSocket];
 [controller authenticateWithData:cookie completion:^(BOOL success, NSError *error) {
     if (!success)
         return;
     
-    [controller getSessionConfiguration:^(NSURLSessionConfiguration *configuration) {
-        NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
-        ...
+    [controller addObserverForCircuitEstablished:^(BOOL established) {
+        if (!established)
+            return;
+        
+        [controller getSessionConfiguration:^(NSURLSessionConfiguration *configuration) {
+            NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+            ...
+        }];
     }];
 }];
 ```
