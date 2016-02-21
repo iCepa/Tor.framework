@@ -18,7 +18,7 @@
 @implementation TORControllerTests
 
 + (TORConfiguration *)configuration {
-    NSString *homeDirectory = nil;
+    NSString *homeDirectory = NSHomeDirectory();
     for (NSString *variable in @[@"IPHONE_SIMULATOR_HOST_HOME", @"SIMULATOR_HOST_HOME"]) {
         char *value = getenv(variable.UTF8String);
         if (value) {

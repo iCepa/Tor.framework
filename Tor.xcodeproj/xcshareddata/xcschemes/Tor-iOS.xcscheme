@@ -28,7 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D0FBEC7B1B79BB01005C7577"
+               BuildableName = "TorTests-iOS.xctest"
+               BlueprintName = "TorTests-iOS"
+               ReferencedContainer = "container:Tor.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "D0FBEC6C1B79BAD7005C7577"
+            BuildableName = "Tor.framework"
+            BlueprintName = "Tor-iOS"
+            ReferencedContainer = "container:Tor.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
