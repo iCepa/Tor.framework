@@ -16,17 +16,24 @@ Currently, the framework compiles in static versions of `tor`, `libevent` and `o
 
 - iOS 8.0 or later
 - Xcode 7.0 or later
+- `autoconf` and `automake` in your `PATH`
 
 ## Installation
 
 Embedded frameworks require a minimum deployment target of iOS 8 or OS X Mavericks (10.9).
+
+If you use `brew`, make sure to install `autoconf` and `automake`:
+
+```
+brew install automake autoconf
+```
 
 ### Carthage
 
 To integrate Tor into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "iCepa/Tor.framework" "e30f2a4974a1464ecb4c53a1fce000e4206633ed"
+github "iCepa/Tor.framework" "master"
 ```
 
 ## Usage
