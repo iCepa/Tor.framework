@@ -30,6 +30,8 @@ if [[ ${ACTION:-build} = "clean" ]] || [[ $REBUILD = 1 ]]; then
     rm "${BUILT_PRODUCTS_DIR}/libor"*.a 2>/dev/null
     rm "${BUILT_PRODUCTS_DIR}/libcurve25519_donna.a" 2>/dev/null
     rm "${BUILT_PRODUCTS_DIR}/libed25519"*.a 2>/dev/null
+    rm "${SRCROOT}/Tor/orconfig.h" 2>/dev/null
+    rm "${SRCROOT}/Tor/micro-revision.i" 2>/dev/null
 fi
 
 if [[ $REBUILD = 0 ]]; then
