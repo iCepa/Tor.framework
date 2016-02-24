@@ -25,14 +25,14 @@ if [[ ${ACTION:-build} = "build" ]]; then
 fi
 
 # If rebuilding or cleaning then delete the built products
-if [ ${ACTION:-build} = "clean" ] || [ $REBUILD = 1 ]; then
+if [[ ${ACTION:-build} = "clean" ]] || [[ $REBUILD = 1 ]]; then
     rm "${BUILT_PRODUCTS_DIR}/libtor.a" 2>/dev/null
     rm "${BUILT_PRODUCTS_DIR}/libor"*.a 2>/dev/null
     rm "${BUILT_PRODUCTS_DIR}/libcurve25519_donna.a" 2>/dev/null
     rm "${BUILT_PRODUCTS_DIR}/libed25519"*.a 2>/dev/null
 fi
 
-if [ $REBUILD = 0 ]; then
+if [[ $REBUILD = 0 ]]; then
     exit;
 fi
 
@@ -43,7 +43,7 @@ PSEUDO_SYS_INCLUDE_DIR="${CONFIGURATION_TEMP_DIR}/tor-sys"
 mkdir -p "${PSEUDO_SYS_INCLUDE_DIR}/sys"
 touch "${PSEUDO_SYS_INCLUDE_DIR}/sys/ptrace.h"
 
-if [ "${ENABLE_BITCODE}" = "YES" ]; then
+if [[ "${ENABLE_BITCODE}" = "YES" ]]; then
     BITCODE_FLAGS="-fembed-bitcode"
 fi
 
