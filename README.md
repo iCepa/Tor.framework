@@ -16,16 +16,16 @@ Currently, the framework compiles in static versions of `tor`, `libevent` and `o
 
 - iOS 8.0 or later
 - Xcode 7.0 or later
-- `autoconf`, `automake` and `libtool` in your `PATH`
+- `autoconf`, `automake`, `libtool` and `gettext` in your `PATH`
 
 ## Installation
 
 Embedded frameworks require a minimum deployment target of iOS 8 or OS X Mavericks (10.9).
 
-If you use `brew`, make sure to install `autoconf`, `automake` and `libtool`:
+If you use `brew`, make sure to install `autoconf`, `automake`, `libtool` and `gettext`:
 
 ```
-brew install automake autoconf libtool
+brew install automake autoconf libtool gettext
 ```
 
 ### Carthage
