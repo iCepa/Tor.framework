@@ -47,6 +47,12 @@ if [[ "${ENABLE_BITCODE}" = "YES" ]]; then
     BITCODE_FLAGS="-fembed-bitcode"
 fi
 
+# Backport commit 049445b to fix bug 18626 (building in Xcode 7.3)
+# Remove this when tor is updated to 0.2.8.x
+if [[ ! -f "${SRCROOT}/Tor/tor/changes/bug18626" ]]; then
+    git -C "${SRCROOT}/Tor/tor" apply "../tor-049445b.patch"
+fi
+
 # Build each architecture one by one using clang
 for ARCH in $ARCHS
 do
