@@ -43,7 +43,7 @@ do
     fi
     ./Configure iphoneos-cross zlib $NO_ASM $EC_NISTP --openssldir="${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}"
     make -j$(sysctl hw.ncpu | awk '{print $2}')
-    make install
+    make install_sw
     make clean
 done
 
