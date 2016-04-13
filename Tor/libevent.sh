@@ -37,6 +37,13 @@ if [[ "${ENABLE_BITCODE}" = "YES" ]]; then
     BITCODE_FLAGS="-fembed-bitcode"
 fi
 
+# If there is a space in SRCROOT, make a symlink without a space and use that
+if [[ "${SRCROOT}" =~ \  ]]; then
+    SYM_DIR="$(mktemp -d)/Tor"
+    ln -s "${SRCROOT}" "${SYM_DIR}"
+    SRCROOT="${SYM_DIR}"
+fi
+
 # We need XPC to build libevent, so copy it from the OSX SDK into a temporary directory
 XPC_INCLUDE_DIR="${CONFIGURATION_TEMP_DIR}/libevent-xpc"
 mkdir -p "${XPC_INCLUDE_DIR}/xpc"
@@ -48,7 +55,7 @@ do
     HOST=$(xcrun --sdk ${PLATFORM_NAME} clang -arch ${ARCH} -v 2>&1 | grep Target | sed -e 's/Target: //')
     PREFIX="${CONFIGURATION_TEMP_DIR}/libevent-${ARCH}"
     mkdir -p $PREFIX
-    ./configure --disable-shared --enable-static --disable-debug-mode --host=${HOST} --prefix=${PREFIX} CFLAGS="${OTHER_CFLAGS} ${BITCODE_FLAGS} -I${XPC_INCLUDE_DIR} -arch ${ARCH}" CPPFLAGS="${OTHER_CFLAGS} ${BITCODE_FLAGS} -I${XPC_INCLUDE_DIR} -arch ${ARCH}" LDFLAGS="${OTHER_LDFLAGS} ${BITCODE_FLAGS}"
+    ./configure --disable-shared --enable-static --disable-debug-mode --host=${HOST} --prefix=${PREFIX} CFLAGS="-I\"${SRCROOT}/Tor/openssl/include\" ${BITCODE_FLAGS} -I${XPC_INCLUDE_DIR} -arch ${ARCH}" CPPFLAGS="-I\"${SRCROOT}/Tor/openssl/include\" ${BITCODE_FLAGS} -I${XPC_INCLUDE_DIR} -arch ${ARCH}" LDFLAGS="${OTHER_LDFLAGS} ${BITCODE_FLAGS}"
     make -j$(sysctl hw.ncpu | awk '{print $2}')
     make install
     mv include/event2/event-config.h "${PREFIX}/event-config.h"

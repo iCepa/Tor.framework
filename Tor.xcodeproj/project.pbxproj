@@ -1016,7 +1016,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				OTHER_CFLAGS = "-I\"$(SRCROOT)/Tor/openssl/include\"";
 				OTHER_LDFLAGS = "-L$(BUILT_PRODUCTS_DIR)";
 				PRODUCT_NAME = libevent;
 			};
@@ -1026,7 +1025,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				OTHER_CFLAGS = "-I\"$(SRCROOT)/Tor/openssl/include\"";
 				OTHER_LDFLAGS = "-L$(BUILT_PRODUCTS_DIR)";
 				PRODUCT_NAME = libevent;
 			};
