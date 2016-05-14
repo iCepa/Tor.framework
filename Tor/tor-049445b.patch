@@ -1,0 +1,70 @@
+From db1352703c281fb5de355f76a00c092b52bcafda Mon Sep 17 00:00:00 2001
+From: Nick Mathewson <nickm@torproject.org>
+Date: Fri, 25 Mar 2016 16:26:13 -0400
+Subject: Remove spurious exit() calls from configure.ac
+
+We added these a while ago, but they do no actual good, and
+cause implicit declaration warnings in some situations.  Rather than
+just adding stdint.h, it's easier to remove the exit() calls
+as redundant.
+
+Fixes bug 18626; bugfix from "cypherpunks"
+
+diff --git a/changes/bug18626 b/changes/bug18626
+new file mode 100644
+index 0000000..5c1abff
+--- /dev/null
++++ b/changes/bug18626
+@@ -0,0 +1,5 @@
++  o Minor bugfixes (build):
++    - Avoid spurious failures from configure files related
++      to calling exit(0) in TOR_SEARCH_LIBRARY.
++      Fixes bug 18625; bugfix on 0.2.0.1-alpha.
++      Patch from "cypherpunks".
+diff --git a/configure.ac b/configure.ac
+index bf6d7f6..0c00910 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -473,19 +473,18 @@ TOR_SEARCH_LIBRARY(libevent, $trylibeventdir, [-levent $STATIC_LIBEVENT_FLAGS $T
+ #ifdef _WIN32
+ #include <winsock2.h>
+ #endif
+-#include <stdlib.h>
+ #include <sys/time.h>
+ #include <sys/types.h>
+ #include <event.h>], [
+ #ifdef _WIN32
+ #include <winsock2.h>
+ #endif
+-void exit(int); void *event_init(void);],
++void *event_init(void);],
+     [
+ #ifdef _WIN32
+ {WSADATA d; WSAStartup(0x101,&d); }
+ #endif
+-event_init(); exit(0);
++event_init();
+ ], [--with-libevent-dir], [/opt/libevent])
+ 
+ dnl Now check for particular libevent functions.
+@@ -611,7 +610,7 @@ AC_ARG_WITH(ssl-dir,
+ TOR_SEARCH_LIBRARY(openssl, $tryssldir, [-lssl -lcrypto $TOR_LIB_GDI],
+     [#include <openssl/rand.h>],
+     [void RAND_add(const void *buf, int num, double entropy);],
+-    [RAND_add((void*)0,0,0); exit(0);], [],
++    [RAND_add((void*)0,0,0);], [],
+     [/usr/local/openssl /usr/lib/openssl /usr/local/ssl /usr/lib/ssl /usr/local /usr/athena /opt/openssl])
+ 
+ dnl XXXX check for OPENSSL_VERSION_NUMBER == SSLeay()
+@@ -688,7 +687,7 @@ tor_zlib_devpkg_debian="zlib1g-dev"
+ TOR_SEARCH_LIBRARY(zlib, $tryzlibdir, [-lz],
+     [#include <zlib.h>],
+     [const char * zlibVersion(void);],
+-    [zlibVersion(); exit(0);], [--with-zlib-dir],
++    [zlibVersion();], [--with-zlib-dir],
+     [/opt/zlib])
+ 
+ if test "$enable_static_zlib" = "yes"; then
+-- 
+cgit v0.10.2
+

@@ -10,22 +10,22 @@ Currently, the framework compiles in static versions of `tor`, `libevent` and `o
 |:-------- | -------:|
 | tor      | 0.2.7.6 |
 | libevent | 2.0.22  |
-| OpenSSL  | 1.0.2f  |
+| OpenSSL  | 1.0.2g  |
 
 ## Requirements
 
 - iOS 8.0 or later
 - Xcode 7.0 or later
-- `autoconf` and `automake` in your `PATH`
+- `autoconf`, `automake`, `libtool` and `gettext` in your `PATH`
 
 ## Installation
 
 Embedded frameworks require a minimum deployment target of iOS 8 or OS X Mavericks (10.9).
 
-If you use `brew`, make sure to install `autoconf` and `automake`:
+If you use `brew`, make sure to install `autoconf`, `automake`, `libtool` and `gettext`:
 
 ```
-brew install automake autoconf
+brew install automake autoconf libtool gettext
 ```
 
 ### Carthage

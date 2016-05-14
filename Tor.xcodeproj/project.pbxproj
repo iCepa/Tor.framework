@@ -537,7 +537,7 @@
 		D0FBEC641B79BAD7005C7577 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Conrad Kramer";
 				TargetAttributes = {
 					D012AB841BC290D0004BE7A6 = {
@@ -1016,7 +1016,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				OTHER_CFLAGS = "-I\"$(SRCROOT)/Tor/openssl/include\"";
 				OTHER_LDFLAGS = "-L$(BUILT_PRODUCTS_DIR)";
 				PRODUCT_NAME = libevent;
 			};
@@ -1026,7 +1025,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				OTHER_CFLAGS = "-I\"$(SRCROOT)/Tor/openssl/include\"";
 				OTHER_LDFLAGS = "-L$(BUILT_PRODUCTS_DIR)";
 				PRODUCT_NAME = libevent;
 			};

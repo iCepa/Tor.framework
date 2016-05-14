@@ -15,16 +15,16 @@ if [[ ${ACTION:-build} = "build" ]]; then
 fi
 
 # If rebuilding or cleaning then delete the built products
-if [ $ACTION = "clean" ] || [ $REBUILD = 1 ]; then
+if [[ $ACTION = "clean" ]] || [[ $REBUILD = 1 ]]; then
     rm "${BUILT_PRODUCTS_DIR}/libssl.a" 2>/dev/null
     rm "${BUILT_PRODUCTS_DIR}/libcrypto.a" 2>/dev/null
 fi
 
-if [ $REBUILD = 0 ]; then
+if [[ $REBUILD = 0 ]]; then
     exit;
 fi
 
-if [ "${ENABLE_BITCODE}" = "YES" ]; then
+if [[ "${ENABLE_BITCODE}" = "YES" ]]; then
     BITCODE_FLAGS="-fembed-bitcode"
 fi
 
@@ -43,7 +43,7 @@ do
     fi
     ./Configure iphoneos-cross zlib $NO_ASM $EC_NISTP --openssldir="${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}"
     make -j$(sysctl hw.ncpu | awk '{print $2}')
-    make install
+    make install_sw
     make clean
 done
 
