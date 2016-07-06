@@ -4,12 +4,12 @@
 //
 //  Created by Conrad Kramer on 8/10/15.
 //
-//
 
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
+NS_SWIFT_NAME(TorConfiguration)
 @interface TORConfiguration : NSObject
 
 @property (nonatomic, copy, nullable) NSURL *dataDirectory;

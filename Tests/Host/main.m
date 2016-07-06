@@ -3,7 +3,6 @@
 //  Host
 //
 //  Created by Conrad Kramer on 8/11/15.
-//  Copyright © 2015 Conrad Kramer. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

@@ -4,7 +4,6 @@
 //
 //  Created by Conrad Kramer on 8/10/15.
 //
-//
 
 #import <XCTest/XCTest.h>
 #import <Tor/Tor.h>

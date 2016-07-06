@@ -1,0 +1,11 @@
+//
+//  Tor-Mac.xcconfig
+//  Tor
+//
+//  Created by Conrad Kramer on 7/6/16.
+//
+
+#include "../Carthage/Checkouts/xcconfigs/Mac OS X/Mac-Framework.xcconfig"
+#include "Tor.xcconfig"
+
+MACOSX_DEPLOYMENT_TARGET = 10.9

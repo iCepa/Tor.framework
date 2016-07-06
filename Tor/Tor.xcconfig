@@ -1,0 +1,20 @@
+//
+//  Tor.xcconfig
+//  Tor
+//
+//  Created by Conrad Kramer on 7/6/16.
+//
+
+PRODUCT_NAME = Tor
+INFOPLIST_FILE = Tor/Info.plist
+PRODUCT_BUNDLE_IDENTIFIER = org.torproject.Tor
+ALWAYS_SEARCH_USER_PATHS = NO
+HEADER_SEARCH_PATHS = $(inherited) "$(SRCROOT)/Tor/tor" "$(SRCROOT)/Tor/tor/src" "$(SRCROOT)/Tor/tor/src/common" "$(SRCROOT)/Tor/tor/src/ext" "$(SRCROOT)/Tor/libevent/include"
+USER_HEADER_SEARCH_PATHS = $(inherited) "$(SRCROOT)/Tor"
+CLANG_ENABLE_OBJC_ARC = YES
+CLANG_ENABLE_MODULES = YES
+OTHER_CFLAGS = -Wall -Wextra -Wunused
+
+ONLY_ACTIVE_ARCH[config=Debug] = YES
+GCC_OPTIMIZATION_LEVEL[config=Debug] = 0
+COPY_PHASE_STRIP[config=Debug] = NO

@@ -4,7 +4,6 @@
 //
 //  Created by Conrad Kramer on 7/19/15.
 //
-//
 
 #include <or/or.h>
 #include <or/main.h>
@@ -12,17 +11,19 @@
 #import "TORThread.h"
 #import "TORConfiguration.h"
 
-static TORThread *_thread = nil;
+NS_ASSUME_NONNULL_BEGIN
+
+static __weak TORThread *_thread = nil;
 
 @interface TORThread ()
 
-@property (nonatomic, readonly, copy) NSArray *arguments;
+@property (nonatomic, readonly, copy) NSArray<NSString *> *arguments;
 
 @end
 
 @implementation TORThread
 
-+ (instancetype)torThread {
++ (nullable TORThread *)activeThread {
     return _thread;
 }
 
@@ -30,7 +31,7 @@ static TORThread *_thread = nil;
     return [self initWithArguments:nil];
 }
 
-- (instancetype)initWithConfiguration:(TORConfiguration *)configuration {
+- (instancetype)initWithConfiguration:(nullable TORConfiguration *)configuration {
     NSMutableArray *arguments = [configuration.arguments mutableCopy];
     for (NSString *key in configuration.options) {
         [arguments addObject:[NSString stringWithFormat:@"--%@", key]];
@@ -39,15 +40,17 @@ static TORThread *_thread = nil;
     return [self initWithArguments:arguments];
 }
 
-- (instancetype)initWithArguments:(NSArray *)arguments {
+- (instancetype)initWithArguments:(nullable NSArray<NSString *> *)arguments {
     NSAssert(_thread == nil, @"There can only be one TORThread per process");
     self = [super init];
-    if (self) {
-        _thread = self;
-        _arguments = [arguments copy];
-        
-        self.name = @"Tor";
-    }
+    if (!self)
+        return nil;
+    
+    _thread = self;
+    _arguments = [arguments copy];
+    
+    self.name = @"Tor";
+    
     return self;
 }
 
@@ -64,3 +67,5 @@ static TORThread *_thread = nil;
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

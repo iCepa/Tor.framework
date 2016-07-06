@@ -59,7 +59,7 @@ fi
 for ARCH in $ARCHS
 do
     HOST=$(xcrun --sdk ${PLATFORM_NAME} clang -arch $ARCH -v 2>&1 | grep Target | sed -e 's/Target: //')
-    ./configure --disable-tool-name-check --host="${HOST}" --enable-static-openssl --enable-static-libevent --disable-asciidoc --disable-system-torrc --disable-gcc-hardening --disable-linker-hardening --prefix="${CONFIGURATION_TEMP_DIR}/tor-${ARCH}" --with-libevent-dir="${CONFIGURATION_TEMP_DIR}/libevent-${ARCH}" --with-openssl-dir="${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}" CC="xcrun --sdk ${PLATFORM_NAME} clang -arch ${ARCH}" CFLAGS="${OTHER_CFLAGS} ${BITCODE_FLAGS} -I${PSEUDO_SYS_INCLUDE_DIR} -isysroot ${SDKROOT}" CPPLAGS="${OTHER_CFLAGS} ${BITCODE_FLAGS} -I${PSEUDO_SYS_INCLUDE_DIR} -isysroot ${SDKROOT}" ac_cv_func__NSGetEnviron="no" LDFLAGS="-lz ${OTHER_LDFLAGS} ${BITCODE_FLAGS}"
+    ./configure --disable-tool-name-check --host="${HOST}" --enable-static-openssl --enable-static-libevent --disable-asciidoc --disable-system-torrc --disable-gcc-hardening --disable-linker-hardening --prefix="${CONFIGURATION_TEMP_DIR}/tor-${ARCH}" --with-libevent-dir="${CONFIGURATION_TEMP_DIR}/libevent-${ARCH}" --with-openssl-dir="${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}" CC="xcrun --sdk ${PLATFORM_NAME} clang -arch ${ARCH}" CFLAGS="${OTHER_CFLAGS} ${BITCODE_FLAGS} -I${PSEUDO_SYS_INCLUDE_DIR} -isysroot ${SDKROOT}" CPPLAGS="${OTHER_CFLAGS} ${BITCODE_FLAGS} -I${PSEUDO_SYS_INCLUDE_DIR} -isysroot ${SDKROOT}" ac_cv_func__NSGetEnviron="no" ac_cv_func_clock_gettime="no" LDFLAGS="-lz ${OTHER_LDFLAGS} ${BITCODE_FLAGS}"
     make -j$(sysctl hw.ncpu | awk '{print $2}')
     for LIBRARY in src/common/*.a src/or/*.a src/ext/ed25519/donna/*.a src/ext/ed25519/ref10/*.a src/trunnel/*.a;
     do

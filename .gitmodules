@@ -10,3 +10,6 @@
 	url = git://git.openssl.org/openssl.git
     ignore = dirty
 
+[submodule "Carthage/Checkouts/xcconfigs"]
+	path = Carthage/Checkouts/xcconfigs
+	url = https://github.com/jspahrsummers/xcconfigs.git

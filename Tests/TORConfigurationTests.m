@@ -3,7 +3,6 @@
 //  Tor
 //
 //  Created by Conrad Kramer on 8/11/15.
-//  Copyright © 2015 Conrad Kramer. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
@@ -23,7 +22,5 @@
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
-
-
 
 @end
