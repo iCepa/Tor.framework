@@ -8,4 +8,4 @@
 #include "../Carthage/Checkouts/xcconfigs/iOS/iOS-Framework.xcconfig"
 #include "Tor.xcconfig"
 
-IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+IPHONEOS_DEPLOYMENT_TARGET = 8.0

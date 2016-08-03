@@ -34,14 +34,17 @@ do
     SDK_COMPONENTS=($(echo ${SDKROOT} | sed -e 's/\/SDKs\//\'$'\n/'))
     export CROSS_TOP="${SDK_COMPONENTS[0]}"
     export CROSS_SDK="${SDK_COMPONENTS[1]}"
-    export CC="clang -arch ${ARCH} ${BITCODE_FLAGS}"
-    if [ "${ARCH}" == "x86_64" ] || [ "${ARCH}" == "arm64" ]; then
-        EC_NISTP="enable-ec_nistp_64_gcc_128"
+    export CC="$(xcrun -f --sdk ${PLATFORM_NAME} clang) -arch ${ARCH} ${BITCODE_FLAGS}"
+    mkdir -p "${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}"
+    if [[ "${ARCH}" == "x86_64" ]]; then
+        ./Configure no-asm darwin64-x86_64-cc enable-ec_nistp_64_gcc_128 --openssldir="${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}"
+    else
+        if [[ "${ARCH}" == "arm64" ]]; then
+            EC_NISTP="enable-ec_nistp_64_gcc_128"
+        fi
+        ./Configure iphoneos-cross zlib $EC_NISTP --openssldir="${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}"
     fi
-    if [ "${ARCH}" == "x86_64" ]; then
-        NO_ASM="no-asm"
-    fi
-    ./Configure iphoneos-cross zlib $NO_ASM $EC_NISTP --openssldir="${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}"
+    make depend
     make -j$(sysctl hw.ncpu | awk '{print $2}')
     make install_sw
     make clean

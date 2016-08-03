@@ -32,6 +32,8 @@
 		D0198ACD1C63F23800EA0043 /* libor-trunnel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0198ACC1C63F23800EA0043 /* libor-trunnel.a */; };
 		D0198ACE1C63F23800EA0043 /* libor-trunnel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0198ACC1C63F23800EA0043 /* libor-trunnel.a */; };
 		D02437B41B79CF2C006B48E0 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D02437B31B79CF2C006B48E0 /* libz.dylib */; };
+		D0943CC21D528E5D0057F67C /* libkeccak-tiny.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0943CC11D528E5D0057F67C /* libkeccak-tiny.a */; };
+		D0943CC31D528E5E0057F67C /* libkeccak-tiny.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0943CC11D528E5D0057F67C /* libkeccak-tiny.a */; };
 		D09E544E1C643B61001DB8F8 /* TORThread.h in Headers */ = {isa = PBXBuildFile; fileRef = D0FBEC951B79BCF6005C7577 /* TORThread.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0B283AE1B79CF6600D0DDA9 /* TORConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = D0B283AC1B79CF6600D0DDA9 /* TORConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0B283AF1B79CF6600D0DDA9 /* TORConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B283AD1B79CF6600D0DDA9 /* TORConfiguration.m */; };
@@ -139,6 +141,7 @@
 		D0401AD61D2CB8C300602E9B /* Tor-iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Tor-iOS.xcconfig"; path = "Tor/Tor-iOS.xcconfig"; sourceTree = "<group>"; };
 		D0401AD71D2CB8C300602E9B /* Tor-Mac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Tor-Mac.xcconfig"; path = "Tor/Tor-Mac.xcconfig"; sourceTree = "<group>"; };
 		D0401AD81D2CB8C300602E9B /* Tor.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Tor.xcconfig; path = Tor/Tor.xcconfig; sourceTree = "<group>"; };
+		D0943CC11D528E5D0057F67C /* libkeccak-tiny.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libkeccak-tiny.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0B283AC1B79CF6600D0DDA9 /* TORConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TORConfiguration.h; sourceTree = "<group>"; };
 		D0B283AD1B79CF6600D0DDA9 /* TORConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TORConfiguration.m; sourceTree = "<group>"; };
 		D0B283B01B79D73700D0DDA9 /* TORConfigurationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TORConfigurationTests.m; sourceTree = "<group>"; };
@@ -186,6 +189,7 @@
 				D0198ABF1C63E16500EA0043 /* libz.dylib in Frameworks */,
 				D0198AB41C63E16500EA0043 /* libtor.a in Frameworks */,
 				D0198ABA1C63E16500EA0043 /* libevent_core.a in Frameworks */,
+				D0943CC31D528E5E0057F67C /* libkeccak-tiny.a in Frameworks */,
 				D0198ABD1C63E16500EA0043 /* libcrypto.a in Frameworks */,
 				D0198AB61C63E16500EA0043 /* libor-crypto.a in Frameworks */,
 				D0198ACB1C63EF2F00EA0043 /* libed25519_ref10.a in Frameworks */,
@@ -215,6 +219,7 @@
 				D0FBECA71B79C014005C7577 /* libcrypto.a in Frameworks */,
 				D0FBECAF1B79C0FE005C7577 /* libevent_core.a in Frameworks */,
 				D0FBECBD1B79C360005C7577 /* libcurve25519_donna.a in Frameworks */,
+				D0943CC21D528E5D0057F67C /* libkeccak-tiny.a in Frameworks */,
 				D0FBECC11B79C360005C7577 /* libtor.a in Frameworks */,
 				D0FBECBF1B79C360005C7577 /* libor-event.a in Frameworks */,
 				D0198ACA1C63EF2F00EA0043 /* libed25519_ref10.a in Frameworks */,
@@ -341,6 +346,7 @@
 				D0FBECB81B79C360005C7577 /* libcurve25519_donna.a */,
 				D0198AC61C63EF2F00EA0043 /* libed25519_donna.a */,
 				D0198AC71C63EF2F00EA0043 /* libed25519_ref10.a */,
+				D0943CC11D528E5D0057F67C /* libkeccak-tiny.a */,
 				D0FBECAE1B79C0FE005C7577 /* libevent.a */,
 				D0FBECAA1B79C0FE005C7577 /* libevent_core.a */,
 				D0FBECAB1B79C0FE005C7577 /* libevent_extra.a */,
