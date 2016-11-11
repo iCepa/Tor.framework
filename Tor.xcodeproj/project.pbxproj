@@ -557,7 +557,7 @@
 		D0FBEC641B79BAD7005C7577 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Conrad Kramer";
 				TargetAttributes = {
 					D012AB841BC290D0004BE7A6 = {
@@ -732,6 +732,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D0401AD71D2CB8C300602E9B /* Tor-Mac.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 			};
 			name = Debug;
 		};
@@ -739,6 +740,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D0401AD71D2CB8C300602E9B /* Tor-Mac.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 			};
 			name = Release;
 		};
@@ -837,8 +839,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -880,8 +884,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -907,6 +913,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D0401AD61D2CB8C300602E9B /* Tor-iOS.xcconfig */;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 			};
 			name = Debug;
 		};
@@ -914,6 +921,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D0401AD61D2CB8C300602E9B /* Tor-iOS.xcconfig */;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 			};
 			name = Release;
 		};
