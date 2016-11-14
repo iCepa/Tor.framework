@@ -34,6 +34,11 @@
 		D02437B41B79CF2C006B48E0 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D02437B31B79CF2C006B48E0 /* libz.dylib */; };
 		D08892B91DD9D23B009DB0CD /* libor-ctime.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D08892B81DD9D23B009DB0CD /* libor-ctime.a */; };
 		D08892BA1DD9D23B009DB0CD /* libor-ctime.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D08892B81DD9D23B009DB0CD /* libor-ctime.a */; };
+		D08892BE1DDA5C36009DB0CD /* TORConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B283B01B79D73700D0DDA9 /* TORConfigurationTests.m */; };
+		D08892BF1DDA5E99009DB0CD /* TORControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FBEC7E1B79BB01005C7577 /* TORControllerTests.m */; };
+		D08892C01DDA5E9A009DB0CD /* TORControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FBEC7E1B79BB01005C7577 /* TORControllerTests.m */; };
+		D08892EC1DDA69C1009DB0CD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D08892E01DDA6919009DB0CD /* main.m */; };
+		D08892ED1DDA69C1009DB0CD /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D08892E11DDA6919009DB0CD /* MainMenu.xib */; };
 		D0943CC21D528E5D0057F67C /* libkeccak-tiny.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0943CC11D528E5D0057F67C /* libkeccak-tiny.a */; };
 		D0943CC31D528E5E0057F67C /* libkeccak-tiny.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0943CC11D528E5D0057F67C /* libkeccak-tiny.a */; };
 		D09E544E1C643B61001DB8F8 /* TORThread.h in Headers */ = {isa = PBXBuildFile; fileRef = D0FBEC951B79BCF6005C7577 /* TORThread.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -42,7 +47,6 @@
 		D0B283B11B79D73700D0DDA9 /* TORConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B283B01B79D73700D0DDA9 /* TORConfigurationTests.m */; };
 		D0B283D51B79D84100D0DDA9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B283D21B79D84100D0DDA9 /* main.m */; };
 		D0FBEC711B79BAD7005C7577 /* Tor.h in Headers */ = {isa = PBXBuildFile; fileRef = D0FBEC701B79BAD7005C7577 /* Tor.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D0FBEC7F1B79BB01005C7577 /* TORControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FBEC7E1B79BB01005C7577 /* TORControllerTests.m */; };
 		D0FBEC811B79BB01005C7577 /* Tor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0FBEC6D1B79BAD7005C7577 /* Tor.framework */; };
 		D0FBEC971B79BCF6005C7577 /* TORController.h in Headers */ = {isa = PBXBuildFile; fileRef = D0FBEC931B79BCF6005C7577 /* TORController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0FBEC981B79BCF6005C7577 /* TORController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FBEC941B79BCF6005C7577 /* TORController.m */; };
@@ -89,6 +93,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = D0198AA41C63DEFF00EA0043;
 			remoteInfo = "tor-Mac";
+		};
+		D08892F01DDA6A5E009DB0CD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0FBEC641B79BAD7005C7577 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D08892E21DDA692C009DB0CD;
+			remoteInfo = "Host-Mac";
+		};
+		D0928DBA1C7A99C300D15679 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0FBEC641B79BAD7005C7577 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D012AB841BC290D0004BE7A6;
+			remoteInfo = "Tor-Mac";
 		};
 		D0AE19341B79D9AE0042BBC8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -144,6 +162,10 @@
 		D0401AD71D2CB8C300602E9B /* Tor-Mac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Tor-Mac.xcconfig"; path = "Tor/Tor-Mac.xcconfig"; sourceTree = "<group>"; };
 		D0401AD81D2CB8C300602E9B /* Tor.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Tor.xcconfig; path = Tor/Tor.xcconfig; sourceTree = "<group>"; };
 		D08892B81DD9D23B009DB0CD /* libor-ctime.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libor-ctime.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D08892DF1DDA6919009DB0CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D08892E01DDA6919009DB0CD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D08892E11DDA6919009DB0CD /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+		D08892EA1DDA692C009DB0CD /* Host.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Host.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0943CC11D528E5D0057F67C /* libkeccak-tiny.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libkeccak-tiny.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0B283AC1B79CF6600D0DDA9 /* TORConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TORConfiguration.h; sourceTree = "<group>"; };
 		D0B283AD1B79CF6600D0DDA9 /* TORConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TORConfiguration.m; sourceTree = "<group>"; };
@@ -155,7 +177,7 @@
 		D0FBEC6D1B79BAD7005C7577 /* Tor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Tor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0FBEC701B79BAD7005C7577 /* Tor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tor.h; sourceTree = "<group>"; };
 		D0FBEC721B79BAD7005C7577 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D0FBEC7C1B79BB01005C7577 /* TorTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TorTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0FBEC7C1B79BB01005C7577 /* TorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0FBEC7E1B79BB01005C7577 /* TORControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TORControllerTests.m; sourceTree = "<group>"; };
 		D0FBEC801B79BB01005C7577 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0FBEC931B79BCF6005C7577 /* TORController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TORController.h; sourceTree = "<group>"; };
@@ -200,6 +222,20 @@
 				D0198ABC1C63E16500EA0043 /* libevent_pthreads.a in Frameworks */,
 				D0198AC91C63EF2F00EA0043 /* libed25519_donna.a in Frameworks */,
 				D0198AB71C63E16500EA0043 /* libor-event.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D08892E51DDA692C009DB0CD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D0928DB11C7A99C300D15679 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,6 +291,16 @@
 			name = Configuration;
 			sourceTree = "<group>";
 		};
+		D08892DE1DDA6919009DB0CD /* Host-Mac */ = {
+			isa = PBXGroup;
+			children = (
+				D08892DF1DDA6919009DB0CD /* Info.plist */,
+				D08892E01DDA6919009DB0CD /* main.m */,
+				D08892E11DDA6919009DB0CD /* MainMenu.xib */,
+			);
+			path = "Host-Mac";
+			sourceTree = "<group>";
+		};
 		D0B283B21B79D74C00D0DDA9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -271,14 +317,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		D0B283CF1B79D84100D0DDA9 /* Host */ = {
+		D0B283CF1B79D84100D0DDA9 /* Host-iOS */ = {
 			isa = PBXGroup;
 			children = (
 				D0B283D01B79D84100D0DDA9 /* Info.plist */,
 				D0B283D11B79D84100D0DDA9 /* LaunchScreen.storyboard */,
 				D0B283D21B79D84100D0DDA9 /* main.m */,
 			);
-			path = Host;
+			path = "Host-iOS";
 			sourceTree = "<group>";
 		};
 		D0FBEC631B79BAD7005C7577 = {
@@ -297,9 +343,10 @@
 			isa = PBXGroup;
 			children = (
 				D0FBEC6D1B79BAD7005C7577 /* Tor.framework */,
-				D0FBEC7C1B79BB01005C7577 /* TorTests-iOS.xctest */,
+				D0FBEC7C1B79BB01005C7577 /* TorTests.xctest */,
 				D0B283B81B79D7FA00D0DDA9 /* Host.app */,
 				D012AB851BC290D0004BE7A6 /* Tor.framework */,
+				D08892EA1DDA692C009DB0CD /* Host.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -324,7 +371,8 @@
 			children = (
 				D0FBEC7E1B79BB01005C7577 /* TORControllerTests.m */,
 				D0B283B01B79D73700D0DDA9 /* TORConfigurationTests.m */,
-				D0B283CF1B79D84100D0DDA9 /* Host */,
+				D0B283CF1B79D84100D0DDA9 /* Host-iOS */,
+				D08892DE1DDA6919009DB0CD /* Host-Mac */,
 				D0B283B31B79D75600D0DDA9 /* Supporting Files */,
 			);
 			path = Tests;
@@ -503,9 +551,44 @@
 			productReference = D012AB851BC290D0004BE7A6 /* Tor.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		D0B283B71B79D7FA00D0DDA9 /* Host */ = {
+		D08892E21DDA692C009DB0CD /* Host-Mac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D0B283CC1B79D7FB00D0DDA9 /* Build configuration list for PBXNativeTarget "Host" */;
+			buildConfigurationList = D08892E71DDA692C009DB0CD /* Build configuration list for PBXNativeTarget "Host-Mac" */;
+			buildPhases = (
+				D08892E31DDA692C009DB0CD /* Sources */,
+				D08892E51DDA692C009DB0CD /* Frameworks */,
+				D08892E61DDA692C009DB0CD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Host-Mac";
+			productName = Host;
+			productReference = D08892EA1DDA692C009DB0CD /* Host.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D0928DB31C7A99C300D15679 /* TorTests-Mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D08892BD1DDA5C33009DB0CD /* Build configuration list for PBXNativeTarget "TorTests-Mac" */;
+			buildPhases = (
+				D0928DB01C7A99C300D15679 /* Sources */,
+				D0928DB11C7A99C300D15679 /* Frameworks */,
+				D0928DB21C7A99C300D15679 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D08892F11DDA6A5E009DB0CD /* PBXTargetDependency */,
+				D0928DBB1C7A99C300D15679 /* PBXTargetDependency */,
+			);
+			name = "TorTests-Mac";
+			productName = "TorTests-Mac";
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D0B283B71B79D7FA00D0DDA9 /* Host-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D0B283CC1B79D7FB00D0DDA9 /* Build configuration list for PBXNativeTarget "Host-iOS" */;
 			buildPhases = (
 				D0B283B41B79D7FA00D0DDA9 /* Sources */,
 				D0B283B51B79D7FA00D0DDA9 /* Frameworks */,
@@ -515,7 +598,7 @@
 			);
 			dependencies = (
 			);
-			name = Host;
+			name = "Host-iOS";
 			productName = Host;
 			productReference = D0B283B81B79D7FA00D0DDA9 /* Host.app */;
 			productType = "com.apple.product-type.application";
@@ -554,7 +637,7 @@
 			);
 			name = "TorTests-iOS";
 			productName = Tests;
-			productReference = D0FBEC7C1B79BB01005C7577 /* TorTests-iOS.xctest */;
+			productReference = D0FBEC7C1B79BB01005C7577 /* TorTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -574,6 +657,14 @@
 					};
 					D0198AA01C63DE2100EA0043 = {
 						CreatedOnToolsVersion = 7.2;
+					};
+					D08892E21DDA692C009DB0CD = {
+						ProvisioningStyle = Automatic;
+					};
+					D0928DB31C7A99C300D15679 = {
+						CreatedOnToolsVersion = 7.2.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = D08892E21DDA692C009DB0CD;
 					};
 					D0B283B71B79D7FA00D0DDA9 = {
 						CreatedOnToolsVersion = 7.0;
@@ -612,7 +703,9 @@
 				D0FBEC6C1B79BAD7005C7577 /* Tor-iOS */,
 				D012AB841BC290D0004BE7A6 /* Tor-Mac */,
 				D0FBEC7B1B79BB01005C7577 /* TorTests-iOS */,
-				D0B283B71B79D7FA00D0DDA9 /* Host */,
+				D0928DB31C7A99C300D15679 /* TorTests-Mac */,
+				D0B283B71B79D7FA00D0DDA9 /* Host-iOS */,
+				D08892E21DDA692C009DB0CD /* Host-Mac */,
 				D0FBEC871B79BC19005C7577 /* tor-iOS */,
 				D0198AA41C63DEFF00EA0043 /* tor-Mac */,
 				D0FBEC8B1B79BC22005C7577 /* libevent-iOS */,
@@ -624,6 +717,21 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D08892E61DDA692C009DB0CD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D08892ED1DDA69C1009DB0CD /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D0928DB21C7A99C300D15679 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D0B283B61B79D7FA00D0DDA9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -651,6 +759,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D08892E31DDA692C009DB0CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D08892EC1DDA69C1009DB0CD /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D0928DB01C7A99C300D15679 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D08892BE1DDA5C36009DB0CD /* TORConfigurationTests.m in Sources */,
+				D08892C01DDA5E9A009DB0CD /* TORControllerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D0B283B41B79D7FA00D0DDA9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -674,7 +799,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0B283B11B79D73700D0DDA9 /* TORConfigurationTests.m in Sources */,
-				D0FBEC7F1B79BB01005C7577 /* TORControllerTests.m in Sources */,
+				D08892BF1DDA5E99009DB0CD /* TORControllerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -701,9 +826,19 @@
 			target = D0198AA41C63DEFF00EA0043 /* tor-Mac */;
 			targetProxy = D0198AB21C63DF9A00EA0043 /* PBXContainerItemProxy */;
 		};
+		D08892F11DDA6A5E009DB0CD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D08892E21DDA692C009DB0CD /* Host-Mac */;
+			targetProxy = D08892F01DDA6A5E009DB0CD /* PBXContainerItemProxy */;
+		};
+		D0928DBB1C7A99C300D15679 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D012AB841BC290D0004BE7A6 /* Tor-Mac */;
+			targetProxy = D0928DBA1C7A99C300D15679 /* PBXContainerItemProxy */;
+		};
 		D0AE19351B79D9AE0042BBC8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D0B283B71B79D7FA00D0DDA9 /* Host */;
+			target = D0B283B71B79D7FA00D0DDA9 /* Host-iOS */;
 			targetProxy = D0AE19341B79D9AE0042BBC8 /* PBXContainerItemProxy */;
 		};
 		D0B283A91B79C90400D0DDA9 /* PBXTargetDependency */ = {
@@ -810,25 +945,82 @@
 			};
 			name = Release;
 		};
+		D08892BB1DDA5C33009DB0CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = "";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.torproject.Tests;
+				PRODUCT_NAME = TorTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Host.app/Contents/MacOS/Host";
+			};
+			name = Debug;
+		};
+		D08892BC1DDA5C33009DB0CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				PRODUCT_BUNDLE_IDENTIFIER = org.torproject.Tests;
+				PRODUCT_NAME = TorTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Host.app/Contents/MacOS/Host";
+			};
+			name = Release;
+		};
+		D08892E81DDA692C009DB0CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "Tests/Host-Mac/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_BUNDLE_IDENTIFIER = org.torproject.Host;
+				PRODUCT_NAME = Host;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		D08892E91DDA692C009DB0CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "Tests/Host-Mac/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_BUNDLE_IDENTIFIER = org.torproject.Host;
+				PRODUCT_NAME = Host;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 		D0B283CD1B79D7FB00D0DDA9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = Tests/Host/Info.plist;
+				INFOPLIST_FILE = "Tests/Host-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.torproject.Host;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Host;
 			};
 			name = Debug;
 		};
 		D0B283CE1B79D7FB00D0DDA9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = Tests/Host/Info.plist;
+				INFOPLIST_FILE = "Tests/Host-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.torproject.Host;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Host;
 			};
 			name = Release;
 		};
@@ -938,7 +1130,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.torproject.Tests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = TorTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Host.app/Host";
 			};
 			name = Debug;
@@ -950,7 +1142,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.torproject.Tests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = TorTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Host.app/Host";
 			};
 			name = Release;
@@ -1042,7 +1234,25 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D0B283CC1B79D7FB00D0DDA9 /* Build configuration list for PBXNativeTarget "Host" */ = {
+		D08892BD1DDA5C33009DB0CD /* Build configuration list for PBXNativeTarget "TorTests-Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D08892BB1DDA5C33009DB0CD /* Debug */,
+				D08892BC1DDA5C33009DB0CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D08892E71DDA692C009DB0CD /* Build configuration list for PBXNativeTarget "Host-Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D08892E81DDA692C009DB0CD /* Debug */,
+				D08892E91DDA692C009DB0CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D0B283CC1B79D7FB00D0DDA9 /* Build configuration list for PBXNativeTarget "Host-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D0B283CD1B79D7FB00D0DDA9 /* Debug */,

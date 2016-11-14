@@ -33,10 +33,15 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D0FBEC7B1B79BB01005C7577"
-               BuildableName = "TorTests-iOS.xctest"
+               BuildableName = "TorTests.xctest"
                BlueprintName = "TorTests-iOS"
                ReferencedContainer = "container:Tor.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "TORControllerTests">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>

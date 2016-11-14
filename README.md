@@ -1,6 +1,6 @@
 # Tor.framework
 
-[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) ![Travis CI](https://img.shields.io/travis/iCepa/Tor.framework.svg)
 
 Tor.framework is the easiest way to embed Tor in your iOS application. The API is *not* stable yet, and subject to change.
 

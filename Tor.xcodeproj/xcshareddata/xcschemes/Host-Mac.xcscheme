@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D012AB841BC290D0004BE7A6"
-               BuildableName = "Tor.framework"
-               BlueprintName = "Tor-Mac"
+               BlueprintIdentifier = "D08892E21DDA692C009DB0CD"
+               BuildableName = "Host.app"
+               BlueprintName = "Host-Mac"
                ReferencedContainer = "container:Tor.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,23 +28,13 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D0928DB31C7A99C300D15679"
-               BuildableName = "TorTests-Mac"
-               BlueprintName = "TorTests-Mac"
-               ReferencedContainer = "container:Tor.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D012AB841BC290D0004BE7A6"
-            BuildableName = "Tor.framework"
-            BlueprintName = "Tor-Mac"
+            BlueprintIdentifier = "D08892E21DDA692C009DB0CD"
+            BuildableName = "Host.app"
+            BlueprintName = "Host-Mac"
             ReferencedContainer = "container:Tor.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -61,15 +51,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D012AB841BC290D0004BE7A6"
-            BuildableName = "Tor.framework"
-            BlueprintName = "Tor-Mac"
+            BlueprintIdentifier = "D08892E21DDA692C009DB0CD"
+            BuildableName = "Host.app"
+            BlueprintName = "Host-Mac"
             ReferencedContainer = "container:Tor.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -79,15 +70,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D012AB841BC290D0004BE7A6"
-            BuildableName = "Tor.framework"
-            BlueprintName = "Tor-Mac"
+            BlueprintIdentifier = "D08892E21DDA692C009DB0CD"
+            BuildableName = "Host.app"
+            BlueprintName = "Host-Mac"
             ReferencedContainer = "container:Tor.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
