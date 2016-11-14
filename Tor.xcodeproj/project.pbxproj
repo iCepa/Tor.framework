@@ -32,6 +32,8 @@
 		D0198ACD1C63F23800EA0043 /* libor-trunnel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0198ACC1C63F23800EA0043 /* libor-trunnel.a */; };
 		D0198ACE1C63F23800EA0043 /* libor-trunnel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0198ACC1C63F23800EA0043 /* libor-trunnel.a */; };
 		D02437B41B79CF2C006B48E0 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D02437B31B79CF2C006B48E0 /* libz.dylib */; };
+		D08892B91DD9D23B009DB0CD /* libor-ctime.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D08892B81DD9D23B009DB0CD /* libor-ctime.a */; };
+		D08892BA1DD9D23B009DB0CD /* libor-ctime.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D08892B81DD9D23B009DB0CD /* libor-ctime.a */; };
 		D0943CC21D528E5D0057F67C /* libkeccak-tiny.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0943CC11D528E5D0057F67C /* libkeccak-tiny.a */; };
 		D0943CC31D528E5E0057F67C /* libkeccak-tiny.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0943CC11D528E5D0057F67C /* libkeccak-tiny.a */; };
 		D09E544E1C643B61001DB8F8 /* TORThread.h in Headers */ = {isa = PBXBuildFile; fileRef = D0FBEC951B79BCF6005C7577 /* TORThread.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -141,6 +143,7 @@
 		D0401AD61D2CB8C300602E9B /* Tor-iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Tor-iOS.xcconfig"; path = "Tor/Tor-iOS.xcconfig"; sourceTree = "<group>"; };
 		D0401AD71D2CB8C300602E9B /* Tor-Mac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Tor-Mac.xcconfig"; path = "Tor/Tor-Mac.xcconfig"; sourceTree = "<group>"; };
 		D0401AD81D2CB8C300602E9B /* Tor.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Tor.xcconfig; path = Tor/Tor.xcconfig; sourceTree = "<group>"; };
+		D08892B81DD9D23B009DB0CD /* libor-ctime.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libor-ctime.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0943CC11D528E5D0057F67C /* libkeccak-tiny.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libkeccak-tiny.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0B283AC1B79CF6600D0DDA9 /* TORConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TORConfiguration.h; sourceTree = "<group>"; };
 		D0B283AD1B79CF6600D0DDA9 /* TORConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TORConfiguration.m; sourceTree = "<group>"; };
@@ -181,6 +184,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0198AB81C63E16500EA0043 /* libcurve25519_donna.a in Frameworks */,
+				D08892BA1DD9D23B009DB0CD /* libor-ctime.a in Frameworks */,
 				D0198AB51C63E16500EA0043 /* libor.a in Frameworks */,
 				D0198ABE1C63E16500EA0043 /* libssl.a in Frameworks */,
 				D0198ACE1C63F23800EA0043 /* libor-trunnel.a in Frameworks */,
@@ -211,6 +215,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D02437B41B79CF2C006B48E0 /* libz.dylib in Frameworks */,
+				D08892B91DD9D23B009DB0CD /* libor-ctime.a in Frameworks */,
 				D0FBECC01B79C360005C7577 /* libor.a in Frameworks */,
 				D0FBECA81B79C014005C7577 /* libssl.a in Frameworks */,
 				D0198ACD1C63F23800EA0043 /* libor-trunnel.a in Frameworks */,
@@ -341,6 +346,7 @@
 				D0FBECBC1B79C360005C7577 /* libtor.a */,
 				D0FBECBB1B79C360005C7577 /* libor.a */,
 				D0FBECB91B79C360005C7577 /* libor-crypto.a */,
+				D08892B81DD9D23B009DB0CD /* libor-ctime.a */,
 				D0FBECBA1B79C360005C7577 /* libor-event.a */,
 				D0198ACC1C63F23800EA0043 /* libor-trunnel.a */,
 				D0FBECB81B79C360005C7577 /* libcurve25519_donna.a */,
@@ -953,7 +959,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				OTHER_LDFLAGS = "-L$(BUILT_PRODUCTS_DIR)";
 				PRODUCT_NAME = tor;
 			};
 			name = Debug;
@@ -962,7 +967,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				OTHER_LDFLAGS = "-L$(BUILT_PRODUCTS_DIR)";
 				PRODUCT_NAME = tor;
 			};
 			name = Release;
@@ -971,7 +975,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				OTHER_LDFLAGS = "-L$(BUILT_PRODUCTS_DIR)";
 				PRODUCT_NAME = libevent;
 			};
 			name = Debug;
@@ -980,7 +983,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				OTHER_LDFLAGS = "-L$(BUILT_PRODUCTS_DIR)";
 				PRODUCT_NAME = libevent;
 			};
 			name = Release;

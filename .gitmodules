@@ -1,15 +1,13 @@
 [submodule "Tor/libevent"]
 	path = Tor/libevent
-	url = git://levent.git.sourceforge.net/gitroot/levent/libevent
-    ignore = dirty
+	url = https://github.com/libevent/libevent.git
 [submodule "Tor/tor"]
 	path = Tor/tor
 	url = https://git.torproject.org/tor.git
+	ignore = dirty
 [submodule "Tor/openssl"]
 	path = Tor/openssl
 	url = git://git.openssl.org/openssl.git
-    ignore = dirty
-
 [submodule "Carthage/Checkouts/xcconfigs"]
 	path = Carthage/Checkouts/xcconfigs
 	url = https://github.com/jspahrsummers/xcconfigs.git

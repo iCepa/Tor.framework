@@ -1,0 +1,20 @@
+commit 47aa500d400458904254e0e728c0d13c5fcd7a30
+Author: Conrad Kramer <conrad@kramerapps.com>
+Date:   Mon Nov 14 03:13:40 2016
+
+    Include compatibility headers for event_init()
+
+diff --git a/configure.ac b/configure.ac
+index 58eab73..862a291 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -478,7 +478,8 @@ TOR_SEARCH_LIBRARY(libevent, $trylibeventdir, [-levent $STATIC_LIBEVENT_FLAGS $T
+ #endif
+ #include <sys/time.h>
+ #include <sys/types.h>
+-#include <event2/event.h>], [
++#include <event2/event.h>
++#include <event2/event_compat.h>], [
+ #ifdef _WIN32
+ #include <winsock2.h>
+ #endif
