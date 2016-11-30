@@ -6,9 +6,13 @@ ARCHS=($ARCHS)
 # This extends the path to look in some common locations (for example, if installed via Homebrew)
 PATH=$PATH:/usr/local/bin:/usr/local/opt/gettext/bin
 
+if [[ ! -f ./changes/libevent-compat ]]; then
+    git -C "${SRCROOT}/Tor/tor" apply "../tor-libevent-compat.patch"
+    rm ./configure 2>/dev/null
+fi
+
 # Generate the configure script (necessary for version control distributions)
 if [[ ! -f ./configure ]]; then
-    git -C "${SRCROOT}/Tor/tor" apply "../tor-libevent-headers.patch" 2>/dev/null
     ./autogen.sh
 fi
 
