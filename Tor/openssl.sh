@@ -46,9 +46,9 @@ do
     elif [[ "${ARCH}" == "x86_64" ]]; then
         ./Configure no-shared no-asm enable-ec_nistp_64_gcc_128 --prefix="${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}" darwin64-x86_64-cc
     elif [[ "${ARCH}" == "arm64" ]]; then
-        ./Configure no-shared zlib-dynamic enable-ec_nistp_64_gcc_128 --prefix="${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}" ios64-cross
+        ./Configure no-shared no-async zlib-dynamic enable-ec_nistp_64_gcc_128 --prefix="${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}" ios64-cross
     else
-        ./Configure no-shared zlib-dynamic --prefix="${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}" ios-cross
+        ./Configure no-shared no-async zlib-dynamic --prefix="${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}" ios-cross
     fi
     make depend
     make -j$(sysctl hw.ncpu | awk '{print $2}') build_libs
