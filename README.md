@@ -70,3 +70,7 @@ TORController *controller = [[TORController alloc] initWithSocketURL:configurati
     }];
 }];
 ```
+
+## License
+
+Tor.framework is available under the MIT license. See the [`LICENSE`](https://github.com/iCepa/Tor.framework/blob/master/LICENSE) file for more info.
