@@ -85,7 +85,7 @@
     
     TORController *controller = self.controller;
 
-    void (^test)() = ^{
+    void (^test)(void) = ^{
         [controller getSessionConfiguration:^(NSURLSessionConfiguration *configuration) {
             NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
             [[session dataTaskWithURL:[NSURL URLWithString:@"https://facebookcorewwwi.onion/"] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
