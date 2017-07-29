@@ -8,7 +8,7 @@ PATH=$PATH:/usr/local/bin:/usr/local/opt/gettext/bin
 
 # Generate the configure script (necessary for version control distributions)
 if [[ ! -f ./configure ]]; then
-    ./autogen.sh
+    ./autogen.sh --add-missing
 fi
 
 REBUILD=0
@@ -57,7 +57,7 @@ mkdir -p "${BUILT_PRODUCTS_DIR}"
 # Build each architecture one by one using clang
 for ARCH in "${ARCHS[@]}"
 do
-    ./configure --disable-tool-name-check --disable-unittests --enable-static-openssl --enable-static-libevent --disable-asciidoc --disable-transparent --disable-system-torrc --disable-linker-hardening --disable-dependency-tracking --prefix="${CONFIGURATION_TEMP_DIR}/tor-${ARCH}" --with-libevent-dir="${BUILT_PRODUCTS_DIR}" --with-openssl-dir="${BUILT_PRODUCTS_DIR}" CC="$(xcrun -f --sdk ${PLATFORM_NAME} clang) -arch ${ARCH}" CPP="$(xcrun -f --sdk ${PLATFORM_NAME} clang) -E -arch ${ARCH}" CPPFLAGS="${BITCODE_FLAGS} -I${SRCROOT}/Tor/libevent/include -I${BUILT_PRODUCTS_DIR}/libevent-${ARCH} -I${SRCROOT}/Tor/openssl/include -I${BUILT_PRODUCTS_DIR}/openssl-${ARCH} -I${PSEUDO_SYS_INCLUDE_DIR} -isysroot ${SDKROOT}" cross_compiling="yes" ac_cv_func__NSGetEnviron="no" ac_cv_func_clock_gettime="no" ac_cv_func_getentropy="no" LDFLAGS="-lz ${BITCODE_FLAGS}"
+    ./configure --disable-tool-name-check --disable-unittests --enable-static-openssl --enable-static-libevent --disable-asciidoc --disable-system-torrc --disable-linker-hardening --disable-dependency-tracking --prefix="${CONFIGURATION_TEMP_DIR}/tor-${ARCH}" --with-libevent-dir="${BUILT_PRODUCTS_DIR}" --with-openssl-dir="${BUILT_PRODUCTS_DIR}" CC="$(xcrun -f --sdk ${PLATFORM_NAME} clang) -arch ${ARCH}" CPP="$(xcrun -f --sdk ${PLATFORM_NAME} clang) -E -arch ${ARCH}" CPPFLAGS="${BITCODE_FLAGS} -I${SRCROOT}/Tor/libevent/include -I${BUILT_PRODUCTS_DIR}/libevent-${ARCH} -I${SRCROOT}/Tor/openssl/include -I${BUILT_PRODUCTS_DIR}/openssl-${ARCH} -I${PSEUDO_SYS_INCLUDE_DIR} -isysroot ${SDKROOT}" cross_compiling="yes" ac_cv_func__NSGetEnviron="no" ac_cv_func_clock_gettime="no" ac_cv_func_getentropy="no" LDFLAGS="-lz ${BITCODE_FLAGS}"
     make -j$(sysctl hw.ncpu | awk '{print $2}')
     for LIBRARY in src/common/*.a src/or/*.a src/ext/ed25519/donna/*.a src/ext/ed25519/ref10/*.a src/trunnel/*.a src/ext/keccak-tiny/*.a;
     do
