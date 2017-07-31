@@ -99,7 +99,7 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
         struct sockaddr_un control_addr = {};
         control_addr.sun_family = AF_UNIX;
         strncpy(control_addr.sun_path, _url.fileSystemRepresentation, sizeof(control_addr.sun_path) - 1);
-        control_addr.sun_len = SUN_LEN(&control_addr);
+        control_addr.sun_len = (unsigned char)SUN_LEN(&control_addr);
         
         sock = socket(AF_UNIX, SOCK_STREAM, 0);
         
