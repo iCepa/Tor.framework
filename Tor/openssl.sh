@@ -29,9 +29,15 @@ if [[ $REBUILD = 0 ]]; then
 fi
 
 if [[ "${BITCODE_GENERATION_MODE}" = "bitcode" ]]; then
-    BITCODE_FLAGS="-fembed-bitcode"
+    BITCODE_CFLAGS="-fembed-bitcode"
 elif [[ "${BITCODE_GENERATION_MODE}" = "marker" ]]; then
-    BITCODE_FLAGS="-fembed-bitcode-marker"
+    BITCODE_CFLAGS="-fembed-bitcode-marker"
+fi
+
+if [[ "${CONFIGURATION}" = "Debug" ]]; then
+    DEBUG_FLAGS="--debug"
+else
+    DEBUG_FLAGS="--release"
 fi
 
 # Build each architecture one by one using clang
@@ -40,15 +46,15 @@ do
     SDK_COMPONENTS=($(echo ${SDKROOT} | sed -e 's/\/SDKs\//\'$'\n/'))
     export CROSS_TOP="${SDK_COMPONENTS[0]}"
     export CROSS_SDK="${SDK_COMPONENTS[1]}"
-    export CC="$(xcrun -f --sdk ${PLATFORM_NAME} clang) -arch ${ARCH} ${BITCODE_FLAGS}"
+    export CC="$(xcrun -f --sdk ${PLATFORM_NAME} clang) -arch ${ARCH} ${BITCODE_CFLAGS}"
     if [[ "${ARCH}" == "i386" ]]; then
-        ./Configure no-shared no-asm --prefix="${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}" darwin-i386-cc
+        ./Configure no-shared no-asm ${DEBUG_FLAGS} --prefix="${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}" darwin-i386-cc
     elif [[ "${ARCH}" == "x86_64" ]]; then
-        ./Configure no-shared no-asm enable-ec_nistp_64_gcc_128 --prefix="${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}" darwin64-x86_64-cc
+        ./Configure no-shared no-asm enable-ec_nistp_64_gcc_128 ${DEBUG_FLAGS} --prefix="${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}" darwin64-x86_64-cc
     elif [[ "${ARCH}" == "arm64" ]]; then
-        ./Configure no-shared no-async zlib-dynamic enable-ec_nistp_64_gcc_128 --prefix="${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}" ios64-cross
+        ./Configure no-shared no-async zlib-dynamic enable-ec_nistp_64_gcc_128 ${DEBUG_FLAGS} --prefix="${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}" ios64-cross
     else
-        ./Configure no-shared no-async zlib-dynamic --prefix="${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}" ios-cross
+        ./Configure no-shared no-async zlib-dynamic ${DEBUG_FLAGS} --prefix="${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}" ios-cross
     fi
     make depend
     make -j$(sysctl hw.ncpu | awk '{print $2}') build_libs

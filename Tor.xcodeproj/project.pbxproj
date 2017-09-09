@@ -32,6 +32,10 @@
 		D0198ACD1C63F23800EA0043 /* libor-trunnel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0198ACC1C63F23800EA0043 /* libor-trunnel.a */; };
 		D0198ACE1C63F23800EA0043 /* libor-trunnel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0198ACC1C63F23800EA0043 /* libor-trunnel.a */; };
 		D02437B41B79CF2C006B48E0 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D02437B31B79CF2C006B48E0 /* libz.dylib */; };
+		D03197121F6493A500720808 /* TORLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = D03197101F6493A500720808 /* TORLogging.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D03197131F6493A500720808 /* TORLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = D03197101F6493A500720808 /* TORLogging.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D03197141F6493A500720808 /* TORLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = D03197111F6493A500720808 /* TORLogging.m */; };
+		D03197151F6493A500720808 /* TORLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = D03197111F6493A500720808 /* TORLogging.m */; };
 		D08892B91DD9D23B009DB0CD /* libor-ctime.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D08892B81DD9D23B009DB0CD /* libor-ctime.a */; };
 		D08892BA1DD9D23B009DB0CD /* libor-ctime.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D08892B81DD9D23B009DB0CD /* libor-ctime.a */; };
 		D08892BE1DDA5C36009DB0CD /* TORConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B283B01B79D73700D0DDA9 /* TORConfigurationTests.m */; };
@@ -158,6 +162,10 @@
 		D0198AC71C63EF2F00EA0043 /* libed25519_ref10.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libed25519_ref10.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0198ACC1C63F23800EA0043 /* libor-trunnel.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libor-trunnel.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D02437B31B79CF2C006B48E0 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		D03196E41F647A7100720808 /* iOS-StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "iOS-StaticLibrary.xcconfig"; path = "Carthage/Checkouts/xcconfigs/iOS/iOS-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
+		D03196E51F647A7F00720808 /* Mac-StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Mac-StaticLibrary.xcconfig"; path = "Carthage/Checkouts/xcconfigs/Mac OS X/Mac-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
+		D03197101F6493A500720808 /* TORLogging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TORLogging.h; sourceTree = "<group>"; };
+		D03197111F6493A500720808 /* TORLogging.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TORLogging.m; sourceTree = "<group>"; };
 		D0401AD61D2CB8C300602E9B /* Tor-iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Tor-iOS.xcconfig"; path = "Tor/Tor-iOS.xcconfig"; sourceTree = "<group>"; };
 		D0401AD71D2CB8C300602E9B /* Tor-Mac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Tor-Mac.xcconfig"; path = "Tor/Tor-Mac.xcconfig"; sourceTree = "<group>"; };
 		D0401AD81D2CB8C300602E9B /* Tor.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Tor.xcconfig; path = Tor/Tor.xcconfig; sourceTree = "<group>"; };
@@ -288,6 +296,8 @@
 			children = (
 				D0593D741F27F21800A8872F /* Debug.xcconfig */,
 				D0593D731F27F21800A8872F /* Release.xcconfig */,
+				D03196E41F647A7100720808 /* iOS-StaticLibrary.xcconfig */,
+				D03196E51F647A7F00720808 /* Mac-StaticLibrary.xcconfig */,
 				D0401AD81D2CB8C300602E9B /* Tor.xcconfig */,
 				D0401AD61D2CB8C300602E9B /* Tor-iOS.xcconfig */,
 				D0401AD71D2CB8C300602E9B /* Tor-Mac.xcconfig */,
@@ -365,6 +375,8 @@
 				D0B283AD1B79CF6600D0DDA9 /* TORConfiguration.m */,
 				D0FBEC951B79BCF6005C7577 /* TORThread.h */,
 				D0FBEC961B79BCF6005C7577 /* TORThread.m */,
+				D03197101F6493A500720808 /* TORLogging.h */,
+				D03197111F6493A500720808 /* TORLogging.m */,
 				D0B283B21B79D74C00D0DDA9 /* Supporting Files */,
 			);
 			path = Tor;
@@ -427,6 +439,7 @@
 				D012AB911BC293BE004BE7A6 /* TORConfiguration.h in Headers */,
 				D09E544E1C643B61001DB8F8 /* TORThread.h in Headers */,
 				D012AB8E1BC2920E004BE7A6 /* Tor.h in Headers */,
+				D03197131F6493A500720808 /* TORLogging.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,6 +451,7 @@
 				D0B283AE1B79CF6600D0DDA9 /* TORConfiguration.h in Headers */,
 				D0FBEC971B79BCF6005C7577 /* TORController.h in Headers */,
 				D0FBEC711B79BAD7005C7577 /* Tor.h in Headers */,
+				D03197121F6493A500720808 /* TORLogging.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -760,6 +774,7 @@
 				D0198A9B1C63D97C00EA0043 /* TORThread.m in Sources */,
 				D012AB8F1BC29220004BE7A6 /* TORConfiguration.m in Sources */,
 				D012AB8D1BC2920C004BE7A6 /* TORController.m in Sources */,
+				D03197151F6493A500720808 /* TORLogging.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -795,6 +810,7 @@
 				D0FBEC981B79BCF6005C7577 /* TORController.m in Sources */,
 				D0FBEC9A1B79BCF6005C7577 /* TORThread.m in Sources */,
 				D0B283AF1B79CF6600D0DDA9 /* TORConfiguration.m in Sources */,
+				D03197141F6493A500720808 /* TORLogging.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -889,6 +905,7 @@
 		};
 		D0198A9E1C63DA5D00EA0043 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D03196E51F647A7F00720808 /* Mac-StaticLibrary.xcconfig */;
 			buildSettings = {
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = openssl;
@@ -907,6 +924,7 @@
 		};
 		D0198AA21C63DE2100EA0043 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D03196E51F647A7F00720808 /* Mac-StaticLibrary.xcconfig */;
 			buildSettings = {
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_CFLAGS = "-I\"$(SRCROOT)/Tor/openssl/include\"";
@@ -929,6 +947,7 @@
 		};
 		D0198AAA1C63DEFF00EA0043 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D03196E51F647A7F00720808 /* Mac-StaticLibrary.xcconfig */;
 			buildSettings = {
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_LDFLAGS = "-L$(BUILT_PRODUCTS_DIR)";
@@ -1080,6 +1099,7 @@
 		};
 		D0FBEC891B79BC19005C7577 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D03196E41F647A7100720808 /* iOS-StaticLibrary.xcconfig */;
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = tor;
@@ -1096,6 +1116,7 @@
 		};
 		D0FBEC8D1B79BC22005C7577 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D03196E41F647A7100720808 /* iOS-StaticLibrary.xcconfig */;
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = libevent;
@@ -1112,6 +1133,7 @@
 		};
 		D0FBEC911B79BC2A005C7577 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D03196E41F647A7100720808 /* iOS-StaticLibrary.xcconfig */;
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = openssl;

@@ -5,10 +5,11 @@
 //  Created by Conrad Kramer on 7/19/15.
 //
 
-#include <or/or.h>
-#include <or/main.h>
+#import <or/or.h>
+#import <or/main.h>
 
 #import "TORThread.h"
+#import "TORLogging.h"
 #import "TORConfiguration.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -62,7 +63,10 @@ static __weak TORThread *_thread = nil;
     for (NSUInteger idx = 0; idx < arguments.count; idx++)
         argv[idx + 1] = (char *)[arguments[idx] UTF8String];
     argv[argc] = NULL;
-    
+
+#if DEBUG
+    event_enable_debug_mode();
+#endif
     tor_main(argc, argv);
 }
 

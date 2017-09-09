@@ -13,5 +13,5 @@ HEADER_SEARCH_PATHS = $(inherited) "$(SRCROOT)/Tor/include" "$(SRCROOT)/Tor/tor"
 USER_HEADER_SEARCH_PATHS = $(inherited) "$(BUILT_PRODUCTS_DIR)/tor"
 CLANG_ENABLE_OBJC_ARC = YES
 CLANG_ENABLE_MODULES = YES
-OTHER_CFLAGS = -Wall -Wextra -Wunused
+OTHER_CFLAGS = -Wunguarded-availability -Wstrict-prototypes -Wall -Wextra -Wunused
 CODE_SIGN_IDENTITY =
