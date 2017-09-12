@@ -37,9 +37,16 @@ if [[ $REBUILD = 0 ]]; then
 fi
 
 if [[ "${BITCODE_GENERATION_MODE}" = "bitcode" ]]; then
-    BITCODE_FLAGS="-fembed-bitcode"
+    BITCODE_CFLAGS="-fembed-bitcode"
 elif [[ "${BITCODE_GENERATION_MODE}" = "marker" ]]; then
-    BITCODE_FLAGS="-fembed-bitcode-marker"
+    BITCODE_CFLAGS="-fembed-bitcode-marker"
+fi
+
+if [[ "${CONFIGURATION}" = "Debug" ]]; then
+    DEBUG_CFLAGS="-g -O0"
+    DEBUG_FLAGS="--enable-verbose-debug"
+else
+    DEBUG_FLAGS="--disable-debug-mode"
 fi
 
 # If there is a space in SRCROOT, make a symlink without a space and use that
@@ -58,7 +65,7 @@ cp -f "$(xcrun --sdk macosx --show-sdk-path)/usr/include/xpc/base.h" "${XPC_INCL
 for ARCH in "${ARCHS[@]}"
 do
     PREFIX="${CONFIGURATION_TEMP_DIR}/libevent-${ARCH}"
-    ./configure --disable-shared --enable-static --disable-debug-mode --enable-gcc-hardening --prefix="${PREFIX}" CC="$(xcrun -f --sdk ${PLATFORM_NAME} clang) -arch ${ARCH}" CPP="$(xcrun -f --sdk ${PLATFORM_NAME} clang) -E -arch ${ARCH}" CFLAGS="-I${BUILT_PRODUCTS_DIR}/openssl-${ARCH} -I\"${SRCROOT}/Tor/openssl/include\" ${BITCODE_FLAGS} -I${XPC_INCLUDE_DIR}" LDFLAGS="-L${BUILT_PRODUCTS_DIR} ${BITCODE_FLAGS}" cross_compiling="yes" ac_cv_func_clock_gettime="no"
+    ./configure --disable-shared --enable-static --enable-gcc-hardening ${DEBUG_FLAGS} --prefix="${PREFIX}" CC="$(xcrun -f --sdk ${PLATFORM_NAME} clang) -arch ${ARCH}" CPP="$(xcrun -f --sdk ${PLATFORM_NAME} clang) -E -arch ${ARCH}" CFLAGS="-I${BUILT_PRODUCTS_DIR}/openssl-${ARCH} -I\"${SRCROOT}/Tor/openssl/include\" ${DEBUG_CFLAGS} ${BITCODE_CFLAGS} -I${XPC_INCLUDE_DIR}" LDFLAGS="-L${BUILT_PRODUCTS_DIR} ${BITCODE_CFLAGS}" cross_compiling="yes" ac_cv_func_clock_gettime="no"
     make -j$(sysctl hw.ncpu | awk '{print $2}')
     make install
     make distclean

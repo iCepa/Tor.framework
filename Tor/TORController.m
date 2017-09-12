@@ -12,7 +12,7 @@
 
 const char tor_git_revision[] =
 #ifndef _MSC_VER
-#include "micro-revision.i"
+#import "micro-revision.i"
 #endif
 "";
 
