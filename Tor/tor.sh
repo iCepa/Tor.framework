@@ -14,7 +14,7 @@ fi
 REBUILD=0
 
 # If the built binaries include a different set of architectures, then rebuild the target
-if [[ ${ACTION:-build} = "build" ]]; then
+if [[ ${ACTION:-build} = "build" ]] || [[ $ACTION = "install" ]]; then
     for LIBRARY in "${BUILT_PRODUCTS_DIR}/libtor.a" "${BUILT_PRODUCTS_DIR}/libor"*.a "${BUILT_PRODUCTS_DIR}/libcurve25519_donna.a" "${BUILT_PRODUCTS_DIR}/libkeccak-tiny.a"
     do
         for ARCH in "${ARCHS[@]}"
