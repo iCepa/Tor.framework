@@ -5,7 +5,7 @@ ARCHS=($ARCHS)
 REBUILD=0
 
 # If the built binary includes a different set of architectures, then rebuild the target
-if [[ ${ACTION:-build} = "build" ]]; then
+if [[ ${ACTION:-build} = "build" ]] || [[ $ACTION = "install" ]]; then
     for ARCH in "${ARCHS[@]}"
     do
         if [[ $(lipo -info "${BUILT_PRODUCTS_DIR}/libssl.a" 2>&1) != *"${ARCH}"* ]]; then

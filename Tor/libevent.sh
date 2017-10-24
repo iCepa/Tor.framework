@@ -14,7 +14,7 @@ fi
 REBUILD=0
 
 # If the built binaries include a different set of architectures, then rebuild the target
-if [[ ${ACTION:-build} = "build" ]]; then
+if [[ ${ACTION:-build} = "build" ]] || [[ $ACTION = "install" ]]; then
     for LIBRARY in "${BUILT_PRODUCTS_DIR}/libevent"*.a
     do
         for ARCH in $ARCHS
