@@ -157,6 +157,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A0428A991FA0E72D00593F79 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D012AB851BC290D0004BE7A6 /* Tor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Tor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0198AC61C63EF2F00EA0043 /* libed25519_donna.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libed25519_donna.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0198AC71C63EF2F00EA0043 /* libed25519_ref10.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libed25519_ref10.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -344,6 +345,7 @@
 		D0FBEC631B79BAD7005C7577 = {
 			isa = PBXGroup;
 			children = (
+				A0428A991FA0E72D00593F79 /* README.md */,
 				D0FBEC6F1B79BAD7005C7577 /* Tor */,
 				D0FBEC7D1B79BB01005C7577 /* Tests */,
 				D0401AD51D2CB8B400602E9B /* Configuration */,
