@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D0FBEC8F1B79BC2A005C7577"
-               BuildableName = "openssl-iOS"
-               BlueprintName = "openssl-iOS"
+               BlueprintIdentifier = "8A44D7321FA3C41700C4E1C0"
+               BuildableName = "xz-Mac"
+               BlueprintName = "xz-Mac"
                ReferencedContainer = "container:Tor.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -47,9 +47,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D0FBEC8F1B79BC2A005C7577"
-            BuildableName = "openssl-iOS"
-            BlueprintName = "openssl-iOS"
+            BlueprintIdentifier = "8A44D7321FA3C41700C4E1C0"
+            BuildableName = "xz-Mac"
+            BlueprintName = "xz-Mac"
             ReferencedContainer = "container:Tor.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -65,9 +65,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D0FBEC8F1B79BC2A005C7577"
-            BuildableName = "openssl-iOS"
-            BlueprintName = "openssl-iOS"
+            BlueprintIdentifier = "8A44D7321FA3C41700C4E1C0"
+            BuildableName = "xz-Mac"
+            BlueprintName = "xz-Mac"
             ReferencedContainer = "container:Tor.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
