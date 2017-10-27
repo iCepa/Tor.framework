@@ -4,3 +4,6 @@ orconfig.h
 *.xcscmblueprint
 *.xccheckout
 
+*.DS_Store
+Carthage/Build
+Tor.framework.zip
