@@ -5,13 +5,14 @@
 //  Created by Benjamin Erhart on 9/9/17.
 //
 
-#import <Foundation/Foundation.h>
-#import <event2/event.h>
-#import <os/log.h>
-#import <asl.h>
-
 #import "TORLogging.h"
+
+#import <event2/event.h>
+#import <asl.h>
 #import "torlog.h"
+
+tor_log_cb tor_log_callback;
+tor_log_cb event_log_callback;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -66,7 +67,10 @@ static inline os_log_type_t TORLogTypeFromEventSeverity(int severity) {
 
 static void TOREventLogCallback(int severity, const char *msg) {
     os_log_type_t type = TORLogTypeFromEventSeverity(severity);
-    if (@available(iOS 10.0, macOS 10.12, *)) {
+
+    if (event_log_callback) {
+        event_log_callback(type, msg);
+    } else if (@available(iOS 10.0, macOS 10.12, *)) {
         static dispatch_once_t onceToken;
         static os_log_t log = NULL;
         dispatch_once(&onceToken, ^{
@@ -156,7 +160,10 @@ static void TORLogCallback(int severity, uint32_t domain, const char *msg) {
     }
 
     os_log_type_t type = TORLogTypeFromSeverity(severity);
-    if (@available(iOS 10.0, macOS 10.12, *)) {
+
+    if (tor_log_callback) {
+        tor_log_callback(type, msg);
+    } else if (@available(iOS 10.0, macOS 10.12, *)) {
         int index = 0;
         while (domain >>= 1) {
             ++index;
@@ -179,14 +186,30 @@ static void TORLogCallback(int severity, uint32_t domain, const char *msg) {
 }
 
 void TORInstallEventLogging(void) {
+    event_log_callback = NULL;
+    event_set_log_callback(TOREventLogCallback);
+    event_enable_debug_logging(EVENT_DBG_ALL);
+}
+
+void TORInstallEventLoggingCallback(tor_log_cb cb) {
+    event_log_callback = cb;
     event_set_log_callback(TOREventLogCallback);
     event_enable_debug_logging(EVENT_DBG_ALL);
 }
 
 void TORInstallTorLogging(void) {
+    tor_log_callback = NULL;
+    log_severity_list_t list;
+    set_log_severity_config(LOG_DEBUG, LOG_ERR, &list);
+    add_callback_log(&list, TORLogCallback);
+}
+
+extern void TORInstallTorLoggingCallback(tor_log_cb cb) {
+    tor_log_callback = cb;
     log_severity_list_t list;
     set_log_severity_config(LOG_DEBUG, LOG_ERR, &list);
     add_callback_log(&list, TORLogCallback);
 }
 
 NS_ASSUME_NONNULL_END
+

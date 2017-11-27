@@ -718,7 +718,7 @@
 		D0FBEC641B79BAD7005C7577 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = "Conrad Kramer";
 				TargetAttributes = {
 					D012AB841BC290D0004BE7A6 = {
@@ -1151,6 +1151,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D0593D741F27F21800A8872F /* Debug.xcconfig */;
 			buildSettings = {
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				ENABLE_TESTABILITY = YES;
 			};
 			name = Debug;
 		};
@@ -1158,6 +1165,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D0593D731F27F21800A8872F /* Release.xcconfig */;
 			buildSettings = {
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 			};
 			name = Release;
