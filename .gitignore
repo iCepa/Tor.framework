@@ -2,6 +2,8 @@ micro-revision.i
 orconfig.h
 *.xcscmblueprint
 *.xccheckout
+Carthage/Build
+Tor.framework.zip
 
 # Created by https://www.gitignore.io/api/macos,xcode,swift,objective-c
 
@@ -144,3 +146,4 @@ playground.xcworkspace
 /*.gcno
 
 # End of https://www.gitignore.io/api/macos,xcode,swift,objective-c
+

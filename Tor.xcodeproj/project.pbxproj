@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A44D7431FA3C9FC00C4E1C0 /* liblzma.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A44D7411FA3C9FC00C4E1C0 /* liblzma.a */; };
+		8A44D7441FA3D4E400C4E1C0 /* liblzma.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A44D7411FA3C9FC00C4E1C0 /* liblzma.a */; };
 		D012AB8D1BC2920C004BE7A6 /* TORController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FBEC941B79BCF6005C7577 /* TORController.m */; };
 		D012AB8E1BC2920E004BE7A6 /* Tor.h in Headers */ = {isa = PBXBuildFile; fileRef = D0FBEC701B79BAD7005C7577 /* Tor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D012AB8F1BC29220004BE7A6 /* TORConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B283AD1B79CF6600D0DDA9 /* TORConfiguration.m */; };
@@ -70,6 +72,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		8A44D7361FA3C44800C4E1C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0FBEC641B79BAD7005C7577 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8A44D72E1FA3C41100C4E1C0;
+			remoteInfo = "xz-iOS";
+		};
+		8A44D7381FA3C44E00C4E1C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0FBEC641B79BAD7005C7577 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8A44D7321FA3C41700C4E1C0;
+			remoteInfo = "xz-Mac";
+		};
 		D0198AAC1C63DF5700EA0043 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D0FBEC641B79BAD7005C7577 /* Project object */;
@@ -157,6 +173,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8A44D72D1FA3BBE000C4E1C0 /* xz.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = xz.sh; path = Tor/xz.sh; sourceTree = "<group>"; };
+		8A44D7411FA3C9FC00C4E1C0 /* liblzma.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = liblzma.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0428A991FA0E72D00593F79 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D012AB851BC290D0004BE7A6 /* Tor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Tor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0198AC61C63EF2F00EA0043 /* libed25519_donna.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libed25519_donna.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -227,6 +245,7 @@
 				D0198AB41C63E16500EA0043 /* libtor.a in Frameworks */,
 				D0198ABA1C63E16500EA0043 /* libevent_core.a in Frameworks */,
 				D0943CC31D528E5E0057F67C /* libkeccak-tiny.a in Frameworks */,
+				8A44D7431FA3C9FC00C4E1C0 /* liblzma.a in Frameworks */,
 				D0198ABD1C63E16500EA0043 /* libcrypto.a in Frameworks */,
 				D0198AB61C63E16500EA0043 /* libor-crypto.a in Frameworks */,
 				D0198ACB1C63EF2F00EA0043 /* libed25519_ref10.a in Frameworks */,
@@ -272,6 +291,7 @@
 				D0FBECAF1B79C0FE005C7577 /* libevent_core.a in Frameworks */,
 				D0FBECBD1B79C360005C7577 /* libcurve25519_donna.a in Frameworks */,
 				D0943CC21D528E5D0057F67C /* libkeccak-tiny.a in Frameworks */,
+				8A44D7441FA3D4E400C4E1C0 /* liblzma.a in Frameworks */,
 				D0FBECC11B79C360005C7577 /* libtor.a in Frameworks */,
 				D0FBECBF1B79C360005C7577 /* libor-event.a in Frameworks */,
 				D0198ACA1C63EF2F00EA0043 /* libed25519_ref10.a in Frameworks */,
@@ -402,6 +422,7 @@
 				D0FBEC9D1B79BD05005C7577 /* tor.sh */,
 				D0FBEC9B1B79BD05005C7577 /* libevent.sh */,
 				D0FBEC9C1B79BD05005C7577 /* openssl.sh */,
+				8A44D72D1FA3BBE000C4E1C0 /* xz.sh */,
 			);
 			name = External;
 			sourceTree = "<group>";
@@ -426,6 +447,7 @@
 				D0FBECA51B79C014005C7577 /* libcrypto.a */,
 				D0FBECA61B79C014005C7577 /* libssl.a */,
 				D02437B31B79CF2C006B48E0 /* libz.dylib */,
+				8A44D7411FA3C9FC00C4E1C0 /* liblzma.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -460,6 +482,34 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXLegacyTarget section */
+		8A44D72E1FA3C41100C4E1C0 /* xz-iOS */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "\"$(SRCROOT)/Tor/xz.sh\"";
+			buildConfigurationList = 8A44D72F1FA3C41100C4E1C0 /* Build configuration list for PBXLegacyTarget "xz-iOS" */;
+			buildPhases = (
+			);
+			buildToolPath = /bin/bash;
+			buildWorkingDirectory = Tor/xz;
+			dependencies = (
+			);
+			name = "xz-iOS";
+			passBuildSettingsInEnvironment = 1;
+			productName = openssl;
+		};
+		8A44D7321FA3C41700C4E1C0 /* xz-Mac */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "\"$(SRCROOT)/Tor/xz.sh\"";
+			buildConfigurationList = 8A44D7331FA3C41700C4E1C0 /* Build configuration list for PBXLegacyTarget "xz-Mac" */;
+			buildPhases = (
+			);
+			buildToolPath = /bin/bash;
+			buildWorkingDirectory = Tor/xz;
+			dependencies = (
+			);
+			name = "xz-Mac";
+			passBuildSettingsInEnvironment = 1;
+			productName = "openssl-OSX";
+		};
 		D0198A9C1C63DA5D00EA0043 /* openssl-Mac */ = {
 			isa = PBXLegacyTarget;
 			buildArgumentsString = "\"$(SRCROOT)/Tor/openssl.sh\"";
@@ -498,6 +548,7 @@
 			buildToolPath = /bin/bash;
 			buildWorkingDirectory = Tor/tor;
 			dependencies = (
+				8A44D7391FA3C44E00C4E1C0 /* PBXTargetDependency */,
 				D0198AAF1C63DF6000EA0043 /* PBXTargetDependency */,
 				D0198AB11C63DF6000EA0043 /* PBXTargetDependency */,
 			);
@@ -514,6 +565,7 @@
 			buildToolPath = /bin/bash;
 			buildWorkingDirectory = Tor/tor;
 			dependencies = (
+				8A44D7371FA3C44800C4E1C0 /* PBXTargetDependency */,
 				D0FBECC31B79C54E005C7577 /* PBXTargetDependency */,
 				D0FBECC51B79C54E005C7577 /* PBXTargetDependency */,
 			);
@@ -732,6 +784,8 @@
 				D0198AA01C63DE2100EA0043 /* libevent-Mac */,
 				D0FBEC8F1B79BC2A005C7577 /* openssl-iOS */,
 				D0198A9C1C63DA5D00EA0043 /* openssl-Mac */,
+				8A44D72E1FA3C41100C4E1C0 /* xz-iOS */,
+				8A44D7321FA3C41700C4E1C0 /* xz-Mac */,
 			);
 		};
 /* End PBXProject section */
@@ -828,6 +882,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		8A44D7371FA3C44800C4E1C0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8A44D72E1FA3C41100C4E1C0 /* xz-iOS */;
+			targetProxy = 8A44D7361FA3C44800C4E1C0 /* PBXContainerItemProxy */;
+		};
+		8A44D7391FA3C44E00C4E1C0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8A44D7321FA3C41700C4E1C0 /* xz-Mac */;
+			targetProxy = 8A44D7381FA3C44E00C4E1C0 /* PBXContainerItemProxy */;
+		};
 		D0198AAD1C63DF5700EA0043 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D0198A9C1C63DA5D00EA0043 /* openssl-Mac */;
@@ -891,6 +955,42 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		8A44D7301FA3C41100C4E1C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D03196E41F647A7100720808 /* iOS-StaticLibrary.xcconfig */;
+			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = liblzma;
+			};
+			name = Debug;
+		};
+		8A44D7311FA3C41100C4E1C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = liblzma;
+			};
+			name = Release;
+		};
+		8A44D7341FA3C41700C4E1C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D03196E51F647A7F00720808 /* Mac-StaticLibrary.xcconfig */;
+			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = liblzma;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		8A44D7351FA3C41700C4E1C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = liblzma;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 		D012AB8B1BC290D0004BE7A6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D0401AD71D2CB8C300602E9B /* Tor-Mac.xcconfig */;
@@ -1167,6 +1267,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8A44D72F1FA3C41100C4E1C0 /* Build configuration list for PBXLegacyTarget "xz-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8A44D7301FA3C41100C4E1C0 /* Debug */,
+				8A44D7311FA3C41100C4E1C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8A44D7331FA3C41700C4E1C0 /* Build configuration list for PBXLegacyTarget "xz-Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8A44D7341FA3C41700C4E1C0 /* Debug */,
+				8A44D7351FA3C41700C4E1C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D012AB8A1BC290D0004BE7A6 /* Build configuration list for PBXNativeTarget "Tor-Mac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

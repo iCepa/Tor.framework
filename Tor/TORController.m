@@ -344,6 +344,67 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
     }];
 }
 
+- (void)resetConfForKey:(NSString *)key completion:(void (^__nullable)(BOOL success, NSError * __nullable error))completion {
+	[self sendCommand:@"RESETCONF" arguments:@[key] data:nil observer:^BOOL(NSArray<NSNumber *> *codes, NSArray<NSData *> *lines, BOOL *stop) {
+		NSUInteger code = codes.firstObject.unsignedIntegerValue;
+		if (code != 250 && code != 515)
+			return NO;
+
+		NSString *message = [[NSString alloc] initWithData:lines.firstObject encoding:NSUTF8StringEncoding];
+		NSDictionary<NSString *, NSString *> *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:message, NSLocalizedDescriptionKey, nil];
+		BOOL success = (code == 250 && [message isEqualToString:@"OK"]);
+		if (completion)
+			completion(success, success ? nil : [NSError errorWithDomain:TORControllerErrorDomain code:code userInfo:userInfo]);
+
+		*stop = YES;
+		return YES;
+	}];
+}
+
+- (void)setConfForKey:(NSString *)key withValue:(NSString *)value completion:(void (^__nullable)(BOOL success, NSError * __nullable error))completion {
+	NSString *arg = [NSString stringWithFormat:@"%@=%@", key, value];
+
+	[self sendCommand:@"SETCONF" arguments:@[arg] data:nil observer:^BOOL(NSArray<NSNumber *> *codes, NSArray<NSData *> *lines, BOOL *stop) {
+		NSUInteger code = codes.firstObject.unsignedIntegerValue;
+		if (code != 250 && code != 515)
+			return NO;
+
+		NSString *message = [[NSString alloc] initWithData:lines.firstObject encoding:NSUTF8StringEncoding];
+		NSDictionary<NSString *, NSString *> *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:message, NSLocalizedDescriptionKey, nil];
+		BOOL success = (code == 250 && [message isEqualToString:@"OK"]);
+		if (completion)
+			completion(success, success ? nil : [NSError errorWithDomain:TORControllerErrorDomain code:code userInfo:userInfo]);
+
+		*stop = YES;
+		return YES;
+	}];
+}
+- (void)setConfs:(NSArray<NSDictionary *> *)configs completion:(void (^__nullable)(BOOL success, NSError * __nullable error))completion {
+    NSMutableArray *conf_arg = [[NSMutableArray alloc] init];
+    for (NSDictionary *config in configs) {
+        NSString *key = [config objectForKey:@"key"];
+        NSString *value = [config objectForKey:@"value"];
+        NSString *arg = [NSString stringWithFormat:@"%@=%@", key, value];
+        [conf_arg addObject:arg];
+    }
+
+    [self sendCommand:@"SETCONF" arguments:conf_arg data:nil observer:^BOOL(NSArray<NSNumber *> *codes, NSArray<NSData *> *lines, BOOL *stop) {
+        NSUInteger code = codes.firstObject.unsignedIntegerValue;
+        if (code != 250 && code != 515)
+            return NO;
+        
+        NSString *message = [[NSString alloc] initWithData:lines.firstObject encoding:NSUTF8StringEncoding];
+        NSDictionary<NSString *, NSString *> *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:message, NSLocalizedDescriptionKey, nil];
+        BOOL success = (code == 250 && [message isEqualToString:@"OK"]);
+        if (completion)
+            completion(success, success ? nil : [NSError errorWithDomain:TORControllerErrorDomain code:code userInfo:userInfo]);
+        
+        *stop = YES;
+        return YES;
+    }];
+
+}
+
 - (void)listenForEvents:(NSArray<NSString *> *)events completion:(void (^__nullable)(BOOL success, NSError * __nullable error))completion {
     [self sendCommand:@"SETEVENTS" arguments:events data:nil observer:^BOOL(NSArray<NSNumber *> *codes, NSArray<NSData *> *lines, BOOL *stop) {
         NSUInteger code = codes.firstObject.unsignedIntegerValue;

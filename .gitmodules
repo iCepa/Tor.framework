@@ -11,3 +11,6 @@
 [submodule "Carthage/Checkouts/xcconfigs"]
 	path = Carthage/Checkouts/xcconfigs
 	url = https://github.com/jspahrsummers/xcconfigs.git
+[submodule "Tor/xz"]
+	path = Tor/xz
+	url = https://git.tukaani.org/xz.git
