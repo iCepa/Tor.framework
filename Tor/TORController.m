@@ -18,8 +18,6 @@ const char tor_git_revision[] =
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef BOOL (^TORObserverBlock)(NSArray<NSNumber *> *codes, NSArray<NSData *> *lines, BOOL *stop);
-
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 100000
 NSErrorDomain const TORControllerErrorDomain = @"TORControllerErrorDomain";
 #else

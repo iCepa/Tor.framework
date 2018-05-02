@@ -9,6 +9,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef BOOL (^TORObserverBlock)(NSArray<NSNumber *> *codes, NSArray<NSData *> *lines, BOOL *stop);
+
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 100000 || __MAC_OS_X_VERSION_MAX_ALLOWED >= 101200
 TOR_EXTERN NSErrorDomain const TORControllerErrorDomain;
 #else
@@ -35,6 +37,7 @@ NS_SWIFT_NAME(TorController)
 - (void)listenForEvents:(NSArray<NSString *> *)events completion:(void (^__nullable)(BOOL success, NSError * __nullable error))completion;
 - (void)getInfoForKeys:(NSArray<NSString *> *)keys completion:(void (^)(NSArray<NSString *> *values))completion; // TODO: Provide errors
 - (void)getSessionConfiguration:(void (^)(NSURLSessionConfiguration * __nullable configuration))completion;
+- (void)sendCommand:(NSString *)command arguments:(nullable NSArray<NSString *> *)arguments data:(nullable NSData *)data observer:(TORObserverBlock)observer;
 
 // Observers
 - (id)addObserverForCircuitEstablished:(void (^)(BOOL established))block;
