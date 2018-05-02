@@ -18,8 +18,6 @@ const char tor_git_revision[] =
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef BOOL (^TORObserverBlock)(NSArray<NSNumber *> *codes, NSArray<NSData *> *lines, BOOL *stop);
-
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 100000
 NSErrorDomain const TORControllerErrorDomain = @"TORControllerErrorDomain";
 #else
@@ -263,10 +261,10 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
     };
     
     dispatch_async([[self class] controlQueue], ^{
-        if ([_events containsObject:event]) {
+        if ([self->_events containsObject:event]) {
             completion(YES, nil);
         } else {
-            NSMutableOrderedSet *events = [_events mutableCopy];
+            NSMutableOrderedSet *events = [self->_events mutableCopy];
             [events addObject:event];
             [self listenForEvents:events.array completion:completion];
         }
@@ -307,7 +305,7 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
 - (id)addObserver:(TORObserverBlock)observer {
     NSParameterAssert(observer);
     dispatch_async([[self class] controlQueue], ^{
-        [_blocks addObject:observer];
+        [self->_blocks addObject:observer];
     });
     return observer;
 }
@@ -317,7 +315,7 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
         return;
     
     dispatch_async([[self class] controlQueue], ^{
-        [_blocks removeObject:observer];
+        [self->_blocks removeObject:observer];
     });
 }
 
@@ -415,7 +413,7 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
         NSDictionary<NSString *, NSString *> *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:message, NSLocalizedDescriptionKey, nil];
         BOOL success = (code == 250 && [message isEqualToString:@"OK"]);
         if (success)
-            _events = [NSOrderedSet orderedSetWithArray:events];
+            self->_events = [NSOrderedSet orderedSetWithArray:events];
         if (completion)
             completion(success, success ? nil : [NSError errorWithDomain:TORControllerErrorDomain code:code userInfo:userInfo]);
         
@@ -516,7 +514,7 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
     dispatch_data_t dispatchData = dispatch_data_create(commandData.bytes, commandData.length, [[self class] controlQueue], DISPATCH_DATA_DESTRUCTOR_DEFAULT);
     dispatch_io_write(_channel, 0, dispatchData, [[self class] controlQueue], ^(bool done, dispatch_data_t __unused data, int error) {
         if (done && !error && observer) {
-            [_blocks insertObject:observer atIndex:0];
+            [self->_blocks insertObject:observer atIndex:0];
         }
     });
 }

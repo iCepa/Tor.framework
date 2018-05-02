@@ -7,6 +7,7 @@
 
 #import <or/or.h>
 #import <or/main.h>
+#import <or/tor_api.h>
 
 #import "TORThread.h"
 #import "TORLogging.h"
@@ -67,7 +68,11 @@ static __weak TORThread *_thread = nil;
 #if DEBUG
     event_enable_debug_mode();
 #endif
-    tor_main(argc, argv);
+
+    tor_main_configuration_t *cfg = tor_main_configuration_new();
+    tor_main_configuration_set_command_line(cfg, argc, argv);
+    tor_run_main(cfg);
+    tor_main_configuration_free(cfg);
 }
 
 @end
