@@ -7,9 +7,9 @@ ARCHS=($ARCHS)
 PATH=$PATH:/usr/local/bin:/usr/local/opt/gettext/bin
 
 # Generate the configure script (necessary for version control distributions)
-if [[ ! -f ./configure ]]; then
+#if [[ ! -f ./configure ]]; then
     ./autogen.sh
-fi
+#fi
 
 REBUILD=0
 

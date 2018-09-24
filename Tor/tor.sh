@@ -4,12 +4,12 @@ ARCHS=($ARCHS)
 
 # We need gettext to build tor
 # This extends the path to look in some common locations (for example, if installed via Homebrew)
-PATH=$PATH:/usr/local/bin:/usr/local/opt/gettext/bin
+PATH=$PATH:/usr/local/bin:/usr/local/opt/gettext/bin:/usr/local/opt/automake/bin:/usr/local/opt/aclocal/bin
 
 # Generate the configure script (necessary for version control distributions)
-if [[ ! -f ./configure ]]; then
+#if [[ ! -f ./configure ]]; then
     ./autogen.sh --add-missing
-fi
+#fi
 
 REBUILD=0
 
@@ -61,15 +61,22 @@ mkdir -p "${BUILT_PRODUCTS_DIR}"
 # Build each architecture one by one using clang
 for ARCH in "${ARCHS[@]}"
 do
-    ./configure --disable-lzma --disable-tool-name-check --disable-unittests --enable-static-openssl --enable-static-libevent --disable-asciidoc --disable-system-torrc --disable-linker-hardening --disable-dependency-tracking --prefix="${CONFIGURATION_TEMP_DIR}/tor-${ARCH}" --with-libevent-dir="${BUILT_PRODUCTS_DIR}" --with-openssl-dir="${BUILT_PRODUCTS_DIR}" --enable-lzma CC="$(xcrun -f --sdk ${PLATFORM_NAME} clang) -arch ${ARCH}" CPP="$(xcrun -f --sdk ${PLATFORM_NAME} clang) -E -arch ${ARCH}" CPPFLAGS="${DEBUG_CFLAGS} ${BITCODE_CFLAGS} -I${SRCROOT}/Tor/libevent/include -I${BUILT_PRODUCTS_DIR}/libevent-${ARCH} -I${SRCROOT}/Tor/openssl/include -I${BUILT_PRODUCTS_DIR}/openssl-${ARCH} -I${BUILT_PRODUCTS_DIR}/liblzma-${ARCH} -I${PSEUDO_SYS_INCLUDE_DIR} -isysroot ${SDKROOT}" cross_compiling="yes" ac_cv_func__NSGetEnviron="no" ac_cv_func_clock_gettime="no" ac_cv_func_getentropy="no" LDFLAGS="-lz ${BITCODE_CFLAGS}"
+    make distclean
+
+    ./configure --enable-restart-debugging --disable-tool-name-check --disable-unittests --enable-static-openssl --enable-static-libevent --disable-asciidoc --disable-system-torrc --disable-linker-hardening --disable-dependency-tracking --prefix="${CONFIGURATION_TEMP_DIR}/tor-${ARCH}" --with-libevent-dir="${BUILT_PRODUCTS_DIR}" --with-openssl-dir="${BUILT_PRODUCTS_DIR}" --enable-lzma CC="$(xcrun -f --sdk ${PLATFORM_NAME} clang) -arch ${ARCH}" CPP="$(xcrun -f --sdk ${PLATFORM_NAME} clang) -E -arch ${ARCH}" CPPFLAGS="${DEBUG_CFLAGS} ${BITCODE_CFLAGS} -I${SRCROOT}/Tor/openssl/include -I${BUILT_PRODUCTS_DIR}/openssl-${ARCH} -I${SRCROOT}/Tor/libevent/include -I${BUILT_PRODUCTS_DIR}/libevent-${ARCH} -I${BUILT_PRODUCTS_DIR}/liblzma-${ARCH} -I${PSEUDO_SYS_INCLUDE_DIR} -isysroot ${SDKROOT}" cross_compiling="yes" ac_cv_func__NSGetEnviron="no" ac_cv_func_clock_gettime="no" ac_cv_func_getentropy="no" LDFLAGS="-lz ${BITCODE_CFLAGS}"
+
+    mkdir -p "${BUILT_PRODUCTS_DIR}/tor-${ARCH}"
+    cp orconfig.h "${CONFIGURATION_TEMP_DIR}/tor-${ARCH}/orconfig.h"
+    cp orconfig.h "${BUILT_PRODUCTS_DIR}/tor-${ARCH}/orconfig.h"
+
     make -j$(sysctl hw.ncpu | awk '{print $2}')
+
+    cp micro-revision.i "${BUILT_PRODUCTS_DIR}/tor-${ARCH}/micro-revision.i"
+
     for LIBRARY in src/common/*.a src/or/*.a src/ext/ed25519/donna/*.a src/ext/ed25519/ref10/*.a src/trunnel/*.a src/ext/keccak-tiny/*.a;
     do
         cp $LIBRARY "${BUILT_PRODUCTS_DIR}/$(basename ${LIBRARY} .a).${ARCH}.a"
     done
-    mkdir -p "${BUILT_PRODUCTS_DIR}/tor-${ARCH}"
-    cp orconfig.h "${BUILT_PRODUCTS_DIR}/tor-${ARCH}/orconfig.h"
-    cp micro-revision.i "${BUILT_PRODUCTS_DIR}/tor-${ARCH}/micro-revision.i"
     make distclean
 done
 
