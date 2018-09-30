@@ -20,6 +20,7 @@ static __weak TORThread *_thread = nil;
 @interface TORThread ()
 
 @property (nonatomic, readonly, copy) NSArray<NSString *> *arguments;
+@property (nonatomic) tor_main_configuration_t *cfg;
 
 @end
 
@@ -69,10 +70,10 @@ static __weak TORThread *_thread = nil;
     event_enable_debug_mode();
 #endif
 
-    tor_main_configuration_t *cfg = tor_main_configuration_new();
-    tor_main_configuration_set_command_line(cfg, argc, argv);
-    tor_run_main(cfg);
-    tor_main_configuration_free(cfg);
+    self.cfg = tor_main_configuration_new();
+    tor_main_configuration_set_command_line(self.cfg, argc, argv);
+    tor_run_main(self.cfg);
+    tor_main_configuration_free(self.cfg);
 }
 
 @end

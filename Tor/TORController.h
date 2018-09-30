@@ -28,6 +28,7 @@ NS_SWIFT_NAME(TorController)
 - (instancetype)initWithSocketHost:(NSString *)host port:(in_port_t)port NS_DESIGNATED_INITIALIZER;
 
 - (BOOL)connect:(out NSError **)error;
+- (void)disconnect;
 
 // Commands
 - (void)authenticateWithData:(NSData *)data completion:(void (^__nullable)(BOOL success, NSError * __nullable error))completion;
