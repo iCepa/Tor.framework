@@ -11,7 +11,7 @@ PATH=$PATH:/usr/local/bin:/usr/local/opt/gettext/bin:/usr/local/opt/automake/bin
     ./autogen.sh --add-missing
 #fi
 
-REBUILD=0
+REBUILD=1
 
 # If the built binaries include a different set of architectures, then rebuild the target
 if [[ ${ACTION:-build} = "build" ]] || [[ $ACTION = "install" ]]; then
@@ -96,14 +96,10 @@ mkdir -p "${BUILT_PRODUCTS_DIR}"
 for ARCH in "${ARCHS[@]}"
 do
     make clean
-    make distclean
 
-    ./configure --enable-restart-debugging --disable-tool-name-check --disable-unittests --enable-static-openssl --enable-static-libevent --disable-asciidoc --disable-system-torrc --disable-linker-hardening --disable-dependency-tracking --prefix="${CONFIGURATION_TEMP_DIR}/tor-${ARCH}" --with-libevent-dir="${BUILT_PRODUCTS_DIR}" --with-openssl-dir="${BUILT_PRODUCTS_DIR}" --enable-lzma CC="$(xcrun -f --sdk ${PLATFORM_NAME} clang) -arch ${ARCH}" CPP="$(xcrun -f --sdk ${PLATFORM_NAME} clang) -E -arch ${ARCH}" CPPFLAGS="${DEBUG_CFLAGS} ${BITCODE_CFLAGS} -I${SRCROOT}/Tor/tor/core -I${SRCROOT}/Tor/openssl/include -I${BUILT_PRODUCTS_DIR}/openssl-${ARCH} -I${SRCROOT}/Tor/libevent/include -I${BUILT_PRODUCTS_DIR}/libevent-${ARCH} -I${BUILT_PRODUCTS_DIR}/liblzma-${ARCH} -I${PSEUDO_SYS_INCLUDE_DIR} -isysroot ${SDKROOT}" cross_compiling="yes" ac_cv_func__NSGetEnviron="no" ac_cv_func_clock_gettime="no" ac_cv_func_getentropy="no" LDFLAGS="-lz ${BITCODE_CFLAGS}"
+    ./configure --enable-restart-debugging --enable-silent-rules --enable-pic --disable-module-dirauth --disable-tool-name-check --disable-unittests --enable-static-openssl --enable-static-libevent --disable-asciidoc --disable-system-torrc --disable-linker-hardening --disable-dependency-tracking --prefix="${CONFIGURATION_TEMP_DIR}/tor-${ARCH}" --with-libevent-dir="${BUILT_PRODUCTS_DIR}" --with-openssl-dir="${BUILT_PRODUCTS_DIR}" --enable-lzma CC="$(xcrun -f --sdk ${PLATFORM_NAME} clang) -arch ${ARCH}" CPP="$(xcrun -f --sdk ${PLATFORM_NAME} clang) -E -arch ${ARCH}" CPPFLAGS="${DEBUG_CFLAGS} ${BITCODE_CFLAGS} -I${SRCROOT}/Tor/tor/core -I${SRCROOT}/Tor/openssl/include -I${BUILT_PRODUCTS_DIR}/openssl-${ARCH} -I${SRCROOT}/Tor/libevent/include -I${BUILT_PRODUCTS_DIR}/libevent-${ARCH} -I${BUILT_PRODUCTS_DIR}/libevent-${ARCH}/include -I${BUILT_PRODUCTS_DIR}/liblzma-${ARCH} -I${BUILT_PRODUCTS_DIR}/liblzma-${ARCH}/include -I${PSEUDO_SYS_INCLUDE_DIR} -isysroot ${SDKROOT}" cross_compiling="yes" ac_cv_func__NSGetEnviron="no" ac_cv_func_clock_gettime="no" ac_cv_func_getentropy="no" LDFLAGS="-lz ${BITCODE_CFLAGS}"
 
-    mkdir -p "${BUILT_PRODUCTS_DIR}/tor-${ARCH}"
-    mkdir -p "${CONFIGURATION_TEMP_DIR}/tor-${ARCH}"
-    cp orconfig.h "${CONFIGURATION_TEMP_DIR}/tor-${ARCH}/orconfig.h"
-    cp orconfig.h "${BUILT_PRODUCTS_DIR}/tor-${ARCH}/orconfig.h"
+    cp orconfig.h "src/lib/cc/"
 
     make -j$(sysctl hw.ncpu | awk '{print $2}')
 
@@ -114,7 +110,6 @@ do
         cp $LIBRARY "${BUILT_PRODUCTS_DIR}/$(basename ${LIBRARY} .a).${ARCH}.a"
     done
     make clean
-    make distclean
 done
 
 cp -rf "${BUILT_PRODUCTS_DIR}/tor-${ARCHS[0]}" "${BUILT_PRODUCTS_DIR}/tor"

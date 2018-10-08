@@ -12,7 +12,7 @@ if [[ ! -f ./configure ]]; then
     ./autogen.sh
 fi
 
-REBUILD=0
+REBUILD=1
 
 # If the built binaries include a different set of architectures, then rebuild the target
 if [[ ${ACTION:-build} = "build" ]] || [[ $ACTION = "install" ]]; then

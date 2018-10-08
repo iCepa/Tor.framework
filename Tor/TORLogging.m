@@ -9,7 +9,7 @@
 
 #import <event2/event.h>
 #import <asl.h>
-#import "torlog.h"
+#import <log/log.h>
 
 tor_log_cb tor_log_callback;
 tor_log_cb event_log_callback;

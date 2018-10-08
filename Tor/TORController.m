@@ -8,13 +8,8 @@
 #import "TORController.h"
 
 #import <or/or.h>
+#import <sys/un.h>
 #import "TORThread.h"
-
-const char tor_git_revision[] =
-#ifndef _MSC_VER
-#import "micro-revision.i"
-#endif
-"";
 
 NS_ASSUME_NONNULL_BEGIN
 
