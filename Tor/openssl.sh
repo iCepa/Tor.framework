@@ -2,7 +2,7 @@
 
 ARCHS=($ARCHS)
 
-REBUILD=1
+REBUILD=0
 
 # If the built binary includes a different set of architectures, then rebuild the target
 if [[ ${ACTION:-build} = "build" ]] || [[ $ACTION = "install" ]]; then

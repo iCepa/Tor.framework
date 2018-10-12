@@ -7,11 +7,11 @@ ARCHS=($ARCHS)
 PATH=$PATH:/usr/local/bin:/usr/local/opt/gettext/bin
 
 # Generate the configure script (necessary for version control distributions)
-#if [[ ! -f ./configure ]]; then
+if [[ ! -f ./configure ]]; then
     ./autogen.sh
-#fi
+fi
 
-REBUILD=1
+REBUILD=0
 
 # If the built binaries include a different set of architectures, then rebuild the target
 if [[ ${ACTION:-build} = "build" ]] || [[ $ACTION = "install" ]]; then
