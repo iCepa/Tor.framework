@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		8A00200C2171261300B1ABBC /* GenFrameworkVersion */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 8A00200F2171261300B1ABBC /* Build configuration list for PBXAggregateTarget "GenFrameworkVersion" */;
+			buildPhases = (
+				8A53A12D2171262900938D1D /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = GenFrameworkVersion;
+			productName = GenFrameworkVersion;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		8A44D7431FA3C9FC00C4E1C0 /* liblzma.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A44D7411FA3C9FC00C4E1C0 /* liblzma.a */; };
 		8A44D7441FA3D4E400C4E1C0 /* liblzma.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A44D7411FA3C9FC00C4E1C0 /* liblzma.a */; };
@@ -135,6 +149,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 8A44D7321FA3C41700C4E1C0;
 			remoteInfo = "xz-Mac";
+		};
+		8A53A12E2171264B00938D1D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0FBEC641B79BAD7005C7577 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8A00200C2171261300B1ABBC;
+			remoteInfo = GenFrameworkVersion;
+		};
+		8A53A1302171265000938D1D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0FBEC641B79BAD7005C7577 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8A00200C2171261300B1ABBC;
+			remoteInfo = GenFrameworkVersion;
 		};
 		D0198AAC1C63DF5700EA0043 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -698,6 +726,7 @@
 			buildToolPath = /bin/bash;
 			buildWorkingDirectory = Tor/tor;
 			dependencies = (
+				8A53A1312171265000938D1D /* PBXTargetDependency */,
 				8A44D7391FA3C44E00C4E1C0 /* PBXTargetDependency */,
 				D0198AAF1C63DF6000EA0043 /* PBXTargetDependency */,
 				D0198AB11C63DF6000EA0043 /* PBXTargetDependency */,
@@ -715,6 +744,7 @@
 			buildToolPath = /bin/bash;
 			buildWorkingDirectory = Tor/tor;
 			dependencies = (
+				8A53A12F2171264B00938D1D /* PBXTargetDependency */,
 				8A44D7371FA3C44800C4E1C0 /* PBXTargetDependency */,
 				D0FBECC31B79C54E005C7577 /* PBXTargetDependency */,
 				D0FBECC51B79C54E005C7577 /* PBXTargetDependency */,
@@ -873,6 +903,10 @@
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Conrad Kramer";
 				TargetAttributes = {
+					8A00200C2171261300B1ABBC = {
+						CreatedOnToolsVersion = 10.0;
+						ProvisioningStyle = Automatic;
+					};
 					D012AB841BC290D0004BE7A6 = {
 						CreatedOnToolsVersion = 7.1;
 					};
@@ -938,6 +972,7 @@
 				D0198A9C1C63DA5D00EA0043 /* openssl-Mac */,
 				8A44D72E1FA3C41100C4E1C0 /* xz-iOS */,
 				8A44D7321FA3C41700C4E1C0 /* xz-Mac */,
+				8A00200C2171261300B1ABBC /* GenFrameworkVersion */,
 			);
 		};
 /* End PBXProject section */
@@ -973,6 +1008,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8A53A12D2171262900938D1D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$SRCROOT\"/Tor/version.sh\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D012AB801BC290D0004BE7A6 /* Sources */ = {
@@ -1044,6 +1099,16 @@
 			target = 8A44D7321FA3C41700C4E1C0 /* xz-Mac */;
 			targetProxy = 8A44D7381FA3C44E00C4E1C0 /* PBXContainerItemProxy */;
 		};
+		8A53A12F2171264B00938D1D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8A00200C2171261300B1ABBC /* GenFrameworkVersion */;
+			targetProxy = 8A53A12E2171264B00938D1D /* PBXContainerItemProxy */;
+		};
+		8A53A1312171265000938D1D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8A00200C2171261300B1ABBC /* GenFrameworkVersion */;
+			targetProxy = 8A53A1302171265000938D1D /* PBXContainerItemProxy */;
+		};
 		D0198AAD1C63DF5700EA0043 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D0198A9C1C63DA5D00EA0043 /* openssl-Mac */;
@@ -1107,6 +1172,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		8A00200D2171261300B1ABBC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8A00200E2171261300B1ABBC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		8A44D7301FA3C41100C4E1C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D03196E41F647A7100720808 /* iOS-StaticLibrary.xcconfig */;
@@ -1419,6 +1500,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8A00200F2171261300B1ABBC /* Build configuration list for PBXAggregateTarget "GenFrameworkVersion" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8A00200D2171261300B1ABBC /* Debug */,
+				8A00200E2171261300B1ABBC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8A44D72F1FA3C41100C4E1C0 /* Build configuration list for PBXLegacyTarget "xz-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

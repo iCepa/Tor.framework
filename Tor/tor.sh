@@ -64,7 +64,6 @@ if [[ ${ACTION:-build} = "clean" ]] || [[ $REBUILD = 1 ]]; then
         libtor-trace \
         libtor-wallclock \
         libor-trunnel \
-        libtorrunner \
         libtor-app;
     do
         rm "${BUILT_PRODUCTS_DIR}/${LIB}.a" 2> /dev/null
@@ -149,7 +148,6 @@ for LIB in \
     libtor-trace \
     libtor-wallclock \
     libor-trunnel \
-    libtorrunner \
     libtor-app;
 do
     xcrun --sdk $PLATFORM_NAME lipo -create "${BUILT_PRODUCTS_DIR}/${LIB}."*.a -output "${BUILT_PRODUCTS_DIR}/${LIB}.a"

@@ -7,6 +7,8 @@
 
 PRODUCT_NAME = Tor
 INFOPLIST_FILE = Tor/Info.plist
+INFOPLIST_PREPROCESS = YES
+INFOPLIST_PREFIX_HEADER = Tor/version.h
 PRODUCT_BUNDLE_IDENTIFIER = org.torproject.Tor
 ALWAYS_SEARCH_USER_PATHS = NO
 HEADER_SEARCH_PATHS = $(inherited) "$(SRCROOT)/Tor/include" "$(SRCROOT)/Tor/tor" "$(SRCROOT)/Tor/tor/src" "$(SRCROOT)/Tor/tor/src/common" "$(SRCROOT)/Tor/tor/src/core" "$(SRCROOT)/Tor/tor/src/ext" "$(SRCROOT)/Tor/tor/src/feature" "$(SRCROOT)/Tor/tor/src/lib" "$(SRCROOT)/Tor/libevent/include" "$(SRCROOT)/Tor/openssl/include" "$(BUILT_PRODUCTS_DIR)/openssl" "$(BUILT_PRODUCTS_DIR)/libevent"
