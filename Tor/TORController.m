@@ -34,6 +34,7 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
     in_port_t _port;
     dispatch_io_t _channel;
     NSMutableArray<TORObserverBlock> *_blocks;
+    int sock;
 }
 
 + (dispatch_queue_t)controlQueue {
@@ -89,7 +90,7 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
     if (_channel)
         return NO;
     
-    int sock = -1;
+    self->sock = -1;
     
     _events = [NSOrderedSet new];
     
@@ -99,9 +100,8 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
         strncpy(control_addr.sun_path, _url.fileSystemRepresentation, sizeof(control_addr.sun_path) - 1);
         control_addr.sun_len = (unsigned char)SUN_LEN(&control_addr);
         
-        sock = socket(AF_UNIX, SOCK_STREAM, 0);
-        
-        if (connect(sock, (struct sockaddr *)&control_addr, control_addr.sun_len) == -1) {
+        self->sock = socket(AF_UNIX, SOCK_STREAM, 0);
+        if (connect(self->sock, (struct sockaddr *)&control_addr, control_addr.sun_len) == -1) {
             if (error)
                 *error = [NSError errorWithDomain:NSPOSIXErrorDomain code:errno userInfo:nil];
             return NO;
@@ -120,9 +120,9 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
         control_addr.sin_addr = addr;
         control_addr.sin_len = (__uint8_t)sizeof(control_addr);
         
-        sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+        self->sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
         
-        if (connect(sock, (struct sockaddr *)&control_addr, control_addr.sin_len) == -1) {
+        if (connect(self->sock, (struct sockaddr *)&control_addr, control_addr.sin_len) == -1) {
             if (error)
                 *error = [NSError errorWithDomain:NSPOSIXErrorDomain code:errno userInfo:nil];
             return NO;
@@ -132,8 +132,8 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
     }
     
     __weak TORController *weakSelf = self;
-    _channel = dispatch_io_create(DISPATCH_IO_STREAM, sock, [[self class] controlQueue], ^(int __unused error) {
-        close(sock);
+    _channel = dispatch_io_create(DISPATCH_IO_STREAM, self->sock, [[self class] controlQueue], ^(int __unused error) {
+        close(self->sock);
         
         TORController *strongSelf = weakSelf;
         if (strongSelf) {
@@ -225,6 +225,19 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
     });
     
     return YES;
+}
+
+- (void)disconnect {
+    [self sendCommand:@"NEWNYM" arguments:nil data:nil observer:^BOOL(NSArray<NSNumber *> * __unused codes, NSArray<NSData *> * __unused lines, BOOL * __unused stop) {
+        return YES;
+    }];
+    
+    [self sendCommand:@"SIGNAL SHUTDOWN" arguments:@[@"0"] data:nil observer:^BOOL(NSArray<NSNumber *> * __unused codes, NSArray<NSData *> * __unused lines, BOOL * __unused stop) {
+        shutdown(self->sock, SHUT_RDWR);
+        self->_channel = nil;
+     
+        return YES;
+     }];
 }
 
 #pragma mark - Receiving Responses
