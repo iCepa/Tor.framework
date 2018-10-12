@@ -7,11 +7,11 @@ ARCHS=($ARCHS)
 PATH=$PATH:/usr/local/bin:/usr/local/opt/gettext/bin
 
 # Generate the configure script (necessary for version control distributions)
-if [[ ! -f ./configure ]]; then
+#if [[ ! -f ./configure ]]; then
     ./autogen.sh
-fi
+#fi
 
-REBUILD=0
+REBUILD=1
 
 # If the built binaries include a different set of architectures, then rebuild the target
 if [[ ${ACTION:-build} = "build" ]] || [[ $ACTION = "install" ]]; then
@@ -64,11 +64,12 @@ cp -f "$(xcrun --sdk macosx --show-sdk-path)/usr/include/xpc/base.h" "${XPC_INCL
 # Build each architecture one by one using clang
 for ARCH in "${ARCHS[@]}"
 do
+    make clean
     PREFIX="${CONFIGURATION_TEMP_DIR}/libevent-${ARCH}"
     ./configure --disable-shared --enable-static --enable-gcc-hardening ${DEBUG_FLAGS} --prefix="${PREFIX}" CC="$(xcrun -f --sdk ${PLATFORM_NAME} clang) -arch ${ARCH}" CPP="$(xcrun -f --sdk ${PLATFORM_NAME} clang) -E -arch ${ARCH}" CFLAGS="-I${BUILT_PRODUCTS_DIR}/openssl-${ARCH} -I\"${SRCROOT}/Tor/openssl/include\" ${DEBUG_CFLAGS} ${BITCODE_CFLAGS} -I${XPC_INCLUDE_DIR}" LDFLAGS="-L${BUILT_PRODUCTS_DIR} ${BITCODE_CFLAGS}" cross_compiling="yes" ac_cv_func_clock_gettime="no"
     make -j$(sysctl hw.ncpu | awk '{print $2}')
     make install
-    make distclean
+    #make distclean
 done
 
 mkdir -p "${BUILT_PRODUCTS_DIR}"
@@ -78,7 +79,7 @@ for ARCH in "${ARCHS[@]}"
 do
 
     mkdir -p "${BUILT_PRODUCTS_DIR}/libevent-${ARCH}/event2"
-    cp "${CONFIGURATION_TEMP_DIR}/libevent-${ARCH}/include/event2/event-config.h" "${BUILT_PRODUCTS_DIR}/libevent-${ARCH}/event2"
+    cp "${CONFIGURATION_TEMP_DIR}/libevent-${ARCH}/include/event2/event-config.h" "${BUILT_PRODUCTS_DIR}/libevent-${ARCH}/event2/"
     for LIBRARY in "${CONFIGURATION_TEMP_DIR}/libevent-${ARCH}/lib/"*.a;
     do
         cp $LIBRARY "${BUILT_PRODUCTS_DIR}/$(basename ${LIBRARY} .a).${ARCH}.a"

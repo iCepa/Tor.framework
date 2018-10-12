@@ -8,9 +8,9 @@ Currently, the framework compiles in static versions of `tor`, `libevent`, `open
 
 |          |         |
 |:-------- | -------:|
-| tor      | 0.3.3.5-rc |
+| tor      | 0.3.5.2-alpha |
 | libevent | 2.1.8   |
-| OpenSSL  | 1.1.0g  |
+| OpenSSL  | 1.0.1i  |
 | liblzma  | 5.2.3   |
 
 ## Requirements
@@ -59,11 +59,11 @@ TORController *controller = [[TORController alloc] initWithSocketURL:configurati
 [controller authenticateWithData:cookie completion:^(BOOL success, NSError *error) {
     if (!success)
         return;
-    
+
     [controller addObserverForCircuitEstablished:^(BOOL established) {
         if (!established)
             return;
-        
+
         [controller getSessionConfiguration:^(NSURLSessionConfiguration *configuration) {
             NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
             ...
