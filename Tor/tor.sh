@@ -7,19 +7,54 @@ ARCHS=($ARCHS)
 PATH=$PATH:/usr/local/bin:/usr/local/opt/gettext/bin:/usr/local/opt/automake/bin:/usr/local/opt/aclocal/bin
 
 # Generate the configure script (necessary for version control distributions)
-#if [[ ! -f ./configure ]]; then
+if [[ ! -f ./configure ]]; then
     ./autogen.sh --add-missing
-#fi
+fi
 
-REBUILD=1
+REBUILD=0
 
 # If the built binaries include a different set of architectures, then rebuild the target
 if [[ ${ACTION:-build} = "build" ]] || [[ $ACTION = "install" ]]; then
-    for LIBRARY in "${BUILT_PRODUCTS_DIR}/libtor.a" "${BUILT_PRODUCTS_DIR}/libor"*.a "${BUILT_PRODUCTS_DIR}/libcurve25519_donna.a" "${BUILT_PRODUCTS_DIR}/libkeccak-tiny.a"
+    for LIB in \
+        libed25519_ref10 \
+        libed25519_donna \
+        libkeccak-tiny \
+        libtor-err \
+        libtor-ctime \
+        libtor-compress \
+        libtor-container \
+        libtor-crypt-ops \
+        libtor-encoding \
+        libtor-evloop \
+        libtor-fdio \
+        libtor-fs \
+        libcurve25519_donna \
+        libtor-intmath \
+        libtor-lock \
+        libtor-log \
+        libtor-math \
+        libtor-memarea \
+        libtor-meminfo \
+        libtor-malloc \
+        libtor-net \
+        libtor-osinfo \
+        libtor-process \
+        libtor-sandbox \
+        libtor-string \
+        libtor-smartlist-core \
+        libtor-term \
+        libtor-thread \
+        libtor-time \
+        libtor-tls \
+        libtor-trace \
+        libtor-wallclock \
+        libor-trunnel \
+        libtorrunner \
+        libtor-app;
     do
         for ARCH in "${ARCHS[@]}"
         do
-            if [[ $(lipo -info "${LIBRARY}" 2>&1) != *"${ARCH}"* ]]; then
+            if [[ $(lipo -info "${BUILT_PRODUCTS_DIR}/${LIBRARY}.a" 2>&1) != *"${ARCH}"* ]]; then
                 REBUILD=1;
             fi
         done
@@ -29,7 +64,6 @@ fi
 # If rebuilding or cleaning then delete the built products
 if [[ ${ACTION:-build} = "clean" ]] || [[ $REBUILD = 1 ]]; then
     make clean 2>/dev/null
-    make distclean 2>/dev/null
     for LIB in \
         libed25519_ref10 \
         libed25519_donna \
@@ -96,7 +130,7 @@ for ARCH in "${ARCHS[@]}"
 do
     make clean
 
-    ./configure --enable-restart-debugging --enable-silent-rules --enable-pic --disable-module-dirauth --disable-tool-name-check --disable-unittests --enable-static-openssl --enable-static-libevent --disable-asciidoc --disable-system-torrc --disable-linker-hardening --disable-dependency-tracking --prefix="${CONFIGURATION_TEMP_DIR}/tor-${ARCH}" --with-libevent-dir="${BUILT_PRODUCTS_DIR}" --with-openssl-dir="${BUILT_PRODUCTS_DIR}" --enable-lzma CC="$(xcrun -f --sdk ${PLATFORM_NAME} clang) -arch ${ARCH}" CPP="$(xcrun -f --sdk ${PLATFORM_NAME} clang) -E -arch ${ARCH}" CPPFLAGS="${DEBUG_CFLAGS} ${BITCODE_CFLAGS} -I${SRCROOT}/Tor/tor/core -I${SRCROOT}/Tor/openssl/include -I${BUILT_PRODUCTS_DIR}/openssl-${ARCH} -I${SRCROOT}/Tor/libevent/include -I${BUILT_PRODUCTS_DIR}/libevent-${ARCH} -I${BUILT_PRODUCTS_DIR}/libevent-${ARCH}/include -I${BUILT_PRODUCTS_DIR}/liblzma-${ARCH} -I${BUILT_PRODUCTS_DIR}/liblzma-${ARCH}/include -I${PSEUDO_SYS_INCLUDE_DIR} -isysroot ${SDKROOT}" cross_compiling="yes" ac_cv_func__NSGetEnviron="no" ac_cv_func_clock_gettime="no" ac_cv_func_getentropy="no" LDFLAGS="-lz ${BITCODE_CFLAGS}"
+    ./configure --enable-restart-debugging --enable-silent-rules --enable-pic --disable-module-dirauth --disable-tool-name-check --disable-unittests --enable-static-openssl --enable-static-libevent --disable-asciidoc --disable-system-torrc --disable-linker-hardening --disable-dependency-tracking --prefix="${CONFIGURATION_TEMP_DIR}/tor-${ARCH}" --with-libevent-dir="${BUILT_PRODUCTS_DIR}" --with-openssl-dir="${BUILT_PRODUCTS_DIR}" --enable-lzma CC="$(xcrun -f --sdk ${PLATFORM_NAME} clang) -arch ${ARCH} -isysroot ${SDKROOT}" CPP="$(xcrun -f --sdk ${PLATFORM_NAME} clang) -E -arch ${ARCH} -isysroot ${SDKROOT}" CPPFLAGS="${DEBUG_CFLAGS} ${BITCODE_CFLAGS} -I${SRCROOT}/Tor/tor/core -I${SRCROOT}/Tor/openssl/include -I${BUILT_PRODUCTS_DIR}/openssl-${ARCH} -I${SRCROOT}/Tor/libevent/include -I${BUILT_PRODUCTS_DIR}/libevent-${ARCH} -I${BUILT_PRODUCTS_DIR}/libevent-${ARCH}/include -I${BUILT_PRODUCTS_DIR}/liblzma-${ARCH} -I${BUILT_PRODUCTS_DIR}/liblzma-${ARCH}/include -I${PSEUDO_SYS_INCLUDE_DIR} -isysroot ${SDKROOT}" cross_compiling="yes" ac_cv_func__NSGetEnviron="no" ac_cv_func_clock_gettime="no" ac_cv_func_getentropy="no" LDFLAGS="-lz ${BITCODE_CFLAGS}"
 
     cp orconfig.h "src/lib/cc/"
 
