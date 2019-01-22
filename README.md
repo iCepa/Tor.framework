@@ -30,6 +30,19 @@ If you use `brew`, make sure to install `autoconf`,  `automake`,  `libtool` and 
 brew install automake autoconf libtool gettext
 ```
 
+### Initial Setup
+
+```bash
+git clone git@github.com:iCepa/Tor.framework
+
+cd Tor.framework
+
+git submodule init
+git submodule update
+
+carthage build --no-skip-current --platform iOS
+```
+
 ### Carthage
 
 To integrate Tor into your Xcode project using Carthage, specify it in your  `Cartfile`:
@@ -112,6 +125,14 @@ TORController *controller = [[TORController alloc] initWithSocketURL:configurati
     }];
 }];
 ```
+
+## Known Issues
+
+- Nobody takes care having it working on MacOS, currently, so builds will probably break on that platform.
+
+- The xcconfigs dependency currently seems unused. Probably can be removed, but somebody
+  needs to do some archeology to determine, why it was used and if we should re-enable that
+  functionality or instead remove the dependency.
 
 ## License
 
