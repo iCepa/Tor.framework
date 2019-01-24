@@ -6,7 +6,6 @@
 //
 
 #import <or/or.h>
-#import <core/mainloop/main.h>
 #import <api/tor_api.h>
 
 #import "TORThread.h"
