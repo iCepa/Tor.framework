@@ -50,7 +50,8 @@ if [[ ${ACTION:-build} = "build" ]] || [[ $ACTION = "install" ]]; then
         libtor-wallclock \
         libor-trunnel \
         libtorrunner \
-        libtor-app;
+        libtor-app \
+        libtor-geoip;
     do
         for ARCH in "${ARCHS[@]}"
         do
@@ -98,7 +99,8 @@ if [[ ${ACTION:-build} = "clean" ]] || [[ $REBUILD = 1 ]]; then
         libtor-trace \
         libtor-wallclock \
         libor-trunnel \
-        libtor-app;
+        libtor-app \
+        libtor-geoip;
     do
         rm "${BUILT_PRODUCTS_DIR}/${LIB}.a" 2> /dev/null
     done
@@ -182,7 +184,8 @@ for LIB in \
     libtor-trace \
     libtor-wallclock \
     libor-trunnel \
-    libtor-app;
+    libtor-app \
+    libtor-geoip;
 do
     xcrun --sdk $PLATFORM_NAME lipo -create "${BUILT_PRODUCTS_DIR}/${LIB}."*.a -output "${BUILT_PRODUCTS_DIR}/${LIB}.a"
     rm "${BUILT_PRODUCTS_DIR}/${LIB}."*.a

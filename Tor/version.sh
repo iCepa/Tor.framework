@@ -18,8 +18,11 @@
 # ABB.C.Y, where the tor version is 0.A.B.C ("BB" is two-digit B slot
 # with leading zero if necessary) and Y is an incremental tor.framework version.
 # so the first tor 0.3.5.2-alpha is 305.2.1
-TOR_BUNDLE_SHORT_VERSION_DATE="October 12 2018 00:00:00 GMT"
-TOR_BUNDLE_SHORT_VERSION_STRING=305.2.1
+
+# BUGFIX: Don't use dates with localized month names, because that breaks building
+# on non-english localized systems. Instead stick to an international format.
+TOR_BUNDLE_SHORT_VERSION_DATE="2019-01-24 15:45:00 GMT"
+TOR_BUNDLE_SHORT_VERSION_STRING=305.7.1
 
 #####
 
@@ -28,7 +31,7 @@ BASH_SOURCE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 #####
 # minutes_since_date
 SECONDS_FROM_EPOCH_TO_NOW=$( date "+%s" )
-SECONDS_FROM_EPOCH_TO_DATE=$( date -j -f "%b %d %Y %T %Z" "${TOR_BUNDLE_SHORT_VERSION_DATE}" "+%s" )
+SECONDS_FROM_EPOCH_TO_DATE=$( date -j -f "%Y-%m-%d %H:%M:%S %Z" "${TOR_BUNDLE_SHORT_VERSION_DATE}" "+%s" )
 
 MINUTES_SINCE_DATE=$(( $(( ${SECONDS_FROM_EPOCH_TO_NOW}-${SECONDS_FROM_EPOCH_TO_DATE} ))/60 ))
 

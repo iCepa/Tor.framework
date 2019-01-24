@@ -93,6 +93,8 @@
 		8A9D5D5D216BE17400B0BB19 /* libtor-wallclock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D11216BE12100B0BB19 /* libtor-wallclock.a */; };
 		8A9D5D5F216BFB3400B0BB19 /* orconfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A9D5D5E216BFB3400B0BB19 /* orconfig.h */; };
 		8A9D5D60216BFB3400B0BB19 /* orconfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A9D5D5E216BFB3400B0BB19 /* orconfig.h */; };
+		A044F45421F9F2F60094F807 /* libtor-geoip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A044F45321F9F2F60094F807 /* libtor-geoip.a */; };
+		A044F45621F9F3F50094F807 /* libtor-geoip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A044F45521F9F3F40094F807 /* libtor-geoip.a */; };
 		D012AB8D1BC2920C004BE7A6 /* TORController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FBEC941B79BCF6005C7577 /* TORController.m */; };
 		D012AB8E1BC2920E004BE7A6 /* Tor.h in Headers */ = {isa = PBXBuildFile; fileRef = D0FBEC701B79BAD7005C7577 /* Tor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D012AB8F1BC29220004BE7A6 /* TORConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B283AD1B79CF6600D0DDA9 /* TORConfiguration.m */; };
@@ -289,6 +291,15 @@
 		8A9D5D17216BE12100B0BB19 /* libed25519_ref10.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libed25519_ref10.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A9D5D5E216BFB3400B0BB19 /* orconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = orconfig.h; path = tor/orconfig.h; sourceTree = "<group>"; };
 		A0428A991FA0E72D00593F79 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		A044F45321F9F2F60094F807 /* libtor-geoip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-geoip.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A044F45521F9F3F40094F807 /* libtor-geoip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-geoip.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0DE78A121F73B8200B6B68B /* Cartfile.private */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile.private; sourceTree = "<group>"; };
+		A0DE78A221F73B8200B6B68B /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		A0DE78A321F73B8200B6B68B /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
+		A0DE78A421F73B8200B6B68B /* .gitmodules */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitmodules; sourceTree = "<group>"; };
+		A0DE78A521F73B8200B6B68B /* Cartfile.resolved */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile.resolved; sourceTree = "<group>"; };
+		A0DE78A621F73B8200B6B68B /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		A0DE78A721F73B8E00B6B68B /* version.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = version.sh; path = Tor/version.sh; sourceTree = "<group>"; };
 		D012AB851BC290D0004BE7A6 /* Tor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Tor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D02437B31B79CF2C006B48E0 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		D03196E41F647A7100720808 /* iOS-StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "iOS-StaticLibrary.xcconfig"; path = "Carthage/Checkouts/xcconfigs/iOS/iOS-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
@@ -337,6 +348,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A044F45621F9F3F50094F807 /* libtor-geoip.a in Frameworks */,
 				D0198ABE1C63E16500EA0043 /* libssl.a in Frameworks */,
 				D0198AB91C63E16500EA0043 /* libevent.a in Frameworks */,
 				D0198ABB1C63E16500EA0043 /* libevent_extra.a in Frameworks */,
@@ -407,6 +419,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A044F45421F9F2F60094F807 /* libtor-geoip.a in Frameworks */,
 				8A9D5D56216BE17400B0BB19 /* libtor-smartlist-core.a in Frameworks */,
 				D02437B41B79CF2C006B48E0 /* libz.dylib in Frameworks */,
 				8A9D5D44216BE17400B0BB19 /* libtor-crypt-ops.a in Frameworks */,
@@ -463,6 +476,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A0DE78A021F73B6000B6B68B /* Build */ = {
+			isa = PBXGroup;
+			children = (
+				A0DE78A221F73B8200B6B68B /* .gitignore */,
+				A0DE78A421F73B8200B6B68B /* .gitmodules */,
+				A0DE78A321F73B8200B6B68B /* .travis.yml */,
+				A0DE78A121F73B8200B6B68B /* Cartfile.private */,
+				A0DE78A521F73B8200B6B68B /* Cartfile.resolved */,
+				A0DE78A621F73B8200B6B68B /* LICENSE */,
+				A0DE78A721F73B8E00B6B68B /* version.sh */,
+			);
+			name = Build;
+			sourceTree = "<group>";
+		};
 		D0401AD51D2CB8B400602E9B /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
@@ -517,6 +544,7 @@
 			isa = PBXGroup;
 			children = (
 				A0428A991FA0E72D00593F79 /* README.md */,
+				A0DE78A021F73B6000B6B68B /* Build */,
 				D0FBEC6F1B79BAD7005C7577 /* Tor */,
 				D0FBEC7D1B79BB01005C7577 /* Tests */,
 				D0401AD51D2CB8B400602E9B /* Configuration */,
@@ -582,6 +610,8 @@
 		D0FBECA91B79C023005C7577 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A044F45321F9F2F60094F807 /* libtor-geoip.a */,
+				A044F45521F9F3F40094F807 /* libtor-geoip.a */,
 				8A9D5CF9216BE12000B0BB19 /* libcurve25519_donna.a */,
 				8A9D5D0E216BE12100B0BB19 /* libed25519_donna.a */,
 				8A9D5D17216BE12100B0BB19 /* libed25519_ref10.a */,
@@ -1364,6 +1394,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.torproject.Host;
 				PRODUCT_NAME = Host;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -1375,6 +1406,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.torproject.Host;
 				PRODUCT_NAME = Host;
+				SDKROOT = iphoneos;
 			};
 			name = Release;
 		};
@@ -1430,6 +1462,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.torproject.Tests;
 				PRODUCT_NAME = TorTests;
+				SDKROOT = iphoneos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Host.app/Host";
 			};
 			name = Debug;
@@ -1442,6 +1475,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.torproject.Tests;
 				PRODUCT_NAME = TorTests;
+				SDKROOT = iphoneos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Host.app/Host";
 			};
 			name = Release;
