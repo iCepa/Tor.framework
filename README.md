@@ -56,10 +56,10 @@ Alternatively, you may use the following to use binary-compiled versions of Tor.
 correspond to releases in GitHub:
 
 ```ogdl
-binary "https://icepa.github.io/Tor.framework/Tor.json" == 305.2.1
+binary "https://icepa.github.io/Tor.framework/Tor.json" == 305.7.1
 ```
 
-For available precompiled versions, see [docs/Tor.json](docs/Tor.json). Since tor 0.3.5.2, 
+For available precompiled versions, see [docs/Tor.json](docs/Tor.json). Since Tor 0.3.5.2, 
 the Tor.framework release version numbers follow the format "ABB.C.X" for tor version "0.A.B.C" 
 and Tor.framework release X (for that version of Tor). Note that the "BB" slot is a two-digit number, 
 with a leading zero, if necessary. "305.2.1" is the first release from tor 0.3.5.2.
