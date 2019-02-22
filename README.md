@@ -9,7 +9,7 @@ Currently, the framework compiles in static versions of `tor`, `libevent`, `open
 
 |          |         |
 |:-------- | -------:|
-| tor      | 0.3.5.7 |
+| tor      | 0.3.5.8 |
 | libevent | 2.1.8   |
 | OpenSSL  | 1.1.0i  |
 | liblzma  | 5.2.3   |
@@ -56,7 +56,7 @@ Alternatively, you may use the following to use binary-compiled versions of Tor.
 correspond to releases in GitHub:
 
 ```ogdl
-binary "https://icepa.github.io/Tor.framework/Tor.json" == 305.7.2
+binary "https://icepa.github.io/Tor.framework/Tor.json" == 305.8.1
 ```
 
 For available precompiled versions, see [docs/Tor.json](docs/Tor.json). Since Tor 0.3.5.2, 
