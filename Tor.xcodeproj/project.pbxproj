@@ -95,6 +95,8 @@
 		8A9D5D60216BFB3400B0BB19 /* orconfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A9D5D5E216BFB3400B0BB19 /* orconfig.h */; };
 		A044F45421F9F2F60094F807 /* libtor-geoip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A044F45321F9F2F60094F807 /* libtor-geoip.a */; };
 		A044F45621F9F3F50094F807 /* libtor-geoip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A044F45521F9F3F40094F807 /* libtor-geoip.a */; };
+		A0E9798622BA57DE00F98556 /* libtor-version.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0E9798422BA57DE00F98556 /* libtor-version.a */; };
+		A0E9798722BA57DE00F98556 /* libtor-buf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0E9798522BA57DE00F98556 /* libtor-buf.a */; };
 		D012AB8D1BC2920C004BE7A6 /* TORController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FBEC941B79BCF6005C7577 /* TORController.m */; };
 		D012AB8E1BC2920E004BE7A6 /* Tor.h in Headers */ = {isa = PBXBuildFile; fileRef = D0FBEC701B79BAD7005C7577 /* Tor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D012AB8F1BC29220004BE7A6 /* TORConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B283AD1B79CF6600D0DDA9 /* TORConfiguration.m */; };
@@ -302,6 +304,8 @@
 		A0DE78A521F73B8200B6B68B /* Cartfile.resolved */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile.resolved; sourceTree = "<group>"; };
 		A0DE78A621F73B8200B6B68B /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		A0DE78A721F73B8E00B6B68B /* version.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = version.sh; path = Tor/version.sh; sourceTree = "<group>"; };
+		A0E9798422BA57DE00F98556 /* libtor-version.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libtor-version.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0E9798522BA57DE00F98556 /* libtor-buf.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libtor-buf.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D012AB851BC290D0004BE7A6 /* Tor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Tor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D02437B31B79CF2C006B48E0 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		D03196E41F647A7100720808 /* iOS-StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "iOS-StaticLibrary.xcconfig"; path = "Carthage/Checkouts/xcconfigs/iOS/iOS-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
@@ -421,6 +425,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0E9798622BA57DE00F98556 /* libtor-version.a in Frameworks */,
+				A0E9798722BA57DE00F98556 /* libtor-buf.a in Frameworks */,
 				A044F45421F9F2F60094F807 /* libtor-geoip.a in Frameworks */,
 				8A9D5D56216BE17400B0BB19 /* libtor-smartlist-core.a in Frameworks */,
 				D02437B41B79CF2C006B48E0 /* libz.dylib in Frameworks */,
@@ -622,6 +628,8 @@
 		D0FBECA91B79C023005C7577 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A0E9798522BA57DE00F98556 /* libtor-buf.a */,
+				A0E9798422BA57DE00F98556 /* libtor-version.a */,
 				A044F45321F9F2F60094F807 /* libtor-geoip.a */,
 				A044F45521F9F3F40094F807 /* libtor-geoip.a */,
 				8A9D5CF9216BE12000B0BB19 /* libcurve25519_donna.a */,
@@ -992,6 +1000,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
