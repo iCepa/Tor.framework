@@ -301,6 +301,7 @@
 		A044F45321F9F2F60094F807 /* libtor-geoip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-geoip.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A044F45521F9F3F40094F807 /* libtor-geoip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-geoip.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A088DB0622E5F6B70018EF4D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		A088DB0822E603270018EF4D /* Tor.podspec */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = Tor.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A0DE78A121F73B8200B6B68B /* Cartfile.private */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile.private; sourceTree = "<group>"; };
 		A0DE78A221F73B8200B6B68B /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		A0DE78A321F73B8200B6B68B /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
@@ -511,6 +512,7 @@
 				A0DE78A321F73B8200B6B68B /* .travis.yml */,
 				A0DE78A121F73B8200B6B68B /* Cartfile.private */,
 				A0DE78A521F73B8200B6B68B /* Cartfile.resolved */,
+				A088DB0822E603270018EF4D /* Tor.podspec */,
 				A0DE78A621F73B8200B6B68B /* LICENSE */,
 				A0DE78A721F73B8E00B6B68B /* version.sh */,
 			);
