@@ -1,6 +1,6 @@
 Pod::Spec.new do |m|
 
-  version = '400.5.1'
+  version = '400.5.2'
 
   m.name    = 'Tor'
   m.version = version
@@ -19,12 +19,13 @@ Pod::Spec.new do |m|
     :flatten => true
   }
 
-  m.platform              = :ios
   m.ios.deployment_target = '9.0'
+  m.osx.deployment_target = '10.9'
 
   m.requires_arc = true
 
-  m.vendored_frameworks = 'Build/iOS/Tor.framework'
+  m.ios.vendored_frameworks = 'Build/iOS/Tor.framework'
+  m.osx.vendored_frameworks = 'Build/Mac/Tor.framework'
   m.module_name = 'Tor'
 
   m.preserve_path = '**/*.bcsymbolmap'
