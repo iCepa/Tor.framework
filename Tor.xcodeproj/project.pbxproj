@@ -95,8 +95,11 @@
 		8A9D5D60216BFB3400B0BB19 /* orconfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A9D5D5E216BFB3400B0BB19 /* orconfig.h */; };
 		A044F45421F9F2F60094F807 /* libtor-geoip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A044F45321F9F2F60094F807 /* libtor-geoip.a */; };
 		A044F45621F9F3F50094F807 /* libtor-geoip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A044F45521F9F3F40094F807 /* libtor-geoip.a */; };
+		A088DB0722E5F6B70018EF4D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A088DB0622E5F6B70018EF4D /* CFNetwork.framework */; };
 		A0E9798622BA57DE00F98556 /* libtor-version.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0E9798422BA57DE00F98556 /* libtor-version.a */; };
 		A0E9798722BA57DE00F98556 /* libtor-buf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0E9798522BA57DE00F98556 /* libtor-buf.a */; };
+		A0E9EF3F22E5D71F005F6D7B /* libtor-buf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0E9EF3E22E5D71F005F6D7B /* libtor-buf.a */; };
+		A0E9EF4122E5D729005F6D7B /* libtor-version.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0E9EF4022E5D729005F6D7B /* libtor-version.a */; };
 		D012AB8D1BC2920C004BE7A6 /* TORController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FBEC941B79BCF6005C7577 /* TORController.m */; };
 		D012AB8E1BC2920E004BE7A6 /* Tor.h in Headers */ = {isa = PBXBuildFile; fileRef = D0FBEC701B79BAD7005C7577 /* Tor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D012AB8F1BC29220004BE7A6 /* TORConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B283AD1B79CF6600D0DDA9 /* TORConfiguration.m */; };
@@ -297,6 +300,7 @@
 		A0428A991FA0E72D00593F79 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A044F45321F9F2F60094F807 /* libtor-geoip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-geoip.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A044F45521F9F3F40094F807 /* libtor-geoip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-geoip.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A088DB0622E5F6B70018EF4D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		A0DE78A121F73B8200B6B68B /* Cartfile.private */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile.private; sourceTree = "<group>"; };
 		A0DE78A221F73B8200B6B68B /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		A0DE78A321F73B8200B6B68B /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
@@ -304,8 +308,10 @@
 		A0DE78A521F73B8200B6B68B /* Cartfile.resolved */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile.resolved; sourceTree = "<group>"; };
 		A0DE78A621F73B8200B6B68B /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		A0DE78A721F73B8E00B6B68B /* version.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = version.sh; path = Tor/version.sh; sourceTree = "<group>"; };
-		A0E9798422BA57DE00F98556 /* libtor-version.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libtor-version.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A0E9798522BA57DE00F98556 /* libtor-buf.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libtor-buf.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0E9798422BA57DE00F98556 /* libtor-version.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-version.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0E9798522BA57DE00F98556 /* libtor-buf.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-buf.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0E9EF3E22E5D71F005F6D7B /* libtor-buf.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-buf.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0E9EF4022E5D729005F6D7B /* libtor-version.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-version.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D012AB851BC290D0004BE7A6 /* Tor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Tor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D02437B31B79CF2C006B48E0 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		D03196E41F647A7100720808 /* iOS-StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "iOS-StaticLibrary.xcconfig"; path = "Carthage/Checkouts/xcconfigs/iOS/iOS-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
@@ -354,6 +360,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A088DB0722E5F6B70018EF4D /* CFNetwork.framework in Frameworks */,
+				A0E9EF4122E5D729005F6D7B /* libtor-version.a in Frameworks */,
+				A0E9EF3F22E5D71F005F6D7B /* libtor-buf.a in Frameworks */,
 				A044F45621F9F3F50094F807 /* libtor-geoip.a in Frameworks */,
 				D0198ABE1C63E16500EA0043 /* libssl.a in Frameworks */,
 				D0198AB91C63E16500EA0043 /* libevent.a in Frameworks */,
@@ -628,7 +637,10 @@
 		D0FBECA91B79C023005C7577 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A088DB0622E5F6B70018EF4D /* CFNetwork.framework */,
+				A0E9EF4022E5D729005F6D7B /* libtor-version.a */,
 				A0E9798522BA57DE00F98556 /* libtor-buf.a */,
+				A0E9EF3E22E5D71F005F6D7B /* libtor-buf.a */,
 				A0E9798422BA57DE00F98556 /* libtor-version.a */,
 				A044F45321F9F2F60094F807 /* libtor-geoip.a */,
 				A044F45521F9F3F40094F807 /* libtor-geoip.a */,
@@ -1279,6 +1291,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D0401AD71D2CB8C300602E9B /* Tor-Mac.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = NO;
 			};
 			name = Debug;
 		};
@@ -1286,6 +1299,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D0401AD71D2CB8C300602E9B /* Tor-Mac.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = NO;
 			};
 			name = Release;
 		};

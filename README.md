@@ -128,11 +128,9 @@ TORController *controller = [[TORController alloc] initWithSocketURL:configurati
 
 ## Known Issues
 
-- Nobody takes care having it working on MacOS, currently, so builds will probably break on that platform.
-
 - Carthage warns about the xcconfigs dependency being seemingly unused.
   It isn't. It's only xcconfig files containing build settings, so nothing actually ends up in the build
-  prodcut. Unfortunately Carthage can't be configured to not throw this warning.
+  product. Unfortunately Carthage can't be configured to not throw this warning.
 
 ## License
 
