@@ -493,9 +493,20 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
         if ([components[1] rangeOfCharacterFromSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]].location != NSNotFound)
             return completion(nil); // TODO: Provide error
 
+        NSString *host = components[0];
+
+        // Replace 127.0.0.1 with localhost, as without this, there's a strange bug
+        // triggered: It won't resolve .onion addresses, but *only on real devices*.
+        // So, on a real device, there's probably the wrong DNS resolver used, which
+        // would mean, DNS queries were leaking, too.
+        if ([host isEqualToString:@"127.0.0.1"])
+        {
+            host = @"localhost";
+        }
+
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         configuration.connectionProxyDictionary = @{(id)kCFProxyTypeKey: (id)kCFProxyTypeSOCKS,
-                                                    (id)kCFStreamPropertySOCKSProxyHost: components[0],
+                                                    (id)kCFStreamPropertySOCKSProxyHost: host,
                                                     (id)kCFStreamPropertySOCKSProxyPort: @([components[1] integerValue])};
         completion(configuration);
     }];
