@@ -59,7 +59,7 @@ NS_SWIFT_NAME(TorController)
 
  @param success: true, if signal calls where successful, false if not.
  */
-- (void)resetConnection:(void (^)(BOOL success))completion;
+- (void)resetConnection:(void (^__nullable)(BOOL success))completion;
 
 // Observers
 - (id)addObserverForCircuitEstablished:(void (^)(BOOL established))block;
