@@ -658,7 +658,7 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
     }];
 }
 
-- (void)resetConnection:(void (^)(BOOL succcess))completion
+- (void)resetConnection:(void (^__nullable)(BOOL success))completion
 {
     [self sendCommand:@"SIGNAL RELOAD" arguments:nil data:nil observer:
      ^BOOL(NSArray<NSNumber *> * _Nonnull codes, NSArray<NSData *> * _Nonnull __attribute__((unused)) lines, BOOL * _Nonnull stop) {
