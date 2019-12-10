@@ -57,7 +57,7 @@ static NSRegularExpression *_ipv6Regex;
 
 // MARK: Static Methods
 
-+ (NSArray<TORNode *> *)builtPathFromCircuits:(NSString *)circuits
++ (NSArray<TORNode *> *)firstBuiltPathFromCircuits:(NSString *)circuits
 {
     NSMutableArray<TORNode *> *nodes = [NSMutableArray new];
 
@@ -135,6 +135,11 @@ static NSRegularExpression *_ipv6Regex;
 
 - (NSString *)localizedCountryName
 {
+    if (!self.countryCode)
+    {
+        return nil;
+    }
+
     if (@available(iOS 10.0, *)) {
         return [NSLocale.currentLocale localizedStringForCountryCode:self.countryCode];
     } else {

@@ -41,41 +41,48 @@ Taken from https://nbviewer.jupyter.org/github/rasbt/python_reference/blob/maste
 /**
  The fingerprint aka. ID of a Tor node.
  */
-@property (nonatomic) NSString *fingerprint;
+@property (nonatomic, nullable) NSString *fingerprint;
 
 /**
  The nickname of a Tor node.
  */
-@property (nonatomic) NSString *nickName;
+@property (nonatomic, nullable) NSString *nickName;
 
 /**
  The IPv4 address of a Tor node.
  */
-@property (nonatomic) NSString *ipv4Address;
+@property (nonatomic, nullable) NSString *ipv4Address;
 
 /**
  The IPv6 address of a Tor node.
  */
-@property (nonatomic) NSString *ipv6Address;
+@property (nonatomic, nullable) NSString *ipv6Address;
 
 /**
  The country code of a Tor node's country.
  */
-@property (nonatomic) NSString *countryCode;
+@property (nonatomic, nullable) NSString *countryCode;
 
 /**
  The localized country name of a Tor node's country.
  */
-@property (nonatomic, readonly) NSString *localizedCountryName;
+@property (nonatomic, readonly, nullable) NSString *localizedCountryName;
 
-+ (NSArray<TORNode *> *)builtPathFromCircuits:(NSString *)circuits;
+/**
+ Extracts the first fully built path from a string which should be the response to a "GETINFO circuit-status".
+
+ See https://torproject.gitlab.io/torspec/control-spec.html#getinfo
+
+ @param circuits: A string as returned by "GETINFO circuit-status".
+ */
++ (NSArray<TORNode *> *)firstBuiltPathFromCircuits:(NSString *)circuits;
 
 /**
  Create a `TORNode` object from a "LongName" node string which should contain the fingerprint and the nickname.
 
  See https://torproject.gitlab.io/torspec/control-spec.html#general-use-tokens
 
- - parameter longName: A "LongName" identifying a Tor node.
+ @param longName: A "LongName" identifying a Tor node.
  */
 - (instancetype)initFromString:(NSString *)longName;
 
@@ -84,7 +91,7 @@ Taken from https://nbviewer.jupyter.org/github/rasbt/python_reference/blob/maste
 
  See https://torproject.gitlab.io/torspec/control-spec.html#getinfo
 
- - parameter response: Should be the response of a `ns/id/<fingerprint>` call.
+ @param response: Should be the response of a `ns/id/<fingerprint>` call.
  */
 - (void)acquireIpAddressesFromNsResponse:(NSString *)response;
 

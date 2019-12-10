@@ -39,7 +39,27 @@ NS_SWIFT_NAME(TorController)
 - (void)getInfoForKeys:(NSArray<NSString *> *)keys completion:(void (^)(NSArray<NSString *> *values))completion; // TODO: Provide errors
 - (void)getSessionConfiguration:(void (^)(NSURLSessionConfiguration * __nullable configuration))completion;
 - (void)sendCommand:(NSString *)command arguments:(nullable NSArray<NSString *> *)arguments data:(nullable NSData *)data observer:(TORObserverBlock)observer;
-- (void)getCurrentCircuit:(void (^)( NSArray<TORNode *> * _Nonnull nodes))completion;
+
+/**
+ Get information about the nodes comprising the currently used circuit.
+
+ @note The first built circuit will be taken, which seems to be the one currently used. This may not hold true,
+ though. Please file an issue, if you stumble accross such a situation!
+
+ @param completion: The callback upon completion of the task.
+ @param nodes: A list of `TORNodes` which should be the currently used circuit, in the given order.
+ Empty if no circuit could be found.
+ */
+- (void)getCurrentCircuit:(void (^)(NSArray<TORNode *> * _Nonnull nodes))completion;
+
+/**
+ Resets the Tor connection: Sends "SIGNAL RELOAD" and "SIGNAL NEWNYM" to the Tor thread.
+
+ See https://torproject.gitlab.io/torspec/control-spec.html#signal
+
+ @param success: true, if signal calls where successful, false if not.
+ */
+- (void)resetConnection:(void (^)(BOOL success))completion;
 
 // Observers
 - (id)addObserverForCircuitEstablished:(void (^)(BOOL established))block;

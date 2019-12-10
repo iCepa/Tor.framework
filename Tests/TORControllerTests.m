@@ -122,6 +122,23 @@
     [self waitForExpectationsWithTimeout:120 handler:nil];
 }
 
+- (void)testReset
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"reset callback"];
+
+    [self exec:^{
+        [self.controller resetConnection:^(BOOL success) {
+            NSLog(@"success=%d", success);
+
+            XCTAssertTrue(success, @"Reset should work correctly.");
+
+            [expectation fulfill];
+        }];
+    }];
+
+    [self waitForExpectationsWithTimeout:120 handler:nil];
+}
+
 
 // MARK: Helper Properties and Methods
 

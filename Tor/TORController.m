@@ -589,7 +589,7 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
     [self getInfoForKeys:@[@"circuit-status"] completion:^(NSArray<NSString *> * _Nonnull values) {
         NSLog(@"values=%@", values);
 
-        NSArray<TORNode *> *nodes = [TORNode builtPathFromCircuits:values.firstObject];
+        NSArray<TORNode *> *nodes = [TORNode firstBuiltPathFromCircuits:values.firstObject];
 
         NSMutableArray<NSString *> *ipResolveCalls = [NSMutableArray new];
 
@@ -655,6 +655,37 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
                 }];
             }];
         }];
+    }];
+}
+
+- (void)resetConnection:(void (^)(BOOL succcess))completion
+{
+    [self sendCommand:@"SIGNAL RELOAD" arguments:nil data:nil observer:
+     ^BOOL(NSArray<NSNumber *> * _Nonnull codes, NSArray<NSData *> * _Nonnull __attribute__((unused)) lines, BOOL * _Nonnull stop) {
+
+        if (codes.firstObject.integerValue == 250)
+        {
+            [self sendCommand:@"SIGNAL NEWNYM" arguments:nil data:nil observer:
+             ^BOOL(NSArray<NSNumber *> * _Nonnull codes, NSArray<NSData *> * _Nonnull __attribute__((unused)) lines, BOOL * _Nonnull stop) {
+
+                if (completion)
+                {
+                    completion(codes.firstObject.integerValue == 250);
+                }
+
+                *stop = YES;
+                return YES;
+            }];
+        }
+        else {
+            if (completion)
+            {
+                completion(NO);
+            }
+        }
+
+        *stop = YES;
+        return YES;
     }];
 }
 
