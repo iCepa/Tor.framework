@@ -14,6 +14,7 @@
 #define TOR_EXTERN    extern __attribute__((visibility ("default")))
 #endif
 
+#import <Tor/TORNode.h>
 #import <Tor/TORController.h>
 #import <Tor/TORConfiguration.h>
 #import <Tor/TORThread.h>

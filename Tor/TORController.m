@@ -430,55 +430,99 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
     }];
 }
 
-- (void)getInfoForKeys:(NSArray<NSString *> *)keys completion:(void (^)(NSArray<NSString *> *values))completion {
+- (void)getInfoForKeys:(NSArray<NSString *> *)keys completion:(void (^)(NSArray<NSString *> *values))completion
+{
     [self sendCommand:@"GETINFO" arguments:keys data:nil observer:^BOOL(NSArray<NSNumber *> *codes, NSArray<NSData *> *lines, BOOL *stop) {
-        if ((lines.count - 1) != keys.count)
+        *stop = YES;
+        NSMutableArray *values = [NSMutableArray new];
+
+        if (lines.count - 1 != keys.count)
+        {
+            if (completion)
+            {
+                completion(values);
+            }
+
             return NO;
+        }
         
         NSMutableArray<NSString *> *strings = [NSMutableArray new];
-        for (NSData *line in lines) {
+
+        for (NSData *line in lines)
+        {
             NSString *string = [[NSString alloc] initWithData:line encoding:NSUTF8StringEncoding];
+
             if (!string)
+            {
+                if (completion)
+                {
+                    completion(values);
+                }
+
                 return NO;
+            }
             
             [strings addObject:string];
         }
         
         if (codes.lastObject.integerValue != 250 || ![strings.lastObject isEqualToString:@"OK"])
+        {
+            if (completion)
+            {
+                completion(values);
+            }
+
             return NO;
+        }
         
         NSMutableDictionary<NSString *, NSString *> *info = [NSMutableDictionary new];
-        for (NSUInteger idx = 0; idx < strings.count - 1; idx++) {
-            NSUInteger code = codes[idx].unsignedIntegerValue;
-            if (code == 250) {
-                NSString *pair = strings[idx];
-                NSArray<NSString *> *components = [pair componentsSeparatedByString:@"="];
-                if (components.count == 2) {
-                    NSCharacterSet *quotes = [NSCharacterSet characterSetWithCharactersInString:@"\""];
-                    NSString *key = [components[0] stringByTrimmingCharactersInSet:quotes];
-                    NSString *value = [components[1] stringByTrimmingCharactersInSet:quotes];
-                    if (![keys containsObject:key])
-                        return NO;
-                    
+        NSCharacterSet *quotes = [NSCharacterSet characterSetWithCharactersInString:@"\""];
+
+        for (NSUInteger idx = 0; idx < strings.count - 1; idx++)
+        {
+            if (codes[idx].integerValue == 250)
+            {
+                NSMutableArray<NSString *> *components = [[strings[idx] componentsSeparatedByString:@"="] mutableCopy];
+
+                if (components.count > 1)
+                {
+                    NSString *key = [components.firstObject stringByTrimmingCharactersInSet:quotes];
+
+                    [components removeObjectAtIndex:0];
+                    NSString* value = [components componentsJoinedByString:@"="];
+
                     if ([keys containsObject:key])
-                        [info setObject:value forKeyedSubscript:key];
+                    {
+                        info[key] = value;
+                    }
+                    else {
+                        if (completion)
+                        {
+                            completion(values);
+                        }
+
+                        return NO;
+                    }
                 }
             }
         }
         
-        NSMutableArray *values = [NSMutableArray new];
         for (NSString *key in keys)
-            [values addObject:([info objectForKey:key] ?: [NSNull null])];
+        {
+            [values addObject:(info[key] ?: [NSNull null])];
+        }
         
         if (completion)
+        {
             completion(values);
+        }
         
-        *stop = YES;
         return YES;
     }];
 }
 
-- (void)getSessionConfiguration:(void (^)(NSURLSessionConfiguration * __nullable configuration))completion {
+- (void)getSessionConfiguration:(void (^)(NSURLSessionConfiguration * __nullable configuration))completion
+{
     [self getInfoForKeys:@[@"net/listeners/socks"] completion:^(NSArray<NSString *> *values) {
         if (values.count != 1)
             return completion(nil);
@@ -512,7 +556,8 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
     }];
 }
 
-- (void)sendCommand:(NSString *)command arguments:(nullable NSArray<NSString *> *)arguments data:(nullable NSData *)data observer:(TORObserverBlock)observer {
+- (void)sendCommand:(NSString *)command arguments:(nullable NSArray<NSString *> *)arguments data:(nullable NSData *)data observer:(TORObserverBlock)observer
+{
     NSParameterAssert(command.length);
     if (!_channel)
         return;
@@ -536,6 +581,81 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
             [self->_blocks insertObject:observer atIndex:0];
         }
     });
+}
+
+
+- (void)getCurrentCircuit:(void (^)( NSArray<TORNode *> * _Nonnull nodes))completion
+{
+    [self getInfoForKeys:@[@"circuit-status"] completion:^(NSArray<NSString *> * _Nonnull values) {
+        NSLog(@"values=%@", values);
+
+        NSArray<TORNode *> *nodes = [TORNode builtPathFromCircuits:values.firstObject];
+
+        NSMutableArray<NSString *> *ipResolveCalls = [NSMutableArray new];
+
+        for (TORNode *node in nodes)
+        {
+            [ipResolveCalls addObject:[NSString stringWithFormat:@"ns/id/%@", node.fingerprint]];
+        }
+
+        [self getInfoForKeys:ipResolveCalls completion:^(NSArray<NSString *> * _Nonnull values) {
+            NSLog(@"values=%@", values);
+
+            for (NSUInteger i = 0; i < values.count; i++) {
+                [nodes[i] acquireIpAddressesFromNsResponse:values[i]];
+            }
+
+            [self getInfoForKeys:@[@"ip-to-country/ipv4-available", @"ip-to-country/ipv6-available"] completion:^(NSArray<NSString *> * _Nonnull values) {
+
+                BOOL ipv4Available = [values.firstObject isEqualToString:@"1"];
+                BOOL ipv6Available = [values.lastObject isEqualToString:@"1"];
+
+                NSLog(@"ipv4Available=%d, ipv6Available=%d", ipv4Available, ipv6Available);
+
+                NSMutableArray<NSString *> *geoipResolveCalls = [NSMutableArray new];
+                NSMutableArray<TORNode *> *map = [NSMutableArray new];
+
+                for (TORNode *node in nodes) {
+                    if (ipv4Available && node.ipv4Address)
+                    {
+                        [geoipResolveCalls addObject:[NSString stringWithFormat:@"ip-to-country/%@", node.ipv4Address]];
+                        [map addObject:node];
+                    }
+                    else if (ipv6Available && node.ipv6Address)
+                    {
+                        [geoipResolveCalls addObject:[NSString stringWithFormat:@"ip-to-country/%@", node.ipv6Address]];
+                        [map addObject:node];
+                    }
+                }
+
+                NSLog(@"geoipResolveCalls=%@", geoipResolveCalls);
+
+                if (geoipResolveCalls.count < 1)
+                {
+                    if (completion)
+                    {
+                        completion(nodes);
+                    }
+
+                    return;
+                }
+
+                [self getInfoForKeys:geoipResolveCalls completion:^(NSArray<NSString *> * _Nonnull values) {
+                    NSLog(@"values=%@", values);
+
+                    for (NSUInteger i = 0; i < values.count; i++)
+                    {
+                        map[i].countryCode = values[i];
+                    }
+
+                    if (completion)
+                    {
+                        completion(nodes);
+                    }
+                }];
+            }];
+        }];
+    }];
 }
 
 @end

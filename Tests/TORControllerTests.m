@@ -11,6 +11,7 @@
 @interface TORControllerTests : XCTestCase
 
 @property (nonatomic, strong) TORController *controller;
+@property (readonly) NSData *cookie;
 
 @end
 
@@ -29,27 +30,31 @@
 #else
     NSString *homeDirectory = NSHomeDirectory();
 #endif
-    
+
     TORConfiguration *configuration = [TORConfiguration new];
     configuration.cookieAuthentication = @YES;
     configuration.dataDirectory = [NSURL fileURLWithPath:NSTemporaryDirectory()];
     configuration.controlSocket = [[NSURL fileURLWithPath:homeDirectory] URLByAppendingPathComponent:@".Trash/control_port"];
-    configuration.arguments = @[@"--ignore-missing-torrc"];
+    configuration.arguments = @[
+        @"--ignore-missing-torrc",
+        @"--GeoIPFile", [NSBundle.mainBundle pathForResource:@"geoip" ofType:nil],
+        @"--GeoIPv6File", [NSBundle.mainBundle pathForResource:@"geoip6" ofType:nil],
+    ];
     return configuration;
 }
 
 + (void)setUp {
     [super setUp];
-    
+
     TORThread *thread = [[TORThread alloc] initWithConfiguration:self.configuration];
     [thread start];
-    
+
     [[NSRunLoop mainRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5f]];
 }
 
 - (void)setUp {
     [super setUp];
-    
+
     self.controller = [[TORController alloc] initWithSocketURL:[[[self class] configuration] controlSocket]];
 }
 
@@ -62,31 +67,27 @@
         XCTAssertGreaterThan(error.localizedDescription, @"Authentication failed: Wrong length on authentication cookie.");
         [expectation fulfill];
     }];
-    
+
     [self waitForExpectationsWithTimeout:1.0f handler:nil];
 }
 
 - (void)testCookieAuthenticationSuccess {
     XCTestExpectation *expectation = [self expectationWithDescription:@"authenticate callback"];
-    
-    NSURL *cookieURL = [[[[self class] configuration] dataDirectory] URLByAppendingPathComponent:@"control_auth_cookie"];
-    NSData *cookie = [NSData dataWithContentsOfURL:cookieURL];
-    [self.controller authenticateWithData:cookie completion:^(BOOL success, NSError *error) {
+
+    [self.controller authenticateWithData:self.cookie completion:^(BOOL success, NSError *error) {
         XCTAssertTrue(success);
         XCTAssertNil(error);
         [expectation fulfill];
     }];
-    
+
     [self waitForExpectationsWithTimeout:1.0f handler:nil];
 }
 
 - (void)testSessionConfiguration {
     XCTestExpectation *expectation = [self expectationWithDescription:@"tor callback"];
-    
-    TORController *controller = self.controller;
 
-    void (^test)(void) = ^{
-        [controller getSessionConfiguration:^(NSURLSessionConfiguration *configuration) {
+    [self exec:^{
+        [self.controller getSessionConfiguration:^(NSURLSessionConfiguration *configuration) {
             NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
             [[session dataTaskWithURL:[NSURL URLWithString:@"https://facebookcorewwwi.onion/"] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                 XCTAssertEqual([(NSHTTPURLResponse *)response statusCode], 200);
@@ -94,23 +95,61 @@
                 [expectation fulfill];
             }] resume];
         }];
-    };
-    
-    NSURL *cookieURL = [[[[self class] configuration] dataDirectory] URLByAppendingPathComponent:@"control_auth_cookie"];
-    NSData *cookie = [NSData dataWithContentsOfURL:cookieURL];
-    [controller authenticateWithData:cookie completion:^(BOOL success, NSError *error) {
-        if (!success)
-            return;
-        
-        [controller addObserverForCircuitEstablished:^(BOOL established) {
-            if (!established)
-                return;
-            
-            test();
+    }];
+
+    [self waitForExpectationsWithTimeout:120.0f handler:nil];
+}
+
+- (void)testCircuitResolution
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"resolution callback"];
+
+    [self exec:^{
+        [self.controller getCurrentCircuit:^(NSArray<TORNode *> * _Nonnull nodes) {
+            NSLog(@"result=%@", nodes);
+
+            XCTAssertEqual(nodes.count, 3, @"A circuit should always consist of 3 nodes.");
+
+            for (TORNode *node in nodes) {
+                XCTAssert(node.fingerprint.length > 0, @"A circuit should have a fingerprint.");
+                XCTAssert(node.ipv4Address.length > 0 || node.ipv6Address.length > 0, @"A circuit should have an IPv4 or IPv6 address.");
+            }
+
+            [expectation fulfill];
         }];
     }];
-    
-    [self waitForExpectationsWithTimeout:120.0f handler:nil];
+
+    [self waitForExpectationsWithTimeout:120 handler:nil];
+}
+
+
+// MARK: Helper Properties and Methods
+
+- (NSData *)cookie
+{
+    return [NSData dataWithContentsOfURL:
+            [[self.class configuration].dataDirectory
+             URLByAppendingPathComponent:@"control_auth_cookie"]];
+}
+
+- (void)exec:(void (^)(void))callback
+{
+    TORController *controller = self.controller;
+
+    [controller authenticateWithData:self.cookie completion:^(BOOL success, NSError * _Nullable error) {
+        XCTAssertTrue(success);
+        XCTAssertNil(error);
+
+        [controller addObserverForCircuitEstablished:^(BOOL established) {
+            // May be called multiple times. We wait until circuit is established.
+            if (!established)
+            {
+                return;
+            }
+
+            callback();
+        }];
+    }];
 }
 
 @end

@@ -39,6 +39,7 @@ NS_SWIFT_NAME(TorController)
 - (void)getInfoForKeys:(NSArray<NSString *> *)keys completion:(void (^)(NSArray<NSString *> *values))completion; // TODO: Provide errors
 - (void)getSessionConfiguration:(void (^)(NSURLSessionConfiguration * __nullable configuration))completion;
 - (void)sendCommand:(NSString *)command arguments:(nullable NSArray<NSString *> *)arguments data:(nullable NSData *)data observer:(TORObserverBlock)observer;
+- (void)getCurrentCircuit:(void (^)( NSArray<TORNode *> * _Nonnull nodes))completion;
 
 // Observers
 - (id)addObserverForCircuitEstablished:(void (^)(BOOL established))block;
