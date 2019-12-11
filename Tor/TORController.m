@@ -584,25 +584,39 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
 }
 
 
-- (void)getCurrentCircuit:(void (^)( NSArray<TORNode *> * _Nonnull nodes))completion
+- (void)getBuiltCircuits:(void (^)( NSArray<NSArray<TORNode *> *> * _Nonnull circuits))completion
 {
     [self getInfoForKeys:@[@"circuit-status"] completion:^(NSArray<NSString *> * _Nonnull values) {
-        NSLog(@"values=%@", values);
+        if (values.count < 1)
+        {
+            if (completion)
+            {
+                completion([NSArray new]);
+            }
 
-        NSArray<TORNode *> *nodes = [TORNode firstBuiltPathFromCircuits:values.firstObject];
+            return;
+        }
+
+        NSArray<NSArray<TORNode *> *> *circuits = [TORNode builtPathsFromCircuits:values.firstObject];
 
         NSMutableArray<NSString *> *ipResolveCalls = [NSMutableArray new];
+        NSMutableArray<TORNode *> *map = [NSMutableArray new];
 
-        for (TORNode *node in nodes)
+        for (NSArray<TORNode *> *nodes in circuits)
         {
-            [ipResolveCalls addObject:[NSString stringWithFormat:@"ns/id/%@", node.fingerprint]];
+            for (TORNode *node in nodes)
+            {
+                if (![map containsObject:node])
+                {
+                    [ipResolveCalls addObject:[NSString stringWithFormat:@"ns/id/%@", node.fingerprint]];
+                    [map addObject:node];
+                }
+            }
         }
 
         [self getInfoForKeys:ipResolveCalls completion:^(NSArray<NSString *> * _Nonnull values) {
-            NSLog(@"values=%@", values);
-
             for (NSUInteger i = 0; i < values.count; i++) {
-                [nodes[i] acquireIpAddressesFromNsResponse:values[i]];
+                [map[i] acquireIpAddressesFromNsResponse:values[i]];
             }
 
             [self getInfoForKeys:@[@"ip-to-country/ipv4-available", @"ip-to-country/ipv6-available"] completion:^(NSArray<NSString *> * _Nonnull values) {
@@ -610,39 +624,41 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
                 BOOL ipv4Available = [values.firstObject isEqualToString:@"1"];
                 BOOL ipv6Available = [values.lastObject isEqualToString:@"1"];
 
-                NSLog(@"ipv4Available=%d, ipv6Available=%d", ipv4Available, ipv6Available);
-
                 NSMutableArray<NSString *> *geoipResolveCalls = [NSMutableArray new];
                 NSMutableArray<TORNode *> *map = [NSMutableArray new];
 
-                for (TORNode *node in nodes) {
-                    if (ipv4Available && node.ipv4Address)
-                    {
-                        [geoipResolveCalls addObject:[NSString stringWithFormat:@"ip-to-country/%@", node.ipv4Address]];
-                        [map addObject:node];
-                    }
-                    else if (ipv6Available && node.ipv6Address)
-                    {
-                        [geoipResolveCalls addObject:[NSString stringWithFormat:@"ip-to-country/%@", node.ipv6Address]];
-                        [map addObject:node];
+                for (NSArray<TORNode *> *nodes in circuits)
+                {
+                    for (TORNode *node in nodes) {
+                        if ([map containsObject:node])
+                        {
+                            continue;
+                        }
+
+                        if (ipv4Available && node.ipv4Address)
+                        {
+                            [geoipResolveCalls addObject:[NSString stringWithFormat:@"ip-to-country/%@", node.ipv4Address]];
+                            [map addObject:node];
+                        }
+                        else if (ipv6Available && node.ipv6Address)
+                        {
+                            [geoipResolveCalls addObject:[NSString stringWithFormat:@"ip-to-country/%@", node.ipv6Address]];
+                            [map addObject:node];
+                        }
                     }
                 }
-
-                NSLog(@"geoipResolveCalls=%@", geoipResolveCalls);
 
                 if (geoipResolveCalls.count < 1)
                 {
                     if (completion)
                     {
-                        completion(nodes);
+                        completion(circuits);
                     }
 
                     return;
                 }
 
                 [self getInfoForKeys:geoipResolveCalls completion:^(NSArray<NSString *> * _Nonnull values) {
-                    NSLog(@"values=%@", values);
-
                     for (NSUInteger i = 0; i < values.count; i++)
                     {
                         map[i].countryCode = values[i];
@@ -650,7 +666,7 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
 
                     if (completion)
                     {
-                        completion(nodes);
+                        completion(circuits);
                     }
                 }];
             }];
