@@ -7,6 +7,7 @@
 //
 
 #import "TORCircuit.h"
+#import "NSCharacterSet+Quotes.h"
 
 @implementation TORCircuit
 
@@ -198,7 +199,8 @@ static NSMutableDictionary<NSString *, NSRegularExpression *> *_optionsRegexes;
 
         if (matches.firstObject.numberOfRanges > 1)
         {
-            _socksUsername = [circuitString substringWithRange:[matches.firstObject rangeAtIndex:1]];
+            _socksUsername = [[circuitString substringWithRange:[matches.firstObject rangeAtIndex:1]]
+                              stringByTrimmingCharactersInSet:NSCharacterSet.doubleQuote];
         }
 
         matches = [[TORCircuit regexForOption:@"SOCKS_PASSWORD"]
@@ -206,7 +208,8 @@ static NSMutableDictionary<NSString *, NSRegularExpression *> *_optionsRegexes;
 
         if (matches.firstObject.numberOfRanges > 1)
         {
-            _socksPassword = [circuitString substringWithRange:[matches.firstObject rangeAtIndex:1]];
+            _socksPassword = [[circuitString substringWithRange:[matches.firstObject rangeAtIndex:1]]
+                              stringByTrimmingCharactersInSet:NSCharacterSet.doubleQuote];
         }
     }
 

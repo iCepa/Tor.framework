@@ -10,6 +10,7 @@
 #import <or/or.h>
 #import <sys/un.h>
 #import "TORThread.h"
+#import "NSCharacterSet+Quotes.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -476,7 +477,6 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
         }
         
         NSMutableDictionary<NSString *, NSString *> *info = [NSMutableDictionary new];
-        NSCharacterSet *quotes = [NSCharacterSet characterSetWithCharactersInString:@"\""];
 
         for (NSUInteger idx = 0; idx < strings.count - 1; idx++)
         {
@@ -486,7 +486,8 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
 
                 if (components.count > 1)
                 {
-                    NSString *key = [components.firstObject stringByTrimmingCharactersInSet:quotes];
+                    NSString *key = [components.firstObject stringByTrimmingCharactersInSet:
+                                     NSCharacterSet.doubleQuote];
 
                     [components removeObjectAtIndex:0];
                     NSString* value = [components componentsJoinedByString:@"="];

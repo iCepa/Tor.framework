@@ -7,6 +7,7 @@
 //
 
 #import "TORNode.h"
+#import "NSCharacterSet+Quotes.h"
 
 @implementation TORNode
 
@@ -52,7 +53,7 @@ static NSRegularExpression *_ipv6Regex;
     if (self)
     {
         NSArray<NSString *> *components = [longName componentsSeparatedByCharactersInSet:
-                                           [NSCharacterSet characterSetWithCharactersInString:@"~="]];
+                                           NSCharacterSet.longNameDivider];
 
         if (components.count > 0)
         {
