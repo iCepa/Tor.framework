@@ -224,10 +224,5 @@ static NSMutableDictionary<NSString *, NSRegularExpression *> *_optionsRegexes;
             self.reason, self.remoteReason, self.socksUsername, self.socksPassword];
 }
 
-- (NSString *)debugDescription
-{
-    return [NSString stringWithFormat:@"<%@: %p> raw=%@", self.class, self, self.raw];
-}
-
 
 @end
