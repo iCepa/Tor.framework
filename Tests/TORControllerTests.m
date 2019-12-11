@@ -105,12 +105,12 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"resolution callback"];
 
     [self exec:^{
-        [self.controller getBuiltCircuits:^(NSArray<NSArray<TORNode *> *> * _Nonnull circuits) {
+        [self.controller getCircuits:^(NSArray<TORCircuit *> * _Nonnull circuits) {
             NSLog(@"circuits=%@", circuits);
 
-            for (NSArray<TORNode *> *nodes in circuits)
+            for (TORCircuit *circuit in circuits)
             {
-                for (TORNode *node in nodes) {
+                for (TORNode *node in circuit.nodes) {
                     XCTAssert(node.fingerprint.length > 0, @"A circuit should have a fingerprint.");
                     XCTAssert(node.ipv4Address.length > 0 || node.ipv6Address.length > 0, @"A circuit should have an IPv4 or IPv6 address.");
                 }

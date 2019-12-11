@@ -14,22 +14,6 @@ NS_SWIFT_NAME(TorNode)
 @interface TORNode : NSObject
 
 /**
- Regular expression to find the beginning of a circuit line in a string soup as returned by "GETINFO circuit-status".
- */
-@property (class, nonatomic, readonly) NSRegularExpression *circuitSplitRegex;
-
-/**
- Regular expression to identify and extract a circuit path of a `BUILT` circuit consisting of "LongNames".
-
- A usable circuit has status "BUILT":
- https://torproject.gitlab.io/torspec/control-spec.html#circuit-status-changed
-
- Syntax of node "LongNames":
- https://torproject.gitlab.io/torspec/control-spec.html#general-use-tokens
- */
-@property (class, nonatomic, readonly) NSRegularExpression *pathRegex;
-
-/**
 Regular expression to identify and extract a valid IPv4 address.
 
 Taken from https://nbviewer.jupyter.org/github/rasbt/python_reference/blob/master/tutorials/useful_regex.ipynb
@@ -72,15 +56,6 @@ Taken from https://nbviewer.jupyter.org/github/rasbt/python_reference/blob/maste
  The localized country name of a Tor node's country.
  */
 @property (nonatomic, readonly, nullable) NSString *localizedCountryName;
-
-/**
- Extracts all fully built circuit paths from a string which should be the response to a "GETINFO circuit-status".
-
- See https://torproject.gitlab.io/torspec/control-spec.html#getinfo
-
- @param circuits: A string as returned by "GETINFO circuit-status".
- */
-+ (NSArray<NSArray<TORNode *> *> *)builtPathsFromCircuits:(NSString *)circuitsString;
 
 /**
  Create a `TORNode` object from a "LongName" node string which should contain the fingerprint and the nickname.

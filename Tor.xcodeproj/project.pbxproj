@@ -93,6 +93,10 @@
 		8A9D5D5D216BE17400B0BB19 /* libtor-wallclock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D11216BE12100B0BB19 /* libtor-wallclock.a */; };
 		8A9D5D5F216BFB3400B0BB19 /* orconfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A9D5D5E216BFB3400B0BB19 /* orconfig.h */; };
 		8A9D5D60216BFB3400B0BB19 /* orconfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A9D5D5E216BFB3400B0BB19 /* orconfig.h */; };
+		A04496FB23A1839200E92CE3 /* TORCircuit.h in Headers */ = {isa = PBXBuildFile; fileRef = A04496F923A1839200E92CE3 /* TORCircuit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A04496FC23A1839200E92CE3 /* TORCircuit.h in Headers */ = {isa = PBXBuildFile; fileRef = A04496F923A1839200E92CE3 /* TORCircuit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A04496FD23A1839200E92CE3 /* TORCircuit.m in Sources */ = {isa = PBXBuildFile; fileRef = A04496FA23A1839200E92CE3 /* TORCircuit.m */; };
+		A04496FE23A1839200E92CE3 /* TORCircuit.m in Sources */ = {isa = PBXBuildFile; fileRef = A04496FA23A1839200E92CE3 /* TORCircuit.m */; };
 		A044F45421F9F2F60094F807 /* libtor-geoip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A044F45321F9F2F60094F807 /* libtor-geoip.a */; };
 		A044F45621F9F3F50094F807 /* libtor-geoip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A044F45521F9F3F40094F807 /* libtor-geoip.a */; };
 		A082A197239E968700A0091A /* TORNode.h in Headers */ = {isa = PBXBuildFile; fileRef = A082A195239E968700A0091A /* TORNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -310,6 +314,8 @@
 		A02CE2B4220055D200964A14 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		A02CE2B5220055D200964A14 /* Tor.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Tor.json; sourceTree = "<group>"; };
 		A0428A991FA0E72D00593F79 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		A04496F923A1839200E92CE3 /* TORCircuit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TORCircuit.h; sourceTree = "<group>"; };
+		A04496FA23A1839200E92CE3 /* TORCircuit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TORCircuit.m; sourceTree = "<group>"; };
 		A044F45321F9F2F60094F807 /* libtor-geoip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-geoip.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A044F45521F9F3F40094F807 /* libtor-geoip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-geoip.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A082A195239E968700A0091A /* TORNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TORNode.h; sourceTree = "<group>"; };
@@ -626,6 +632,8 @@
 				D0FBEC961B79BCF6005C7577 /* TORThread.m */,
 				D03197101F6493A500720808 /* TORLogging.h */,
 				D03197111F6493A500720808 /* TORLogging.m */,
+				A04496F923A1839200E92CE3 /* TORCircuit.h */,
+				A04496FA23A1839200E92CE3 /* TORCircuit.m */,
 				A082A195239E968700A0091A /* TORNode.h */,
 				A082A196239E968700A0091A /* TORNode.m */,
 				D0B283B21B79D74C00D0DDA9 /* Supporting Files */,
@@ -721,6 +729,7 @@
 			files = (
 				D012AB901BC293BE004BE7A6 /* TORController.h in Headers */,
 				A082A198239E968700A0091A /* TORNode.h in Headers */,
+				A04496FC23A1839200E92CE3 /* TORCircuit.h in Headers */,
 				D012AB911BC293BE004BE7A6 /* TORConfiguration.h in Headers */,
 				D09E544E1C643B61001DB8F8 /* TORThread.h in Headers */,
 				D012AB8E1BC2920E004BE7A6 /* Tor.h in Headers */,
@@ -735,6 +744,7 @@
 			files = (
 				D0FBEC991B79BCF6005C7577 /* TORThread.h in Headers */,
 				A082A197239E968700A0091A /* TORNode.h in Headers */,
+				A04496FB23A1839200E92CE3 /* TORCircuit.h in Headers */,
 				D0B283AE1B79CF6600D0DDA9 /* TORConfiguration.h in Headers */,
 				D0FBEC971B79BCF6005C7577 /* TORController.h in Headers */,
 				D0FBEC711B79BAD7005C7577 /* Tor.h in Headers */,
@@ -1033,10 +1043,9 @@
 			};
 			buildConfigurationList = D0FBEC671B79BAD7005C7577 /* Build configuration list for PBXProject "Tor" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
@@ -1132,6 +1141,7 @@
 				A082A19A239E968700A0091A /* TORNode.m in Sources */,
 				D0198A9B1C63D97C00EA0043 /* TORThread.m in Sources */,
 				D012AB8F1BC29220004BE7A6 /* TORConfiguration.m in Sources */,
+				A04496FE23A1839200E92CE3 /* TORCircuit.m in Sources */,
 				D012AB8D1BC2920C004BE7A6 /* TORController.m in Sources */,
 				D03197151F6493A500720808 /* TORLogging.m in Sources */,
 			);
@@ -1169,6 +1179,7 @@
 				A082A199239E968700A0091A /* TORNode.m in Sources */,
 				D0FBEC981B79BCF6005C7577 /* TORController.m in Sources */,
 				D0FBEC9A1B79BCF6005C7577 /* TORThread.m in Sources */,
+				A04496FD23A1839200E92CE3 /* TORCircuit.m in Sources */,
 				D0B283AF1B79CF6600D0DDA9 /* TORConfiguration.m in Sources */,
 				D03197141F6493A500720808 /* TORLogging.m in Sources */,
 			);

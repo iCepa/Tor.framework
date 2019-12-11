@@ -584,7 +584,7 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
 }
 
 
-- (void)getBuiltCircuits:(void (^)( NSArray<NSArray<TORNode *> *> * _Nonnull circuits))completion
+- (void)getCircuits:(void (^)(NSArray<TORCircuit *> * _Nonnull circuits))completion
 {
     [self getInfoForKeys:@[@"circuit-status"] completion:^(NSArray<NSString *> * _Nonnull values) {
         if (values.count < 1)
@@ -597,20 +597,17 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
             return;
         }
 
-        NSArray<NSArray<TORNode *> *> *circuits = [TORNode builtPathsFromCircuits:values.firstObject];
+        NSArray<TORCircuit *> *circuits = [TORCircuit circuitsFromString:values.firstObject];
 
         NSMutableArray<NSString *> *ipResolveCalls = [NSMutableArray new];
         NSMutableArray<TORNode *> *map = [NSMutableArray new];
 
-        for (NSArray<TORNode *> *nodes in circuits)
+        for (TORCircuit *circuit in circuits)
         {
-            for (TORNode *node in nodes)
+            for (TORNode *node in circuit.nodes)
             {
-                if (![map containsObject:node])
-                {
-                    [ipResolveCalls addObject:[NSString stringWithFormat:@"ns/id/%@", node.fingerprint]];
-                    [map addObject:node];
-                }
+                [ipResolveCalls addObject:[NSString stringWithFormat:@"ns/id/%@", node.fingerprint]];
+                [map addObject:node];
             }
         }
 
@@ -627,14 +624,10 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
                 NSMutableArray<NSString *> *geoipResolveCalls = [NSMutableArray new];
                 NSMutableArray<TORNode *> *map = [NSMutableArray new];
 
-                for (NSArray<TORNode *> *nodes in circuits)
+                for (TORCircuit *circuit in circuits)
                 {
-                    for (TORNode *node in nodes) {
-                        if ([map containsObject:node])
-                        {
-                            continue;
-                        }
-
+                    for (TORNode *node in circuit.nodes)
+                    {
                         if (ipv4Available && node.ipv4Address)
                         {
                             [geoipResolveCalls addObject:[NSString stringWithFormat:@"ip-to-country/%@", node.ipv4Address]];

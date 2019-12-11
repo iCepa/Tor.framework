@@ -41,14 +41,14 @@ NS_SWIFT_NAME(TorController)
 - (void)sendCommand:(NSString *)command arguments:(nullable NSArray<NSString *> *)arguments data:(nullable NSData *)data observer:(TORObserverBlock)observer;
 
 /**
- Get a list of built circuits as a list of `TorNodes` containing detailed information about the node.
+ Get a list of all currently available circuits with detailed information about their nodes.
 
  @note There's no clear way to determine, which circuit actually was used by a specific request.
 
  @param completion: The callback upon completion of the task.
- @param circuits: A list of circuits as a list of `TORNodes` . Empty if no circuit could be found.
+ @param circuits: A list of `TORCircuit`s . Empty if no circuit could be found.
  */
-- (void)getBuiltCircuits:(void (^)(NSArray<NSArray<TORNode *> *> * _Nonnull circuits))completion;
+- (void)getCircuits:(void (^)(NSArray<TORCircuit *> * _Nonnull circuits))completion;
 
 /**
  Resets the Tor connection: Sends "SIGNAL RELOAD" and "SIGNAL NEWNYM" to the Tor thread.
