@@ -254,32 +254,32 @@ Client-side rendezvous-point circuit state: Connected to HS.
 /**
  The raw data this object is constructed from. The unchanged argument from @c initFromString:.
  */
-@property (readonly) NSString *raw;
+@property (readonly, nullable) NSString *raw;
 
 /**
  The circuit status. Should be one of @c statusLaunched, @c statusBuilt, @c statusGuardWait,
  @c statusExtended, @c statusFailed or @c statusClosed .
  */
-@property (readonly) NSString *status;
+@property (readonly, nullable) NSString *status;
 
 /**
  The circuit path as a list of @c TORNode objects.
  */
-@property (readonly) NSArray<TORNode *> *nodes;
+@property (readonly, nullable) NSArray<TORNode *> *nodes;
 
 /**
  Build flags of the circuit. Can be any of @c buildFlagOneHopTunnel, @c buildFlagIsInternal,
  @c buildFlagNeedCapacity, @c buildFlagNeedUptime  or a flag which was unknown at the time of
  writing of this class.
 */
-@property (readonly) NSArray<NSString *> *buildFlags;
+@property (readonly, nullable) NSArray<NSString *> *buildFlags;
 
 /**
  Circuit purpose. May be one of @c purposeGeneral, @c purposeHsClientIntro,
  @c purposeHsClientRend, @c purposeHsServiceIntro, @c purposeHsServiceRend,
  @c purposeTesting, @c purposeController or, @c purposeMeasureTimeout.
  */
-@property (readonly) NSString *purpose;
+@property (readonly, nullable) NSString *purpose;
 
 /**
  Circuit hidden service state. May be one of @c hsStateHsciConnecting, @c hsStateHsciIntroSent,
@@ -288,19 +288,19 @@ Client-side rendezvous-point circuit state: Connected to HS.
  @c hsStateHssiEstablished, @c hsStateHssrConnecting, @c hsStateHssrJoined
  or a state which was unknown at the time of writing of this class.
  */
-@property (readonly) NSString *hsState;
+@property (readonly, nullable) NSString *hsState;
 
 /**
  The rendevouz query.
 
  Should be equal the onion address this circuit was used for minus the @c .onion postfix.
  */
-@property (readonly) NSString *rendQuery;
+@property (readonly, nullable) NSString *rendQuery;
 
 /**
  The circuit's  timestamp at which the circuit was created or cannibalized.
  */
-@property (readonly) NSDate *timeCreated;
+@property (readonly, nullable) NSDate *timeCreated;
 
 /**
  The @c reason field is provided only for @c FAILED and @c CLOSED  events, and only if
@@ -313,7 +313,7 @@ Client-side rendezvous-point circuit state: Connected to HS.
  @c reasonNoSuchService, @c reasonMeasurementExpired  or a reason which was unknown at the
  time of writing of this class.
  */
-@property (readonly) NSString *reason;
+@property (readonly, nullable) NSString *reason;
 
 /**
  The @c remoteReason field is provided only when we receive a @c DESTROY or @c TRUNCATE cell, and
@@ -326,19 +326,19 @@ Client-side rendezvous-point circuit state: Connected to HS.
  @c reasonNoSuchService, @c reasonMeasurementExpired  or a reason which was unknown at the
  time of writing of this class.
  */
-@property (readonly) NSString *remoteReason;
+@property (readonly, nullable) NSString *remoteReason;
 
 /**
  The @c socksUsername and @c socksPassword fields indicate the credentials that were used by a
  SOCKS client to connect to Tor’s SOCKS port and initiate this circuit.
  */
-@property (readonly) NSString *socksUsername;
+@property (readonly, nullable) NSString *socksUsername;
 
 /**
 The @c socksUsername and @c socksPassword fields indicate the credentials that were used by a
 SOCKS client to connect to Tor’s SOCKS port and initiate this circuit.
 */
-@property (readonly) NSString *socksPassword;
+@property (readonly, nullable) NSString *socksPassword;
 
 
 /**
