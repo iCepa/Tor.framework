@@ -17,6 +17,7 @@
 static NSRegularExpression *_circuitSplitRegex;
 static NSRegularExpression *_statusAndPathRegex;
 static NSMutableDictionary<NSString *, NSRegularExpression *> *_optionsRegexes;
+static NSDateFormatter *_timestampFormatter;
 
 + (NSRegularExpression *)circuitSplitRegex
 {
@@ -45,6 +46,226 @@ static NSMutableDictionary<NSString *, NSRegularExpression *> *_optionsRegexes;
     return _statusAndPathRegex;
 }
 
++ (NSString *)statusLaunched
+{
+    return @"LAUNCHED";
+}
+
++ (NSString *)statusBuilt
+{
+    return @"BUILT";
+}
+
++ (NSString *)statusGuardWait
+{
+    return @"GUARD_WAIT";
+}
+
++ (NSString *)statusExtended
+{
+    return @"EXTENDED";
+}
+
++ (NSString *)statusFailed
+{
+    return @"FAILED";
+}
+
++ (NSString *)statusClosed
+{
+    return @"CLOSED";
+}
+
++ (NSString *)buildFlagOneHopTunnel
+{
+    return @"ONEHOP_TUNNEL";
+}
+
++ (NSString *)buildFlagIsInternal
+{
+    return @"IS_INTERNAL";
+}
+
++ (NSString *)buildFlagNeedCapacity
+{
+    return @"NEED_CAPACITY";
+}
+
++ (NSString *)buildFlagNeedUptime
+{
+    return @"NEED_UPTIME";
+}
+
++ (NSString *)purposeGeneral
+{
+    return @"GENERAL";
+}
+
++ (NSString *)purposeHsClientIntro
+{
+    return @"HS_CLIENT_INTRO";
+}
+
++ (NSString *)purposeHsClientRend
+{
+    return @"HS_CLIENT_REND";
+}
+
++ (NSString *)purposeHsServiceIntro
+{
+    return @"HS_SERVICE_INTRO";
+}
+
++ (NSString *)purposeHsServiceRend
+{
+    return @"HS_SERVICE_REND";
+}
+
++ (NSString *)purposeTesting
+{
+    return @"TESTING";
+}
+
++ (NSString *)purposeController
+{
+    return @"CONTROLLER";
+}
+
++ (NSString *)purposeMeasureTimeout
+{
+    return @"MEASURE_TIMEOUT";
+}
+
++ (NSString *)hsStateHsciConnecting
+{
+    return @"HSCI_CONNECTING";
+}
+
++ (NSString *)hsStateHsciIntroSent
+{
+    return @"HSCI_INTRO_SENT";
+}
+
++ (NSString *)hsStateHsciDone
+{
+    return @"HSCI_DONE";
+}
+
++ (NSString *)hsStateHscrConnecting
+{
+    return @"HSCR_CONNECTING";
+}
+
++ (NSString *)hsStateHscrEstablishedIdle
+{
+    return @"HSCR_ESTABLISHED_IDLE";
+}
+
++ (NSString *)hsStateHscrEstablishedWaiting
+{
+    return @"HSCR_ESTABLISHED_WAITING";
+}
+
++ (NSString *)hsStateHscrJoined
+{
+    return @"HSCR_JOINED";
+}
+
++ (NSString *)hsStateHssiConnecting
+{
+    return @"HSSI_CONNECTING";
+}
+
++ (NSString *)hsStateHssiEstablished
+{
+    return @"HSSI_ESTABLISHED";
+}
+
++ (NSString *)hsStateHssrConnecting
+{
+    return @"HSSR_CONNECTING";
+}
+
++ (NSString *)hsStateHssrJoined
+{
+    return @"HSSR_JOINED";
+}
+
++ (NSString *)reasonNone
+{
+    return @"NONE";
+}
+
++ (NSString *)reasonTorProtocol
+{
+    return @"TORPROTOCOL";
+}
+
++ (NSString *)reasonInternal
+{
+    return @"INTERNAL";
+}
+
++ (NSString *)reasonRequested
+{
+    return @"REQUESTED";
+}
+
++ (NSString *)reasonHibernating
+{
+    return @"HIBERNATING";
+}
+
++ (NSString *)reasonResourceLimit
+{
+    return @"RESOURCELIMIT";
+}
+
++ (NSString *)reasonConnectFailed
+{
+    return @"CONNECTFAILED";
+}
+
++ (NSString *)reasonOrIdentity
+{
+    return @"OR_IDENTITY";
+}
+
++ (NSString *)reasonOrConnClosed
+{
+    return @"OR_CONN_CLOSED";
+}
+
++ (NSString *)reasonTimeout
+{
+    return @"TIMEOUT";
+}
+
++ (NSString *)reasonFinished
+{
+    return @"FINISHED";
+}
+
++ (NSString *)reasonDestroyed
+{
+    return @"DESTROYED";
+}
+
++ (NSString *)reasonNoPath
+{
+    return @"NOPATH";
+}
+
++ (NSString *)reasonNoSuchService
+{
+    return @"NOSUCHSERVICE";
+}
+
++ (NSString *)reasonMeasurementExpired
+{
+    return @"MEASUREMENT_EXPIRED";
+}
+
 
 // MARK: Class Methods
 
@@ -64,6 +285,19 @@ static NSMutableDictionary<NSString *, NSRegularExpression *> *_optionsRegexes;
     }
 
     return _optionsRegexes[option];
+}
+
++ (NSDateFormatter *)timestampFormatter
+{
+    if (!_timestampFormatter)
+    {
+        _timestampFormatter = [NSDateFormatter new];
+        _timestampFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSSSSSS";
+        _timestampFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+        _timestampFormatter.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+    }
+
+    return _timestampFormatter;
 }
 
 + (NSArray<TORCircuit *> *)circuitsFromString:(NSString *)circuitsString
@@ -143,7 +377,8 @@ static NSMutableDictionary<NSString *, NSRegularExpression *> *_optionsRegexes;
 
         if (matches.firstObject.numberOfRanges > 1)
         {
-            _buildFlags = [circuitString substringWithRange:[matches.firstObject rangeAtIndex:1]];
+            _buildFlags = [[circuitString substringWithRange:[matches.firstObject rangeAtIndex:1]]
+                           componentsSeparatedByString:@","];
         }
 
         matches = [[TORCircuit regexForOption:@"PURPOSE"]
@@ -175,7 +410,8 @@ static NSMutableDictionary<NSString *, NSRegularExpression *> *_optionsRegexes;
 
         if (matches.firstObject.numberOfRanges > 1)
         {
-            _timeCreated = [circuitString substringWithRange:[matches.firstObject rangeAtIndex:1]];
+            _timeCreated = [TORCircuit.timestampFormatter dateFromString:
+                            [circuitString substringWithRange:[matches.firstObject rangeAtIndex:1]]];
         }
 
         matches = [[TORCircuit regexForOption:@"REASON"]
@@ -221,10 +457,10 @@ static NSMutableDictionary<NSString *, NSRegularExpression *> *_optionsRegexes;
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p> status=%@, nodes=%@, buildFlags=%@, purpose=%@, hsState=%@, rendQuery=%@, timeCreated=%@, reason=%@, remoteReason=%@, socksUsername=%@, socksPassword=%@]",
+    return [NSString stringWithFormat:@"<%@: %p> status=%@, nodes=%@, buildFlags=%@, purpose=%@, hsState=%@, rendQuery=%@, timeCreated=%@, reason=%@, remoteReason=%@, socksUsername=%@, socksPassword=%@, raw=%@]",
             self.class, self, self.status, self.nodes, self.buildFlags,
             self.purpose, self.hsState, self.rendQuery, self.timeCreated,
-            self.reason, self.remoteReason, self.socksUsername, self.socksPassword];
+            self.reason, self.remoteReason, self.socksUsername, self.socksPassword, self.raw];
 }
 
 
