@@ -100,7 +100,7 @@
     [self waitForExpectationsWithTimeout:120.0f handler:nil];
 }
 
-- (void)testCircuitResolution
+- (void)testGetAndCloseCircuits
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"resolution callback"];
 
@@ -116,7 +116,11 @@
                 }
             }
 
-            [expectation fulfill];
+            [self.controller closeCircuits:circuits completion:^(BOOL success) {
+                XCTAssertTrue(success, @"Circuits were closed successfully.");
+
+                [expectation fulfill];
+            }];
         }];
     }];
 

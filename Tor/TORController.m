@@ -673,12 +673,12 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
 - (void)resetConnection:(void (^__nullable)(BOOL success))completion
 {
     [self sendCommand:@"SIGNAL RELOAD" arguments:nil data:nil observer:
-     ^BOOL(NSArray<NSNumber *> * _Nonnull codes, NSArray<NSData *> * _Nonnull __attribute__((unused)) lines, BOOL * _Nonnull stop) {
+     ^BOOL(NSArray<NSNumber *> * _Nonnull codes, NSArray<NSData *> * _Nonnull __unused lines, BOOL * _Nonnull stop) {
 
         if (codes.firstObject.integerValue == 250)
         {
             [self sendCommand:@"SIGNAL NEWNYM" arguments:nil data:nil observer:
-             ^BOOL(NSArray<NSNumber *> * _Nonnull codes, NSArray<NSData *> * _Nonnull __attribute__((unused)) lines, BOOL * _Nonnull stop) {
+             ^BOOL(NSArray<NSNumber *> * _Nonnull codes, NSArray<NSData *> * _Nonnull __unused lines, BOOL * _Nonnull stop) {
 
                 if (completion)
                 {
@@ -699,6 +699,56 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
         *stop = YES;
         return YES;
     }];
+}
+
+- (void)closeCircuitsByIds:(NSArray<NSString *> *)circuitIds completion:(void (^__nullable)(BOOL success))completion
+{
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+        __block BOOL success = YES;
+
+        for (NSString *circuitId in circuitIds)
+        {
+            __block BOOL done = NO;
+
+            [self sendCommand:@"CLOSECIRCUIT" arguments:@[circuitId] data:nil observer:
+             ^BOOL(NSArray<NSNumber *> * _Nonnull codes, NSArray<NSData *> * _Nonnull __unused lines, BOOL * _Nonnull stop) {
+
+                success = success && codes.firstObject.integerValue == 250;
+
+                done = YES;
+
+                *stop = YES;
+                return YES;
+            }];
+
+            // Need to deparallelize to not mix up responses.
+            while (!done) {
+                [NSThread sleepForTimeInterval:0.1];
+            }
+        }
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (completion)
+            {
+                completion(success);
+            }
+        });
+    });
+}
+
+- (void)closeCircuits:(NSArray<TORCircuit *> *)circuits completion:(void (^__nullable)(BOOL success))completion
+{
+    NSMutableArray<NSString *> *circuitIds = [NSMutableArray new];
+
+    for (TORCircuit *circuit in circuits)
+    {
+        if (circuit.circuitId.length > 0)
+        {
+            [circuitIds addObject:circuit.circuitId];
+        }
+    }
+
+    [self closeCircuitsByIds:circuitIds completion:completion];
 }
 
 @end
