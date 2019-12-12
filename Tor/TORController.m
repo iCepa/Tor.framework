@@ -168,6 +168,8 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
                 } else {
                     NSMutableData *lastData = lines.lastObject.mutableCopy;
                     if (lastData) {
+                        // BUGFIX: Add in separator again. It is needed to pick apart multi-line results later!
+                        [lastData appendData:separator];
                         [lastData appendData:lineData];
                         [lines replaceObjectAtIndex:(lines.count - 1) withObject:lastData];
                     } else {

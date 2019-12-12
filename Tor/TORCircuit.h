@@ -17,17 +17,12 @@ NS_SWIFT_NAME(TorCircuit)
 @interface TORCircuit : NSObject
 
 /**
- Regular expression to find the beginning of a circuit line in a string soup as returned by "GETINFO circuit-status".
- */
-@property (class, readonly) NSRegularExpression *circuitSplitRegex;
-
-/**
- Regular expression to identify and extract status and circuit path consisting of "LongNames".
+ Regular expression to identify and extract ID, status and circuit path consisting of "LongNames".
 
  Syntax of node "LongNames":
  https://torproject.gitlab.io/torspec/control-spec.html#general-use-tokens
  */
-@property (class, readonly) NSRegularExpression *statusAndPathRegex;
+@property (class, readonly) NSRegularExpression *mainInfoRegex;
 
 /**
  - Tag: statusLaunched
@@ -255,6 +250,11 @@ Client-side rendezvous-point circuit state: Connected to HS.
  The raw data this object is constructed from. The unchanged argument from @c initFromString:.
  */
 @property (readonly, nullable) NSString *raw;
+
+/**
+The circuit ID. Currently only numbers beginning with "1" but Tor spec says, that could change.
+ */
+@property (readonly, nullable) NSString *circuitId;
 
 /**
  The circuit status. Should be one of @c statusLaunched, @c statusBuilt, @c statusGuardWait,

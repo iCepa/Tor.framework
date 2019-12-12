@@ -14,52 +14,22 @@
 
 // MARK: Class Properties
 
-static NSRegularExpression *_circuitSplitRegex;
-static NSRegularExpression *_statusAndPathRegex;
+static NSRegularExpression *_mainInfoRegex;
 static NSMutableDictionary<NSString *, NSRegularExpression *> *_optionsRegexes;
 static NSDateFormatter *_timestampFormatter;
 
-+ (NSRegularExpression *)circuitSplitRegex
++ (NSRegularExpression *)mainInfoRegex
 {
-    if (!_circuitSplitRegex)
+    if (!_mainInfoRegex)
     {
-        // Every circuit line starts with a CircuitID, which is an integer counter
-        // starting at 1. Unfortunately, many circuits end with something like
-        // "TIME_CREATED=2019-12-12T14:03:40.052851". Even though, there should be
-        // a CRLF divider between the circuits, for an unknown reason, it isn't.
-        // So, it's hard to distinguish, which digit belongs to the last circuit's
-        // timestamp and which one belongs to the CircuitID.
-        //
-        // So, for the sake of simplicity, we assume, that the CircuitID is never
-        // bigger than 99, steal a digit from the preceding circuit on single-digit
-        // CircuitIDs, ignore the CircuitID otherwise alltogether and
-        // live with the lost precision of 1/100,000 of a second in some timestamps.
-        //
-        // And all this, so other arguments don't end up with the CircuitID of a
-        // subsequent circuit...
-        //
-        // TODO: Improve this.
-        _circuitSplitRegex =
-        [NSRegularExpression
-         regularExpressionWithPattern:@"\\d{1,2}\\s+(?:LAUNCHED|BUILT|GUARD_WAIT|EXTENDED|FAILED|CLOSED)"
-         options:NSRegularExpressionCaseInsensitive error:nil];
-    }
-
-    return _circuitSplitRegex;
-}
-
-+ (NSRegularExpression *)statusAndPathRegex
-{
-    if (!_statusAndPathRegex)
-    {
-        _statusAndPathRegex =
+        _mainInfoRegex =
         [NSRegularExpression
          regularExpressionWithPattern:
-         @"(LAUNCHED|BUILT|GUARD_WAIT|EXTENDED|FAILED|CLOSED)\\s+((?:\\$[\\da-f]+[=~]\\w+(?:,|\\s|\\Z))+)"
+         @"(\\w+)\\s+(LAUNCHED|BUILT|GUARD_WAIT|EXTENDED|FAILED|CLOSED)\\s+((?:\\$[\\da-f]+[=~]\\w+(?:,|\\s|\\Z))+)?"
          options:NSRegularExpressionCaseInsensitive error:nil];
     }
 
-    return _statusAndPathRegex;
+    return _mainInfoRegex;
 }
 
 + (NSString *)statusLaunched
@@ -320,29 +290,12 @@ static NSDateFormatter *_timestampFormatter;
 {
     NSMutableArray<TORCircuit *> *circuits = [NSMutableArray new];
 
-    NSArray<NSTextCheckingResult *> *matches = [TORCircuit.circuitSplitRegex
-                                                matchesInString:circuitsString
-                                                options:0
-                                                range:NSMakeRange(0, circuitsString.length)];
-
-    for (NSUInteger i = 0; i < matches.count; i++)
-    {
-        NSUInteger location = [matches[i] rangeAtIndex:0].location;
-        NSRange range;
-
-        // Last one. Take everything until the end!
-        if (i >= matches.count - 1)
+    for (NSString *circuitString in [circuitsString componentsSeparatedByString:@"\r\n"]) {
+        if (circuitString.length > 0)
         {
-            range = NSMakeRange(location, circuitsString.length - location);
+            [circuits addObject:
+             [[TORCircuit alloc] initFromString:circuitString]];
         }
-        else {
-            range = NSMakeRange(location, [matches[i + 1] rangeAtIndex:0].location - location);
-        }
-
-        [circuits addObject:
-         [[TORCircuit alloc] initFromString:
-          [[circuitsString substringWithRange:range]
-           stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet]]];
     }
 
     return circuits;
@@ -361,20 +314,25 @@ static NSDateFormatter *_timestampFormatter;
 
         NSRange range = NSMakeRange(0, circuitString.length);
 
-        NSArray<NSTextCheckingResult *> *matches = [TORCircuit.statusAndPathRegex
+        NSArray<NSTextCheckingResult *> *matches = [TORCircuit.mainInfoRegex
                                                     matchesInString:circuitString options:0
                                                     range:range];
 
         if (matches.firstObject.numberOfRanges > 1)
         {
-            _status = [circuitString substringWithRange:[matches.firstObject rangeAtIndex:1]];
+            _circuitId = [circuitString substringWithRange:[matches.firstObject rangeAtIndex:1]];
         }
 
         if (matches.firstObject.numberOfRanges > 2)
         {
+            _status = [circuitString substringWithRange:[matches.firstObject rangeAtIndex:2]];
+        }
+
+        if (matches.firstObject.numberOfRanges > 3)
+        {
             NSMutableArray<TORNode *> *nodes = [NSMutableArray new];
 
-            NSString *path = [circuitString substringWithRange:[matches.firstObject rangeAtIndex:2]];
+            NSString *path = [circuitString substringWithRange:[matches.firstObject rangeAtIndex:3]];
 
             NSArray<NSString *> *nodesStrings = [path componentsSeparatedByString:@","];
 
@@ -473,8 +431,8 @@ static NSDateFormatter *_timestampFormatter;
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p> status=%@, nodes=%@, buildFlags=%@, purpose=%@, hsState=%@, rendQuery=%@, timeCreated=%@, reason=%@, remoteReason=%@, socksUsername=%@, socksPassword=%@, raw=%@]",
-            self.class, self, self.status, self.nodes, self.buildFlags,
+    return [NSString stringWithFormat:@"<%@: %p> circuitId=%@, status=%@, nodes=%@, buildFlags=%@, purpose=%@, hsState=%@, rendQuery=%@, timeCreated=%@, reason=%@, remoteReason=%@, socksUsername=%@, socksPassword=%@, raw=%@]",
+            self.class, self, self.circuitId, self.status, self.nodes, self.buildFlags,
             self.purpose, self.hsState, self.rendQuery, self.timeCreated,
             self.reason, self.remoteReason, self.socksUsername, self.socksPassword, self.raw];
 }
