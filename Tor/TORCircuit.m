@@ -23,9 +23,25 @@ static NSDateFormatter *_timestampFormatter;
 {
     if (!_circuitSplitRegex)
     {
+        // Every circuit line starts with a CircuitID, which is an integer counter
+        // starting at 1. Unfortunately, many circuits end with something like
+        // "TIME_CREATED=2019-12-12T14:03:40.052851". Even though, there should be
+        // a CRLF divider between the circuits, for an unknown reason, it isn't.
+        // So, it's hard to distinguish, which digit belongs to the last circuit's
+        // timestamp and which one belongs to the CircuitID.
+        //
+        // So, for the sake of simplicity, we assume, that the CircuitID is never
+        // bigger than 99, steal a digit from the preceding circuit on single-digit
+        // CircuitIDs, ignore the CircuitID otherwise alltogether and
+        // live with the lost precision of 1/100,000 of a second in some timestamps.
+        //
+        // And all this, so other arguments don't end up with the CircuitID of a
+        // subsequent circuit...
+        //
+        // TODO: Improve this.
         _circuitSplitRegex =
         [NSRegularExpression
-         regularExpressionWithPattern:@"(?:LAUNCHED|BUILT|GUARD_WAIT|EXTENDED|FAILED|CLOSED)"
+         regularExpressionWithPattern:@"\\d{1,2}\\s+(?:LAUNCHED|BUILT|GUARD_WAIT|EXTENDED|FAILED|CLOSED)"
          options:NSRegularExpressionCaseInsensitive error:nil];
     }
 
@@ -292,7 +308,7 @@ static NSDateFormatter *_timestampFormatter;
     if (!_timestampFormatter)
     {
         _timestampFormatter = [NSDateFormatter new];
-        _timestampFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSSSSSS";
+        _timestampFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSSSSS";
         _timestampFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
         _timestampFormatter.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
     }
