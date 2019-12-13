@@ -14,15 +14,15 @@
 # at most 7 characters long so we can use the format:
 # ${MINUTES_SINCE_DATE}.${DECIMALIZED_GIT_HASH}
 
-# the version for this framework is roughly in the format of:
+# The version for this framework is roughly in the format of:
 # ABB.C.Y, where the tor version is 0.A.B.C ("BB" is two-digit B slot
 # with leading zero if necessary) and Y is an incremental tor.framework version.
 # so the first tor 0.3.5.2-alpha is 305.2.1
 
 # BUGFIX: Don't use dates with localized month names, because that breaks building
 # on non-english localized systems. Instead stick to an international format.
-TOR_BUNDLE_SHORT_VERSION_DATE="2019-07-22 14:30:00 GMT"
-TOR_BUNDLE_SHORT_VERSION_STRING=400.5.2
+TOR_BUNDLE_SHORT_VERSION_DATE="2019-12-13 11:00:00 GMT"
+TOR_BUNDLE_SHORT_VERSION_STRING=400.6.1
 
 #####
 
