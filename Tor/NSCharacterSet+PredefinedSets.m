@@ -3,12 +3,11 @@
 //  Tor
 //
 //  Created by Benjamin Erhart on 12.12.19.
-//  Copyright © 2019 Conrad Kramer. All rights reserved.
 //
 
-#import "NSCharacterSet+Quotes.h"
+#import "NSCharacterSet+PredefinedSets.h"
 
-@implementation NSCharacterSet (Quotes)
+@implementation NSCharacterSet (PredefinedSets)
 
 static NSCharacterSet *_doubleQuote;
 static NSCharacterSet *_longNameDivider;

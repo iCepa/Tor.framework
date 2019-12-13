@@ -3,11 +3,10 @@
 //  Tor
 //
 //  Created by Benjamin Erhart on 09.12.19.
-//  Copyright © 2019 Conrad Kramer. All rights reserved.
 //
 
 #import "TORNode.h"
-#import "NSCharacterSet+Quotes.h"
+#import "NSCharacterSet+PredefinedSets.h"
 
 @implementation TORNode
 

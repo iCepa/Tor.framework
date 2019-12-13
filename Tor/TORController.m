@@ -10,7 +10,7 @@
 #import <or/or.h>
 #import <sys/un.h>
 #import "TORThread.h"
-#import "NSCharacterSet+Quotes.h"
+#import "NSCharacterSet+PredefinedSets.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -169,7 +169,10 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
                     NSMutableData *lastData = lines.lastObject.mutableCopy;
                     if (lastData) {
                         // BUGFIX: Add in separator again. It is needed to pick apart multi-line results later!
-                        [lastData appendData:separator];
+                        if (lastData.length > 0)
+                        {
+                            [lastData appendData:separator];
+                        }
                         [lastData appendData:lineData];
                         [lines replaceObjectAtIndex:(lines.count - 1) withObject:lastData];
                     } else {

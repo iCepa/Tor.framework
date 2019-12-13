@@ -3,11 +3,10 @@
 //  Tor
 //
 //  Created by Benjamin Erhart on 11.12.19.
-//  Copyright © 2019 Conrad Kramer. All rights reserved.
 //
 
 #import "TORCircuit.h"
-#import "NSCharacterSet+Quotes.h"
+#import "NSCharacterSet+PredefinedSets.h"
 
 @implementation TORCircuit
 

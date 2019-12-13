@@ -3,7 +3,6 @@
 //  Tor
 //
 //  Created by Benjamin Erhart on 09.12.19.
-//  Copyright © 2019 Conrad Kramer. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

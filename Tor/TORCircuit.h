@@ -3,7 +3,6 @@
 //  Tor
 //
 //  Created by Benjamin Erhart on 11.12.19.
-//  Copyright © 2019 Conrad Kramer. All rights reserved.
 //
 //  Documentation this class is modelled after:
 //  https://torproject.gitlab.io/torspec/control-spec.html#circuit-status-changed
