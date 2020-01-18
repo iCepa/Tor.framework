@@ -319,30 +319,45 @@ static NSDateFormatter *_timestampFormatter;
 
         if (matches.firstObject.numberOfRanges > 1)
         {
-            _circuitId = [circuitString substringWithRange:[matches.firstObject rangeAtIndex:1]];
+            @try {
+                _circuitId = [circuitString substringWithRange:[matches.firstObject rangeAtIndex:1]];
+            }
+            @catch (NSException *exception) {
+                // Hm. Range seems out-of-range. Strange.
+            }
         }
 
         if (matches.firstObject.numberOfRanges > 2)
         {
-            _status = [circuitString substringWithRange:[matches.firstObject rangeAtIndex:2]];
+            @try {
+                _status = [circuitString substringWithRange:[matches.firstObject rangeAtIndex:2]];
+            }
+            @catch (NSException *exception) {
+                // Hm. Range seems out-of-range. Strange.
+            }
         }
 
         if (matches.firstObject.numberOfRanges > 3)
         {
             NSMutableArray<TORNode *> *nodes = [NSMutableArray new];
 
-            NSString *path = [circuitString substringWithRange:[matches.firstObject rangeAtIndex:3]];
+            @try {
+                NSString *path = [circuitString substringWithRange:[matches.firstObject rangeAtIndex:3]];
 
-            NSArray<NSString *> *nodesStrings = [path componentsSeparatedByString:@","];
+                NSArray<NSString *> *nodesStrings = [path componentsSeparatedByString:@","];
 
-            for (NSString *nodeString in nodesStrings)
-            {
-                [nodes addObject:
-                 [[TORNode alloc] initFromString:
-                  [nodeString stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceCharacterSet]]];
+                for (NSString *nodeString in nodesStrings)
+                {
+                    [nodes addObject:
+                     [[TORNode alloc] initFromString:
+                      [nodeString stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceCharacterSet]]];
+                }
+
+                _nodes = nodes;
             }
-
-            _nodes = nodes;
+            @catch (NSException *exception) {
+                // Hm. Range seems out-of-range. Strange.
+            }
         }
 
         matches = [[TORCircuit regexForOption:@"BUILD_FLAGS"]
