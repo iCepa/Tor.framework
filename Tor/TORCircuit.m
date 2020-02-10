@@ -441,6 +441,53 @@ static NSDateFormatter *_timestampFormatter;
 }
 
 
+// MARK: NSSecureCoding
+
++ (BOOL)supportsSecureCoding
+{
+  return YES;
+}
+
+- (id)initWithCoder:(NSCoder *)coder
+{
+    if ((self = [super init]))
+    {
+        _raw = [coder decodeObjectOfClass:NSString.class forKey:@"raw"];
+        _circuitId = [coder decodeObjectOfClass:NSString.class forKey:@"circuitId"];
+        _status = [coder decodeObjectOfClass:NSString.class forKey:@"status"];
+        _nodes = [coder decodeObjectOfClasses:[NSSet setWithArray:@[NSArray.class, TORNode.class]] forKey:@"nodes"];
+        _buildFlags = [coder decodeObjectOfClasses:[NSSet setWithArray:@[NSArray.class, NSString.class]] forKey:@"buildFlags"];
+        _purpose = [coder decodeObjectOfClass:NSString.class forKey:@"purpose"];
+        _hsState = [coder decodeObjectOfClass:NSString.class forKey:@"hsState"];
+        _rendQuery = [coder decodeObjectOfClass:NSString.class forKey:@"rendQuery"];
+        _timeCreated = [coder decodeObjectOfClass:NSDate.class forKey:@"timeCreated"];
+        _reason = [coder decodeObjectOfClass:NSString.class forKey:@"reason"];
+        _remoteReason = [coder decodeObjectOfClass:NSString.class forKey:@"remoteReason"];
+        _socksUsername = [coder decodeObjectOfClass:NSString.class forKey:@"socksUsername"];
+        _socksPassword = [coder decodeObjectOfClass:NSString.class forKey:@"socksPassword"];
+    }
+
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+    [coder encodeObject:self.raw forKey:@"raw"];
+    [coder encodeObject:self.circuitId forKey:@"circuitId"];
+    [coder encodeObject:self.status forKey:@"status"];
+    [coder encodeObject:self.nodes forKey:@"nodes"];
+    [coder encodeObject:self.buildFlags forKey:@"buildFlags"];
+    [coder encodeObject:self.purpose forKey:@"purpose"];
+    [coder encodeObject:self.hsState forKey:@"hsState"];
+    [coder encodeObject:self.rendQuery forKey:@"rendQuery"];
+    [coder encodeObject:self.timeCreated forKey:@"timeCreated"];
+    [coder encodeObject:self.reason forKey:@"reason"];
+    [coder encodeObject:self.remoteReason forKey:@"remoteReason"];
+    [coder encodeObject:self.socksUsername forKey:@"socksUsername"];
+    [coder encodeObject:self.socksPassword forKey:@"socksPassword"];
+}
+
+
 // MARK: NSObject
 
 - (NSString *)description

@@ -13,7 +13,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 NS_SWIFT_NAME(TorCircuit)
-@interface TORCircuit : NSObject
+@interface TORCircuit : NSObject<NSSecureCoding>
 
 /**
  Regular expression to identify and extract ID, status and circuit path consisting of "LongNames".

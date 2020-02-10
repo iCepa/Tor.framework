@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 NS_SWIFT_NAME(TorNode)
-@interface TORNode : NSObject
+@interface TORNode : NSObject<NSSecureCoding>
 
 /**
 Regular expression to identify and extract a valid IPv4 address.

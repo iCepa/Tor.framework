@@ -100,11 +100,42 @@ static NSRegularExpression *_ipv6Regex;
         return nil;
     }
 
-    if (@available(iOS 10.0, *)) {
+    if (@available(iOS 10.0, macOS 10.12, *)) {
         return [NSLocale.currentLocale localizedStringForCountryCode:self.countryCode];
     } else {
         return [NSLocale.currentLocale displayNameForKey:NSLocaleCountryCode value:self.countryCode];
     }
+}
+
+
+// MARK: NSSecureCoding
+
++ (BOOL)supportsSecureCoding
+{
+  return YES;
+}
+
+- (id)initWithCoder:(NSCoder *)coder
+{
+    if ((self = [super init]))
+    {
+        _fingerprint = [coder decodeObjectOfClass:NSString.class forKey:@"fingerprint"];
+        _nickName = [coder decodeObjectOfClass:NSString.class forKey:@"nickName"];
+        _ipv4Address = [coder decodeObjectOfClass:NSString.class forKey:@"ipv4Address"];
+        _ipv6Address = [coder decodeObjectOfClass:NSString.class forKey:@"ipv6Address"];
+        _countryCode = [coder decodeObjectOfClass:NSString.class forKey:@"countryCode"];
+    }
+
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+    [coder encodeObject:self.fingerprint forKey:@"fingerprint"];
+    [coder encodeObject:self.nickName forKey:@"nickName"];
+    [coder encodeObject:self.ipv4Address forKey:@"ipv4Address"];
+    [coder encodeObject:self.ipv6Address forKey:@"ipv6Address"];
+    [coder encodeObject:self.countryCode forKey:@"countryCode"];
 }
 
 
