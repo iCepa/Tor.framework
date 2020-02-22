@@ -495,7 +495,8 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
                                      NSCharacterSet.doubleQuote];
 
                     [components removeObjectAtIndex:0];
-                    NSString* value = [components componentsJoinedByString:@"="];
+                    NSString* value = [[components componentsJoinedByString:@"="]
+                                       stringByTrimmingCharactersInSet:NSCharacterSet.doubleQuote];
 
                     if ([keys containsObject:key])
                     {
