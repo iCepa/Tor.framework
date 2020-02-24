@@ -313,126 +313,111 @@ static NSDateFormatter *_timestampFormatter;
 
         NSRange range = NSMakeRange(0, circuitString.length);
 
-        NSArray<NSTextCheckingResult *> *matches = [TORCircuit.mainInfoRegex
+        NSTextCheckingResult *match = [TORCircuit.mainInfoRegex
                                                     matchesInString:circuitString options:0
-                                                    range:range];
-
-        if (matches.firstObject.numberOfRanges > 1)
+                                                    range:range].firstObject;
+        
+        if (match && [match rangeAtIndex:1].location != NSNotFound)
         {
-            @try {
-                _circuitId = [circuitString substringWithRange:[matches.firstObject rangeAtIndex:1]];
-            }
-            @catch (NSException *exception) {
-                // Hm. Range seems out-of-range. Strange.
-            }
+            _circuitId = [circuitString substringWithRange:[match rangeAtIndex:1]];
         }
-
-        if (matches.firstObject.numberOfRanges > 2)
+        
+        if (match && [match rangeAtIndex:2].location != NSNotFound)
         {
-            @try {
-                _status = [circuitString substringWithRange:[matches.firstObject rangeAtIndex:2]];
-            }
-            @catch (NSException *exception) {
-                // Hm. Range seems out-of-range. Strange.
-            }
+            _status = [circuitString substringWithRange:[match rangeAtIndex:2]];
         }
-
-        if (matches.firstObject.numberOfRanges > 3)
+        
+        if (match && [match rangeAtIndex:3].location != NSNotFound)
         {
             NSMutableArray<TORNode *> *nodes = [NSMutableArray new];
+            
+            NSString *path = [circuitString substringWithRange:[match rangeAtIndex:3]];
 
-            @try {
-                NSString *path = [circuitString substringWithRange:[matches.firstObject rangeAtIndex:3]];
+            NSArray<NSString *> *nodesStrings = [path componentsSeparatedByString:@","];
 
-                NSArray<NSString *> *nodesStrings = [path componentsSeparatedByString:@","];
-
-                for (NSString *nodeString in nodesStrings)
-                {
-                    [nodes addObject:
-                     [[TORNode alloc] initFromString:
-                      [nodeString stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceCharacterSet]]];
-                }
-
-                _nodes = nodes;
+            for (NSString *nodeString in nodesStrings)
+            {
+                [nodes addObject:
+                [[TORNode alloc] initFromString:
+                    [nodeString stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceCharacterSet]]];
             }
-            @catch (NSException *exception) {
-                // Hm. Range seems out-of-range. Strange.
-            }
+
+            _nodes = nodes;
         }
+        
+        match = [[TORCircuit regexForOption:@"BUILD_FLAGS"]
+                   matchesInString:circuitString options:0 range:range].firstObject;
 
-        matches = [[TORCircuit regexForOption:@"BUILD_FLAGS"]
-                   matchesInString:circuitString options:0 range:range];
-
-        if (matches.firstObject.numberOfRanges > 1)
+        if (match && [match rangeAtIndex:1].location != NSNotFound)
         {
-            _buildFlags = [[circuitString substringWithRange:[matches.firstObject rangeAtIndex:1]]
+            _buildFlags = [[circuitString substringWithRange:[match rangeAtIndex:1]]
                            componentsSeparatedByString:@","];
         }
 
-        matches = [[TORCircuit regexForOption:@"PURPOSE"]
-                   matchesInString:circuitString options:0 range:range];
+        match = [[TORCircuit regexForOption:@"PURPOSE"]
+                    matchesInString:circuitString options:0 range:range].firstObject;
 
-        if (matches.firstObject.numberOfRanges > 1)
+        if (match && [match rangeAtIndex:1].location != NSNotFound)
         {
-            _purpose = [circuitString substringWithRange:[matches.firstObject rangeAtIndex:1]];
+            _purpose = [circuitString substringWithRange:[match rangeAtIndex:1]];
         }
 
-        matches = [[TORCircuit regexForOption:@"HS_STATE"]
-                   matchesInString:circuitString options:0 range:range];
+        match = [[TORCircuit regexForOption:@"HS_STATE"]
+                    matchesInString:circuitString options:0 range:range].firstObject;
 
-        if (matches.firstObject.numberOfRanges > 1)
+        if (match && [match rangeAtIndex:1].location != NSNotFound)
         {
-            _hsState = [circuitString substringWithRange:[matches.firstObject rangeAtIndex:1]];
+            _hsState = [circuitString substringWithRange:[match rangeAtIndex:1]];
         }
 
-        matches = [[TORCircuit regexForOption:@"REND_QUERY"]
-                   matchesInString:circuitString options:0 range:range];
+        match = [[TORCircuit regexForOption:@"REND_QUERY"]
+                    matchesInString:circuitString options:0 range:range].firstObject;
 
-        if (matches.firstObject.numberOfRanges > 1)
+        if (match && [match rangeAtIndex:1].location != NSNotFound)
         {
-            _rendQuery = [circuitString substringWithRange:[matches.firstObject rangeAtIndex:1]];
+            _rendQuery = [circuitString substringWithRange:[match rangeAtIndex:1]];
         }
 
-        matches = [[TORCircuit regexForOption:@"TIME_CREATED"]
-                   matchesInString:circuitString options:0 range:range];
+        match = [[TORCircuit regexForOption:@"TIME_CREATED"]
+                    matchesInString:circuitString options:0 range:range].firstObject;
 
-        if (matches.firstObject.numberOfRanges > 1)
+        if (match && [match rangeAtIndex:1].location != NSNotFound)
         {
             _timeCreated = [TORCircuit.timestampFormatter dateFromString:
-                            [circuitString substringWithRange:[matches.firstObject rangeAtIndex:1]]];
+                            [circuitString substringWithRange:[match rangeAtIndex:1]]];
         }
 
-        matches = [[TORCircuit regexForOption:@"REASON"]
-                   matchesInString:circuitString options:0 range:range];
+        match = [[TORCircuit regexForOption:@"REASON"]
+                    matchesInString:circuitString options:0 range:range].firstObject;
 
-        if (matches.firstObject.numberOfRanges > 1)
+        if (match && [match rangeAtIndex:1].location != NSNotFound)
         {
-            _reason = [circuitString substringWithRange:[matches.firstObject rangeAtIndex:1]];
+            _reason = [circuitString substringWithRange:[match rangeAtIndex:1]];
         }
 
-        matches = [[TORCircuit regexForOption:@"REMOTE_REASON"]
-                   matchesInString:circuitString options:0 range:range];
+        match = [[TORCircuit regexForOption:@"REMOTE_REASON"]
+                    matchesInString:circuitString options:0 range:range].firstObject;
 
-        if (matches.firstObject.numberOfRanges > 1)
+        if (match && [match rangeAtIndex:1].location != NSNotFound)
         {
-            _remoteReason = [circuitString substringWithRange:[matches.firstObject rangeAtIndex:1]];
+            _remoteReason = [circuitString substringWithRange:[match rangeAtIndex:1]];
         }
 
-        matches = [[TORCircuit regexForOption:@"SOCKS_USERNAME"]
-                   matchesInString:circuitString options:0 range:range];
+        match = [[TORCircuit regexForOption:@"SOCKS_USERNAME"]
+                    matchesInString:circuitString options:0 range:range].firstObject;
 
-        if (matches.firstObject.numberOfRanges > 1)
+        if (match && [match rangeAtIndex:1].location != NSNotFound)
         {
-            _socksUsername = [[circuitString substringWithRange:[matches.firstObject rangeAtIndex:1]]
+            _socksUsername = [[circuitString substringWithRange:[match rangeAtIndex:1]]
                               stringByTrimmingCharactersInSet:NSCharacterSet.doubleQuote];
         }
 
-        matches = [[TORCircuit regexForOption:@"SOCKS_PASSWORD"]
-                   matchesInString:circuitString options:0 range:range];
+        match = [[TORCircuit regexForOption:@"SOCKS_PASSWORD"]
+                    matchesInString:circuitString options:0 range:range].firstObject;
 
-        if (matches.firstObject.numberOfRanges > 1)
+        if (match && [match rangeAtIndex:1].location != NSNotFound)
         {
-            _socksPassword = [[circuitString substringWithRange:[matches.firstObject rangeAtIndex:1]]
+            _socksPassword = [[circuitString substringWithRange:[match rangeAtIndex:1]]
                               stringByTrimmingCharactersInSet:NSCharacterSet.doubleQuote];
         }
     }
