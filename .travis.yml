@@ -6,19 +6,19 @@ matrix:
   include:
     - xcode_scheme: "Tor-iOS"
       xcode_sdk: iphoneos
-      osx_image: xcode9
+      osx_image: xcode11.3
       env:
         - XCODE_ACTION=build
         - XCODE_DESTINATION="generic/platform=iOS"
     - xcode_scheme: "Tor-iOS"
       xcode_sdk: iphonesimulator
-      osx_image: xcode9
+      osx_image: xcode11.3
       env:
         - XCODE_ACTION=build
         - XCODE_DESTINATION="platform=iOS Simulator,name=iPhone 7"
     - xcode_scheme: "Tor-Mac"
       xcode_sdk: macosx
-      osx_image: xcode9
+      osx_image: xcode11.3
       env:
         - XCODE_ACTION=build
         - XCODE_DESTINATION="arch=x86_64"
