@@ -15,7 +15,7 @@ matrix:
       osx_image: xcode11.3
       env:
         - XCODE_ACTION=build
-        - XCODE_DESTINATION="platform=iOS Simulator,name=iPhone 7"
+        - XCODE_DESTINATION="platform=iOS Simulator,name=iPhone 11 Pro"
     - xcode_scheme: "Tor-Mac"
       xcode_sdk: macosx
       osx_image: xcode11.3
