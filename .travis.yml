@@ -1,5 +1,12 @@
 language: objective-c
 xcode_project: Tor.xcodeproj
+addons:
+homebrew:
+  packages:
+  - automake
+  - autoconf
+  - libtool
+  - gettext
 script:
   - xcodebuild $XCODE_ACTION -project "$TRAVIS_XCODE_PROJECT" -scheme "$TRAVIS_XCODE_SCHEME" -sdk "$TRAVIS_XCODE_SDK" -destination "$XCODE_DESTINATION"
 matrix:
