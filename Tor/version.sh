@@ -35,6 +35,9 @@ SECONDS_FROM_EPOCH_TO_DATE=$( date -j -f "%Y-%m-%d %H:%M:%S %Z" "${TOR_BUNDLE_SH
 
 MINUTES_SINCE_DATE=$(( $(( ${SECONDS_FROM_EPOCH_TO_NOW}-${SECONDS_FROM_EPOCH_TO_DATE} ))/60 ))
 
+# Fix negative numbers because TOR_BUNDLE_SHORT_VERSION_DATE is later then NOW.
+MINUTES_SINCE_DATE=${MINUTES_SINCE_DATE#-}
+
 #####
 # decimalize git hash
 
