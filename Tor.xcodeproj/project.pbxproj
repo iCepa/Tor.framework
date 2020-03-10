@@ -315,6 +315,7 @@
 		8A9D5D16216BE12100B0BB19 /* libtor-malloc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-malloc.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A9D5D17216BE12100B0BB19 /* libed25519_ref10.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libed25519_ref10.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A9D5D5E216BFB3400B0BB19 /* orconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = orconfig.h; path = tor/orconfig.h; sourceTree = "<group>"; };
+		A01E949B24127899001BFFF5 /* version.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = version.h; path = Tor/version.h; sourceTree = "<group>"; };
 		A02CE2B4220055D200964A14 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		A02CE2B5220055D200964A14 /* Tor.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Tor.json; sourceTree = "<group>"; };
 		A0428A991FA0E72D00593F79 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -543,6 +544,7 @@
 				A088DB0822E603270018EF4D /* Tor.podspec */,
 				A0DE78A621F73B8200B6B68B /* LICENSE */,
 				A0DE78A721F73B8E00B6B68B /* version.sh */,
+				A01E949B24127899001BFFF5 /* version.h */,
 			);
 			name = Build;
 			sourceTree = "<group>";
