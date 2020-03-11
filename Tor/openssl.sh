@@ -64,11 +64,18 @@ done
 
 mkdir -p "${BUILT_PRODUCTS_DIR}"
 
+declare -a HEADERS=("opensslconf.h" "configuration.h" "macros.h" "opensslv.h")
+
 # Copy the build products from the temporary directory to the built products directory
 for ARCH in "${ARCHS[@]}"
 do
     mkdir -p "${BUILT_PRODUCTS_DIR}/openssl-${ARCH}/openssl"
-    cp "${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}/include/openssl/opensslconf.h" "${BUILT_PRODUCTS_DIR}/openssl-${ARCH}/openssl"
+
+    for HEADER in "${HEADERS[@]}"
+    do
+        cp "${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}/include/openssl/${HEADER}" "${BUILT_PRODUCTS_DIR}/openssl-${ARCH}/openssl"
+    done
+
     for LIBRARY in "${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}/lib/"*.a;
     do
         cp $LIBRARY "${BUILT_PRODUCTS_DIR}/$(basename ${LIBRARY} .a).${ARCH}.a"
