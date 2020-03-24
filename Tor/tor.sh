@@ -13,47 +13,55 @@ fi
 
 REBUILD=0
 
+declare -a LIBS=(
+    "libtor-app"
+    "libtor-compress"
+    "libtor-evloop"
+
+    "libtor-tls"
+    "libtor-crypt-ops"
+    "libkeccak-tiny"
+    "libed25519_ref10"
+    "libed25519_donna"
+    "libcurve25519_donna"
+
+    "libtor-geoip"
+    "libtor-process"
+    "libtor-buf"
+#    "libtor-confmgt"   # Needed in Tor 0.4.2.7
+#    "libtor-pubsub"    # Needed in Tor 0.4.2.7
+#    "libtor-dispatch"  # Needed in Tor 0.4.2.7
+    "libtor-time"
+    "libtor-fs"
+    "libtor-encoding"
+    "libtor-sandbox"
+    "libtor-container"
+    "libtor-net"
+    "libtor-thread"
+    "libtor-memarea"
+    "libtor-math"
+    "libtor-meminfo"
+    "libtor-osinfo"
+    "libtor-log"
+    "libtor-lock"
+    "libtor-fdio"
+    "libtor-string"
+    "libtor-term"
+    "libtor-smartlist-core"
+    "libtor-malloc"
+    "libtor-wallclock"
+    "libtor-err"
+    "libtor-version"
+    "libtor-intmath"
+    "libtor-ctime"
+
+    "libor-trunnel"
+    "libtor-trace"
+)
+
 # If the built binaries include a different set of architectures, then rebuild the target
 if [[ ${ACTION:-build} = "build" ]] || [[ $ACTION = "install" ]]; then
-    for LIB in \
-        libed25519_ref10 \
-        libed25519_donna \
-        libkeccak-tiny \
-        libtor-err \
-        libtor-ctime \
-        libtor-compress \
-        libtor-container \
-        libtor-crypt-ops \
-        libtor-encoding \
-        libtor-evloop \
-        libtor-fdio \
-        libtor-fs \
-        libcurve25519_donna \
-        libtor-intmath \
-        libtor-lock \
-        libtor-log \
-        libtor-math \
-        libtor-memarea \
-        libtor-meminfo \
-        libtor-malloc \
-        libtor-net \
-        libtor-osinfo \
-        libtor-process \
-        libtor-sandbox \
-        libtor-string \
-        libtor-smartlist-core \
-        libtor-term \
-        libtor-thread \
-        libtor-time \
-        libtor-tls \
-        libtor-trace \
-        libtor-wallclock \
-        libor-trunnel \
-        libtorrunner \
-        libtor-app \
-        libtor-geoip \
-        libtor-buf \
-        libtor-version;
+    for LIB in "${LIBS[@]}"
     do
         for ARCH in "${ARCHS[@]}"
         do
@@ -67,44 +75,7 @@ fi
 # If rebuilding or cleaning then delete the built products
 if [[ ${ACTION:-build} = "clean" ]] || [[ $REBUILD = 1 ]]; then
     make clean 2>/dev/null
-    for LIB in \
-        libed25519_ref10 \
-        libed25519_donna \
-        libkeccak-tiny \
-        libtor-err \
-        libtor-ctime \
-        libtor-compress \
-        libtor-container \
-        libtor-crypt-ops \
-        libtor-encoding \
-        libtor-evloop \
-        libtor-fdio \
-        libtor-fs \
-        libcurve25519_donna \
-        libtor-intmath \
-        libtor-lock \
-        libtor-log \
-        libtor-math \
-        libtor-memarea \
-        libtor-meminfo \
-        libtor-malloc \
-        libtor-net \
-        libtor-osinfo \
-        libtor-process \
-        libtor-sandbox \
-        libtor-string \
-        libtor-smartlist-core \
-        libtor-term \
-        libtor-thread \
-        libtor-time \
-        libtor-tls \
-        libtor-trace \
-        libtor-wallclock \
-        libor-trunnel \
-        libtor-app \
-        libtor-geoip \
-        libtor-buf \
-        libtor-version;
+    for LIB in "${LIBS[@]}"
     do
         rm "${BUILT_PRODUCTS_DIR}/${LIB}.a" 2> /dev/null
     done
@@ -159,44 +130,7 @@ done
 cp -rf "${BUILT_PRODUCTS_DIR}/tor-${ARCHS[0]}" "${BUILT_PRODUCTS_DIR}/tor"
 
 # Combine the built products into a fat binary
-for LIB in \
-    libed25519_ref10 \
-    libed25519_donna \
-    libkeccak-tiny \
-    libtor-err \
-    libtor-ctime \
-    libtor-compress \
-    libtor-container \
-    libtor-crypt-ops \
-    libtor-encoding \
-    libtor-evloop \
-    libtor-fdio \
-    libtor-fs \
-    libcurve25519_donna \
-    libtor-intmath \
-    libtor-lock \
-    libtor-log \
-    libtor-math \
-    libtor-memarea \
-    libtor-meminfo \
-    libtor-malloc \
-    libtor-net \
-    libtor-osinfo \
-    libtor-process \
-    libtor-sandbox \
-    libtor-string \
-    libtor-smartlist-core \
-    libtor-term \
-    libtor-thread \
-    libtor-time \
-    libtor-tls \
-    libtor-trace \
-    libtor-wallclock \
-    libor-trunnel \
-    libtor-app \
-    libtor-geoip \
-    libtor-buf \
-    libtor-version;
+for LIB in "${LIBS[@]}"
 do
     xcrun --sdk $PLATFORM_NAME lipo -create "${BUILT_PRODUCTS_DIR}/${LIB}."*.a -output "${BUILT_PRODUCTS_DIR}/${LIB}.a"
     rm "${BUILT_PRODUCTS_DIR}/${LIB}."*.a
