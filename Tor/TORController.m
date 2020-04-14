@@ -7,8 +7,11 @@
 
 #import "TORController.h"
 
-#import <or/or.h>
+#import <sys/socket.h>
 #import <sys/un.h>
+#import <netinet/in.h>
+#import <arpa/inet.h>
+
 #import "TORThread.h"
 #import "NSCharacterSet+PredefinedSets.h"
 

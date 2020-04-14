@@ -5,8 +5,7 @@
 //  Created by Conrad Kramer on 7/19/15.
 //
 
-#import <or/or.h>
-#import <api/tor_api.h>
+#import <feature/api/tor_api.h>
 
 #import "TORThread.h"
 #import "TORLogging.h"
