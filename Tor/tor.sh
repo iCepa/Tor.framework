@@ -13,6 +13,10 @@ fi
 
 REBUILD=0
 
+# XXXX This is unstable, since it changes from one Tor version to another.  Also, it is
+# XXXX not acutally necessary: you can make the Tor build process tell you its
+# XXXX libraries with "make show-libs".
+
 declare -a LIBS=(
     "libtor-app"
     "libtor-compress"
