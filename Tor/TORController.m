@@ -710,7 +710,16 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
 
 - (void)closeCircuitsByIds:(NSArray<NSString *> *)circuitIds completion:(void (^__nullable)(BOOL success))completion
 {
-    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+    long queueId;
+
+    if (@available(macOS 10.10, *)) {
+        queueId = QOS_CLASS_USER_INITIATED;
+    }
+    else {
+        queueId = DISPATCH_QUEUE_PRIORITY_HIGH;
+    }
+
+    dispatch_async(dispatch_get_global_queue(queueId, 0), ^{
         __block BOOL success = YES;
 
         for (NSString *circuitId in circuitIds)

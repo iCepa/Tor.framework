@@ -112,6 +112,12 @@
 		A0F3439E23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.h in Headers */ = {isa = PBXBuildFile; fileRef = A0F3439B23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.h */; };
 		A0F3439F23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F3439C23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.m */; };
 		A0F343A023A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F3439C23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.m */; };
+		A0F66E11244736680094FEB2 /* libtor-confmgt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A083F649242A6D08004EF128 /* libtor-confmgt.a */; };
+		A0F66E12244736680094FEB2 /* libtor-confmgt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A083F649242A6D08004EF128 /* libtor-confmgt.a */; };
+		A0F66E132447366A0094FEB2 /* libtor-dispatch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A083F64A242A6D08004EF128 /* libtor-dispatch.a */; };
+		A0F66E142447366B0094FEB2 /* libtor-dispatch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A083F64A242A6D08004EF128 /* libtor-dispatch.a */; };
+		A0F66E152447366D0094FEB2 /* libtor-pubsub.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A083F648242A6D08004EF128 /* libtor-pubsub.a */; };
+		A0F66E162447366F0094FEB2 /* libtor-pubsub.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A083F648242A6D08004EF128 /* libtor-pubsub.a */; };
 		A0FB442A239EEC7E00E96E92 /* geoip6 in Resources */ = {isa = PBXBuildFile; fileRef = A0FB4428239EEC7D00E96E92 /* geoip6 */; };
 		A0FB442B239EEC7E00E96E92 /* geoip6 in Resources */ = {isa = PBXBuildFile; fileRef = A0FB4428239EEC7D00E96E92 /* geoip6 */; };
 		A0FB442C239EEC7E00E96E92 /* geoip6 in Resources */ = {isa = PBXBuildFile; fileRef = A0FB4428239EEC7D00E96E92 /* geoip6 */; };
@@ -397,6 +403,8 @@
 				8A9D5D21216BE12100B0BB19 /* libtor-tls.a in Frameworks */,
 				8A9D5D29216BE12100B0BB19 /* libtor-crypt-ops.a in Frameworks */,
 				8A9D5D37216BE12100B0BB19 /* libkeccak-tiny.a in Frameworks */,
+				A0F66E162447366F0094FEB2 /* libtor-pubsub.a in Frameworks */,
+				A0F66E12244736680094FEB2 /* libtor-confmgt.a in Frameworks */,
 				8A9D5D3A216BE12100B0BB19 /* libed25519_ref10.a in Frameworks */,
 				8A9D5D31216BE12100B0BB19 /* libed25519_donna.a in Frameworks */,
 				8A9D5D1C216BE12100B0BB19 /* libcurve25519_donna.a in Frameworks */,
@@ -414,6 +422,7 @@
 				8A9D5D27216BE12100B0BB19 /* libtor-math.a in Frameworks */,
 				8A9D5D1D216BE12100B0BB19 /* libtor-meminfo.a in Frameworks */,
 				8A9D5D28216BE12100B0BB19 /* libtor-osinfo.a in Frameworks */,
+				A0F66E142447366B0094FEB2 /* libtor-dispatch.a in Frameworks */,
 				8A9D5D2A216BE12100B0BB19 /* libtor-log.a in Frameworks */,
 				8A9D5D35216BE12100B0BB19 /* libtor-lock.a in Frameworks */,
 				8A9D5D36216BE12100B0BB19 /* libtor-fdio.a in Frameworks */,
@@ -470,7 +479,10 @@
 				8A9D5D5B216BE17400B0BB19 /* libtor-tls.a in Frameworks */,
 				8A9D5D44216BE17400B0BB19 /* libtor-crypt-ops.a in Frameworks */,
 				8A9D5D3E216BE17400B0BB19 /* libkeccak-tiny.a in Frameworks */,
+				A0F66E11244736680094FEB2 /* libtor-confmgt.a in Frameworks */,
 				8A9D5D3D216BE17400B0BB19 /* libed25519_ref10.a in Frameworks */,
+				A0F66E152447366D0094FEB2 /* libtor-pubsub.a in Frameworks */,
+				A0F66E132447366A0094FEB2 /* libtor-dispatch.a in Frameworks */,
 				8A9D5D3C216BE17400B0BB19 /* libed25519_donna.a in Frameworks */,
 				8A9D5D3B216BE17400B0BB19 /* libcurve25519_donna.a in Frameworks */,
 				A044F45421F9F2F60094F807 /* libtor-geoip.a in Frameworks */,
@@ -1542,6 +1554,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D0401AD61D2CB8C300602E9B /* Tor-iOS.xcconfig */;
 			buildSettings = {
+				SUPPORTS_MACCATALYST = NO;
 			};
 			name = Debug;
 		};
@@ -1549,6 +1562,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D0401AD61D2CB8C300602E9B /* Tor-iOS.xcconfig */;
 			buildSettings = {
+				SUPPORTS_MACCATALYST = NO;
 			};
 			name = Release;
 		};

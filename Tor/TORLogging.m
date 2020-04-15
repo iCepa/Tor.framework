@@ -156,7 +156,7 @@ static inline os_log_type_t TORLogTypeFromSeverity(int severity) {
     }
 }
 
-static void TORLogCallback(int severity, uint32_t domain, const char *msg) {
+static void TORLogCallback(int severity, uint64_t domain, const char *msg) {
     if (domain & LD_NOCB) {
         return;
     }
