@@ -21,8 +21,8 @@
 
 # BUGFIX: Don't use dates with localized month names, because that breaks building
 # on non-english localized systems. Instead stick to an international format.
-TOR_BUNDLE_SHORT_VERSION_DATE="2020-02-24 11:30:00 GMT"
-TOR_BUNDLE_SHORT_VERSION_STRING=400.6.3
+TOR_BUNDLE_SHORT_VERSION_DATE="2020-04-15 12:00:00 GMT"
+TOR_BUNDLE_SHORT_VERSION_STRING=402.7.1
 
 #####
 
