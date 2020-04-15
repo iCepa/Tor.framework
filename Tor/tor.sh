@@ -13,63 +13,16 @@ fi
 
 REBUILD=0
 
-# XXXX This is unstable, since it changes from one Tor version to another.  Also, it is
-# XXXX not acutally necessary: you can make the Tor build process tell you its
-# XXXX libraries with "make show-libs".
-
-declare -a LIBS=(
-    "libtor-app"
-    "libtor-compress"
-    "libtor-evloop"
-
-    "libtor-tls"
-    "libtor-crypt-ops"
-    "libkeccak-tiny"
-    "libed25519_ref10"
-    "libed25519_donna"
-    "libcurve25519_donna"
-
-    "libtor-geoip"
-    "libtor-process"
-    "libtor-buf"
-#    "libtor-confmgt"   # Needed in Tor 0.4.2.7
-#    "libtor-pubsub"    # Needed in Tor 0.4.2.7
-#    "libtor-dispatch"  # Needed in Tor 0.4.2.7
-    "libtor-time"
-    "libtor-fs"
-    "libtor-encoding"
-    "libtor-sandbox"
-    "libtor-container"
-    "libtor-net"
-    "libtor-thread"
-    "libtor-memarea"
-    "libtor-math"
-    "libtor-meminfo"
-    "libtor-osinfo"
-    "libtor-log"
-    "libtor-lock"
-    "libtor-fdio"
-    "libtor-string"
-    "libtor-term"
-    "libtor-smartlist-core"
-    "libtor-malloc"
-    "libtor-wallclock"
-    "libtor-err"
-    "libtor-version"
-    "libtor-intmath"
-    "libtor-ctime"
-
-    "libor-trunnel"
-    "libtor-trace"
-)
+declare -a LIBS=(`make show-libs`)
+echo "LIBRARIES: ${LIBS[@]}"
 
 # If the built binaries include a different set of architectures, then rebuild the target
 if [[ ${ACTION:-build} = "build" ]] || [[ $ACTION = "install" ]]; then
-    for LIB in "${LIBS[@]}"
+    for LIB in ${LIBS[@]}
     do
-        for ARCH in "${ARCHS[@]}"
+        for ARCH in ${ARCHS[@]}
         do
-            if [[ $(lipo -info "${BUILT_PRODUCTS_DIR}/${LIBRARY}.a" 2>&1) != *"${ARCH}"* ]]; then
+            if [[ $(lipo -info "${BUILT_PRODUCTS_DIR}/$(basename $LIB)" 2>&1) != *"${ARCH}"* ]]; then
                 REBUILD=1;
             fi
         done
@@ -79,9 +32,9 @@ fi
 # If rebuilding or cleaning then delete the built products
 if [[ ${ACTION:-build} = "clean" ]] || [[ $REBUILD = 1 ]]; then
     make clean 2>/dev/null
-    for LIB in "${LIBS[@]}"
+    for LIB in ${LIBS[@]}
     do
-        rm "${BUILT_PRODUCTS_DIR}/${LIB}.a" 2> /dev/null
+        rm "${BUILT_PRODUCTS_DIR}/$(basename $LIB)" 2> /dev/null
     done
 fi
 
@@ -107,7 +60,7 @@ fi
 mkdir -p "${BUILT_PRODUCTS_DIR}"
 
 # Build each architecture one by one using clang
-for ARCH in "${ARCHS[@]}"
+for ARCH in ${ARCHS[@]}
 do
     make clean
 
@@ -122,20 +75,20 @@ do
 
     make -j$(sysctl hw.ncpu | awk '{print $2}')
 
-    cp micro-revision.i "${BUILT_PRODUCTS_DIR}/tor-${ARCH}/micro-revision.i"
+    cp micro-revision.i "${BUILT_PRODUCTS_DIR}/micro-revision.i"
 
-    for LIBRARY in src/lib/*.a src/core/*.a src/ext/ed25519/donna/*.a src/ext/ed25519/ref10/*.a src/trunnel/*.a src/ext/keccak-tiny/*.a;
+    for LIB in ${LIBS[@]}
     do
-        cp $LIBRARY "${BUILT_PRODUCTS_DIR}/$(basename ${LIBRARY} .a).${ARCH}.a"
+        cp $LIB "${BUILT_PRODUCTS_DIR}/$(basename $LIB).${ARCH}.a"
     done
     make clean
 done
 
-cp -rf "${BUILT_PRODUCTS_DIR}/tor-${ARCHS[0]}" "${BUILT_PRODUCTS_DIR}/tor"
-
 # Combine the built products into a fat binary
-for LIB in "${LIBS[@]}"
+for LIB in ${LIBS[@]}
 do
-    xcrun --sdk $PLATFORM_NAME lipo -create "${BUILT_PRODUCTS_DIR}/${LIB}."*.a -output "${BUILT_PRODUCTS_DIR}/${LIB}.a"
-    rm "${BUILT_PRODUCTS_DIR}/${LIB}."*.a
+    FILENAME=$(basename $LIB)
+
+    xcrun --sdk $PLATFORM_NAME lipo -create "${BUILT_PRODUCTS_DIR}/$FILENAME."*.a -output "${BUILT_PRODUCTS_DIR}/$FILENAME"
+    rm "${BUILT_PRODUCTS_DIR}/$FILENAME."*.a
 done
