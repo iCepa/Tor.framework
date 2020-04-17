@@ -1,6 +1,6 @@
 Pod::Spec.new do |m|
 
-  version = '402.7.1'
+  version = '400.6.3'
 
   m.name    = 'Tor'
   m.version = version
