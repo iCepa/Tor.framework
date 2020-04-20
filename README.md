@@ -95,6 +95,32 @@ to the tag, attach the generated `Tor.framework.zip` to the release.
 Add a corresponding entry to [docs/Tor.json](docs/Tor.json), commit & push that so that it becomes 
 available at https://icepa.github.io/Tor.framework/Tor.json
 
+### Upgrading Tor
+
+To upgrade Tor:
+
+```bash
+cd Tor/tor
+git fetch
+git checkout tor-0.4.2.7 # Find latest versions with git tag -l
+rm configure # This will trigger a complete rebuild in tor.sh!
+```
+
+-> Test build by building `Tor-iOS` and `Tor-Mac` targets in Xcode.
+
+Check build output in the Report Navigator. (Last tab in the left pane.)
+
+The `tor.sh` build script will call `make show-libs`, which outputs all libraries which are created by 
+the Tor build. This is echoed with a "LIBRARIES: " header. Search for that in the build output and
+compare the list against the list of "Frameworks and Libraries" in the `Tor-iOS` and `Tor-Mac`
+targets. Add missing ones accordingly.
+
+The typically can be found in `~/Library/Developer/Xcode/DerivedData/Tor-`[random ID]`/Build/Products/Debug[-iphonesimulator]`.
+
+The `project.pbxproj` file may need manual editing to set the references to the built libraries 
+in a way, which is independent of your personal setup. Check other entries for how that is done.
+
+
 ## Usage
 
 Starting an instance of Tor involves using three classes: `TORThread`, `TORConfiguration` and `TORController`.
