@@ -232,11 +232,7 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
 }
 
 - (void)disconnect {
-    [self sendCommand:@"SIGNAL NEWNYM" arguments:nil data:nil observer:^BOOL(NSArray<NSNumber *> * __unused codes, NSArray<NSData *> * __unused lines, BOOL * __unused stop) {
-        return YES;
-    }];
-    
-    [self sendCommand:@"SIGNAL SHUTDOWN" arguments:@[@"0"] data:nil observer:^BOOL(NSArray<NSNumber *> * __unused codes, NSArray<NSData *> * __unused lines, BOOL * __unused stop) {
+    [self sendCommand:@"SIGNAL SHUTDOWN" arguments:nil data:nil observer:^BOOL(NSArray<NSNumber *> * __unused codes, NSArray<NSData *> * __unused lines, BOOL * __unused stop) {
         shutdown(self->sock, SHUT_RDWR);
         self->_channel = nil;
      
