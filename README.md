@@ -1,9 +1,5 @@
 # Tor.framework
 
-**ATTENTION**: Latest version 402.7.1 has a known issue with shutdown!
-See https://github.com/iCepa/Tor.framework/issues/62 for details.
-Stick with 400.6.3 in the meantime, if that's a problem for you!
-
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) 
 [![Travis CI](https://img.shields.io/travis/iCepa/Tor.framework.svg)](https://travis-ci.org/iCepa/Tor.framework)
 
@@ -13,9 +9,9 @@ Currently, the framework compiles in static versions of `tor`, `libevent`, `open
 
 |          |         |
 |:-------- | -------:|
-| tor      | 0.4.2.7 |
+| tor      | 0.4.1.6 |
 | libevent | 2.1.11  |
-| OpenSSL  | 1.1.1f  |
+| OpenSSL  | 1.1.1g  |
 | liblzma  | 5.2.5   |
 
 ## Requirements
@@ -60,7 +56,7 @@ Alternatively, you may use the following to use binary-compiled versions of Tor.
 correspond to releases in GitHub:
 
 ```ogdl
-binary "https://icepa.github.io/Tor.framework/Tor.json" == 400.6.3
+binary "https://icepa.github.io/Tor.framework/Tor.json" == 401.6.1
 ```
 
 For available precompiled versions, see [docs/Tor.json](docs/Tor.json). Since Tor 0.3.5.2, 
