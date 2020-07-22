@@ -9,7 +9,7 @@ Currently, the framework compiles in static versions of `tor`, `libevent`, `open
 
 |          |         |
 |:-------- | -------:|
-| tor      | 0.4.3.5 |
+| tor      | 0.4.3.6 |
 | libevent | 2.1.11  |
 | OpenSSL  | 1.1.1g  |
 | liblzma  | 5.2.5   |
@@ -75,6 +75,8 @@ In `Tor/version.sh`, increment the `TOR_BUNDLE_SHORT_VERSION_STRING` version per
 format described above. Change `TOR_BUNDLE_SHORT_VERSION_DATE` to the current date. 
 Commit these changes.
 
+Also update info in `README.md`, `Tor.podspec` and `docs/Tor.json`!
+
 Create a git tag for the version, and then 
 [build + archive the framework](https://github.com/Carthage/Carthage/#archive-prebuilt-frameworks-into-one-zip-file):
 
@@ -98,7 +100,7 @@ To upgrade Tor:
 ```bash
 cd Tor/tor
 git fetch
-git checkout tor-0.4.3.5 # Find latest versions with git tag -l
+git checkout tor-0.4.3.6 # Find latest versions with git tag -l
 rm configure # This will trigger a complete rebuild in tor.sh!
 ```
 
@@ -115,7 +117,6 @@ The typically can be found in `~/Library/Developer/Xcode/DerivedData/Tor-`[rando
 
 The `project.pbxproj` file may need manual editing to set the references to the built libraries 
 in a way, which is independent of your personal setup. Check other entries for how that is done.
-
 
 ## Usage
 
