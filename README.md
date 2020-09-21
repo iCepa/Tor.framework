@@ -9,7 +9,7 @@ Currently, the framework compiles in static versions of `tor`, `libevent`, `open
 
 |          |         |
 |:-------- | -------:|
-| tor      | 0.4.3.6 |
+| tor      | 0.4.4.5 |
 | libevent | 2.1.11  |
 | OpenSSL  | 1.1.1g  |
 | liblzma  | 5.2.5   |
@@ -56,7 +56,7 @@ Alternatively, you may use the following to use binary-compiled versions of Tor.
 correspond to releases in GitHub:
 
 ```ogdl
-binary "https://icepa.github.io/Tor.framework/Tor.json" == 401.6.1
+binary "https://icepa.github.io/Tor.framework/Tor.json" == 404.5.1
 ```
 
 For available precompiled versions, see [docs/Tor.json](docs/Tor.json). Since Tor 0.3.5.2, 
@@ -100,7 +100,7 @@ To upgrade Tor:
 ```bash
 cd Tor/tor
 git fetch
-git checkout tor-0.4.3.6 # Find latest versions with git tag -l
+git checkout tor-0.4.4.5 # Find latest versions with git tag -l
 rm configure # This will trigger a complete rebuild in tor.sh!
 ```
 
