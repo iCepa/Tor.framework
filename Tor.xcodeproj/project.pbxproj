@@ -1020,7 +1020,7 @@
 			attributes = {
 				DefaultBuildSystemTypeForWorkspace = Latest;
 				LastSwiftUpdateCheck = 1000;
-				LastUpgradeCheck = 1120;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Conrad Kramer";
 				TargetAttributes = {
 					8A00200C2171261300B1ABBC = {
@@ -1326,7 +1326,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D03196E41F647A7100720808 /* iOS-StaticLibrary.xcconfig */;
 			buildSettings = {
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_NAME = liblzma;
 			};
 			name = Debug;
@@ -1334,7 +1334,7 @@
 		8A44D7311FA3C41100C4E1C0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_NAME = liblzma;
 			};
 			name = Release;
@@ -1498,7 +1498,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = "Tests/Host-iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.torproject.Host;
 				PRODUCT_NAME = Host;
@@ -1510,7 +1510,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = "Tests/Host-iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.torproject.Host;
 				PRODUCT_NAME = Host;
@@ -1527,6 +1527,7 @@
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1543,6 +1544,7 @@
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1554,6 +1556,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D0401AD61D2CB8C300602E9B /* Tor-iOS.xcconfig */;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				SUPPORTS_MACCATALYST = NO;
 			};
 			name = Debug;
@@ -1562,6 +1565,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D0401AD61D2CB8C300602E9B /* Tor-iOS.xcconfig */;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				SUPPORTS_MACCATALYST = NO;
 			};
 			name = Release;
@@ -1596,7 +1600,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D03196E41F647A7100720808 /* iOS-StaticLibrary.xcconfig */;
 			buildSettings = {
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_NAME = tor;
 			};
 			name = Debug;
@@ -1604,7 +1608,7 @@
 		D0FBEC8A1B79BC19005C7577 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_NAME = tor;
 			};
 			name = Release;
@@ -1613,7 +1617,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D03196E41F647A7100720808 /* iOS-StaticLibrary.xcconfig */;
 			buildSettings = {
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_NAME = libevent;
 			};
 			name = Debug;
@@ -1621,7 +1625,7 @@
 		D0FBEC8E1B79BC22005C7577 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_NAME = libevent;
 			};
 			name = Release;
@@ -1630,7 +1634,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D03196E41F647A7100720808 /* iOS-StaticLibrary.xcconfig */;
 			buildSettings = {
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_NAME = openssl;
 			};
 			name = Debug;
@@ -1638,7 +1642,7 @@
 		D0FBEC921B79BC2A005C7577 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_NAME = openssl;
 			};
 			name = Release;
