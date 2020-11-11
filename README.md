@@ -118,6 +118,21 @@ The typically can be found in `~/Library/Developer/Xcode/DerivedData/Tor-`[rando
 The `project.pbxproj` file may need manual editing to set the references to the built libraries 
 in a way, which is independent of your personal setup. Check other entries for how that is done.
 
+### CocoaPods
+
+Directly reference the provided podspec like so:
+
+```ruby
+pod 'Tor', podspec: 'https://raw.githubusercontent.com/iCepa/Tor.framework/v404.5.1/Tor.podspec'
+```
+
+You could also reference master, to always get the latest version:
+
+```ruby
+pod 'Tor', podspec: 'https://raw.githubusercontent.com/iCepa/Tor.framework/master/Tor.podspec'
+```
+
+
 ## Usage
 
 Starting an instance of Tor involves using three classes: `TORThread`, `TORConfiguration` and `TORController`.
