@@ -9,9 +9,9 @@ Currently, the framework compiles in static versions of `tor`, `libevent`, `open
 
 |          |         |
 |:-------- | -------:|
-| tor      | 0.4.4.5 |
+| tor      | 0.4.4.6 |
 | libevent | 2.1.11  |
-| OpenSSL  | 1.1.1g  |
+| OpenSSL  | 1.1.1h  |
 | liblzma  | 5.2.5   |
 
 ## Requirements
@@ -56,7 +56,7 @@ Alternatively, you may use the following to use binary-compiled versions of Tor.
 correspond to releases in GitHub:
 
 ```ogdl
-binary "https://icepa.github.io/Tor.framework/Tor.json" == 404.5.1
+binary "https://icepa.github.io/Tor.framework/Tor.json" == 404.6.1
 ```
 
 For available precompiled versions, see [docs/Tor.json](docs/Tor.json). Since Tor 0.3.5.2, 
@@ -100,7 +100,7 @@ To upgrade Tor:
 ```bash
 cd Tor/tor
 git fetch
-git checkout tor-0.4.4.5 # Find latest versions with git tag -l
+git checkout tor-0.4.4.6 # Find latest versions with git tag -l
 rm configure # This will trigger a complete rebuild in tor.sh!
 ```
 
@@ -123,7 +123,7 @@ in a way, which is independent of your personal setup. Check other entries for h
 Directly reference the provided podspec like so:
 
 ```ruby
-pod 'Tor', podspec: 'https://raw.githubusercontent.com/iCepa/Tor.framework/v404.5.1/Tor.podspec'
+pod 'Tor', podspec: 'https://raw.githubusercontent.com/iCepa/Tor.framework/v404.6.1/Tor.podspec'
 ```
 
 You could also reference master, to always get the latest version:
