@@ -37,10 +37,9 @@ git clone git@github.com:iCepa/Tor.framework
 
 cd Tor.framework
 
-git submodule init
-git submodule update
+git submodule update --init --recursive
 
-carthage build --no-skip-current --platform iOS
+carthage build --no-skip-current
 ```
 
 ### Carthage

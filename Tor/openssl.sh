@@ -43,23 +43,51 @@ fi
 # Build each architecture one by one using clang
 for ARCH in "${ARCHS[@]}"
 do
-    SDK_COMPONENTS=($(echo ${SDKROOT} | sed -e 's/\/SDKs\//\'$'\n/'))
-    export CROSS_TOP="${SDK_COMPONENTS[0]}"
-    export CROSS_SDK="${SDK_COMPONENTS[1]}"
-    export CC="$(xcrun -f --sdk ${PLATFORM_NAME} clang) -arch ${ARCH} ${BITCODE_CFLAGS}"
-    if [[ "${ARCH}" == "i386" ]]; then
-        ./Configure no-shared no-asm ${DEBUG_FLAGS} --prefix="${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}" darwin-i386-cc
-    elif [[ "${ARCH}" == "x86_64" ]]; then
-        ./Configure no-shared no-asm enable-ec_nistp_64_gcc_128 ${DEBUG_FLAGS} --prefix="${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}" darwin64-x86_64-cc
-    elif [[ "${ARCH}" == "arm64" ]]; then
-        ./Configure no-shared no-async zlib-dynamic enable-ec_nistp_64_gcc_128 ${DEBUG_FLAGS} --prefix="${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}" ios64-cross
-    else
-        ./Configure no-shared no-async zlib-dynamic ${DEBUG_FLAGS} --prefix="${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}" ios-cross
+    export CC="$(xcrun --sdk ${PLATFORM_NAME} --find clang) -isysroot $(xcrun --sdk ${PLATFORM_NAME} --show-sdk-path) -arch ${ARCH} ${BITCODE_CFLAGS}"
+    
+    if [[ "${PLATFORM_NAME}" == "iphoneos" ]]; then
+        if [[ "${ARCH}" == "arm64" ]]; then
+            PLATFORM_FLAGS="no-async zlib-dynamic enable-ec_nistp_64_gcc_128"
+            CONFIG="ios64-xcrun"
+        elif [[ "${ARCH}" == "armv7" ]]; then
+            PLATFORM_FLAGS="no-async zlib-dynamic"
+            CONFIG="ios-xcrun"
+        else
+	        echo "OpenSSL configuration error: ${ARCH} on ${PLATFORM_NAME} not supported!"
+        fi
+    elif [[ "${PLATFORM_NAME}" == "iphonesimulator" ]]; then
+        if [[ "${ARCH}" == "arm64" ]]; then
+            PLATFORM_FLAGS="no-async zlib-dynamic enable-ec_nistp_64_gcc_128"
+            CONFIG="ios64-xcrun"
+        elif [[ "${ARCH}" == "i386" ]]; then
+            PLATFORM_FLAGS="no-asm"
+            CONFIG="iossimulator-xcrun"
+        elif [[ "${ARCH}" == "x86_64" ]]; then
+            PLATFORM_FLAGS="no-asm enable-ec_nistp_64_gcc_128"
+            CONFIG="iossimulator-xcrun"
+        else
+	        echo "OpenSSL configuration error: ${ARCH} on ${PLATFORM_NAME} not supported!"
+        fi    
+    elif [[ "${PLATFORM_NAME}" == "macosx" ]]; then
+        if [[ "${ARCH}" == "i386" ]]; then
+            PLATFORM_FLAGS="no-asm"
+            CONFIG="darwin-i386-cc"
+        elif [[ "${ARCH}" == "x86_64" ]]; then
+            PLATFORM_FLAGS="no-asm enable-ec_nistp_64_gcc_128"
+            CONFIG="darwin64-x86_64-cc"
+        else
+	        echo "OpenSSL configuration error: ${ARCH} on ${PLATFORM_NAME} not supported!"
+        fi
     fi
-    make depend
-    make -j$(sysctl hw.ncpu | awk '{print $2}') build_libs
-    make install_dev
-    make distclean
+    
+    if [ -n "${CONFIG}" ]; then
+        ./Configure no-shared ${PLATFORM_FLAGS} ${DEBUG_FLAGS} --prefix="${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}" ${CONFIG}
+        
+        make depend
+        make -j$(sysctl hw.ncpu | awk '{print $2}') build_libs
+        make install_dev
+        make distclean
+    fi
 done
 
 mkdir -p "${BUILT_PRODUCTS_DIR}"
