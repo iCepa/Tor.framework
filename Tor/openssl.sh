@@ -75,6 +75,9 @@ do
         elif [[ "${ARCH}" == "x86_64" ]]; then
             PLATFORM_FLAGS="no-asm enable-ec_nistp_64_gcc_128"
             CONFIG="darwin64-x86_64-cc"
+        elif [[ "${ARCH}" == "arm64" ]]; then
+            PLATFORM_FLAGS="no-async zlib-dynamic enable-ec_nistp_64_gcc_128"
+            CONFIG="darwin64-arm64-cc"
         else
 	        echo "OpenSSL configuration error: ${ARCH} on ${PLATFORM_NAME} not supported!"
         fi

@@ -354,7 +354,7 @@
 		D012AB851BC290D0004BE7A6 /* Tor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Tor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D02437B31B79CF2C006B48E0 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		D03196E41F647A7100720808 /* iOS-StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "iOS-StaticLibrary.xcconfig"; path = "Carthage/Checkouts/xcconfigs/iOS/iOS-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
-		D03196E51F647A7F00720808 /* Mac-StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Mac-StaticLibrary.xcconfig"; path = "Carthage/Checkouts/xcconfigs/Mac OS X/Mac-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
+		D03196E51F647A7F00720808 /* Mac-StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Mac-StaticLibrary.xcconfig"; path = "Carthage/Checkouts/xcconfigs/macOS/macOS-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
 		D03197101F6493A500720808 /* TORLogging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TORLogging.h; sourceTree = "<group>"; };
 		D03197111F6493A500720808 /* TORLogging.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TORLogging.m; sourceTree = "<group>"; };
 		D0401AD61D2CB8C300602E9B /* Tor-iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Tor-iOS.xcconfig"; path = "Tor/Tor-iOS.xcconfig"; sourceTree = "<group>"; };
@@ -1026,7 +1026,7 @@
 			attributes = {
 				DefaultBuildSystemTypeForWorkspace = Latest;
 				LastSwiftUpdateCheck = 1000;
-				LastUpgradeCheck = 1220;
+				LastUpgradeCheck = 1230;
 				ORGANIZATIONNAME = "Conrad Kramer";
 				TargetAttributes = {
 					8A00200C2171261300B1ABBC = {
@@ -1349,7 +1349,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D03196E51F647A7F00720808 /* Mac-StaticLibrary.xcconfig */;
 			buildSettings = {
-				ARCHS = x86_64;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = liblzma;
 				SDKROOT = macosx;
@@ -1359,7 +1358,6 @@
 		8A44D7351FA3C41700C4E1C0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = x86_64;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = liblzma;
 				SDKROOT = macosx;
@@ -1386,7 +1384,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D03196E51F647A7F00720808 /* Mac-StaticLibrary.xcconfig */;
 			buildSettings = {
-				ARCHS = x86_64;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = openssl;
 				SDKROOT = macosx;
@@ -1396,7 +1393,6 @@
 		D0198A9F1C63DA5D00EA0043 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = x86_64;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = openssl;
 				SDKROOT = macosx;
@@ -1407,7 +1403,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D03196E51F647A7F00720808 /* Mac-StaticLibrary.xcconfig */;
 			buildSettings = {
-				ARCHS = x86_64;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_LDFLAGS = "-L$(BUILT_PRODUCTS_DIR)";
 				PRODUCT_NAME = libevent;
@@ -1418,7 +1413,6 @@
 		D0198AA31C63DE2100EA0043 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = x86_64;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_LDFLAGS = "-L$(BUILT_PRODUCTS_DIR)";
 				PRODUCT_NAME = libevent;
@@ -1430,7 +1424,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D03196E51F647A7F00720808 /* Mac-StaticLibrary.xcconfig */;
 			buildSettings = {
-				ARCHS = x86_64;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_LDFLAGS = "-L$(BUILT_PRODUCTS_DIR)";
 				PRODUCT_NAME = tor;
@@ -1441,7 +1434,6 @@
 		D0198AAB1C63DEFF00EA0043 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = x86_64;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_LDFLAGS = "-L$(BUILT_PRODUCTS_DIR)";
 				PRODUCT_NAME = tor;

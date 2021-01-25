@@ -11,7 +11,7 @@ Currently, the framework compiles in static versions of `tor`, `libevent`, `open
 |:-------- | -------:|
 | tor      | 0.4.4.6 |
 | libevent | 2.1.11  |
-| OpenSSL  | 1.1.1h  |
+| OpenSSL  | 1.1.1i  |
 | liblzma  | 5.2.5   |
 
 ## Requirements
