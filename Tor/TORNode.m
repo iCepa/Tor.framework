@@ -100,10 +100,11 @@ static NSRegularExpression *_ipv6Regex;
         return nil;
     }
 
+    NSString *countryCode = (NSString * _Nonnull)self.countryCode;
     if (@available(iOS 10.0, macOS 10.12, *)) {
-        return [NSLocale.currentLocale localizedStringForCountryCode:self.countryCode];
+        return [NSLocale.currentLocale localizedStringForCountryCode:countryCode];
     } else {
-        return [NSLocale.currentLocale displayNameForKey:NSLocaleCountryCode value:self.countryCode];
+        return [NSLocale.currentLocale displayNameForKey:NSLocaleCountryCode value:countryCode];
     }
 }
 
