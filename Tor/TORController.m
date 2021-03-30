@@ -292,7 +292,7 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
         if (codes.firstObject.integerValue != 650)
             return NO;
         
-        NSString *replyString = [[NSString alloc] initWithData:lines.firstObject encoding:NSUTF8StringEncoding];
+        NSString *replyString = lines.firstObject ? [[NSString alloc] initWithData:(NSData * _Nonnull)lines.firstObject encoding:NSUTF8StringEncoding] : @"";
         if (![replyString hasPrefix:@"STATUS_"])
             return NO;
         
@@ -310,8 +310,9 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
                 }
             }
         }
-        
-        return block(components.firstObject, components[1], components[2], arguments);
+
+        NSString *type = (NSString * _Nonnull)components.firstObject;
+        return block(type, components[1], components[2], arguments);
     }];
 }
 
@@ -328,7 +329,7 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
         return;
     
     dispatch_async([[self class] controlQueue], ^{
-        [self->_blocks removeObject:observer];
+        [self->_blocks removeObject:(id _Nonnull)observer];
     });
 }
 
@@ -344,7 +345,7 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
         if (code != 250 && code != 515)
             return NO;
         
-        NSString *message = [[NSString alloc] initWithData:lines.firstObject encoding:NSUTF8StringEncoding];
+        NSString *message = lines.firstObject ? [[NSString alloc] initWithData:(NSData * _Nonnull)lines.firstObject encoding:NSUTF8StringEncoding] : @"";
         NSDictionary<NSString *, NSString *> *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:message, NSLocalizedDescriptionKey, nil];
         BOOL success = (code == 250 && [message isEqualToString:@"OK"]);
         if (completion)
@@ -361,7 +362,7 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
 		if (code != 250 && code != 515)
 			return NO;
 
-		NSString *message = [[NSString alloc] initWithData:lines.firstObject encoding:NSUTF8StringEncoding];
+		NSString *message = lines.firstObject ? [[NSString alloc] initWithData:(NSData * _Nonnull)lines.firstObject encoding:NSUTF8StringEncoding] : @"";
 		NSDictionary<NSString *, NSString *> *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:message, NSLocalizedDescriptionKey, nil];
 		BOOL success = (code == 250 && [message isEqualToString:@"OK"]);
 		if (completion)
@@ -380,7 +381,7 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
 		if (code != 250 && code != 515)
 			return NO;
 
-		NSString *message = [[NSString alloc] initWithData:lines.firstObject encoding:NSUTF8StringEncoding];
+		NSString *message = lines.firstObject ? [[NSString alloc] initWithData:(NSData * _Nonnull)lines.firstObject encoding:NSUTF8StringEncoding] : @"";
 		NSDictionary<NSString *, NSString *> *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:message, NSLocalizedDescriptionKey, nil];
 		BOOL success = (code == 250 && [message isEqualToString:@"OK"]);
 		if (completion)
@@ -404,7 +405,7 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
         if (code != 250 && code != 515)
             return NO;
         
-        NSString *message = [[NSString alloc] initWithData:lines.firstObject encoding:NSUTF8StringEncoding];
+        NSString *message = lines.firstObject ? [[NSString alloc] initWithData:(NSData * _Nonnull)lines.firstObject encoding:NSUTF8StringEncoding] : @"";
         NSDictionary<NSString *, NSString *> *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:message, NSLocalizedDescriptionKey, nil];
         BOOL success = (code == 250 && [message isEqualToString:@"OK"]);
         if (completion)
@@ -421,8 +422,8 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
         NSUInteger code = codes.firstObject.unsignedIntegerValue;
         if (code != 250 && code != 552)
             return NO;
-        
-        NSString *message = [[NSString alloc] initWithData:lines.firstObject encoding:NSUTF8StringEncoding];
+
+        NSString *message = lines.firstObject ? [[NSString alloc] initWithData:(NSData * _Nonnull)lines.firstObject encoding:NSUTF8StringEncoding] : @"";
         NSDictionary<NSString *, NSString *> *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:message, NSLocalizedDescriptionKey, nil];
         BOOL success = (code == 250 && [message isEqualToString:@"OK"]);
         if (success)
@@ -567,17 +568,21 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
     NSParameterAssert(command.length);
     if (!_channel)
         return;
+
+    if (arguments == nil) {
+        arguments = @[];
+    }
     
-    NSString *argumentsString = [[@[command] arrayByAddingObjectsFromArray:arguments] componentsJoinedByString:@" "];
+    NSString *argumentsString = [[@[command] arrayByAddingObjectsFromArray:(NSArray * _Nonnull)arguments] componentsJoinedByString:@" "];
     
     NSMutableData *commandData = [NSMutableData new];
     if (data.length) {
         [commandData appendBytes:"+" length:1];
     }
-    [commandData appendData:[argumentsString dataUsingEncoding:NSUTF8StringEncoding]];
+    [commandData appendData:(NSData * _Nonnull)[argumentsString dataUsingEncoding:NSUTF8StringEncoding]];
     [commandData appendBytes:"\r\n" length:2];
     if (data.length) {
-        [commandData appendData:data];
+        [commandData appendData:(NSData * _Nonnull)data];
         [commandData appendBytes:"\r\n.\r\n" length:5];
     }
     
@@ -603,7 +608,7 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
             return;
         }
 
-        NSArray<TORCircuit *> *circuits = [TORCircuit circuitsFromString:values.firstObject];
+        NSArray<TORCircuit *> *circuits = [TORCircuit circuitsFromString:(NSString * _Nonnull)values.firstObject];
 
         NSMutableArray<NSString *> *ipResolveCalls = [NSMutableArray new];
         NSMutableArray<TORNode *> *map = [NSMutableArray new];
@@ -756,7 +761,7 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
     {
         if (circuit.circuitId.length > 0)
         {
-            [circuitIds addObject:circuit.circuitId];
+            [circuitIds addObject:(NSString * _Nonnull)circuit.circuitId];
         }
     }
 

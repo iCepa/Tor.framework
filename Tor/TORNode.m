@@ -161,7 +161,7 @@ static NSRegularExpression *_ipv6Regex;
         return NO;
     }
 
-    return [self.fingerprint isEqualToString:((TORNode *)other).fingerprint];
+    return [self.fingerprint isEqualToString:(NSString * _Nonnull)((TORNode *)other).fingerprint];
 }
 
 - (NSUInteger)hash
