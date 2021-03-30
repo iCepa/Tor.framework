@@ -17,7 +17,7 @@ static __weak TORThread *_thread = nil;
 
 @interface TORThread ()
 
-@property (nonatomic, readonly, copy) NSArray<NSString *> *arguments;
+@property (nonatomic, readonly, copy, nullable) NSArray<NSString *> *arguments;
 
 @end
 
@@ -35,7 +35,7 @@ static __weak TORThread *_thread = nil;
     NSMutableArray *arguments = [configuration.arguments mutableCopy];
     for (NSString *key in configuration.options) {
         [arguments addObject:[NSString stringWithFormat:@"--%@", key]];
-        [arguments addObject:[configuration.options objectForKey:key]];
+        [arguments addObject:(NSString * _Nonnull)[configuration.options objectForKey:key]];
     }
     return [self initWithArguments:arguments];
 }
