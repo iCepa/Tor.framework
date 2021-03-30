@@ -13,6 +13,8 @@
 #import <arpa/inet.h>
 
 #import "TORThread.h"
+#import "TORControlReplyCode.h"
+#import "TORControlCommand.h"
 #import "NSCharacterSet+PredefinedSets.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -232,7 +234,7 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
 }
 
 - (void)disconnect {
-    [self sendCommand:@"SIGNAL SHUTDOWN" arguments:nil data:nil observer:^BOOL(NSArray<NSNumber *> * __unused codes, NSArray<NSData *> * __unused lines, BOOL * __unused stop) {
+    [self sendCommand:TORCommandSignalShutdown arguments:nil data:nil observer:^BOOL(NSArray<NSNumber *> * __unused codes, NSArray<NSData *> * __unused lines, BOOL * __unused stop) {
         shutdown(self->sock, SHUT_RDWR);
         self->_channel = nil;
      
@@ -340,14 +342,14 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
     for (NSUInteger idx = 0; idx < data.length; idx++)
         [hexString appendFormat:@"%02x", ((const unsigned char *)data.bytes)[idx]];
     
-    [self sendCommand:@"AUTHENTICATE" arguments:(hexString.length ? @[hexString] : nil) data:nil observer:^BOOL(NSArray<NSNumber *> *codes, NSArray<NSData *> *lines, BOOL *stop) {
+    [self sendCommand:TORCommandAuthenticate arguments:(hexString.length ? @[hexString] : nil) data:nil observer:^BOOL(NSArray<NSNumber *> *codes, NSArray<NSData *> *lines, BOOL *stop) {
         NSUInteger code = codes.firstObject.unsignedIntegerValue;
-        if (code != 250 && code != 515)
+        if (code != TORControlReplyCodeOK && code != TORControlReplyCodeBadAuthentication)
             return NO;
         
         NSString *message = lines.firstObject ? [[NSString alloc] initWithData:(NSData * _Nonnull)lines.firstObject encoding:NSUTF8StringEncoding] : @"";
         NSDictionary<NSString *, NSString *> *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:message, NSLocalizedDescriptionKey, nil];
-        BOOL success = (code == 250 && [message isEqualToString:@"OK"]);
+        BOOL success = (code == TORControlReplyCodeOK && [message isEqualToString:@"OK"]);
         if (completion)
             completion(success, success ? nil : [NSError errorWithDomain:TORControllerErrorDomain code:code userInfo:userInfo]);
         
@@ -357,14 +359,14 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
 }
 
 - (void)resetConfForKey:(NSString *)key completion:(void (^__nullable)(BOOL success, NSError * __nullable error))completion {
-	[self sendCommand:@"RESETCONF" arguments:@[key] data:nil observer:^BOOL(NSArray<NSNumber *> *codes, NSArray<NSData *> *lines, BOOL *stop) {
+	[self sendCommand:TORCommandResetConf arguments:@[key] data:nil observer:^BOOL(NSArray<NSNumber *> *codes, NSArray<NSData *> *lines, BOOL *stop) {
 		NSUInteger code = codes.firstObject.unsignedIntegerValue;
-		if (code != 250 && code != 515)
+		if (code != TORControlReplyCodeOK && code != TORControlReplyCodeBadAuthentication)
 			return NO;
 
 		NSString *message = lines.firstObject ? [[NSString alloc] initWithData:(NSData * _Nonnull)lines.firstObject encoding:NSUTF8StringEncoding] : @"";
 		NSDictionary<NSString *, NSString *> *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:message, NSLocalizedDescriptionKey, nil];
-		BOOL success = (code == 250 && [message isEqualToString:@"OK"]);
+		BOOL success = (code == TORControlReplyCodeOK && [message isEqualToString:@"OK"]);
 		if (completion)
 			completion(success, success ? nil : [NSError errorWithDomain:TORControllerErrorDomain code:code userInfo:userInfo]);
 
@@ -376,14 +378,14 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
 - (void)setConfForKey:(NSString *)key withValue:(NSString *)value completion:(void (^__nullable)(BOOL success, NSError * __nullable error))completion {
 	NSString *arg = [NSString stringWithFormat:@"%@=%@", key, value];
 
-	[self sendCommand:@"SETCONF" arguments:@[arg] data:nil observer:^BOOL(NSArray<NSNumber *> *codes, NSArray<NSData *> *lines, BOOL *stop) {
+	[self sendCommand:TORCommandSetConf arguments:@[arg] data:nil observer:^BOOL(NSArray<NSNumber *> *codes, NSArray<NSData *> *lines, BOOL *stop) {
 		NSUInteger code = codes.firstObject.unsignedIntegerValue;
-		if (code != 250 && code != 515)
+		if (code != TORControlReplyCodeOK && code != TORControlReplyCodeBadAuthentication)
 			return NO;
 
 		NSString *message = lines.firstObject ? [[NSString alloc] initWithData:(NSData * _Nonnull)lines.firstObject encoding:NSUTF8StringEncoding] : @"";
 		NSDictionary<NSString *, NSString *> *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:message, NSLocalizedDescriptionKey, nil];
-		BOOL success = (code == 250 && [message isEqualToString:@"OK"]);
+		BOOL success = (code == TORControlReplyCodeOK && [message isEqualToString:@"OK"]);
 		if (completion)
 			completion(success, success ? nil : [NSError errorWithDomain:TORControllerErrorDomain code:code userInfo:userInfo]);
 
@@ -400,14 +402,14 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
         [conf_arg addObject:arg];
     }
 
-    [self sendCommand:@"SETCONF" arguments:conf_arg data:nil observer:^BOOL(NSArray<NSNumber *> *codes, NSArray<NSData *> *lines, BOOL *stop) {
+    [self sendCommand:TORCommandSetConf arguments:conf_arg data:nil observer:^BOOL(NSArray<NSNumber *> *codes, NSArray<NSData *> *lines, BOOL *stop) {
         NSUInteger code = codes.firstObject.unsignedIntegerValue;
-        if (code != 250 && code != 515)
+        if (code != TORControlReplyCodeOK && code != TORControlReplyCodeBadAuthentication)
             return NO;
         
         NSString *message = lines.firstObject ? [[NSString alloc] initWithData:(NSData * _Nonnull)lines.firstObject encoding:NSUTF8StringEncoding] : @"";
         NSDictionary<NSString *, NSString *> *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:message, NSLocalizedDescriptionKey, nil];
-        BOOL success = (code == 250 && [message isEqualToString:@"OK"]);
+        BOOL success = (code == TORControlReplyCodeOK && [message isEqualToString:@"OK"]);
         if (completion)
             completion(success, success ? nil : [NSError errorWithDomain:TORControllerErrorDomain code:code userInfo:userInfo]);
         
@@ -418,14 +420,14 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
 }
 
 - (void)listenForEvents:(NSArray<NSString *> *)events completion:(void (^__nullable)(BOOL success, NSError * __nullable error))completion {
-    [self sendCommand:@"SETEVENTS" arguments:events data:nil observer:^BOOL(NSArray<NSNumber *> *codes, NSArray<NSData *> *lines, BOOL *stop) {
+    [self sendCommand:TORCommandSetEvents arguments:events data:nil observer:^BOOL(NSArray<NSNumber *> *codes, NSArray<NSData *> *lines, BOOL *stop) {
         NSUInteger code = codes.firstObject.unsignedIntegerValue;
-        if (code != 250 && code != 552)
+        if (code != TORControlReplyCodeOK && code != TORControlReplyCodeUnrecognizedEntity)
             return NO;
 
         NSString *message = lines.firstObject ? [[NSString alloc] initWithData:(NSData * _Nonnull)lines.firstObject encoding:NSUTF8StringEncoding] : @"";
         NSDictionary<NSString *, NSString *> *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:message, NSLocalizedDescriptionKey, nil];
-        BOOL success = (code == 250 && [message isEqualToString:@"OK"]);
+        BOOL success = (code == TORControlReplyCodeOK && [message isEqualToString:@"OK"]);
         if (success)
             self->_events = [NSOrderedSet orderedSetWithArray:events];
         if (completion)
@@ -438,7 +440,7 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
 
 - (void)getInfoForKeys:(NSArray<NSString *> *)keys completion:(void (^)(NSArray<NSString *> *values))completion
 {
-    [self sendCommand:@"GETINFO" arguments:keys data:nil observer:^BOOL(NSArray<NSNumber *> *codes, NSArray<NSData *> *lines, BOOL *stop) {
+    [self sendCommand:TORCommandGetInfo arguments:keys data:nil observer:^BOOL(NSArray<NSNumber *> *codes, NSArray<NSData *> *lines, BOOL *stop) {
         *stop = YES;
         NSMutableArray *values = [NSMutableArray new];
 
@@ -471,7 +473,7 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
             [strings addObject:string];
         }
         
-        if (codes.lastObject.integerValue != 250 || ![strings.lastObject isEqualToString:@"OK"])
+        if (codes.lastObject.integerValue != TORControlReplyCodeOK || ![strings.lastObject isEqualToString:@"OK"])
         {
             if (completion)
             {
@@ -485,7 +487,7 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
 
         for (NSUInteger idx = 0; idx < strings.count - 1; idx++)
         {
-            if (codes[idx].integerValue == 250)
+            if (codes[idx].integerValue == TORControlReplyCodeOK)
             {
                 NSMutableArray<NSString *> *components = [[strings[idx] componentsSeparatedByString:@"="] mutableCopy];
 
@@ -680,17 +682,17 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
 
 - (void)resetConnection:(void (^__nullable)(BOOL success))completion
 {
-    [self sendCommand:@"SIGNAL RELOAD" arguments:nil data:nil observer:
+    [self sendCommand:TORCommandSignalReload arguments:nil data:nil observer:
      ^BOOL(NSArray<NSNumber *> * _Nonnull codes, NSArray<NSData *> * _Nonnull __unused lines, BOOL * _Nonnull stop) {
 
-        if (codes.firstObject.integerValue == 250)
+        if (codes.firstObject.integerValue == TORControlReplyCodeOK)
         {
-            [self sendCommand:@"SIGNAL NEWNYM" arguments:nil data:nil observer:
+            [self sendCommand:TORCommandSignalNewnym arguments:nil data:nil observer:
              ^BOOL(NSArray<NSNumber *> * _Nonnull codes, NSArray<NSData *> * _Nonnull __unused lines, BOOL * _Nonnull stop) {
 
                 if (completion)
                 {
-                    completion(codes.firstObject.integerValue == 250);
+                    completion(codes.firstObject.integerValue == TORControlReplyCodeOK);
                 }
 
                 *stop = YES;
@@ -727,10 +729,10 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
         {
             __block BOOL done = NO;
 
-            [self sendCommand:@"CLOSECIRCUIT" arguments:@[circuitId] data:nil observer:
+            [self sendCommand:TORCommandCloseCircuit arguments:@[circuitId] data:nil observer:
              ^BOOL(NSArray<NSNumber *> * _Nonnull codes, NSArray<NSData *> * _Nonnull __unused lines, BOOL * _Nonnull stop) {
 
-                success = success && codes.firstObject.integerValue == 250;
+                success = success && codes.firstObject.integerValue == TORControlReplyCodeOK;
 
                 done = YES;
 

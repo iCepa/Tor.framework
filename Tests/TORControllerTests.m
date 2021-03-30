@@ -63,7 +63,7 @@
     [self.controller authenticateWithData:[@"invalid" dataUsingEncoding:NSUTF8StringEncoding] completion:^(BOOL success, NSError *error) {
         XCTAssertFalse(success);
         XCTAssertEqualObjects(error.domain, TORControllerErrorDomain);
-        XCTAssertNotEqual(error.code, 250);
+        XCTAssertNotEqual(error.code, TORControlReplyCodeOK);
         XCTAssertGreaterThan(error.localizedDescription, @"Authentication failed: Wrong length on authentication cookie.");
         [expectation fulfill];
     }];
