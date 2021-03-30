@@ -93,6 +93,10 @@
 		8A9D5D5D216BE17400B0BB19 /* libtor-wallclock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D11216BE12100B0BB19 /* libtor-wallclock.a */; };
 		8A9D5D5F216BFB3400B0BB19 /* orconfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A9D5D5E216BFB3400B0BB19 /* orconfig.h */; };
 		8A9D5D60216BFB3400B0BB19 /* orconfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A9D5D5E216BFB3400B0BB19 /* orconfig.h */; };
+		92B5293D2613BB9900705FF4 /* TORControlReplyCode.h in Headers */ = {isa = PBXBuildFile; fileRef = 92B529352613B9B900705FF4 /* TORControlReplyCode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		92B529452613BB9900705FF4 /* TORControlReplyCode.h in Headers */ = {isa = PBXBuildFile; fileRef = 92B529352613B9B900705FF4 /* TORControlReplyCode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		92B529552613BD1F00705FF4 /* TORControlCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 92B529542613BD1900705FF4 /* TORControlCommand.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		92B5295D2613BD1F00705FF4 /* TORControlCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 92B529542613BD1900705FF4 /* TORControlCommand.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A00453DA2473DF3E0057A136 /* libtor-confmgt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A083F649242A6D08004EF128 /* libtor-confmgt.a */; };
 		A00453DB2473DF3F0057A136 /* libtor-confmgt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A083F649242A6D08004EF128 /* libtor-confmgt.a */; };
 		A04496FB23A1839200E92CE3 /* TORCircuit.h in Headers */ = {isa = PBXBuildFile; fileRef = A04496F923A1839200E92CE3 /* TORCircuit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -323,6 +327,8 @@
 		8A9D5D16216BE12100B0BB19 /* libtor-malloc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-malloc.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A9D5D17216BE12100B0BB19 /* libed25519_ref10.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libed25519_ref10.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A9D5D5E216BFB3400B0BB19 /* orconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = orconfig.h; path = tor/orconfig.h; sourceTree = "<group>"; };
+		92B529352613B9B900705FF4 /* TORControlReplyCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TORControlReplyCode.h; sourceTree = "<group>"; };
+		92B529542613BD1900705FF4 /* TORControlCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TORControlCommand.h; sourceTree = "<group>"; };
 		A01E949B24127899001BFFF5 /* version.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = version.h; path = Tor/version.h; sourceTree = "<group>"; };
 		A02CE2B4220055D200964A14 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		A02CE2B5220055D200964A14 /* Tor.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Tor.json; sourceTree = "<group>"; };
@@ -649,6 +655,8 @@
 			children = (
 				8A9D5D5E216BFB3400B0BB19 /* orconfig.h */,
 				D0FBEC701B79BAD7005C7577 /* Tor.h */,
+				92B529352613B9B900705FF4 /* TORControlReplyCode.h */,
+				92B529542613BD1900705FF4 /* TORControlCommand.h */,
 				D0FBEC931B79BCF6005C7577 /* TORController.h */,
 				D0FBEC941B79BCF6005C7577 /* TORController.m */,
 				D0B283AC1B79CF6600D0DDA9 /* TORConfiguration.h */,
@@ -755,6 +763,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92B5295D2613BD1F00705FF4 /* TORControlCommand.h in Headers */,
 				D012AB901BC293BE004BE7A6 /* TORController.h in Headers */,
 				A0F3439E23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.h in Headers */,
 				A082A198239E968700A0091A /* TORNode.h in Headers */,
@@ -763,6 +772,7 @@
 				D09E544E1C643B61001DB8F8 /* TORThread.h in Headers */,
 				D012AB8E1BC2920E004BE7A6 /* Tor.h in Headers */,
 				D03197131F6493A500720808 /* TORLogging.h in Headers */,
+				92B529452613BB9900705FF4 /* TORControlReplyCode.h in Headers */,
 				8A9D5D60216BFB3400B0BB19 /* orconfig.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -771,6 +781,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92B529552613BD1F00705FF4 /* TORControlCommand.h in Headers */,
 				D0FBEC991B79BCF6005C7577 /* TORThread.h in Headers */,
 				A0F3439D23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.h in Headers */,
 				A082A197239E968700A0091A /* TORNode.h in Headers */,
@@ -779,6 +790,7 @@
 				D0FBEC971B79BCF6005C7577 /* TORController.h in Headers */,
 				D0FBEC711B79BAD7005C7577 /* Tor.h in Headers */,
 				D03197121F6493A500720808 /* TORLogging.h in Headers */,
+				92B5293D2613BB9900705FF4 /* TORControlReplyCode.h in Headers */,
 				8A9D5D5F216BFB3400B0BB19 /* orconfig.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

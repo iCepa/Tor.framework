@@ -20,3 +20,5 @@
 #import <Tor/TORConfiguration.h>
 #import <Tor/TORThread.h>
 #import <Tor/TORLogging.h>
+#import <Tor/TORControlReplyCode.h>
+#import <Tor/TORControlCommand.h>
