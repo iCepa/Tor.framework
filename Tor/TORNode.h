@@ -61,7 +61,7 @@ Taken from https://nbviewer.jupyter.org/github/rasbt/python_reference/blob/maste
 
  See https://torproject.gitlab.io/torspec/control-spec.html#general-use-tokens
 
- @param longName: A "LongName" identifying a Tor node.
+ @param longName A "LongName" identifying a Tor node.
  */
 - (instancetype)initFromString:(NSString *)longName;
 
@@ -70,7 +70,7 @@ Taken from https://nbviewer.jupyter.org/github/rasbt/python_reference/blob/maste
 
  See https://torproject.gitlab.io/torspec/control-spec.html#getinfo
 
- @param response: Should be the response of a `ns/id/<fingerprint>` call.
+ @param response Should be the response of a `ns/id/<fingerprint>` call.
  */
 - (void)acquireIpAddressesFromNsResponse:(NSString *)response;
 

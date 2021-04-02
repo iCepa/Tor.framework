@@ -345,7 +345,7 @@ Extracts all circuit info from a string which should be the response to a "GETIN
 
 See https://torproject.gitlab.io/torspec/control-spec.html#getinfo
 
-@param circuits: A string as returned by "GETINFO circuit-status".
+@param circuitsString A string as returned by "GETINFO circuit-status".
 */
 + (NSArray<TORCircuit *> *)circuitsFromString:(NSString *)circuitsString;
 
