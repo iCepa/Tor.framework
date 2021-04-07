@@ -42,7 +42,13 @@ REBUILD=0
 
 # Generate the configure script (necessary for version control distributions)
 if [[ ! -f ./configure ]]; then
-    ./autogen.sh --add-missing
+    # FIXME: This fixes `Tor/tor/autogen.sh`. Check if that was changed and remove this patch.
+    sed -i'.backup' -e 's/all,error/no-obsolete,error/' autogen.sh
+
+    ./autogen.sh
+
+    # FIXME: Undoes the patch. Remove, when it becomes unnecessary.
+    rm autogen.sh && mv autogen.sh.backup autogen.sh
 
     # make show-libs needs a full configure, otherwise it will trigger that and return a lot of garbage.
     configure ${ARCHS[0]}
