@@ -23,107 +23,27 @@
 /* Begin PBXBuildFile section */
 		8A44D7431FA3C9FC00C4E1C0 /* liblzma.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A44D7411FA3C9FC00C4E1C0 /* liblzma.a */; };
 		8A44D7441FA3D4E400C4E1C0 /* liblzma.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A44D7411FA3C9FC00C4E1C0 /* liblzma.a */; };
-		8A9D5D18216BE12100B0BB19 /* libtor-term.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5CF5216BE12000B0BB19 /* libtor-term.a */; };
-		8A9D5D19216BE12100B0BB19 /* libtor-container.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5CF6216BE12000B0BB19 /* libtor-container.a */; };
-		8A9D5D1A216BE12100B0BB19 /* libtor-encoding.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5CF7216BE12000B0BB19 /* libtor-encoding.a */; };
-		8A9D5D1B216BE12100B0BB19 /* libtor-trace.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5CF8216BE12000B0BB19 /* libtor-trace.a */; };
-		8A9D5D1C216BE12100B0BB19 /* libcurve25519_donna.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5CF9216BE12000B0BB19 /* libcurve25519_donna.a */; };
-		8A9D5D1D216BE12100B0BB19 /* libtor-meminfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5CFA216BE12000B0BB19 /* libtor-meminfo.a */; };
-		8A9D5D1E216BE12100B0BB19 /* libtor-app.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5CFB216BE12000B0BB19 /* libtor-app.a */; };
-		8A9D5D1F216BE12100B0BB19 /* libtor-evloop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5CFC216BE12000B0BB19 /* libtor-evloop.a */; };
-		8A9D5D20216BE12100B0BB19 /* libtor-err.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5CFD216BE12000B0BB19 /* libtor-err.a */; };
-		8A9D5D21216BE12100B0BB19 /* libtor-tls.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5CFE216BE12000B0BB19 /* libtor-tls.a */; };
-		8A9D5D22216BE12100B0BB19 /* libtor-memarea.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5CFF216BE12000B0BB19 /* libtor-memarea.a */; };
-		8A9D5D23216BE12100B0BB19 /* libtor-time.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D00216BE12000B0BB19 /* libtor-time.a */; };
-		8A9D5D25216BE12100B0BB19 /* libor-trunnel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D02216BE12000B0BB19 /* libor-trunnel.a */; };
-		8A9D5D26216BE12100B0BB19 /* libtor-fs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D03216BE12000B0BB19 /* libtor-fs.a */; };
-		8A9D5D27216BE12100B0BB19 /* libtor-math.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D04216BE12000B0BB19 /* libtor-math.a */; };
-		8A9D5D28216BE12100B0BB19 /* libtor-osinfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D05216BE12000B0BB19 /* libtor-osinfo.a */; };
-		8A9D5D29216BE12100B0BB19 /* libtor-crypt-ops.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D06216BE12000B0BB19 /* libtor-crypt-ops.a */; };
-		8A9D5D2A216BE12100B0BB19 /* libtor-log.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D07216BE12000B0BB19 /* libtor-log.a */; };
-		8A9D5D2B216BE12100B0BB19 /* libtor-process.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D08216BE12000B0BB19 /* libtor-process.a */; };
-		8A9D5D2C216BE12100B0BB19 /* libtor-intmath.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D09216BE12000B0BB19 /* libtor-intmath.a */; };
-		8A9D5D2D216BE12100B0BB19 /* libtor-thread.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D0A216BE12000B0BB19 /* libtor-thread.a */; };
-		8A9D5D2E216BE12100B0BB19 /* libtor-sandbox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D0B216BE12000B0BB19 /* libtor-sandbox.a */; };
-		8A9D5D2F216BE12100B0BB19 /* libtor-net.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D0C216BE12000B0BB19 /* libtor-net.a */; };
-		8A9D5D30216BE12100B0BB19 /* libtor-smartlist-core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D0D216BE12100B0BB19 /* libtor-smartlist-core.a */; };
-		8A9D5D31216BE12100B0BB19 /* libed25519_donna.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D0E216BE12100B0BB19 /* libed25519_donna.a */; };
-		8A9D5D32216BE12100B0BB19 /* libtor-string.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D0F216BE12100B0BB19 /* libtor-string.a */; };
-		8A9D5D33216BE12100B0BB19 /* libtor-ctime.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D10216BE12100B0BB19 /* libtor-ctime.a */; };
-		8A9D5D34216BE12100B0BB19 /* libtor-wallclock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D11216BE12100B0BB19 /* libtor-wallclock.a */; };
-		8A9D5D35216BE12100B0BB19 /* libtor-lock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D12216BE12100B0BB19 /* libtor-lock.a */; };
-		8A9D5D36216BE12100B0BB19 /* libtor-fdio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D13216BE12100B0BB19 /* libtor-fdio.a */; };
-		8A9D5D37216BE12100B0BB19 /* libkeccak-tiny.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D14216BE12100B0BB19 /* libkeccak-tiny.a */; };
-		8A9D5D38216BE12100B0BB19 /* libtor-compress.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D15216BE12100B0BB19 /* libtor-compress.a */; };
-		8A9D5D39216BE12100B0BB19 /* libtor-malloc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D16216BE12100B0BB19 /* libtor-malloc.a */; };
-		8A9D5D3A216BE12100B0BB19 /* libed25519_ref10.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D17216BE12100B0BB19 /* libed25519_ref10.a */; };
-		8A9D5D3B216BE17400B0BB19 /* libcurve25519_donna.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5CF9216BE12000B0BB19 /* libcurve25519_donna.a */; };
-		8A9D5D3C216BE17400B0BB19 /* libed25519_donna.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D0E216BE12100B0BB19 /* libed25519_donna.a */; };
-		8A9D5D3D216BE17400B0BB19 /* libed25519_ref10.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D17216BE12100B0BB19 /* libed25519_ref10.a */; };
-		8A9D5D3E216BE17400B0BB19 /* libkeccak-tiny.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D14216BE12100B0BB19 /* libkeccak-tiny.a */; };
-		8A9D5D40216BE17400B0BB19 /* libor-trunnel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D02216BE12000B0BB19 /* libor-trunnel.a */; };
-		8A9D5D41216BE17400B0BB19 /* libtor-app.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5CFB216BE12000B0BB19 /* libtor-app.a */; };
-		8A9D5D42216BE17400B0BB19 /* libtor-compress.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D15216BE12100B0BB19 /* libtor-compress.a */; };
-		8A9D5D43216BE17400B0BB19 /* libtor-container.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5CF6216BE12000B0BB19 /* libtor-container.a */; };
-		8A9D5D44216BE17400B0BB19 /* libtor-crypt-ops.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D06216BE12000B0BB19 /* libtor-crypt-ops.a */; };
-		8A9D5D45216BE17400B0BB19 /* libtor-ctime.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D10216BE12100B0BB19 /* libtor-ctime.a */; };
-		8A9D5D46216BE17400B0BB19 /* libtor-encoding.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5CF7216BE12000B0BB19 /* libtor-encoding.a */; };
-		8A9D5D47216BE17400B0BB19 /* libtor-err.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5CFD216BE12000B0BB19 /* libtor-err.a */; };
-		8A9D5D48216BE17400B0BB19 /* libtor-evloop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5CFC216BE12000B0BB19 /* libtor-evloop.a */; };
-		8A9D5D49216BE17400B0BB19 /* libtor-fdio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D13216BE12100B0BB19 /* libtor-fdio.a */; };
-		8A9D5D4A216BE17400B0BB19 /* libtor-fs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D03216BE12000B0BB19 /* libtor-fs.a */; };
-		8A9D5D4B216BE17400B0BB19 /* libtor-intmath.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D09216BE12000B0BB19 /* libtor-intmath.a */; };
-		8A9D5D4C216BE17400B0BB19 /* libtor-lock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D12216BE12100B0BB19 /* libtor-lock.a */; };
-		8A9D5D4D216BE17400B0BB19 /* libtor-log.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D07216BE12000B0BB19 /* libtor-log.a */; };
-		8A9D5D4E216BE17400B0BB19 /* libtor-malloc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D16216BE12100B0BB19 /* libtor-malloc.a */; };
-		8A9D5D4F216BE17400B0BB19 /* libtor-math.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D04216BE12000B0BB19 /* libtor-math.a */; };
-		8A9D5D50216BE17400B0BB19 /* libtor-memarea.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5CFF216BE12000B0BB19 /* libtor-memarea.a */; };
-		8A9D5D51216BE17400B0BB19 /* libtor-meminfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5CFA216BE12000B0BB19 /* libtor-meminfo.a */; };
-		8A9D5D52216BE17400B0BB19 /* libtor-net.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D0C216BE12000B0BB19 /* libtor-net.a */; };
-		8A9D5D53216BE17400B0BB19 /* libtor-osinfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D05216BE12000B0BB19 /* libtor-osinfo.a */; };
-		8A9D5D54216BE17400B0BB19 /* libtor-process.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D08216BE12000B0BB19 /* libtor-process.a */; };
-		8A9D5D55216BE17400B0BB19 /* libtor-sandbox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D0B216BE12000B0BB19 /* libtor-sandbox.a */; };
-		8A9D5D56216BE17400B0BB19 /* libtor-smartlist-core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D0D216BE12100B0BB19 /* libtor-smartlist-core.a */; };
-		8A9D5D57216BE17400B0BB19 /* libtor-string.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D0F216BE12100B0BB19 /* libtor-string.a */; };
-		8A9D5D58216BE17400B0BB19 /* libtor-term.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5CF5216BE12000B0BB19 /* libtor-term.a */; };
-		8A9D5D59216BE17400B0BB19 /* libtor-thread.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D0A216BE12000B0BB19 /* libtor-thread.a */; };
-		8A9D5D5A216BE17400B0BB19 /* libtor-time.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D00216BE12000B0BB19 /* libtor-time.a */; };
-		8A9D5D5B216BE17400B0BB19 /* libtor-tls.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5CFE216BE12000B0BB19 /* libtor-tls.a */; };
-		8A9D5D5C216BE17400B0BB19 /* libtor-trace.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5CF8216BE12000B0BB19 /* libtor-trace.a */; };
-		8A9D5D5D216BE17400B0BB19 /* libtor-wallclock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5D11216BE12100B0BB19 /* libtor-wallclock.a */; };
+		8A9D5D1E216BE12100B0BB19 /* libtor.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5CFB216BE12000B0BB19 /* libtor.a */; };
+		8A9D5D41216BE17400B0BB19 /* libtor.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9D5CFB216BE12000B0BB19 /* libtor.a */; };
 		8A9D5D5F216BFB3400B0BB19 /* orconfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A9D5D5E216BFB3400B0BB19 /* orconfig.h */; };
 		8A9D5D60216BFB3400B0BB19 /* orconfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A9D5D5E216BFB3400B0BB19 /* orconfig.h */; };
 		92B5293D2613BB9900705FF4 /* TORControlReplyCode.h in Headers */ = {isa = PBXBuildFile; fileRef = 92B529352613B9B900705FF4 /* TORControlReplyCode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		92B529452613BB9900705FF4 /* TORControlReplyCode.h in Headers */ = {isa = PBXBuildFile; fileRef = 92B529352613B9B900705FF4 /* TORControlReplyCode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		92B529552613BD1F00705FF4 /* TORControlCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 92B529542613BD1900705FF4 /* TORControlCommand.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		92B5295D2613BD1F00705FF4 /* TORControlCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 92B529542613BD1900705FF4 /* TORControlCommand.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A00453DA2473DF3E0057A136 /* libtor-confmgt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A083F649242A6D08004EF128 /* libtor-confmgt.a */; };
-		A00453DB2473DF3F0057A136 /* libtor-confmgt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A083F649242A6D08004EF128 /* libtor-confmgt.a */; };
 		A04496FB23A1839200E92CE3 /* TORCircuit.h in Headers */ = {isa = PBXBuildFile; fileRef = A04496F923A1839200E92CE3 /* TORCircuit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A04496FC23A1839200E92CE3 /* TORCircuit.h in Headers */ = {isa = PBXBuildFile; fileRef = A04496F923A1839200E92CE3 /* TORCircuit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A04496FD23A1839200E92CE3 /* TORCircuit.m in Sources */ = {isa = PBXBuildFile; fileRef = A04496FA23A1839200E92CE3 /* TORCircuit.m */; };
 		A04496FE23A1839200E92CE3 /* TORCircuit.m in Sources */ = {isa = PBXBuildFile; fileRef = A04496FA23A1839200E92CE3 /* TORCircuit.m */; };
-		A044F45421F9F2F60094F807 /* libtor-geoip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A044F45321F9F2F60094F807 /* libtor-geoip.a */; };
 		A082A197239E968700A0091A /* TORNode.h in Headers */ = {isa = PBXBuildFile; fileRef = A082A195239E968700A0091A /* TORNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A082A198239E968700A0091A /* TORNode.h in Headers */ = {isa = PBXBuildFile; fileRef = A082A195239E968700A0091A /* TORNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A082A199239E968700A0091A /* TORNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A082A196239E968700A0091A /* TORNode.m */; };
 		A082A19A239E968700A0091A /* TORNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A082A196239E968700A0091A /* TORNode.m */; };
-		A083F645242A6AE7004EF128 /* libtor-version.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0E9EF4022E5D729005F6D7B /* libtor-version.a */; };
-		A083F646242A6AF8004EF128 /* libtor-buf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0E9798522BA57DE00F98556 /* libtor-buf.a */; };
-		A083F647242A6B06004EF128 /* libtor-geoip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A044F45321F9F2F60094F807 /* libtor-geoip.a */; };
 		A088DB0722E5F6B70018EF4D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A088DB0622E5F6B70018EF4D /* CFNetwork.framework */; };
-		A0BDED912518CD8F00912E7F /* libtor-llharden.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0BDED902518CD4400912E7F /* libtor-llharden.a */; };
-		A0BDED922518CD9000912E7F /* libtor-llharden.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0BDED902518CD4400912E7F /* libtor-llharden.a */; };
-		A0E9798722BA57DE00F98556 /* libtor-buf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0E9798522BA57DE00F98556 /* libtor-buf.a */; };
-		A0E9EF4122E5D729005F6D7B /* libtor-version.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0E9EF4022E5D729005F6D7B /* libtor-version.a */; };
 		A0F3439D23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.h in Headers */ = {isa = PBXBuildFile; fileRef = A0F3439B23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.h */; };
 		A0F3439E23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.h in Headers */ = {isa = PBXBuildFile; fileRef = A0F3439B23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.h */; };
 		A0F3439F23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F3439C23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.m */; };
 		A0F343A023A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F3439C23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.m */; };
-		A0F66E132447366A0094FEB2 /* libtor-dispatch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A083F64A242A6D08004EF128 /* libtor-dispatch.a */; };
-		A0F66E142447366B0094FEB2 /* libtor-dispatch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A083F64A242A6D08004EF128 /* libtor-dispatch.a */; };
-		A0F66E152447366D0094FEB2 /* libtor-pubsub.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A083F648242A6D08004EF128 /* libtor-pubsub.a */; };
-		A0F66E162447366F0094FEB2 /* libtor-pubsub.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A083F648242A6D08004EF128 /* libtor-pubsub.a */; };
 		A0FB442A239EEC7E00E96E92 /* geoip6 in Resources */ = {isa = PBXBuildFile; fileRef = A0FB4428239EEC7D00E96E92 /* geoip6 */; };
 		A0FB442B239EEC7E00E96E92 /* geoip6 in Resources */ = {isa = PBXBuildFile; fileRef = A0FB4428239EEC7D00E96E92 /* geoip6 */; };
 		A0FB442C239EEC7E00E96E92 /* geoip6 in Resources */ = {isa = PBXBuildFile; fileRef = A0FB4428239EEC7D00E96E92 /* geoip6 */; };
@@ -292,40 +212,7 @@
 /* Begin PBXFileReference section */
 		8A44D72D1FA3BBE000C4E1C0 /* xz.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = xz.sh; path = Tor/xz.sh; sourceTree = "<group>"; };
 		8A44D7411FA3C9FC00C4E1C0 /* liblzma.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = liblzma.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5CF5216BE12000B0BB19 /* libtor-term.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-term.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5CF6216BE12000B0BB19 /* libtor-container.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-container.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5CF7216BE12000B0BB19 /* libtor-encoding.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-encoding.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5CF8216BE12000B0BB19 /* libtor-trace.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-trace.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5CF9216BE12000B0BB19 /* libcurve25519_donna.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcurve25519_donna.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5CFA216BE12000B0BB19 /* libtor-meminfo.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-meminfo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5CFB216BE12000B0BB19 /* libtor-app.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-app.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5CFC216BE12000B0BB19 /* libtor-evloop.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-evloop.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5CFD216BE12000B0BB19 /* libtor-err.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-err.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5CFE216BE12000B0BB19 /* libtor-tls.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-tls.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5CFF216BE12000B0BB19 /* libtor-memarea.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-memarea.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5D00216BE12000B0BB19 /* libtor-time.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-time.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5D02216BE12000B0BB19 /* libor-trunnel.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libor-trunnel.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5D03216BE12000B0BB19 /* libtor-fs.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-fs.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5D04216BE12000B0BB19 /* libtor-math.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-math.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5D05216BE12000B0BB19 /* libtor-osinfo.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-osinfo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5D06216BE12000B0BB19 /* libtor-crypt-ops.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-crypt-ops.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5D07216BE12000B0BB19 /* libtor-log.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-log.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5D08216BE12000B0BB19 /* libtor-process.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-process.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5D09216BE12000B0BB19 /* libtor-intmath.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-intmath.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5D0A216BE12000B0BB19 /* libtor-thread.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-thread.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5D0B216BE12000B0BB19 /* libtor-sandbox.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-sandbox.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5D0C216BE12000B0BB19 /* libtor-net.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-net.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5D0D216BE12100B0BB19 /* libtor-smartlist-core.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-smartlist-core.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5D0E216BE12100B0BB19 /* libed25519_donna.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libed25519_donna.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5D0F216BE12100B0BB19 /* libtor-string.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-string.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5D10216BE12100B0BB19 /* libtor-ctime.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-ctime.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5D11216BE12100B0BB19 /* libtor-wallclock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-wallclock.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5D12216BE12100B0BB19 /* libtor-lock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-lock.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5D13216BE12100B0BB19 /* libtor-fdio.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-fdio.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5D14216BE12100B0BB19 /* libkeccak-tiny.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libkeccak-tiny.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5D15216BE12100B0BB19 /* libtor-compress.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-compress.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5D16216BE12100B0BB19 /* libtor-malloc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-malloc.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5D17216BE12100B0BB19 /* libed25519_ref10.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libed25519_ref10.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A9D5CFB216BE12000B0BB19 /* libtor.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A9D5D5E216BFB3400B0BB19 /* orconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = orconfig.h; path = tor/orconfig.h; sourceTree = "<group>"; };
 		92B529352613B9B900705FF4 /* TORControlReplyCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TORControlReplyCode.h; sourceTree = "<group>"; };
 		92B529542613BD1900705FF4 /* TORControlCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TORControlCommand.h; sourceTree = "<group>"; };
@@ -335,15 +222,10 @@
 		A0428A991FA0E72D00593F79 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A04496F923A1839200E92CE3 /* TORCircuit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TORCircuit.h; sourceTree = "<group>"; };
 		A04496FA23A1839200E92CE3 /* TORCircuit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TORCircuit.m; sourceTree = "<group>"; };
-		A044F45321F9F2F60094F807 /* libtor-geoip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-geoip.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A082A195239E968700A0091A /* TORNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TORNode.h; sourceTree = "<group>"; };
 		A082A196239E968700A0091A /* TORNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TORNode.m; sourceTree = "<group>"; };
-		A083F648242A6D08004EF128 /* libtor-pubsub.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-pubsub.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A083F649242A6D08004EF128 /* libtor-confmgt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-confmgt.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A083F64A242A6D08004EF128 /* libtor-dispatch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-dispatch.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A088DB0622E5F6B70018EF4D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		A088DB0822E603270018EF4D /* Tor.podspec */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = Tor.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A0BDED902518CD4400912E7F /* libtor-llharden.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-llharden.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0DE78A121F73B8200B6B68B /* Cartfile.private */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile.private; sourceTree = "<group>"; };
 		A0DE78A221F73B8200B6B68B /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		A0DE78A321F73B8200B6B68B /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
@@ -351,8 +233,6 @@
 		A0DE78A521F73B8200B6B68B /* Cartfile.resolved */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile.resolved; sourceTree = "<group>"; };
 		A0DE78A621F73B8200B6B68B /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		A0DE78A721F73B8E00B6B68B /* version.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = version.sh; path = Tor/version.sh; sourceTree = "<group>"; };
-		A0E9798522BA57DE00F98556 /* libtor-buf.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-buf.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A0E9EF4022E5D729005F6D7B /* libtor-version.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor-version.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0F3439B23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSCharacterSet+PredefinedSets.h"; sourceTree = "<group>"; };
 		A0F3439C23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSCharacterSet+PredefinedSets.m"; sourceTree = "<group>"; };
 		A0FB4428239EEC7D00E96E92 /* geoip6 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = geoip6; sourceTree = "<group>"; };
@@ -406,47 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A088DB0722E5F6B70018EF4D /* CFNetwork.framework in Frameworks */,
-				A00453DB2473DF3F0057A136 /* libtor-confmgt.a in Frameworks */,
-				8A9D5D1E216BE12100B0BB19 /* libtor-app.a in Frameworks */,
-				8A9D5D38216BE12100B0BB19 /* libtor-compress.a in Frameworks */,
-				8A9D5D1F216BE12100B0BB19 /* libtor-evloop.a in Frameworks */,
-				8A9D5D21216BE12100B0BB19 /* libtor-tls.a in Frameworks */,
-				8A9D5D29216BE12100B0BB19 /* libtor-crypt-ops.a in Frameworks */,
-				8A9D5D37216BE12100B0BB19 /* libkeccak-tiny.a in Frameworks */,
-				A0F66E162447366F0094FEB2 /* libtor-pubsub.a in Frameworks */,
-				8A9D5D3A216BE12100B0BB19 /* libed25519_ref10.a in Frameworks */,
-				8A9D5D31216BE12100B0BB19 /* libed25519_donna.a in Frameworks */,
-				8A9D5D1C216BE12100B0BB19 /* libcurve25519_donna.a in Frameworks */,
-				A083F647242A6B06004EF128 /* libtor-geoip.a in Frameworks */,
-				8A9D5D2B216BE12100B0BB19 /* libtor-process.a in Frameworks */,
-				A083F646242A6AF8004EF128 /* libtor-buf.a in Frameworks */,
-				8A9D5D23216BE12100B0BB19 /* libtor-time.a in Frameworks */,
-				8A9D5D26216BE12100B0BB19 /* libtor-fs.a in Frameworks */,
-				8A9D5D1A216BE12100B0BB19 /* libtor-encoding.a in Frameworks */,
-				8A9D5D2E216BE12100B0BB19 /* libtor-sandbox.a in Frameworks */,
-				A0BDED922518CD9000912E7F /* libtor-llharden.a in Frameworks */,
-				8A9D5D19216BE12100B0BB19 /* libtor-container.a in Frameworks */,
-				8A9D5D2F216BE12100B0BB19 /* libtor-net.a in Frameworks */,
-				8A9D5D2D216BE12100B0BB19 /* libtor-thread.a in Frameworks */,
-				8A9D5D22216BE12100B0BB19 /* libtor-memarea.a in Frameworks */,
-				8A9D5D27216BE12100B0BB19 /* libtor-math.a in Frameworks */,
-				8A9D5D1D216BE12100B0BB19 /* libtor-meminfo.a in Frameworks */,
-				8A9D5D28216BE12100B0BB19 /* libtor-osinfo.a in Frameworks */,
-				A0F66E142447366B0094FEB2 /* libtor-dispatch.a in Frameworks */,
-				8A9D5D2A216BE12100B0BB19 /* libtor-log.a in Frameworks */,
-				8A9D5D35216BE12100B0BB19 /* libtor-lock.a in Frameworks */,
-				8A9D5D36216BE12100B0BB19 /* libtor-fdio.a in Frameworks */,
-				8A9D5D32216BE12100B0BB19 /* libtor-string.a in Frameworks */,
-				8A9D5D18216BE12100B0BB19 /* libtor-term.a in Frameworks */,
-				8A9D5D30216BE12100B0BB19 /* libtor-smartlist-core.a in Frameworks */,
-				8A9D5D39216BE12100B0BB19 /* libtor-malloc.a in Frameworks */,
-				8A9D5D34216BE12100B0BB19 /* libtor-wallclock.a in Frameworks */,
-				8A9D5D20216BE12100B0BB19 /* libtor-err.a in Frameworks */,
-				A0E9EF4122E5D729005F6D7B /* libtor-version.a in Frameworks */,
-				8A9D5D2C216BE12100B0BB19 /* libtor-intmath.a in Frameworks */,
-				8A9D5D33216BE12100B0BB19 /* libtor-ctime.a in Frameworks */,
-				8A9D5D25216BE12100B0BB19 /* libor-trunnel.a in Frameworks */,
-				8A9D5D1B216BE12100B0BB19 /* libtor-trace.a in Frameworks */,
+				8A9D5D1E216BE12100B0BB19 /* libtor.a in Frameworks */,
 				D0198ABE1C63E16500EA0043 /* libssl.a in Frameworks */,
 				D0198ABD1C63E16500EA0043 /* libcrypto.a in Frameworks */,
 				D0198AB91C63E16500EA0043 /* libevent.a in Frameworks */,
@@ -483,47 +323,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A9D5D41216BE17400B0BB19 /* libtor-app.a in Frameworks */,
-				8A9D5D42216BE17400B0BB19 /* libtor-compress.a in Frameworks */,
-				8A9D5D48216BE17400B0BB19 /* libtor-evloop.a in Frameworks */,
-				8A9D5D5B216BE17400B0BB19 /* libtor-tls.a in Frameworks */,
-				8A9D5D44216BE17400B0BB19 /* libtor-crypt-ops.a in Frameworks */,
-				8A9D5D3E216BE17400B0BB19 /* libkeccak-tiny.a in Frameworks */,
-				8A9D5D3D216BE17400B0BB19 /* libed25519_ref10.a in Frameworks */,
-				A0F66E152447366D0094FEB2 /* libtor-pubsub.a in Frameworks */,
-				A0F66E132447366A0094FEB2 /* libtor-dispatch.a in Frameworks */,
-				8A9D5D3C216BE17400B0BB19 /* libed25519_donna.a in Frameworks */,
-				8A9D5D3B216BE17400B0BB19 /* libcurve25519_donna.a in Frameworks */,
-				A044F45421F9F2F60094F807 /* libtor-geoip.a in Frameworks */,
-				8A9D5D54216BE17400B0BB19 /* libtor-process.a in Frameworks */,
-				A0BDED912518CD8F00912E7F /* libtor-llharden.a in Frameworks */,
-				A0E9798722BA57DE00F98556 /* libtor-buf.a in Frameworks */,
-				8A9D5D5A216BE17400B0BB19 /* libtor-time.a in Frameworks */,
-				8A9D5D4A216BE17400B0BB19 /* libtor-fs.a in Frameworks */,
-				8A9D5D46216BE17400B0BB19 /* libtor-encoding.a in Frameworks */,
-				8A9D5D55216BE17400B0BB19 /* libtor-sandbox.a in Frameworks */,
-				8A9D5D43216BE17400B0BB19 /* libtor-container.a in Frameworks */,
-				8A9D5D52216BE17400B0BB19 /* libtor-net.a in Frameworks */,
-				8A9D5D59216BE17400B0BB19 /* libtor-thread.a in Frameworks */,
-				8A9D5D50216BE17400B0BB19 /* libtor-memarea.a in Frameworks */,
-				A00453DA2473DF3E0057A136 /* libtor-confmgt.a in Frameworks */,
-				8A9D5D4F216BE17400B0BB19 /* libtor-math.a in Frameworks */,
-				8A9D5D51216BE17400B0BB19 /* libtor-meminfo.a in Frameworks */,
-				8A9D5D53216BE17400B0BB19 /* libtor-osinfo.a in Frameworks */,
-				8A9D5D4D216BE17400B0BB19 /* libtor-log.a in Frameworks */,
-				8A9D5D4C216BE17400B0BB19 /* libtor-lock.a in Frameworks */,
-				8A9D5D49216BE17400B0BB19 /* libtor-fdio.a in Frameworks */,
-				8A9D5D57216BE17400B0BB19 /* libtor-string.a in Frameworks */,
-				8A9D5D58216BE17400B0BB19 /* libtor-term.a in Frameworks */,
-				8A9D5D56216BE17400B0BB19 /* libtor-smartlist-core.a in Frameworks */,
-				8A9D5D4E216BE17400B0BB19 /* libtor-malloc.a in Frameworks */,
-				8A9D5D5D216BE17400B0BB19 /* libtor-wallclock.a in Frameworks */,
-				8A9D5D47216BE17400B0BB19 /* libtor-err.a in Frameworks */,
-				A083F645242A6AE7004EF128 /* libtor-version.a in Frameworks */,
-				8A9D5D4B216BE17400B0BB19 /* libtor-intmath.a in Frameworks */,
-				8A9D5D45216BE17400B0BB19 /* libtor-ctime.a in Frameworks */,
-				8A9D5D40216BE17400B0BB19 /* libor-trunnel.a in Frameworks */,
-				8A9D5D5C216BE17400B0BB19 /* libtor-trace.a in Frameworks */,
+				8A9D5D41216BE17400B0BB19 /* libtor.a in Frameworks */,
 				D0FBECA81B79C014005C7577 /* libssl.a in Frameworks */,
 				D0FBECA71B79C014005C7577 /* libcrypto.a in Frameworks */,
 				D0FBECB31B79C0FE005C7577 /* libevent.a in Frameworks */,
@@ -703,47 +503,7 @@
 			isa = PBXGroup;
 			children = (
 				A088DB0622E5F6B70018EF4D /* CFNetwork.framework */,
-				8A9D5CFB216BE12000B0BB19 /* libtor-app.a */,
-				8A9D5D15216BE12100B0BB19 /* libtor-compress.a */,
-				8A9D5CFC216BE12000B0BB19 /* libtor-evloop.a */,
-				8A9D5CFE216BE12000B0BB19 /* libtor-tls.a */,
-				8A9D5D06216BE12000B0BB19 /* libtor-crypt-ops.a */,
-				8A9D5D14216BE12100B0BB19 /* libkeccak-tiny.a */,
-				8A9D5CF9216BE12000B0BB19 /* libcurve25519_donna.a */,
-				8A9D5D17216BE12100B0BB19 /* libed25519_ref10.a */,
-				8A9D5D0E216BE12100B0BB19 /* libed25519_donna.a */,
-				A044F45321F9F2F60094F807 /* libtor-geoip.a */,
-				8A9D5D08216BE12000B0BB19 /* libtor-process.a */,
-				A0E9798522BA57DE00F98556 /* libtor-buf.a */,
-				A083F649242A6D08004EF128 /* libtor-confmgt.a */,
-				A083F648242A6D08004EF128 /* libtor-pubsub.a */,
-				A083F64A242A6D08004EF128 /* libtor-dispatch.a */,
-				8A9D5D00216BE12000B0BB19 /* libtor-time.a */,
-				8A9D5D03216BE12000B0BB19 /* libtor-fs.a */,
-				8A9D5CF7216BE12000B0BB19 /* libtor-encoding.a */,
-				8A9D5D0B216BE12000B0BB19 /* libtor-sandbox.a */,
-				8A9D5CF6216BE12000B0BB19 /* libtor-container.a */,
-				8A9D5D0C216BE12000B0BB19 /* libtor-net.a */,
-				8A9D5D0A216BE12000B0BB19 /* libtor-thread.a */,
-				8A9D5CFF216BE12000B0BB19 /* libtor-memarea.a */,
-				8A9D5D04216BE12000B0BB19 /* libtor-math.a */,
-				8A9D5CFA216BE12000B0BB19 /* libtor-meminfo.a */,
-				8A9D5D05216BE12000B0BB19 /* libtor-osinfo.a */,
-				8A9D5D07216BE12000B0BB19 /* libtor-log.a */,
-				8A9D5D12216BE12100B0BB19 /* libtor-lock.a */,
-				8A9D5D13216BE12100B0BB19 /* libtor-fdio.a */,
-				8A9D5D0F216BE12100B0BB19 /* libtor-string.a */,
-				8A9D5CF5216BE12000B0BB19 /* libtor-term.a */,
-				8A9D5D0D216BE12100B0BB19 /* libtor-smartlist-core.a */,
-				8A9D5D16216BE12100B0BB19 /* libtor-malloc.a */,
-				8A9D5D11216BE12100B0BB19 /* libtor-wallclock.a */,
-				8A9D5CFD216BE12000B0BB19 /* libtor-err.a */,
-				A0E9EF4022E5D729005F6D7B /* libtor-version.a */,
-				A0BDED902518CD4400912E7F /* libtor-llharden.a */,
-				8A9D5D09216BE12000B0BB19 /* libtor-intmath.a */,
-				8A9D5D10216BE12100B0BB19 /* libtor-ctime.a */,
-				8A9D5D02216BE12000B0BB19 /* libor-trunnel.a */,
-				8A9D5CF8216BE12000B0BB19 /* libtor-trace.a */,
+				8A9D5CFB216BE12000B0BB19 /* libtor.a */,
 				D02437B31B79CF2C006B48E0 /* libz.dylib */,
 				D0FBECAE1B79C0FE005C7577 /* libevent.a */,
 				D0FBECAA1B79C0FE005C7577 /* libevent_core.a */,
