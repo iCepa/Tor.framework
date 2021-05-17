@@ -212,7 +212,7 @@
 /* Begin PBXFileReference section */
 		8A44D72D1FA3BBE000C4E1C0 /* xz.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = xz.sh; path = Tor/xz.sh; sourceTree = "<group>"; };
 		8A44D7411FA3C9FC00C4E1C0 /* liblzma.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = liblzma.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9D5CFB216BE12000B0BB19 /* libtor.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libtor.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A9D5CFB216BE12000B0BB19 /* libtor.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libtor.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A9D5D5E216BFB3400B0BB19 /* orconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = orconfig.h; path = tor/orconfig.h; sourceTree = "<group>"; };
 		92B529352613B9B900705FF4 /* TORControlReplyCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TORControlReplyCode.h; sourceTree = "<group>"; };
 		92B529542613BD1900705FF4 /* TORControlCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TORControlCommand.h; sourceTree = "<group>"; };
@@ -798,7 +798,7 @@
 			attributes = {
 				DefaultBuildSystemTypeForWorkspace = Latest;
 				LastSwiftUpdateCheck = 1000;
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = "Conrad Kramer";
 				TargetAttributes = {
 					8A00200C2171261300B1ABBC = {
