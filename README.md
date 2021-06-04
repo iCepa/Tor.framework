@@ -9,7 +9,7 @@ Currently, the framework compiles in static versions of `tor`, `libevent`, `open
 
 |          |         |
 |:-------- | -------:|
-| tor      | 0.4.5.7  |
+| tor      | 0.4.5.8  |
 | libevent | 2.1.12  |
 | OpenSSL  | 1.1.1k  |
 | liblzma  | 5.2.5  |
@@ -55,7 +55,7 @@ Alternatively, you may use the following to use binary-compiled versions of Tor.
 correspond to releases in GitHub:
 
 ```ogdl
-binary "https://icepa.github.io/Tor.framework/Tor.json" == 405.7.1
+binary "https://icepa.github.io/Tor.framework/Tor.json" == 405.8.1
 ```
 
 For available precompiled versions, see [docs/Tor.json](docs/Tor.json). Since Tor 0.3.5.2, 
@@ -123,7 +123,7 @@ in a way, which is independent of your personal setup. Check other entries for h
 Directly reference the provided podspec like so:
 
 ```ruby
-pod 'Tor', podspec: 'https://raw.githubusercontent.com/iCepa/Tor.framework/v405.7.1/Tor.podspec'
+pod 'Tor', podspec: 'https://raw.githubusercontent.com/iCepa/Tor.framework/v405.8.1/Tor.podspec'
 ```
 
 You could also reference master, to always get the latest version:

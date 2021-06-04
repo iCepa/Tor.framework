@@ -1,6 +1,6 @@
 Pod::Spec.new do |m|
 
-  version = '405.7.1'
+  version = '405.8.1'
 
   m.name    = 'Tor'
   m.version = version
