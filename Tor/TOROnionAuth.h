@@ -16,10 +16,16 @@ NS_ASSUME_NONNULL_BEGIN
 NS_SWIFT_NAME(TorOnionAuth)
 @interface TOROnionAuth : NSObject
 
+
 /**
- The base directory where this instance operates on.
+ The directory where this instance expects the private key files to be in.
  */
-@property (nonatomic, nonnull, readonly) NSURL *directory;
+@property (nonatomic, nullable, readonly) NSURL *privateUrl;
+
+/**
+ The directory where this instance expects the public key files to be in.
+ */
+@property (nonatomic, nullable, readonly) NSURL *publicUrl;
 
 /**
  The found public and/or private keys in the base \c directory.
@@ -34,9 +40,11 @@ NS_SWIFT_NAME(TorOnionAuth)
 
  If you have a lot of keys, you might want to do this in a background thread!
 
- @param url  The base directory where the configuration files live.
- Should be the same as you set in \c <ClientOnionAuthDir> for clients  or the
- \c <HiddenServiceDir>/authorized_clients directory for servers.
+ @param privateUrl  The base directory where the key files live.
+ Should be the same as you set in \c <ClientOnionAuthDir> for clients.
+
+ @param publicUrl  The base directory where the key files live.
+ Should be the same as you set in \c <HiddenServiceDir> for servers.
 
  @see https://2019.www.torproject.org/docs/tor-manual.html.en#ClientOnionAuthDir
 
@@ -44,16 +52,18 @@ NS_SWIFT_NAME(TorOnionAuth)
 
  @see https://2019.www.torproject.org/docs/tor-manual.html.en#_client_authorization
  */
-- (instancetype)initWithDirUrl:(NSURL *)url;
+- (instancetype)initWithPrivateDirUrl:(NSURL *)privateUrl andPublicDirUrl:(NSURL *)publicUrl;
 
 /**
  Initialize with a given directory. Will immediately read all keys on disk.
 
  If you have a lot of keys, you might want to do this in a background thread!
 
- @param path  The base directory where the configuration files live.
- Should be the same as you set in \c <ClientOnionAuthDir> for clients  or the
- \c <HiddenServiceDir>/authorized_clients directory for servers.
+ @param privatePath  The base directory where the key files live.
+ Should be the same as you set in \c <ClientOnionAuthDir> for clients.
+
+ @param publicPath  The base directory where the key files live.
+ Should be the same as you set in \c <HiddenServiceDir> for servers.
 
  @see https://2019.www.torproject.org/docs/tor-manual.html.en#ClientOnionAuthDir
 
@@ -61,7 +71,7 @@ NS_SWIFT_NAME(TorOnionAuth)
 
  @see https://2019.www.torproject.org/docs/tor-manual.html.en#_client_authorization
  */
-- (instancetype)initWithDir:(NSString *)path;
+- (instancetype)initWithPrivateDir:(NSString *)privatePath andPublicDir:(NSString *)publicPath;
 
 
 /**
@@ -82,6 +92,7 @@ NS_SWIFT_NAME(TorOnionAuth)
  @returns \c YES on success, \c NO on failure.
  */
 - (BOOL)removeKeyAtIndex:(NSInteger)idx;
+
 
 @end
 

@@ -9,32 +9,59 @@
 
 @implementation TOROnionAuth
 
-- (instancetype)initWithDirUrl:(NSURL *)url
+- (instancetype)initWithPrivateDirUrl:(NSURL *)privateUrl andPublicDirUrl:(NSURL *)publicUrl
 {
     if ((self = [super init]))
     {
-        _directory = url;
+        if (![publicUrl.lastPathComponent isEqualToString:@"authorized_clients"])
+        {
+            publicUrl = [publicUrl URLByAppendingPathComponent:@"authorized_clients"];
+        }
+
+        _privateUrl = privateUrl;
+        _publicUrl = publicUrl;
         _keys = [NSMutableArray new];
 
+        NSMutableArray<NSURL *> *files = [NSMutableArray new];
         NSError *error;
-        NSArray<NSURL *> *files = [NSFileManager.defaultManager
-                                   contentsOfDirectoryAtURL:url
-                                   includingPropertiesForKeys:nil options:0
-                                   error:&error];
 
-        if (error)
-        {
-            NSLog(@"[%@] Error while reading keys: %@", NSStringFromClass(self.class), error.localizedDescription);
-        }
-        else {
-            for (NSURL *file in files)
+        if (privateUrl) {
+            NSArray<NSURL *> *privateFiles = [NSFileManager.defaultManager
+                                              contentsOfDirectoryAtURL:privateUrl
+                                              includingPropertiesForKeys:nil options:0
+                                              error:&error];
+
+            if (error)
             {
-                if ([TORAuthKey isAuthFile:file])
-                {
-                    TORAuthKey *key = [[TORAuthKey alloc] initFromUrl:file];
+                NSLog(@"[%@] Error while reading keys: %@", NSStringFromClass(self.class), error.localizedDescription);
+            }
+            else {
+                if (privateFiles) [files addObjectsFromArray:privateFiles];
+            }
+        }
 
-                    if (key) [((NSMutableArray *)_keys) addObject:key];
-                }
+        if (publicUrl) {
+            NSArray<NSURL *> *publicFiles = [NSFileManager.defaultManager
+                                              contentsOfDirectoryAtURL:publicUrl
+                                              includingPropertiesForKeys:nil options:0
+                                              error:&error];
+
+            if (error)
+            {
+                NSLog(@"[%@] Error while reading keys: %@", NSStringFromClass(self.class), error.localizedDescription);
+            }
+            else {
+                if (publicFiles) [files addObjectsFromArray:publicFiles];
+            }
+        }
+
+        for (NSURL *file in files)
+        {
+            if ([TORAuthKey isAuthFile:file])
+            {
+                TORAuthKey *key = [[TORAuthKey alloc] initFromUrl:file];
+
+                if (key) [((NSMutableArray *)_keys) addObject:key];
             }
         }
     }
@@ -42,9 +69,9 @@
     return self;
 }
 
-- (instancetype)initWithDir:(NSString *)path
+- (instancetype)initWithPrivateDir:(NSString *)privatePath andPublicDir:(NSString *)publicPath
 {
-    return [self initWithDirUrl:[NSURL fileURLWithPath:path]];
+    return [self initWithPrivateDirUrl:[NSURL fileURLWithPath:privatePath] andPublicDirUrl:[NSURL fileURLWithPath:publicPath]];
 }
 
 
@@ -52,7 +79,25 @@
 
 - (void)set:(TORAuthKey *)key
 {
-    [key setDirectory:_directory];
+    NSURL *privateUrl = _privateUrl;
+    NSURL *publicUrl = _publicUrl;
+
+    if (key.isPrivate) {
+        if (privateUrl) {
+            [key setDirectory:privateUrl];
+        }
+        else if (publicUrl) {
+            [key setDirectory:publicUrl];
+        }
+    }
+    else {
+        if (publicUrl) {
+            [key setDirectory:publicUrl];
+        }
+        else if (privateUrl) {
+            [key setDirectory:privateUrl];
+        }
+    }
 
     if ([key persist])
     {
