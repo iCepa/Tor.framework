@@ -100,9 +100,9 @@
 
 + (nullable NSData *)base32Decode:(NSString *)encoded
 {
-    char dest[encoded.length * 5 / 8];
-
     const char *src = [encoded cStringUsingEncoding:kCFStringEncodingUTF8];
+
+    char dest[sizeof(src) * 5 / 8];
 
     base32_decode(dest, sizeof(dest), src, sizeof(src));
 
