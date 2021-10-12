@@ -69,7 +69,7 @@
     if (domain.length < 1) return nil;
 
     NSURLComponents *urlc = [NSURLComponents new];
-    urlc.scheme = @"https";
+    urlc.scheme = @"http";
     urlc.host = domain;
 
     NSURL *url = urlc.URL;
