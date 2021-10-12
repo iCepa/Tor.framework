@@ -48,6 +48,10 @@
 		A082A199239E968700A0091A /* TORNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A082A196239E968700A0091A /* TORNode.m */; };
 		A082A19A239E968700A0091A /* TORNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A082A196239E968700A0091A /* TORNode.m */; };
 		A088DB0722E5F6B70018EF4D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A088DB0622E5F6B70018EF4D /* CFNetwork.framework */; };
+		A0C2ED652714323D0034889C /* TORX25519KeyPair.h in Headers */ = {isa = PBXBuildFile; fileRef = A0C2ED632714323D0034889C /* TORX25519KeyPair.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A0C2ED662714323D0034889C /* TORX25519KeyPair.h in Headers */ = {isa = PBXBuildFile; fileRef = A0C2ED632714323D0034889C /* TORX25519KeyPair.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A0C2ED672714323D0034889C /* TORX25519KeyPair.m in Sources */ = {isa = PBXBuildFile; fileRef = A0C2ED642714323D0034889C /* TORX25519KeyPair.m */; };
+		A0C2ED682714323D0034889C /* TORX25519KeyPair.m in Sources */ = {isa = PBXBuildFile; fileRef = A0C2ED642714323D0034889C /* TORX25519KeyPair.m */; };
 		A0F3439D23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.h in Headers */ = {isa = PBXBuildFile; fileRef = A0F3439B23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.h */; };
 		A0F3439E23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.h in Headers */ = {isa = PBXBuildFile; fileRef = A0F3439B23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.h */; };
 		A0F3439F23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F3439C23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.m */; };
@@ -238,6 +242,8 @@
 		A082A196239E968700A0091A /* TORNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TORNode.m; sourceTree = "<group>"; };
 		A088DB0622E5F6B70018EF4D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		A088DB0822E603270018EF4D /* Tor.podspec */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = Tor.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A0C2ED632714323D0034889C /* TORX25519KeyPair.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TORX25519KeyPair.h; sourceTree = "<group>"; };
+		A0C2ED642714323D0034889C /* TORX25519KeyPair.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TORX25519KeyPair.m; sourceTree = "<group>"; };
 		A0DE78A121F73B8200B6B68B /* Cartfile.private */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile.private; sourceTree = "<group>"; };
 		A0DE78A221F73B8200B6B68B /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		A0DE78A321F73B8200B6B68B /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
@@ -485,6 +491,8 @@
 				A0491C79270479C60061E355 /* TOROnionAuth.m */,
 				A0491C7E27047E2B0061E355 /* TORAuthKey.h */,
 				A0491C7F27047E2B0061E355 /* TORAuthKey.m */,
+				A0C2ED632714323D0034889C /* TORX25519KeyPair.h */,
+				A0C2ED642714323D0034889C /* TORX25519KeyPair.m */,
 				A0F3439B23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.h */,
 				A0F3439C23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.m */,
 				D0B283B21B79D74C00D0DDA9 /* Supporting Files */,
@@ -547,6 +555,7 @@
 				D012AB911BC293BE004BE7A6 /* TORConfiguration.h in Headers */,
 				A0491C8127047E2B0061E355 /* TORAuthKey.h in Headers */,
 				D09E544E1C643B61001DB8F8 /* TORThread.h in Headers */,
+				A0C2ED662714323D0034889C /* TORX25519KeyPair.h in Headers */,
 				D012AB8E1BC2920E004BE7A6 /* Tor.h in Headers */,
 				D03197131F6493A500720808 /* TORLogging.h in Headers */,
 				92B529452613BB9900705FF4 /* TORControlReplyCode.h in Headers */,
@@ -567,6 +576,7 @@
 				D0B283AE1B79CF6600D0DDA9 /* TORConfiguration.h in Headers */,
 				A0491C8027047E2B0061E355 /* TORAuthKey.h in Headers */,
 				D0FBEC971B79BCF6005C7577 /* TORController.h in Headers */,
+				A0C2ED652714323D0034889C /* TORX25519KeyPair.h in Headers */,
 				D0FBEC711B79BAD7005C7577 /* Tor.h in Headers */,
 				D03197121F6493A500720808 /* TORLogging.h in Headers */,
 				92B5293D2613BB9900705FF4 /* TORControlReplyCode.h in Headers */,
@@ -968,6 +978,7 @@
 				A04496FE23A1839200E92CE3 /* TORCircuit.m in Sources */,
 				D012AB8D1BC2920C004BE7A6 /* TORController.m in Sources */,
 				D03197151F6493A500720808 /* TORLogging.m in Sources */,
+				A0C2ED682714323D0034889C /* TORX25519KeyPair.m in Sources */,
 				A0491C8327047E2B0061E355 /* TORAuthKey.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1009,6 +1020,7 @@
 				A04496FD23A1839200E92CE3 /* TORCircuit.m in Sources */,
 				D0B283AF1B79CF6600D0DDA9 /* TORConfiguration.m in Sources */,
 				D03197141F6493A500720808 /* TORLogging.m in Sources */,
+				A0C2ED672714323D0034889C /* TORX25519KeyPair.m in Sources */,
 				A0491C8227047E2B0061E355 /* TORAuthKey.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
