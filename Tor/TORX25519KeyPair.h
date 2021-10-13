@@ -60,10 +60,18 @@ NS_SWIFT_NAME(TorX25519KeyPair)
 /**
  Create a private \c TORAuthKey from this key material using the provided domain.
 
- @param domain The domain name, this private key is for. Must include the \c .onion domain!
+ @param domain The domain name, this private key is for. Must include the \c .onion TLD!
  @returns the private \c TORAuthKey of this key pair's private key  or \c nil if the \c domain is empty or this class doesn't contain a private key.
 */
 - (nullable TORAuthKey *)getPrivateAuthKeyForDomain:(nonnull NSString *)domain;
+
+/**
+ Create a private \c TORAuthKey from this key material using the provided domain.
+
+ @param url The domain, this private key is for.
+ @returns the private \c TORAuthKey of this key pair's private key  or \c nil if this class doesn't contain a private key.
+*/
+- (nullable TORAuthKey *)getPrivateAuthKeyForUrl:(nonnull NSURL *)url;
 
 /**
  Create a public \c TORAuthKey from this key material using the provided name.

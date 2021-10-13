@@ -52,7 +52,7 @@ NS_SWIFT_NAME(TorOnionAuth)
 
  @see https://2019.www.torproject.org/docs/tor-manual.html.en#_client_authorization
  */
-- (instancetype)initWithPrivateDirUrl:(NSURL *)privateUrl andPublicDirUrl:(NSURL *)publicUrl;
+- (instancetype)initWithPrivateDirUrl:(nullable NSURL *)privateUrl andPublicDirUrl:(nullable NSURL *)publicUrl NS_SWIFT_NAME(init(withPrivateDir:andPublicDir:));
 
 /**
  Initialize with a given directory. Will immediately read all keys on disk.
@@ -71,7 +71,7 @@ NS_SWIFT_NAME(TorOnionAuth)
 
  @see https://2019.www.torproject.org/docs/tor-manual.html.en#_client_authorization
  */
-- (instancetype)initWithPrivateDir:(NSString *)privatePath andPublicDir:(NSString *)publicPath;
+- (instancetype)initWithPrivateDir:(NSString *)privatePath andPublicDir:(NSString *)publicPath NS_SWIFT_NAME(init(withPrivateDir:andPublicDir:));
 
 
 /**
@@ -81,8 +81,10 @@ NS_SWIFT_NAME(TorOnionAuth)
  \c keys array.
 
  @param key A new or modified key.
- */
-- (void)set:(TORAuthKey *)key;
+
+ @returns \c YES on success, \c NO on failure.
+*/
+- (BOOL)set:(TORAuthKey *)key;
 
 /**
  Remove the key at the specified index.

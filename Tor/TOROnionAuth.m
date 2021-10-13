@@ -9,13 +9,13 @@
 
 @implementation TOROnionAuth
 
-- (instancetype)initWithPrivateDirUrl:(NSURL *)privateUrl andPublicDirUrl:(NSURL *)publicUrl
+- (instancetype)initWithPrivateDirUrl:(nullable NSURL *)privateUrl andPublicDirUrl:(nullable NSURL *)publicUrl
 {
     if ((self = [super init]))
     {
         if (![publicUrl.lastPathComponent isEqualToString:@"authorized_clients"])
         {
-            publicUrl = [publicUrl URLByAppendingPathComponent:@"authorized_clients"];
+            [publicUrl URLByAppendingPathComponent:@"authorized_clients" isDirectory:YES];
         }
 
         _privateUrl = privateUrl;
@@ -25,6 +25,7 @@
         NSMutableArray<NSURL *> *files = [NSMutableArray new];
         NSError *error;
 
+        NSURL *privateUrl = _privateUrl;
         if (privateUrl) {
             NSArray<NSURL *> *privateFiles = [NSFileManager.defaultManager
                                               contentsOfDirectoryAtURL:privateUrl
@@ -40,6 +41,7 @@
             }
         }
 
+        NSURL *publicUrl = _publicUrl;
         if (publicUrl) {
             NSArray<NSURL *> *publicFiles = [NSFileManager.defaultManager
                                               contentsOfDirectoryAtURL:publicUrl
@@ -77,7 +79,7 @@
 
 // MARK: Public Methods
 
-- (void)set:(TORAuthKey *)key
+- (BOOL)set:(TORAuthKey *)key
 {
     NSURL *privateUrl = _privateUrl;
     NSURL *publicUrl = _publicUrl;
@@ -110,7 +112,11 @@
         else {
             ((NSMutableArray *)_keys)[i] = key;
         }
+
+        return YES;
     }
+
+    return NO;
 }
 
 - (BOOL)removeKeyAtIndex:(NSInteger)idx

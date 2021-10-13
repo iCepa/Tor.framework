@@ -61,11 +61,10 @@
 }
 
 
+// MARK: Public Methods
+
 - (nullable TORAuthKey *)getPrivateAuthKeyForDomain:(nonnull NSString *)domain
 {
-    NSString *privateKey = _privateKey;
-    if (!privateKey) return nil;
-
     if (domain.length < 1) return nil;
 
     NSURLComponents *urlc = [NSURLComponents new];
@@ -74,6 +73,14 @@
 
     NSURL *url = urlc.URL;
     if (!url) return nil;
+
+    return [self getPrivateAuthKeyForUrl:url];
+}
+
+- (nullable TORAuthKey *)getPrivateAuthKeyForUrl:(nonnull NSURL *)url
+{
+    NSString *privateKey = _privateKey;
+    if (!privateKey) return nil;
 
     return [[TORAuthKey alloc] initPrivate:privateKey forDomain:url];
 }
@@ -88,6 +95,8 @@
     return [[TORAuthKey alloc] initPublic:publicKey withName:name];
 }
 
+
+// MARK: Public Class Methods
 
 + (nullable NSString *)base32Encode:(NSData *)raw
 {
