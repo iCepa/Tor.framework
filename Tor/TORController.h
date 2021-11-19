@@ -26,6 +26,7 @@ NS_SWIFT_NAME(TorController)
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithSocketURL:(NSURL *)url NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithSocketHost:(NSString *)host port:(in_port_t)port NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithControlPortFile:(NSURL *)file;
 
 - (BOOL)connect:(out NSError **)error;
 - (void)disconnect;

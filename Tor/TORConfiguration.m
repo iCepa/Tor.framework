@@ -11,78 +11,76 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation TORConfiguration
 
-static NSString * const kDataDirectory = @"DataDirectory";
-static NSString * const kControlSocket = @"ControlSocket";
-static NSString * const kSocksPort = @"SocksPort";
-static NSString * const kCookieAuthentication = @"CookieAuthentication";
-
 - (NSDictionary *)options {
-    if (!_options)
-        _options = [NSDictionary new];
+    if (!_options) _options = [NSDictionary new];
     
     return _options;
 }
 
 - (NSArray *)arguments {
-    if (!_arguments)
-        _arguments = [NSArray new];
+    if (!_arguments) _arguments = [NSArray new];
     
     return _arguments;
 }
 
-- (void)setDataDirectory:(nullable NSURL *)dataDirectory {
-    NSMutableDictionary *options = [self.options mutableCopy];
-    if (!dataDirectory) {
-        [options removeObjectForKey:kDataDirectory];
-    } else {
-        options[kDataDirectory] = @((const char * _Nonnull)dataDirectory.fileSystemRepresentation);
+- (nullable NSURL *)controlPortFile {
+    return [self.dataDirectory URLByAppendingPathComponent:@"controlport"];
+}
+
+- (nullable NSData *)cookie {
+    NSURL *url = [self.dataDirectory URLByAppendingPathComponent:@"control_auth_cookie"];
+
+    if (!url) return nil;
+
+    return [[NSData alloc] initWithContentsOfURL:url];
+}
+
+- (NSArray<NSString *> *)compile {
+    NSMutableArray<NSString *> *arguments = [NSMutableArray new];
+
+    if (self.ignoreMissingTorrc) {
+        [arguments addObjectsFromArray:@[@"--allow-missing-torrc", @"--ignore-missing-torrc"]];
     }
-    self.options = options;
-}
 
-- (nullable NSURL *)dataDirectory {
-    NSString *path = self.options[kDataDirectory];
-    return (path ? [NSURL fileURLWithPath:path] : nil);
-}
-
-- (void)setControlSocket:(nullable NSURL *)controlSocket {
-    NSMutableDictionary *options = [self.options mutableCopy];
-    if (!controlSocket) {
-        [options removeObjectForKey:kControlSocket];
-    } else {
-        options[kControlSocket] = @((const char * _Nonnull)controlSocket.fileSystemRepresentation);
+    NSString *dataDir = self.dataDirectory.path;
+    if (dataDir) {
+        [arguments addObjectsFromArray:@[@"--DataDirectory", dataDir]];
     }
-    self.options = options;
-}
 
-- (nullable NSURL *)controlSocket {
-    NSString *path = self.options[kControlSocket];
-    return (path ? [NSURL fileURLWithPath:path] : nil);
-}
+    if (self.cookieAuthentication) {
+        [arguments addObjectsFromArray:@[@"--CookieAuthentication", @"1"]];
+    }
 
-- (void)setSocksURL:(nullable NSURL *)socksURL {
-    NSMutableDictionary *options = [_options mutableCopy];
-    [options setObject:[NSString stringWithFormat:@"unix:%s", socksURL.fileSystemRepresentation] forKey:kSocksPort];
-    self.options = options;
-}
+    NSString *controlPortFile = self.controlPortFile.path;
+    if (self.autoControlPort && self.controlPortFile.isFileURL && controlPortFile) {
+        [arguments addObjectsFromArray:@[@"--ControlPort", @"auto", @"--ControlPortWriteToFile", controlPortFile]];
+    }
 
-- (nullable NSURL *)socksURL {
-    NSArray<NSString *> *components = [self.options[kSocksPort] componentsSeparatedByString:@":"];
-    if ([components.firstObject isEqualToString:@"unix"])
-        return [NSURL fileURLWithPath:[[components subarrayWithRange:NSMakeRange(1, components.count - 1)] componentsJoinedByString:@":"]];
-    
-    return nil;
-}
+    NSString *controlSocket = self.controlSocket.path;
+    if (self.controlSocket.isFileURL && controlSocket) {
+        [arguments addObjectsFromArray:@[@"--ControlSocket", controlSocket]];
+    }
 
-- (void)setCookieAuthentication:(nullable NSNumber *)cookieAuthentication {
-    NSMutableDictionary *options = [self.options mutableCopy];
-    options[kCookieAuthentication] = (cookieAuthentication.boolValue ? @"1" : @"0");
-    self.options = options;
-}
+    NSString *socksPath = self.socksURL.path;
+    if (self.socksURL.isFileURL && socksPath) {
+        [arguments addObjectsFromArray:@[@"--SocksPort", [NSString stringWithFormat:@"unix:%@", socksPath]]];
+    }
 
-- (nullable NSNumber *)cookieAuthentication {
-    NSString *cookieAuthentication = self.options[kCookieAuthentication];
-    return (cookieAuthentication ? @(cookieAuthentication.boolValue) : nil);
+    NSString *clientAuthDir = self.clientAuthDirectory.path;
+    if (clientAuthDir) {
+        [arguments addObjectsFromArray:@[@"--ClientOnionAuthDir", clientAuthDir]];
+    }
+
+    [arguments addObjectsFromArray:self.arguments];
+
+    for (NSString *key in self.options.allKeys) {
+        [arguments addObject:[NSString stringWithFormat:@"--%@", key]];
+
+        NSString *value = self.options[key];
+        if (value) [arguments addObject:value];
+    }
+
+    return arguments;
 }
 
 @end

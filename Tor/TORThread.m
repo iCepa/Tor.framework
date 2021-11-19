@@ -32,12 +32,7 @@ static __weak TORThread *_thread = nil;
 }
 
 - (instancetype)initWithConfiguration:(nullable TORConfiguration *)configuration {
-    NSMutableArray *arguments = [configuration.arguments mutableCopy];
-    for (NSString *key in configuration.options) {
-        [arguments addObject:[NSString stringWithFormat:@"--%@", key]];
-        [arguments addObject:(NSString * _Nonnull)[configuration.options objectForKey:key]];
-    }
-    return [self initWithArguments:arguments];
+    return [self initWithArguments:[configuration compile]];
 }
 
 - (instancetype)initWithArguments:(nullable NSArray<NSString *> *)arguments {

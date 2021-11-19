@@ -76,6 +76,33 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
     return self;
 }
 
+- (instancetype)initWithControlPortFile:(NSURL *)file {
+    NSParameterAssert(file.fileURL);
+
+    // Expected example content:
+    // PORT=127.0.0.1:49651
+
+    NSError *error;
+    NSString *content = [[NSString alloc]
+                         initWithContentsOfURL:file
+                         encoding:NSUTF8StringEncoding error:&error];
+
+    NSAssert(!error, error.localizedDescription);
+
+    NSArray<NSString *> *address = [[[content componentsSeparatedByString:@"="]
+                                         .lastObject
+                                     stringByTrimmingCharactersInSet:
+                                         NSCharacterSet.whitespaceAndNewlineCharacterSet]
+                                    componentsSeparatedByString:@":"];
+
+    NSString *host = address.firstObject;
+    NSAssert(host, @"Provided file doesn't seem to be a valid control port file as written by Tor!");
+
+    NSInteger port = address.lastObject.integerValue;
+
+    return [self initWithSocketHost:host port:(in_port_t) port];
+}
+
 - (void)dealloc {
     if (_channel)
         dispatch_io_close(_channel, DISPATCH_IO_STOP);
