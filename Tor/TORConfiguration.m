@@ -27,6 +27,10 @@ NS_ASSUME_NONNULL_BEGIN
     return [self.dataDirectory URLByAppendingPathComponent:@"controlport"];
 }
 
+- (nullable NSURL *)serviceAuthDirectory {
+    return [self.hiddenServiceDirectory URLByAppendingPathComponent:@"authorized_clients"];
+}
+
 - (BOOL)isLocked {
     NSURL *url = [self.dataDirectory URLByAppendingPathComponent:@"lock"];
     NSString *path = url.path;
@@ -49,6 +53,14 @@ NS_ASSUME_NONNULL_BEGIN
 
     if (self.ignoreMissingTorrc) {
         [arguments addObjectsFromArray:@[@"--allow-missing-torrc", @"--ignore-missing-torrc"]];
+    }
+
+    if (self.avoidDiskWrites) {
+        [arguments addObjectsFromArray:@[@"--AvoidDiskWrites", @"1"]];
+    }
+
+    if (self.clientOnly) {
+        [arguments addObjectsFromArray:@[@"--ClientOnly", @"1"]];
     }
 
     NSString *dataDir = self.dataDirectory.path;
@@ -76,8 +88,13 @@ NS_ASSUME_NONNULL_BEGIN
     }
 
     NSString *clientAuthDir = self.clientAuthDirectory.path;
-    if (clientAuthDir) {
+    if (self.clientAuthDirectory.isFileURL && clientAuthDir) {
         [arguments addObjectsFromArray:@[@"--ClientOnionAuthDir", clientAuthDir]];
+    }
+
+    NSString *hiddenServiceDir = self.hiddenServiceDirectory.path;
+    if (!self.clientOnly && self.hiddenServiceDirectory.isFileURL && hiddenServiceDir) {
+        [arguments addObjectsFromArray:@[@"--HiddenServiceDir", hiddenServiceDir]];
     }
 
     [arguments addObjectsFromArray:self.arguments];

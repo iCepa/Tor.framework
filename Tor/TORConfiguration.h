@@ -17,10 +17,14 @@ NS_SWIFT_NAME(TorConfiguration)
 @property (nonatomic, copy, nullable) NSURL *controlSocket;
 @property (nonatomic, copy, nullable) NSURL *socksURL;
 @property (nonatomic, copy, nullable) NSURL *clientAuthDirectory;
+@property (nonatomic, copy, nullable) NSURL *hiddenServiceDirectory;
+@property (nonatomic, copy, nullable, readonly) NSURL *serviceAuthDirectory;
 
 @property (nonatomic) BOOL ignoreMissingTorrc;
 @property (nonatomic) BOOL cookieAuthentication;
 @property (nonatomic) BOOL autoControlPort;
+@property (nonatomic) BOOL avoidDiskWrites;
+@property (nonatomic) BOOL clientOnly;
 
 @property (nonatomic, readonly) BOOL isLocked;
 @property (nonatomic, copy, nullable, readonly) NSData *cookie;
