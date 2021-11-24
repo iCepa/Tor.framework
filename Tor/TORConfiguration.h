@@ -22,6 +22,7 @@ NS_SWIFT_NAME(TorConfiguration)
 @property (nonatomic) BOOL cookieAuthentication;
 @property (nonatomic) BOOL autoControlPort;
 
+@property (nonatomic, readonly) BOOL isLocked;
 @property (nonatomic, copy, nullable, readonly) NSData *cookie;
 
 @property (nonatomic, copy, null_resettable) NSDictionary<NSString *, NSString *> *options;

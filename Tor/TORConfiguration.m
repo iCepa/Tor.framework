@@ -27,10 +27,19 @@ NS_ASSUME_NONNULL_BEGIN
     return [self.dataDirectory URLByAppendingPathComponent:@"controlport"];
 }
 
+- (BOOL)isLocked {
+    NSURL *url = [self.dataDirectory URLByAppendingPathComponent:@"lock"];
+    NSString *path = url.path;
+
+    if (!path || !url.isFileURL) return false;
+
+    return [NSFileManager.defaultManager fileExistsAtPath:path];
+}
+
 - (nullable NSData *)cookie {
     NSURL *url = [self.dataDirectory URLByAppendingPathComponent:@"control_auth_cookie"];
 
-    if (!url) return nil;
+    if (!url || !url.isFileURL) return nil;
 
     return [[NSData alloc] initWithContentsOfURL:url];
 }
@@ -43,7 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
     }
 
     NSString *dataDir = self.dataDirectory.path;
-    if (dataDir) {
+    if (self.dataDirectory.isFileURL && dataDir) {
         [arguments addObjectsFromArray:@[@"--DataDirectory", dataDir]];
     }
 
