@@ -15,7 +15,7 @@
     {
         if (![publicUrl.lastPathComponent isEqualToString:@"authorized_clients"])
         {
-            [publicUrl URLByAppendingPathComponent:@"authorized_clients" isDirectory:YES];
+            publicUrl = [publicUrl URLByAppendingPathComponent:@"authorized_clients" isDirectory:YES];
         }
 
         _privateUrl = privateUrl;
