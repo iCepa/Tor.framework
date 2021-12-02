@@ -55,7 +55,7 @@ Alternatively, you may use the following to use binary-compiled versions of Tor.
 correspond to releases in GitHub:
 
 ```ogdl
-binary "https://icepa.github.io/Tor.framework/Tor.json" == 406.8.1
+binary "https://icepa.github.io/Tor.framework/Tor.json" == 406.8.2
 ```
 
 For available precompiled versions, see [docs/Tor.json](docs/Tor.json). Since Tor 0.3.5.2, 
@@ -120,10 +120,16 @@ in a way, which is independent of your personal setup. Check other entries for h
 
 ### CocoaPods
 
-Directly reference the provided podspec like so:
+Nowadays, Tor.framework can be found on the CocoaPods registry:
 
 ```ruby
-pod 'Tor', podspec: 'https://raw.githubusercontent.com/iCepa/Tor.framework/v405.8.1/Tor.podspec'
+pod 'Tor', '~> 406.8.2'
+```
+
+If you want to directly use it, you need to reference the provided podspec like so:
+
+```ruby
+pod 'Tor', podspec: 'https://raw.githubusercontent.com/iCepa/Tor.framework/v406.8.2/Tor.podspec'
 ```
 
 You could also reference master, to always get the latest version:
@@ -195,8 +201,9 @@ to a limitation of CocoaPods!*
 ## Known Issues
 
 - Carthage warns about the xcconfigs dependency being seemingly unused.
-  It isn't. It's only xcconfig files containing build settings, so nothing actually ends up in the build
-  product. Unfortunately Carthage can't be configured to not throw this warning.
+  It isn't. It's only xcconfig files containing build settings, so nothing actually 
+  ends up in the build product. 
+  Unfortunately Carthage can't be configured to not throw this warning.
 
 ## License
 
