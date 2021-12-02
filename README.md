@@ -167,6 +167,31 @@ TORController *controller = [[TORController alloc] initWithSocketURL:configurati
 }];
 ```
 
+### GeoIP
+
+This works only with [CocoaPods](https://cocoapods.org):
+
+In your `Podfile` use subspec `GeoIP` instead of the root spec:
+
+```ruby
+pod 'Tor/GeoIP'
+```
+
+The subspec will create a "GeoIP" bundle and install a run script phase which 
+will download the appropriate GeoIP files.
+
+To use it with Tor, add this to your configuration:
+
+```objc
+TORConfiguration *configuration = [TORConfiguration new];
+configuration.geoipFile = NSBundle.geoIpBundle.geoipFile;
+configuration.geoip6File = NSBundle.geoIpBundle.geoip6File;
+```
+
+*ATTENTION: You might need to build two times to acquire the geoip files, due
+to a limitation of CocoaPods!*
+
+
 ## Known Issues
 
 - Carthage warns about the xcconfigs dependency being seemingly unused.

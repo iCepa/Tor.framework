@@ -97,6 +97,16 @@ NS_ASSUME_NONNULL_BEGIN
         [arguments addObjectsFromArray:@[@"--HiddenServiceDir", hiddenServiceDir]];
     }
 
+    NSString *geoipFile = self.geoipFile.path;
+    if (self.geoipFile.isFileURL && geoipFile) {
+        [arguments addObjectsFromArray:@[@"--GeoIPFile", geoipFile]];
+    }
+
+    NSString *geoip6File = self.geoip6File.path;
+    if (self.geoip6File.isFileURL && geoip6File) {
+        [arguments addObjectsFromArray:@[@"--GeoIPv6File", geoip6File]];
+    }
+
     [arguments addObjectsFromArray:self.arguments];
 
     for (NSString *key in self.options.allKeys) {

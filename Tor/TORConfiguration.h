@@ -19,6 +19,8 @@ NS_SWIFT_NAME(TorConfiguration)
 @property (nonatomic, copy, nullable) NSURL *clientAuthDirectory;
 @property (nonatomic, copy, nullable) NSURL *hiddenServiceDirectory;
 @property (nonatomic, copy, nullable, readonly) NSURL *serviceAuthDirectory;
+@property (nonatomic, copy, nullable) NSURL *geoipFile;
+@property (nonatomic, copy, nullable) NSURL *geoip6File;
 
 @property (nonatomic) BOOL ignoreMissingTorrc;
 @property (nonatomic) BOOL cookieAuthentication;

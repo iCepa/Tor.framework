@@ -43,6 +43,10 @@
 		A0491C8127047E2B0061E355 /* TORAuthKey.h in Headers */ = {isa = PBXBuildFile; fileRef = A0491C7E27047E2B0061E355 /* TORAuthKey.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A0491C8227047E2B0061E355 /* TORAuthKey.m in Sources */ = {isa = PBXBuildFile; fileRef = A0491C7F27047E2B0061E355 /* TORAuthKey.m */; };
 		A0491C8327047E2B0061E355 /* TORAuthKey.m in Sources */ = {isa = PBXBuildFile; fileRef = A0491C7F27047E2B0061E355 /* TORAuthKey.m */; };
+		A049FDDF2759019D001A39C8 /* NSBundle+GeoIP.h in Headers */ = {isa = PBXBuildFile; fileRef = A049FDDD2759019D001A39C8 /* NSBundle+GeoIP.h */; };
+		A049FDE02759019D001A39C8 /* NSBundle+GeoIP.h in Headers */ = {isa = PBXBuildFile; fileRef = A049FDDD2759019D001A39C8 /* NSBundle+GeoIP.h */; };
+		A049FDE12759019D001A39C8 /* NSBundle+GeoIP.m in Sources */ = {isa = PBXBuildFile; fileRef = A049FDDE2759019D001A39C8 /* NSBundle+GeoIP.m */; };
+		A049FDE22759019D001A39C8 /* NSBundle+GeoIP.m in Sources */ = {isa = PBXBuildFile; fileRef = A049FDDE2759019D001A39C8 /* NSBundle+GeoIP.m */; };
 		A082A197239E968700A0091A /* TORNode.h in Headers */ = {isa = PBXBuildFile; fileRef = A082A195239E968700A0091A /* TORNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A082A198239E968700A0091A /* TORNode.h in Headers */ = {isa = PBXBuildFile; fileRef = A082A195239E968700A0091A /* TORNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A082A199239E968700A0091A /* TORNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A082A196239E968700A0091A /* TORNode.m */; };
@@ -238,6 +242,8 @@
 		A0491C79270479C60061E355 /* TOROnionAuth.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TOROnionAuth.m; sourceTree = "<group>"; };
 		A0491C7E27047E2B0061E355 /* TORAuthKey.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TORAuthKey.h; sourceTree = "<group>"; };
 		A0491C7F27047E2B0061E355 /* TORAuthKey.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TORAuthKey.m; sourceTree = "<group>"; };
+		A049FDDD2759019D001A39C8 /* NSBundle+GeoIP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSBundle+GeoIP.h"; sourceTree = "<group>"; };
+		A049FDDE2759019D001A39C8 /* NSBundle+GeoIP.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+GeoIP.m"; sourceTree = "<group>"; };
 		A082A195239E968700A0091A /* TORNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TORNode.h; sourceTree = "<group>"; };
 		A082A196239E968700A0091A /* TORNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TORNode.m; sourceTree = "<group>"; };
 		A088DB0622E5F6B70018EF4D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -493,6 +499,8 @@
 				A0491C7F27047E2B0061E355 /* TORAuthKey.m */,
 				A0C2ED632714323D0034889C /* TORX25519KeyPair.h */,
 				A0C2ED642714323D0034889C /* TORX25519KeyPair.m */,
+				A049FDDD2759019D001A39C8 /* NSBundle+GeoIP.h */,
+				A049FDDE2759019D001A39C8 /* NSBundle+GeoIP.m */,
 				A0F3439B23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.h */,
 				A0F3439C23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.m */,
 				D0B283B21B79D74C00D0DDA9 /* Supporting Files */,
@@ -550,6 +558,7 @@
 				92B5295D2613BD1F00705FF4 /* TORControlCommand.h in Headers */,
 				D012AB901BC293BE004BE7A6 /* TORController.h in Headers */,
 				A0F3439E23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.h in Headers */,
+				A049FDE02759019D001A39C8 /* NSBundle+GeoIP.h in Headers */,
 				A082A198239E968700A0091A /* TORNode.h in Headers */,
 				A04496FC23A1839200E92CE3 /* TORCircuit.h in Headers */,
 				D012AB911BC293BE004BE7A6 /* TORConfiguration.h in Headers */,
@@ -571,6 +580,7 @@
 				92B529552613BD1F00705FF4 /* TORControlCommand.h in Headers */,
 				D0FBEC991B79BCF6005C7577 /* TORThread.h in Headers */,
 				A0F3439D23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.h in Headers */,
+				A049FDDF2759019D001A39C8 /* NSBundle+GeoIP.h in Headers */,
 				A082A197239E968700A0091A /* TORNode.h in Headers */,
 				A04496FB23A1839200E92CE3 /* TORCircuit.h in Headers */,
 				D0B283AE1B79CF6600D0DDA9 /* TORConfiguration.h in Headers */,
@@ -971,6 +981,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A082A19A239E968700A0091A /* TORNode.m in Sources */,
+				A049FDE22759019D001A39C8 /* NSBundle+GeoIP.m in Sources */,
 				D0198A9B1C63D97C00EA0043 /* TORThread.m in Sources */,
 				D012AB8F1BC29220004BE7A6 /* TORConfiguration.m in Sources */,
 				A0491C7D270479C60061E355 /* TOROnionAuth.m in Sources */,
@@ -1013,6 +1024,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A082A199239E968700A0091A /* TORNode.m in Sources */,
+				A049FDE12759019D001A39C8 /* NSBundle+GeoIP.m in Sources */,
 				D0FBEC981B79BCF6005C7577 /* TORController.m in Sources */,
 				D0FBEC9A1B79BCF6005C7577 /* TORThread.m in Sources */,
 				A0491C7C270479C60061E355 /* TOROnionAuth.m in Sources */,

@@ -25,3 +25,4 @@
 #import <Tor/TORAuthKey.h>
 #import <Tor/TOROnionAuth.h>
 #import <Tor/TORX25519KeyPair.h>
+#import <Tor/NSBundle+GeoIP.h>
