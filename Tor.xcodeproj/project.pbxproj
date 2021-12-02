@@ -43,8 +43,8 @@
 		A0491C8127047E2B0061E355 /* TORAuthKey.h in Headers */ = {isa = PBXBuildFile; fileRef = A0491C7E27047E2B0061E355 /* TORAuthKey.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A0491C8227047E2B0061E355 /* TORAuthKey.m in Sources */ = {isa = PBXBuildFile; fileRef = A0491C7F27047E2B0061E355 /* TORAuthKey.m */; };
 		A0491C8327047E2B0061E355 /* TORAuthKey.m in Sources */ = {isa = PBXBuildFile; fileRef = A0491C7F27047E2B0061E355 /* TORAuthKey.m */; };
-		A049FDDF2759019D001A39C8 /* NSBundle+GeoIP.h in Headers */ = {isa = PBXBuildFile; fileRef = A049FDDD2759019D001A39C8 /* NSBundle+GeoIP.h */; };
-		A049FDE02759019D001A39C8 /* NSBundle+GeoIP.h in Headers */ = {isa = PBXBuildFile; fileRef = A049FDDD2759019D001A39C8 /* NSBundle+GeoIP.h */; };
+		A049FDDF2759019D001A39C8 /* NSBundle+GeoIP.h in Headers */ = {isa = PBXBuildFile; fileRef = A049FDDD2759019D001A39C8 /* NSBundle+GeoIP.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A049FDE02759019D001A39C8 /* NSBundle+GeoIP.h in Headers */ = {isa = PBXBuildFile; fileRef = A049FDDD2759019D001A39C8 /* NSBundle+GeoIP.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A049FDE12759019D001A39C8 /* NSBundle+GeoIP.m in Sources */ = {isa = PBXBuildFile; fileRef = A049FDDE2759019D001A39C8 /* NSBundle+GeoIP.m */; };
 		A049FDE22759019D001A39C8 /* NSBundle+GeoIP.m in Sources */ = {isa = PBXBuildFile; fileRef = A049FDDE2759019D001A39C8 /* NSBundle+GeoIP.m */; };
 		A082A197239E968700A0091A /* TORNode.h in Headers */ = {isa = PBXBuildFile; fileRef = A082A195239E968700A0091A /* TORNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
