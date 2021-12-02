@@ -43,7 +43,7 @@ Pod::Spec.new do |m|
 
     s.script_phase = {
       :name => 'Load GeoIP files',
-      :execution_position => :before_headers,
+      :execution_position => :before_compile,
       :script => <<-SCRIPT
       if [ ! -f "$PODS_TARGET_SRCROOT/geoip" ] || \
           test `find "$PODS_TARGET_SRCROOT" -name geoip -empty` || \
