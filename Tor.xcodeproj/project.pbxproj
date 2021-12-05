@@ -745,6 +745,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D08892E71DDA692C009DB0CD /* Build configuration list for PBXNativeTarget "Host-Mac" */;
 			buildPhases = (
+				A05A527B275D47EE0081364D /* ShellScript */,
 				D08892E31DDA692C009DB0CD /* Sources */,
 				D08892E51DDA692C009DB0CD /* Frameworks */,
 				D08892E61DDA692C009DB0CD /* Resources */,
@@ -780,6 +781,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D0B283CC1B79D7FB00D0DDA9 /* Build configuration list for PBXNativeTarget "Host-iOS" */;
 			buildPhases = (
+				A05A527A275D47290081364D /* ShellScript */,
 				D0B283B41B79D7FA00D0DDA9 /* Sources */,
 				D0B283B51B79D7FA00D0DDA9 /* Frameworks */,
 				D0B283B61B79D7FA00D0DDA9 /* Resources */,
@@ -972,6 +974,40 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"$SRCROOT\"/Tor/version.sh\n";
+		};
+		A05A527A275D47290081364D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ ! -f \"$SRCROOT/geoip\" ] || \\\n  test `find \"$SRCROOT\" -name geoip -empty` || \\\n  test `find \"$SRCROOT\" -name geoip -mtime +1`\nthen\n  curl -Lo \"$SRCROOT/geoip\" https://gitweb.torproject.org/tor.git/plain/src/config/geoip\nfi\n\nif [ ! -f \"$SRCROOT/geoip6\" ] || \\\n  test `find \"$SRCROOT\" -name geoip6 -empty` || \\\n  test `find \"$SRCROOT\" -name geoip6 -mtime +1`\nthen\n  curl -Lo \"$SRCROOT/geoip6\" https://gitweb.torproject.org/tor.git/plain/src/config/geoip6\nfi\n";
+		};
+		A05A527B275D47EE0081364D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ ! -f \"$SRCROOT/geoip\" ] || \\\n  test `find \"$SRCROOT\" -name geoip -empty` || \\\n  test `find \"$SRCROOT\" -name geoip -mtime +1`\nthen\n  curl -Lo \"$SRCROOT/geoip\" https://gitweb.torproject.org/tor.git/plain/src/config/geoip\nfi\n\nif [ ! -f \"$SRCROOT/geoip6\" ] || \\\n  test `find \"$SRCROOT\" -name geoip6 -empty` || \\\n  test `find \"$SRCROOT\" -name geoip6 -mtime +1`\nthen\n  curl -Lo \"$SRCROOT/geoip6\" https://gitweb.torproject.org/tor.git/plain/src/config/geoip6\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

@@ -4,6 +4,8 @@ orconfig.h
 *.xccheckout
 Carthage/Build
 Tor.framework.zip
+geoip
+geoip6
 
 # Created by https://www.gitignore.io/api/macos,xcode,swift,objective-c
 
