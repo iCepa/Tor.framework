@@ -4,7 +4,7 @@ ARCHS=($ARCHS)
 
 # We need gettext to build Tor.
 # This extends the path to look in some common locations (for example, if installed via Homebrew).
-PATH=$PATH:/usr/local/bin:/usr/local/opt/gettext/bin:/usr/local/opt/automake/bin:/usr/local/opt/aclocal/bin
+PATH=$PATH:/usr/local/bin:/usr/local/opt/gettext/bin:/usr/local/opt/automake/bin:/usr/local/opt/aclocal/bin:/opt/homebrew/bin
 
 # Disable PT_DENY_ATTACH because it is private API.
 PSEUDO_SYS_INCLUDE_DIR="${CONFIGURATION_TEMP_DIR}/tor-sys"

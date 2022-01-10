@@ -4,7 +4,7 @@ ARCHS=($ARCHS)
 
 # We need gettext
 # This extends the path to look in some common locations (for example, if installed via Homebrew)
-PATH=$PATH:/usr/local/bin:/usr/local/opt/gettext/bin
+PATH=$PATH:/usr/local/bin:/usr/local/opt/gettext/bin:/opt/homebrew/bin
 
 # Generate the configure script (necessary for version control distributions)
 if [[ ! -f ./configure ]]; then
