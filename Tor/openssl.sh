@@ -58,7 +58,7 @@ do
     elif [[ "${PLATFORM_NAME}" == "iphonesimulator" ]]; then
         if [[ "${ARCH}" == "arm64" ]]; then
             PLATFORM_FLAGS="no-async zlib-dynamic enable-ec_nistp_64_gcc_128"
-            CONFIG="ios64-xcrun"
+            CONFIG="iossimulator-xcrun"
         elif [[ "${ARCH}" == "i386" ]]; then
             PLATFORM_FLAGS="no-asm"
             CONFIG="iossimulator-xcrun"
