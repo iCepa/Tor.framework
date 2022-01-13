@@ -149,7 +149,7 @@ Here is an example of integrating Tor with `NSURLSession`:
 TORConfiguration *configuration = [TORConfiguration new];
 configuration.ignoreMissingTorrc = YES;
 configuration.cookieAuthentication = YES;
-configuration.dataDirectory = [NSURL URLWithString:NSTemporaryDirectory()];
+configuration.dataDirectory = [NSURL fileURLWithPath:NSTemporaryDirectory()];
 configuration.controlSocket = [configuration.dataDirectory URLByAppendingPathComponent:@"control_port"];
 
 TORThread *thread = [[TORThread alloc] initWithConfiguration:configuration];
