@@ -68,7 +68,6 @@
 		A0F008FA27906DBA0073D36D /* TORConfigurationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TORConfigurationTests.m; sourceTree = "<group>"; };
 		A0F008FB27906DBA0073D36D /* TORControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TORControllerTests.m; sourceTree = "<group>"; };
 		A0F008FE27906F620073D36D /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; name = .gitignore; path = ../.gitignore; sourceTree = "<group>"; };
-		A0F008FF27906F620073D36D /* .gitmodules */ = {isa = PBXFileReference; lastKnownFileType = text; name = .gitmodules; path = ../.gitmodules; sourceTree = "<group>"; };
 		A0F0090127906F970073D36D /* tor.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = tor.sh; path = ../Tor/tor.sh; sourceTree = "<group>"; };
 		A0F0090227906F970073D36D /* xz.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = xz.sh; path = ../Tor/xz.sh; sourceTree = "<group>"; };
 		A0F0090327906F970073D36D /* libevent.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = libevent.sh; path = ../Tor/libevent.sh; sourceTree = "<group>"; };
@@ -194,7 +193,6 @@
 				A0F008F827906CA30073D36D /* Podfile */,
 				A0F008F727906CA30073D36D /* Podfile.lock */,
 				A0F008FE27906F620073D36D /* .gitignore */,
-				A0F008FF27906F620073D36D /* .gitmodules */,
 				A0F0090227906F970073D36D /* xz.sh */,
 				A0F0090427906F970073D36D /* openssl.sh */,
 				A0F0090327906F970073D36D /* libevent.sh */,

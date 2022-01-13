@@ -19,10 +19,10 @@ Pod::Spec.new do |m|
   m.ios.deployment_target = '9.0'
   m.macos.deployment_target = '10.9'
 
-  m.prepare_command = <<-SCRIPT
-    touch geoip
-    touch geoip6
-  SCRIPT
+  m.prepare_command = <<-ENDSCRIPT
+touch geoip
+touch geoip6
+ENDSCRIPT
 
   m.subspec 'Core' do |s|
     s.xcconfig = {
@@ -41,29 +41,68 @@ Pod::Spec.new do |m|
 
     s.script_phases = [
       {
-        :name => 'Checkout Submodules',
-        :execution_position => :before_compile,
-        :script => 'git submodule update --init --recursive',
-      },
-      {
         :name => 'Build XZ',
         :execution_position => :before_compile,
-        :script => 'cd $PODS_TARGET_SRCROOT/Tor/xz && $PODS_TARGET_SRCROOT/Tor/xz.sh',
+        :script => <<-ENDSCRIPT
+cd "${PODS_TARGET_SRCROOT}/Tor"
+
+if [ ! -d xz ]
+then
+  git clone --branch v5.2.5 --single-branch --recurse-submodules https://git.tukaani.org/xz.git
+fi
+
+cd xz
+
+../xz.sh
+ENDSCRIPT
       },
       {
         :name => 'Build OpenSSL',
         :execution_position => :before_compile,
-        :script => 'cd $PODS_TARGET_SRCROOT/Tor/openssl && $PODS_TARGET_SRCROOT/Tor/openssl.sh',
+        :script => <<-ENDSCRIPT
+cd "${PODS_TARGET_SRCROOT}/Tor"
+
+if [ ! -d openssl ]
+then
+  git clone --branch OpenSSL_1_1_1m --single-branch --recurse-submodules https://github.com/openssl/openssl.git
+fi
+
+cd openssl
+
+../openssl.sh
+ENDSCRIPT
       },
       {
         :name => 'Build libevent',
         :execution_position => :before_compile,
-        :script => 'cd $PODS_TARGET_SRCROOT/Tor/libevent && $PODS_TARGET_SRCROOT/Tor/libevent.sh',
+        :script => <<-ENDSCRIPT
+cd "${PODS_TARGET_SRCROOT}/Tor"
+
+if [ ! -d libevent ]
+then
+  git clone --branch release-2.1.12-stable --single-branch --recurse-submodules https://github.com/libevent/libevent.git
+fi
+
+cd libevent
+
+../libevent.sh
+ENDSCRIPT
       },
       {
         :name => 'Build Tor',
         :execution_position => :before_compile,
-        :script => 'cd $PODS_TARGET_SRCROOT/Tor/tor && $PODS_TARGET_SRCROOT/Tor/tor.sh',
+        :script => <<-ENDSCRIPT
+cd "${PODS_TARGET_SRCROOT}/Tor"
+
+if [ ! -d tor ]
+then
+  git clone --branch tor-0.4.6.9 --single-branch --recurse-submodules https://git.torproject.org/tor.git
+fi
+
+cd tor
+
+../tor.sh
+ENDSCRIPT
       },
     ]
 
@@ -78,7 +117,7 @@ Pod::Spec.new do |m|
     s.script_phase = {
       :name => 'Load GeoIP files',
       :execution_position => :before_compile,
-      :script => <<-SCRIPT
+      :script => <<-ENDSCRIPT
       if [ ! -f "$PODS_TARGET_SRCROOT/geoip" ] || \
           test `find "$PODS_TARGET_SRCROOT" -name geoip -empty` || \
           test `find "$PODS_TARGET_SRCROOT" -name geoip -mtime +1`
@@ -92,7 +131,7 @@ Pod::Spec.new do |m|
       then
         curl -Lo "$PODS_TARGET_SRCROOT/geoip6" https://gitweb.torproject.org/tor.git/plain/src/config/geoip6?h=tor-#{tor_version}
       fi
-      SCRIPT
+      ENDSCRIPT
     }
 
     s.resource_bundles = {
