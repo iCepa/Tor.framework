@@ -1,6 +1,0 @@
-framework module Pods_Tor_Example_Mac {
-  umbrella header "Pods-Tor_Example_Mac-umbrella.h"
-
-  export *
-  module * { export * }
-}

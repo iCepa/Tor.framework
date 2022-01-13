@@ -1,6 +1,0 @@
-framework module Tor {
-  umbrella header "Tor-iOS-umbrella.h"
-
-  export *
-  module * { export * }
-}
