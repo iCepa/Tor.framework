@@ -20,7 +20,6 @@ Pod::Spec.new do |m|
   m.macos.deployment_target = '10.9'
 
   m.prepare_command = <<-SCRIPT
-    git submodule update --init --recursive
     touch geoip
     touch geoip6
   SCRIPT
@@ -41,6 +40,11 @@ Pod::Spec.new do |m|
     }
 
     s.script_phases = [
+      {
+        :name => 'Checkout Submodules',
+        :execution_position => :before_compile,
+        :script => 'git submodule update --init --recursive',
+      },
       {
         :name => 'Build XZ',
         :execution_position => :before_compile,
