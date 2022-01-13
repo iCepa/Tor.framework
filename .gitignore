@@ -1,9 +1,3 @@
-micro-revision.i
-orconfig.h
-*.xcscmblueprint
-*.xccheckout
-Carthage/Build
-Tor.framework.zip
 geoip
 geoip6
 
