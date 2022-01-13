@@ -1,3 +1,14 @@
+**ATTENTION: This version of Tor.framework is discontinued, because it uses Carthage, which is incompatible with Apple Silicon Macs.**
+
+Releases after version 406.8.2 will be pure [CocoaPods](https://cocoapods.org) releases.
+
+For the **pure CocoaPods** version, go here: https://github.com/iCepa/Tor.framework/tree/pure_pod
+
+For the time being, the old Carthage stuff will stay here, to not break dependencies, but it will eventually go away! Use the CocoaPods version - you'll want the latest Tor version!
+
+
+
+
 # Tor.framework
 
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) 
