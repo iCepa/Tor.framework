@@ -1,0 +1,6 @@
+framework module Tor {
+  umbrella header "Tor-macOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

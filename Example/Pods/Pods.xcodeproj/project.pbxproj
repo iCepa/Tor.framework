@@ -1,0 +1,1579 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00C1B08CDC6D5C1E790C096838EC3F1B /* NSBundle+GeoIP.h in Headers */ = {isa = PBXBuildFile; fileRef = ABFEEBF83EAA6E9AB7C42CD0073A9659 /* NSBundle+GeoIP.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0E08BEB9223A7B6F98DCFFB7D542E619 /* Pods-Tor_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CBDB6778D38610256C19867162FD20 /* Pods-Tor_Tests-dummy.m */; };
+		1140C50CD20F676001D357A6622234EC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3261E5A5395F45780622405F504B2804 /* Foundation.framework */; };
+		176F93DBB4833CCB2E4D2F7AC4F2E54A /* TORThread.h in Headers */ = {isa = PBXBuildFile; fileRef = 01BB924BABAA10DEB89B50BC3BCF8383 /* TORThread.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1C3FF3472496B5CBFEE7E226CEB2D268 /* Tor-iOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7679637FA81611937C28C70B84BA2C05 /* Tor-iOS-dummy.m */; };
+		1DA0FE633A320ACBF546B2667F1743F3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A54C97DEB1A3977AC3A62AFF00971BF /* Cocoa.framework */; };
+		26B35984F1D7A5F903D60198AA0BE188 /* Tor-iOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FD09879D9D97EC0C87A01E33EBFBF95 /* Tor-iOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2766166AA1BAD46693F1450CFA4AA6CE /* TORNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A557B8308798DB2842310ABA0F3E4A9 /* TORNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2CE7731D92E7D8DAA4FAFDEBE975BD84 /* TORConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = AE4ED3C144A7AE39B755471AC1482832 /* TORConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2FBBBB9B3E676ED4709D9C47476625E5 /* TORControlCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E022B529CE3509FC5EFD22EC9B3CE7A /* TORControlCommand.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		30E857EE870D951CF4F3F8BD326DFCC9 /* TORControlReplyCode.h in Headers */ = {isa = PBXBuildFile; fileRef = 14EE8B0E133F4CE166BD30B468FDE4D6 /* TORControlReplyCode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		331897641373B638544486B66F3D385C /* NSBundle+GeoIP.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9E069FD8542002F327D1171528C7A5 /* NSBundle+GeoIP.m */; };
+		3498AD7EE66FE0F2EE6FF4A9E8BE7A9E /* Pods-Tor_Example_Mac-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A7427DC659B97EE8318B542CDB5F33FB /* Pods-Tor_Example_Mac-dummy.m */; };
+		363AA92C3A5B99BAED378A928C3EA934 /* TORThread.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0C7D7856F23F50B671B09EDE8FFE66 /* TORThread.m */; };
+		3A8654B6B695524B94148BB64A149371 /* NSCharacterSet+PredefinedSets.h in Headers */ = {isa = PBXBuildFile; fileRef = 58024632A6D5A57672D5BC653803057E /* NSCharacterSet+PredefinedSets.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3B51F65EC73C2406742979AA44946C20 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3261E5A5395F45780622405F504B2804 /* Foundation.framework */; };
+		3DBE0BA3F47D8B276BE22ACAAED8B057 /* TORNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A557B8308798DB2842310ABA0F3E4A9 /* TORNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		40FCAB92DAD7CC724EC6C70F4FCCACE8 /* geoip6 in Resources */ = {isa = PBXBuildFile; fileRef = B96FD0A3FDC325513D0B62940DB0806E /* geoip6 */; };
+		41B5AE918224FA92B21AC2764956C296 /* Tor-iOS-GeoIP in Resources */ = {isa = PBXBuildFile; fileRef = FB92E21AFB473E26978235656032FE13 /* Tor-iOS-GeoIP */; };
+		45D8E8B74D56AAA23C46EC9A7B8AC11D /* geoip in Resources */ = {isa = PBXBuildFile; fileRef = A47E419E74720B99877C744DFD1DB55B /* geoip */; };
+		4B69C403EE5CC99F2F0E6084FD4C0989 /* Pods-Tor_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 941A58B0BBD725B0BC3FE5BD226ACB87 /* Pods-Tor_Example-dummy.m */; };
+		4E1F0BC09D3C89C912CA100244CC3AC7 /* TORNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D67C0C80FC2B23EF7380709B4390A17 /* TORNode.m */; };
+		4E43745AFDD0714803C9CFD0D89D8A83 /* geoip in Resources */ = {isa = PBXBuildFile; fileRef = A47E419E74720B99877C744DFD1DB55B /* geoip */; };
+		4EBBFB2117C6451AA96FC28D6860EC6D /* TORController.m in Sources */ = {isa = PBXBuildFile; fileRef = 791B159A74443642FD1D16237DA11398 /* TORController.m */; };
+		50D7737EAF96096C509AF433471F5EB1 /* TOROnionAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = E305A5EEECEDEA722FFBE6332BF1A7E4 /* TOROnionAuth.m */; };
+		5553B0A359A74C57B27C860C630D0935 /* TORX25519KeyPair.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1F28483FCDF501940587249E966145 /* TORX25519KeyPair.m */; };
+		5749BBD296E8CBE9E9B7F3DE5BE0050F /* TOROnionAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = E305A5EEECEDEA722FFBE6332BF1A7E4 /* TOROnionAuth.m */; };
+		5B6FCB1BCDE2C69384F3D9DCD04A8BA4 /* TORCircuit.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E2182CD6F415ADCBBEAD8F23E189AF /* TORCircuit.m */; };
+		5F16C18A0A0A8D212316036421FB27BB /* TORControlReplyCode.h in Headers */ = {isa = PBXBuildFile; fileRef = 14EE8B0E133F4CE166BD30B468FDE4D6 /* TORControlReplyCode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		667402CD2C9AA5233004BB31603F3DC4 /* NSBundle+GeoIP.h in Headers */ = {isa = PBXBuildFile; fileRef = ABFEEBF83EAA6E9AB7C42CD0073A9659 /* NSBundle+GeoIP.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BF6292D43D12E6747D2C711B9978B7C /* TORController.h in Headers */ = {isa = PBXBuildFile; fileRef = D3A9C324AA3430A211CC14A1FB2DC87F /* TORController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6EFF15F4079AD73CCF8271C89AEA2055 /* NSBundle+GeoIP.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9E069FD8542002F327D1171528C7A5 /* NSBundle+GeoIP.m */; };
+		7598C0B00984E27827857BBE4A9E99CA /* TORAuthKey.m in Sources */ = {isa = PBXBuildFile; fileRef = BE06279AE9FBF3FFA0D776B3798B38A3 /* TORAuthKey.m */; };
+		75A7602F605F955097A9338088891FA7 /* TORControlCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E022B529CE3509FC5EFD22EC9B3CE7A /* TORControlCommand.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7A7B94B65AAD23F14DD7A149FBBECDD3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3261E5A5395F45780622405F504B2804 /* Foundation.framework */; };
+		7D0980243629C80EAF32FB55B65DA21C /* geoip6 in Resources */ = {isa = PBXBuildFile; fileRef = B96FD0A3FDC325513D0B62940DB0806E /* geoip6 */; };
+		81F8035696FDB73F6E6E4C754031D301 /* TORController.m in Sources */ = {isa = PBXBuildFile; fileRef = 791B159A74443642FD1D16237DA11398 /* TORController.m */; };
+		84B69C880F1761BD08130F8D7D1CE263 /* Pods-Tor_Example_Mac-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A5514AD0B21965617F250EC76C9D561 /* Pods-Tor_Example_Mac-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		88F996587684346E2293E410D2C89234 /* TORLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCBFB00FE43B7726426E96C0DBD8849 /* TORLogging.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8FD858AB05A2AB0663E591E30D0178D5 /* TORLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = BD691BCE236F568B0F6AD9E2536DBF23 /* TORLogging.m */; };
+		90AA69E22413F4CF9CAD0DC754336CEF /* TORNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D67C0C80FC2B23EF7380709B4390A17 /* TORNode.m */; };
+		92496419C48F0DF4E10BB751EC863ED4 /* TORX25519KeyPair.h in Headers */ = {isa = PBXBuildFile; fileRef = B93D547C3280A2FE8E06F046DDFF3687 /* TORX25519KeyPair.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		955417BEDD51C4F2921742A31C9A4B6C /* TORAuthKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 11093A1E1EC8FEFD062DCDB2A8D60F34 /* TORAuthKey.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9AFD620239A70D0065304C6B1729A65E /* TORCircuit.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E2182CD6F415ADCBBEAD8F23E189AF /* TORCircuit.m */; };
+		9C743F389F71767F57080B9D87EBC34D /* TORCircuit.h in Headers */ = {isa = PBXBuildFile; fileRef = F83EFE5E00741FDACE680069510D9385 /* TORCircuit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A22EE06296651A4B6634B25CD3749A4E /* TORThread.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0C7D7856F23F50B671B09EDE8FFE66 /* TORThread.m */; };
+		A5A1B8D2D2892235064CED4096942EAB /* TORController.h in Headers */ = {isa = PBXBuildFile; fileRef = D3A9C324AA3430A211CC14A1FB2DC87F /* TORController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A88402F86DFCFCC7364ABEA0DC70F7D0 /* TORThread.h in Headers */ = {isa = PBXBuildFile; fileRef = 01BB924BABAA10DEB89B50BC3BCF8383 /* TORThread.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AED33A32283563CCC9145CD5FAB056E9 /* TORAuthKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 11093A1E1EC8FEFD062DCDB2A8D60F34 /* TORAuthKey.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B3F46CABAB1F91372D5005E9814BEB04 /* NSCharacterSet+PredefinedSets.m in Sources */ = {isa = PBXBuildFile; fileRef = BE47B33B85FB7E444C095336CF511B76 /* NSCharacterSet+PredefinedSets.m */; };
+		B7DBD946D9238D7BE742268B7CC5465D /* TORConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 85E7796438BE38F9B863108B0969BA10 /* TORConfiguration.m */; };
+		B822BEEA19F6A1295B80A8E6D864AB1E /* Pods-Tor_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6569090D3B008C70FB5317290579B858 /* Pods-Tor_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BD42691BA302A0CDDD92FCB7392C01E7 /* TOROnionAuth.h in Headers */ = {isa = PBXBuildFile; fileRef = 35866BACE7B8909E71A921336D2E34E3 /* TOROnionAuth.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CDF9D72A71A1E5E64F4E6A5059B9FE3C /* TOROnionAuth.h in Headers */ = {isa = PBXBuildFile; fileRef = 35866BACE7B8909E71A921336D2E34E3 /* TOROnionAuth.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D2EEB24217FD565134C7AA9E79F95579 /* Tor-macOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 52992309C7D4F4FB39B876C4A00BDAFB /* Tor-macOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D46BF600A89C8B9B71C2935D891FF178 /* Tor-macOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1D0DACC02EF7B35555F6349CE26C5D /* Tor-macOS-dummy.m */; };
+		DFFD395294BFE80E465A6CCCA1E27EDA /* Pods-Tor_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A4B8024B1F54EC7160507D04115139C8 /* Pods-Tor_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E030D7478C60026071572DD2D530F349 /* TORConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 85E7796438BE38F9B863108B0969BA10 /* TORConfiguration.m */; };
+		E4AC468A866B570323927357E275398E /* TORLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = BD691BCE236F568B0F6AD9E2536DBF23 /* TORLogging.m */; };
+		E5713921BA234E773A12C65E28AA2378 /* TORX25519KeyPair.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1F28483FCDF501940587249E966145 /* TORX25519KeyPair.m */; };
+		E73FCBDB02216ABDD39C1CDE3E841ABE /* Tor.h in Headers */ = {isa = PBXBuildFile; fileRef = 50503E35C2955CB0DA9B477566BF5B9F /* Tor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EAD47268DA0581BB228B9B24A467CA71 /* TORConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = AE4ED3C144A7AE39B755471AC1482832 /* TORConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EAF8A1A0F7ACD71E7D4ED61446A62448 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A54C97DEB1A3977AC3A62AFF00971BF /* Cocoa.framework */; };
+		EDD0864C0B32A9A05E2B94200678B566 /* TORCircuit.h in Headers */ = {isa = PBXBuildFile; fileRef = F83EFE5E00741FDACE680069510D9385 /* TORCircuit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EFD4DEEDD5F2DB184114BF4AFACE5072 /* NSCharacterSet+PredefinedSets.h in Headers */ = {isa = PBXBuildFile; fileRef = 58024632A6D5A57672D5BC653803057E /* NSCharacterSet+PredefinedSets.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F0685517D5CF8405AFE63DEF79BBD513 /* TORLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCBFB00FE43B7726426E96C0DBD8849 /* TORLogging.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F4AEE111CAD7C43F4FC4A0DCB36B3A56 /* TORAuthKey.m in Sources */ = {isa = PBXBuildFile; fileRef = BE06279AE9FBF3FFA0D776B3798B38A3 /* TORAuthKey.m */; };
+		F68FAE1582536A48B6E042557CC488BE /* TORX25519KeyPair.h in Headers */ = {isa = PBXBuildFile; fileRef = B93D547C3280A2FE8E06F046DDFF3687 /* TORX25519KeyPair.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F7E63D7AC99208D506F02E94EFCCD544 /* Tor-macOS-GeoIP in Resources */ = {isa = PBXBuildFile; fileRef = 701B635117997C6B662EFC5C3CA41280 /* Tor-macOS-GeoIP */; };
+		F88A89B76BC77F481DCB41DF26C5C213 /* Tor.h in Headers */ = {isa = PBXBuildFile; fileRef = 50503E35C2955CB0DA9B477566BF5B9F /* Tor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FE23706F4D1E9A0A0A20598DABCB8501 /* NSCharacterSet+PredefinedSets.m in Sources */ = {isa = PBXBuildFile; fileRef = BE47B33B85FB7E444C095336CF511B76 /* NSCharacterSet+PredefinedSets.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4A9DD498E252E7B4C03F14F580ABBC2C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 57334D5B49894DA73BAF8636AF47BFA7;
+			remoteInfo = "Tor-iOS-GeoIP";
+		};
+		7DE65FBDAD8F55B59F40219EF6817349 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FAB1FC9BD36CC5A918D05007A1B852B4;
+			remoteInfo = "Tor-macOS-GeoIP";
+		};
+		A6FFC7FF9920A817E212C97319B41616 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9F04C66C15F5A64EA7E56E498C1B6BAB;
+			remoteInfo = "Pods-Tor_Example";
+		};
+		CDA350F06AA6DA296C3FD245623BF98A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 44B955CCA4F2DE939B50A5A03B7A0525;
+			remoteInfo = "Tor-iOS";
+		};
+		F4063AADA9A1A5E8DF9E516B8BAAB913 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E441EABB7B42E3DE1AA213A584274D9A;
+			remoteInfo = "Tor-macOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		01BB924BABAA10DEB89B50BC3BCF8383 /* TORThread.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TORThread.h; path = Tor/Classes/TORThread.h; sourceTree = "<group>"; };
+		0B7CC2502ECF6A879B2C7DAE6BF67015 /* Pods-Tor_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Tor_Example.release.xcconfig"; sourceTree = "<group>"; };
+		0B941F5B54FDEE73AAEB08FF5A333D5C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		0E449882D2C2472802E31313E2C79EC0 /* Tor-macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Tor-macOS.release.xcconfig"; path = "../Tor-macOS/Tor-macOS.release.xcconfig"; sourceTree = "<group>"; };
+		11093A1E1EC8FEFD062DCDB2A8D60F34 /* TORAuthKey.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TORAuthKey.h; path = Tor/Classes/TORAuthKey.h; sourceTree = "<group>"; };
+		11B10FA423009FD8BE82C03D8744A39B /* Pods-Tor_Example_Mac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Tor_Example_Mac.debug.xcconfig"; sourceTree = "<group>"; };
+		14EE8B0E133F4CE166BD30B468FDE4D6 /* TORControlReplyCode.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TORControlReplyCode.h; path = Tor/Classes/TORControlReplyCode.h; sourceTree = "<group>"; };
+		15505C1E1D0E6DE7B6EA59108EE46F3C /* Pods-Tor_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Tor_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		17B06694EA816D1E767AC734842F785F /* ResourceBundle-GeoIP-Tor-macOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "ResourceBundle-GeoIP-Tor-macOS-Info.plist"; path = "../Tor-macOS/ResourceBundle-GeoIP-Tor-macOS-Info.plist"; sourceTree = "<group>"; };
+		18E2182CD6F415ADCBBEAD8F23E189AF /* TORCircuit.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TORCircuit.m; path = Tor/Classes/TORCircuit.m; sourceTree = "<group>"; };
+		21C7AC4D4A1DEAB82E65D548743A6D43 /* Tor-iOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Tor-iOS.modulemap"; sourceTree = "<group>"; };
+		2286611B11FC6FB062F40914DBA4A960 /* Tor-iOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Tor-iOS-prefix.pch"; sourceTree = "<group>"; };
+		2A557B8308798DB2842310ABA0F3E4A9 /* TORNode.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TORNode.h; path = Tor/Classes/TORNode.h; sourceTree = "<group>"; };
+		2C3113F357FE0B094419BAF9DE252E76 /* Tor-macOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; name = "Tor-macOS.modulemap"; path = "../Tor-macOS/Tor-macOS.modulemap"; sourceTree = "<group>"; };
+		3261E5A5395F45780622405F504B2804 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		35866BACE7B8909E71A921336D2E34E3 /* TOROnionAuth.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TOROnionAuth.h; path = Tor/Classes/TOROnionAuth.h; sourceTree = "<group>"; };
+		38150724F1FACBF19D4C627E7C36378F /* Pods-Tor_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Tor_Example-acknowledgements.plist"; sourceTree = "<group>"; };
+		38A043D91C1A6BD159482DF7A4AB384F /* Pods-Tor_Example_Mac-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Tor_Example_Mac-frameworks.sh"; sourceTree = "<group>"; };
+		3A5514AD0B21965617F250EC76C9D561 /* Pods-Tor_Example_Mac-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Tor_Example_Mac-umbrella.h"; sourceTree = "<group>"; };
+		3B6AC7ABE4AED058BC9E482BCD133B18 /* Pods-Tor_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Tor_Tests-Info.plist"; sourceTree = "<group>"; };
+		3D1D0DACC02EF7B35555F6349CE26C5D /* Tor-macOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "Tor-macOS-dummy.m"; path = "../Tor-macOS/Tor-macOS-dummy.m"; sourceTree = "<group>"; };
+		3E022B529CE3509FC5EFD22EC9B3CE7A /* TORControlCommand.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TORControlCommand.h; path = Tor/Classes/TORControlCommand.h; sourceTree = "<group>"; };
+		44A62F68AF4B1B2091C658A0CD42FE9A /* Tor-macOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Tor-macOS-prefix.pch"; path = "../Tor-macOS/Tor-macOS-prefix.pch"; sourceTree = "<group>"; };
+		4516653C6A9C06068D9B950BE2D2492D /* Tor-macOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Tor-macOS-Info.plist"; path = "../Tor-macOS/Tor-macOS-Info.plist"; sourceTree = "<group>"; };
+		48CD81C0E98A45CA11FC0560F088F8F7 /* Pods-Tor_Example_Mac-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Tor_Example_Mac-Info.plist"; sourceTree = "<group>"; };
+		4AE7424932C83CF341ED611A2D13B734 /* Pods-Tor_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Tor_Example-Info.plist"; sourceTree = "<group>"; };
+		4F66B0CCDAC53FB908E40B8760A961D0 /* Pods-Tor_Example_Mac-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Tor_Example_Mac-acknowledgements.plist"; sourceTree = "<group>"; };
+		4FD09879D9D97EC0C87A01E33EBFBF95 /* Tor-iOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Tor-iOS-umbrella.h"; sourceTree = "<group>"; };
+		50503E35C2955CB0DA9B477566BF5B9F /* Tor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Tor.h; path = Tor/Classes/Tor.h; sourceTree = "<group>"; };
+		513B9F2981EDE92117FCFB5835EB6DA3 /* Tor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Tor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		52992309C7D4F4FB39B876C4A00BDAFB /* Tor-macOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Tor-macOS-umbrella.h"; path = "../Tor-macOS/Tor-macOS-umbrella.h"; sourceTree = "<group>"; };
+		58024632A6D5A57672D5BC653803057E /* NSCharacterSet+PredefinedSets.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSCharacterSet+PredefinedSets.h"; path = "Tor/Classes/NSCharacterSet+PredefinedSets.h"; sourceTree = "<group>"; };
+		588AE32481B5A5AA8CC04BBA3FEA203E /* Pods-Tor_Example */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-Tor_Example"; path = Pods_Tor_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A54C97DEB1A3977AC3A62AFF00971BF /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		6569090D3B008C70FB5317290579B858 /* Pods-Tor_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Tor_Tests-umbrella.h"; sourceTree = "<group>"; };
+		691BEF9A6D5CA5D8BA9800F1B5D300A2 /* Tor-iOS */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Tor-iOS"; path = Tor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		69F861AF9954588929DE37402123E86E /* Pods-Tor_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Tor_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		6BF2ED49654C2C8466633A3EC19EA562 /* Tor-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Tor-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		6D67C0C80FC2B23EF7380709B4390A17 /* TORNode.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TORNode.m; path = Tor/Classes/TORNode.m; sourceTree = "<group>"; };
+		701B635117997C6B662EFC5C3CA41280 /* Tor-macOS-GeoIP */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "Tor-macOS-GeoIP"; path = GeoIP.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		75868C2A9A2AA05862816272185356AE /* Tor.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = Tor.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		7679637FA81611937C28C70B84BA2C05 /* Tor-iOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Tor-iOS-dummy.m"; sourceTree = "<group>"; };
+		791B159A74443642FD1D16237DA11398 /* TORController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TORController.m; path = Tor/Classes/TORController.m; sourceTree = "<group>"; };
+		7B1D2C789462762E9B212565481F6225 /* ResourceBundle-GeoIP-Tor-iOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-GeoIP-Tor-iOS-Info.plist"; sourceTree = "<group>"; };
+		85E7796438BE38F9B863108B0969BA10 /* TORConfiguration.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TORConfiguration.m; path = Tor/Classes/TORConfiguration.m; sourceTree = "<group>"; };
+		88D00D39E311EF7215B16A6332E01E96 /* Pods-Tor_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Tor_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		8C0521A4F30984AC549ED695C0D7F7D3 /* Pods-Tor_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Tor_Example-frameworks.sh"; sourceTree = "<group>"; };
+		8CB2367118E134FC285336C0D55CD1AB /* Pods-Tor_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Tor_Tests.modulemap"; sourceTree = "<group>"; };
+		8DD0558E640F853D021A786DAF9B8CF1 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		8FA4FCB25FCC6ADE84831172D6376379 /* Tor.json */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json; name = Tor.json; path = docs/Tor.json; sourceTree = "<group>"; };
+		8FCBFB00FE43B7726426E96C0DBD8849 /* TORLogging.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TORLogging.h; path = Tor/Classes/TORLogging.h; sourceTree = "<group>"; };
+		91CBDB6778D38610256C19867162FD20 /* Pods-Tor_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Tor_Tests-dummy.m"; sourceTree = "<group>"; };
+		941A58B0BBD725B0BC3FE5BD226ACB87 /* Pods-Tor_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Tor_Example-dummy.m"; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A47E419E74720B99877C744DFD1DB55B /* geoip */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = geoip; sourceTree = "<group>"; };
+		A4B8024B1F54EC7160507D04115139C8 /* Pods-Tor_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Tor_Example-umbrella.h"; sourceTree = "<group>"; };
+		A663FEE25812069963F55F40CF7A9370 /* Tor-macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Tor-macOS.debug.xcconfig"; path = "../Tor-macOS/Tor-macOS.debug.xcconfig"; sourceTree = "<group>"; };
+		A7427DC659B97EE8318B542CDB5F33FB /* Pods-Tor_Example_Mac-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Tor_Example_Mac-dummy.m"; sourceTree = "<group>"; };
+		A898E1476468EC16850894428BF6CF76 /* Pods-Tor_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Tor_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
+		A8EF1923FB5F41D3EFB330166AC8DCA7 /* Pods-Tor_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Tor_Example.modulemap"; sourceTree = "<group>"; };
+		A9E88A56520BCB266CEEB6E1941AC649 /* index.html */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.html; name = index.html; path = docs/index.html; sourceTree = "<group>"; };
+		AA426ECE1C33D4717CBA83A87D730D1F /* Pods-Tor_Example_Mac.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Tor_Example_Mac.modulemap"; sourceTree = "<group>"; };
+		ABFEEBF83EAA6E9AB7C42CD0073A9659 /* NSBundle+GeoIP.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSBundle+GeoIP.h"; path = "Tor/Classes/NSBundle+GeoIP.h"; sourceTree = "<group>"; };
+		AD1F28483FCDF501940587249E966145 /* TORX25519KeyPair.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TORX25519KeyPair.m; path = Tor/Classes/TORX25519KeyPair.m; sourceTree = "<group>"; };
+		AE4ED3C144A7AE39B755471AC1482832 /* TORConfiguration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TORConfiguration.h; path = Tor/Classes/TORConfiguration.h; sourceTree = "<group>"; };
+		B93D547C3280A2FE8E06F046DDFF3687 /* TORX25519KeyPair.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TORX25519KeyPair.h; path = Tor/Classes/TORX25519KeyPair.h; sourceTree = "<group>"; };
+		B96FD0A3FDC325513D0B62940DB0806E /* geoip6 */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = geoip6; sourceTree = "<group>"; };
+		BD689D157B77B2215F3BBC2336ABD923 /* Tor-iOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Tor-iOS-Info.plist"; sourceTree = "<group>"; };
+		BD691BCE236F568B0F6AD9E2536DBF23 /* TORLogging.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TORLogging.m; path = Tor/Classes/TORLogging.m; sourceTree = "<group>"; };
+		BE06279AE9FBF3FFA0D776B3798B38A3 /* TORAuthKey.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TORAuthKey.m; path = Tor/Classes/TORAuthKey.m; sourceTree = "<group>"; };
+		BE47B33B85FB7E444C095336CF511B76 /* NSCharacterSet+PredefinedSets.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSCharacterSet+PredefinedSets.m"; path = "Tor/Classes/NSCharacterSet+PredefinedSets.m"; sourceTree = "<group>"; };
+		C9AB3C075D5A3C53A5840FEF91627FC7 /* Pods-Tor_Tests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-Tor_Tests"; path = Pods_Tor_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC0C7D7856F23F50B671B09EDE8FFE66 /* TORThread.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TORThread.m; path = Tor/Classes/TORThread.m; sourceTree = "<group>"; };
+		D3A9C324AA3430A211CC14A1FB2DC87F /* TORController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TORController.h; path = Tor/Classes/TORController.h; sourceTree = "<group>"; };
+		D71B3D5EE2A59A0ABA874A6AF3B05FB0 /* Pods-Tor_Example_Mac-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Tor_Example_Mac-acknowledgements.markdown"; sourceTree = "<group>"; };
+		D8E647450BCE7D81AEEDADBF94E3D999 /* Pods_Tor_Example_Mac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tor_Example_Mac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D92AB0AC409874FE288BFFDACD6D1C25 /* Pods-Tor_Example_Mac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Tor_Example_Mac.release.xcconfig"; sourceTree = "<group>"; };
+		E305A5EEECEDEA722FFBE6332BF1A7E4 /* TOROnionAuth.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TOROnionAuth.m; path = Tor/Classes/TOROnionAuth.m; sourceTree = "<group>"; };
+		E76D1B52BB447B03B8F6264F8F5DA074 /* Pods-Tor_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Tor_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		EA9E069FD8542002F327D1171528C7A5 /* NSBundle+GeoIP.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSBundle+GeoIP.m"; path = "Tor/Classes/NSBundle+GeoIP.m"; sourceTree = "<group>"; };
+		F83EFE5E00741FDACE680069510D9385 /* TORCircuit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TORCircuit.h; path = Tor/Classes/TORCircuit.h; sourceTree = "<group>"; };
+		FB92E21AFB473E26978235656032FE13 /* Tor-iOS-GeoIP */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "Tor-iOS-GeoIP"; path = GeoIP.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE71243F4DFE82AC3D8BFAAE285A8F83 /* Tor-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Tor-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		FFC80F37ECF98997F4552C4EA15584DE /* Pods-Tor_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Tor_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		792569D1E5B0E77F223E0E0489F21595 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7EAD162E5CCA78B9F2089323F549315C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A7B94B65AAD23F14DD7A149FBBECDD3 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7EBFDE7EF32C4CFD1458EA47C55F2A75 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1DA0FE633A320ACBF546B2667F1743F3 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9D056CF10E14DE2E98D7FF1C302BDA6C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A18C814D6E604E9D8ED717B27D6E82D9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3B51F65EC73C2406742979AA44946C20 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A74320B4506694ECA83D9AE52BC458CF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAF8A1A0F7ACD71E7D4ED61446A62448 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C5DCB898E01439792B5B8C2062730194 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1140C50CD20F676001D357A6622234EC /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		271568B2FD5271416D6F72C78CB81E19 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				85E3DDE5015B26D00A5458120B47E218 /* Tor */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		41C052635D3E21350AC08C5F316759F6 /* OS X */ = {
+			isa = PBXGroup;
+			children = (
+				5A54C97DEB1A3977AC3A62AFF00971BF /* Cocoa.framework */,
+			);
+			name = "OS X";
+			sourceTree = "<group>";
+		};
+		43EC86E223F989001A70900C520F85B1 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				7B1D2C789462762E9B212565481F6225 /* ResourceBundle-GeoIP-Tor-iOS-Info.plist */,
+				17B06694EA816D1E767AC734842F785F /* ResourceBundle-GeoIP-Tor-macOS-Info.plist */,
+				21C7AC4D4A1DEAB82E65D548743A6D43 /* Tor-iOS.modulemap */,
+				7679637FA81611937C28C70B84BA2C05 /* Tor-iOS-dummy.m */,
+				BD689D157B77B2215F3BBC2336ABD923 /* Tor-iOS-Info.plist */,
+				2286611B11FC6FB062F40914DBA4A960 /* Tor-iOS-prefix.pch */,
+				4FD09879D9D97EC0C87A01E33EBFBF95 /* Tor-iOS-umbrella.h */,
+				6BF2ED49654C2C8466633A3EC19EA562 /* Tor-iOS.debug.xcconfig */,
+				FE71243F4DFE82AC3D8BFAAE285A8F83 /* Tor-iOS.release.xcconfig */,
+				2C3113F357FE0B094419BAF9DE252E76 /* Tor-macOS.modulemap */,
+				3D1D0DACC02EF7B35555F6349CE26C5D /* Tor-macOS-dummy.m */,
+				4516653C6A9C06068D9B950BE2D2492D /* Tor-macOS-Info.plist */,
+				44A62F68AF4B1B2091C658A0CD42FE9A /* Tor-macOS-prefix.pch */,
+				52992309C7D4F4FB39B876C4A00BDAFB /* Tor-macOS-umbrella.h */,
+				A663FEE25812069963F55F40CF7A9370 /* Tor-macOS.debug.xcconfig */,
+				0E449882D2C2472802E31313E2C79EC0 /* Tor-macOS.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/Tor-iOS";
+			sourceTree = "<group>";
+		};
+		4EDC20B56A0B9A8564E1FCEA191C83C4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DABCD2AA1C1DFCD4E2578CE87BDFD93F /* iOS */,
+				41C052635D3E21350AC08C5F316759F6 /* OS X */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		58FE9D611940CE1773BC515D47294D68 /* Pods-Tor_Example */ = {
+			isa = PBXGroup;
+			children = (
+				A8EF1923FB5F41D3EFB330166AC8DCA7 /* Pods-Tor_Example.modulemap */,
+				A898E1476468EC16850894428BF6CF76 /* Pods-Tor_Example-acknowledgements.markdown */,
+				38150724F1FACBF19D4C627E7C36378F /* Pods-Tor_Example-acknowledgements.plist */,
+				941A58B0BBD725B0BC3FE5BD226ACB87 /* Pods-Tor_Example-dummy.m */,
+				8C0521A4F30984AC549ED695C0D7F7D3 /* Pods-Tor_Example-frameworks.sh */,
+				4AE7424932C83CF341ED611A2D13B734 /* Pods-Tor_Example-Info.plist */,
+				A4B8024B1F54EC7160507D04115139C8 /* Pods-Tor_Example-umbrella.h */,
+				15505C1E1D0E6DE7B6EA59108EE46F3C /* Pods-Tor_Example.debug.xcconfig */,
+				0B7CC2502ECF6A879B2C7DAE6BF67015 /* Pods-Tor_Example.release.xcconfig */,
+			);
+			name = "Pods-Tor_Example";
+			path = "Target Support Files/Pods-Tor_Example";
+			sourceTree = "<group>";
+		};
+		653FE5A1602F879FB4E539A6CD8B9FF9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				588AE32481B5A5AA8CC04BBA3FEA203E /* Pods-Tor_Example */,
+				D8E647450BCE7D81AEEDADBF94E3D999 /* Pods_Tor_Example_Mac.framework */,
+				C9AB3C075D5A3C53A5840FEF91627FC7 /* Pods-Tor_Tests */,
+				691BEF9A6D5CA5D8BA9800F1B5D300A2 /* Tor-iOS */,
+				FB92E21AFB473E26978235656032FE13 /* Tor-iOS-GeoIP */,
+				513B9F2981EDE92117FCFB5835EB6DA3 /* Tor.framework */,
+				701B635117997C6B662EFC5C3CA41280 /* Tor-macOS-GeoIP */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		67051B402F3B50F375B5E31CB57CCC6B /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				A9E88A56520BCB266CEEB6E1941AC649 /* index.html */,
+				8DD0558E640F853D021A786DAF9B8CF1 /* LICENSE */,
+				0B941F5B54FDEE73AAEB08FF5A333D5C /* README.md */,
+				8FA4FCB25FCC6ADE84831172D6376379 /* Tor.json */,
+				75868C2A9A2AA05862816272185356AE /* Tor.podspec */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		76C379F37DA4F67E0C388E9EFA2E89E3 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				ABFEEBF83EAA6E9AB7C42CD0073A9659 /* NSBundle+GeoIP.h */,
+				EA9E069FD8542002F327D1171528C7A5 /* NSBundle+GeoIP.m */,
+				58024632A6D5A57672D5BC653803057E /* NSCharacterSet+PredefinedSets.h */,
+				BE47B33B85FB7E444C095336CF511B76 /* NSCharacterSet+PredefinedSets.m */,
+				50503E35C2955CB0DA9B477566BF5B9F /* Tor.h */,
+				11093A1E1EC8FEFD062DCDB2A8D60F34 /* TORAuthKey.h */,
+				BE06279AE9FBF3FFA0D776B3798B38A3 /* TORAuthKey.m */,
+				F83EFE5E00741FDACE680069510D9385 /* TORCircuit.h */,
+				18E2182CD6F415ADCBBEAD8F23E189AF /* TORCircuit.m */,
+				AE4ED3C144A7AE39B755471AC1482832 /* TORConfiguration.h */,
+				85E7796438BE38F9B863108B0969BA10 /* TORConfiguration.m */,
+				3E022B529CE3509FC5EFD22EC9B3CE7A /* TORControlCommand.h */,
+				D3A9C324AA3430A211CC14A1FB2DC87F /* TORController.h */,
+				791B159A74443642FD1D16237DA11398 /* TORController.m */,
+				14EE8B0E133F4CE166BD30B468FDE4D6 /* TORControlReplyCode.h */,
+				8FCBFB00FE43B7726426E96C0DBD8849 /* TORLogging.h */,
+				BD691BCE236F568B0F6AD9E2536DBF23 /* TORLogging.m */,
+				2A557B8308798DB2842310ABA0F3E4A9 /* TORNode.h */,
+				6D67C0C80FC2B23EF7380709B4390A17 /* TORNode.m */,
+				35866BACE7B8909E71A921336D2E34E3 /* TOROnionAuth.h */,
+				E305A5EEECEDEA722FFBE6332BF1A7E4 /* TOROnionAuth.m */,
+				01BB924BABAA10DEB89B50BC3BCF8383 /* TORThread.h */,
+				CC0C7D7856F23F50B671B09EDE8FFE66 /* TORThread.m */,
+				B93D547C3280A2FE8E06F046DDFF3687 /* TORX25519KeyPair.h */,
+				AD1F28483FCDF501940587249E966145 /* TORX25519KeyPair.m */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		858F7FEDA2779D11A552786E5FEB08FA /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				58FE9D611940CE1773BC515D47294D68 /* Pods-Tor_Example */,
+				A7B3305B67BADD9610FEC2997FE8CA6F /* Pods-Tor_Example_Mac */,
+				FA461A60A028467A525E02A5EA4D2361 /* Pods-Tor_Tests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		85E3DDE5015B26D00A5458120B47E218 /* Tor */ = {
+			isa = PBXGroup;
+			children = (
+				76C379F37DA4F67E0C388E9EFA2E89E3 /* Core */,
+				874058343D92458FF5C27FDB40E20EE4 /* GeoIP */,
+				67051B402F3B50F375B5E31CB57CCC6B /* Pod */,
+				43EC86E223F989001A70900C520F85B1 /* Support Files */,
+			);
+			name = Tor;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		874058343D92458FF5C27FDB40E20EE4 /* GeoIP */ = {
+			isa = PBXGroup;
+			children = (
+				A47E419E74720B99877C744DFD1DB55B /* geoip */,
+				B96FD0A3FDC325513D0B62940DB0806E /* geoip6 */,
+			);
+			name = GeoIP;
+			sourceTree = "<group>";
+		};
+		A7B3305B67BADD9610FEC2997FE8CA6F /* Pods-Tor_Example_Mac */ = {
+			isa = PBXGroup;
+			children = (
+				AA426ECE1C33D4717CBA83A87D730D1F /* Pods-Tor_Example_Mac.modulemap */,
+				D71B3D5EE2A59A0ABA874A6AF3B05FB0 /* Pods-Tor_Example_Mac-acknowledgements.markdown */,
+				4F66B0CCDAC53FB908E40B8760A961D0 /* Pods-Tor_Example_Mac-acknowledgements.plist */,
+				A7427DC659B97EE8318B542CDB5F33FB /* Pods-Tor_Example_Mac-dummy.m */,
+				38A043D91C1A6BD159482DF7A4AB384F /* Pods-Tor_Example_Mac-frameworks.sh */,
+				48CD81C0E98A45CA11FC0560F088F8F7 /* Pods-Tor_Example_Mac-Info.plist */,
+				3A5514AD0B21965617F250EC76C9D561 /* Pods-Tor_Example_Mac-umbrella.h */,
+				11B10FA423009FD8BE82C03D8744A39B /* Pods-Tor_Example_Mac.debug.xcconfig */,
+				D92AB0AC409874FE288BFFDACD6D1C25 /* Pods-Tor_Example_Mac.release.xcconfig */,
+			);
+			name = "Pods-Tor_Example_Mac";
+			path = "Target Support Files/Pods-Tor_Example_Mac";
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				271568B2FD5271416D6F72C78CB81E19 /* Development Pods */,
+				4EDC20B56A0B9A8564E1FCEA191C83C4 /* Frameworks */,
+				653FE5A1602F879FB4E539A6CD8B9FF9 /* Products */,
+				858F7FEDA2779D11A552786E5FEB08FA /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		DABCD2AA1C1DFCD4E2578CE87BDFD93F /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				3261E5A5395F45780622405F504B2804 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		FA461A60A028467A525E02A5EA4D2361 /* Pods-Tor_Tests */ = {
+			isa = PBXGroup;
+			children = (
+				8CB2367118E134FC285336C0D55CD1AB /* Pods-Tor_Tests.modulemap */,
+				E76D1B52BB447B03B8F6264F8F5DA074 /* Pods-Tor_Tests-acknowledgements.markdown */,
+				FFC80F37ECF98997F4552C4EA15584DE /* Pods-Tor_Tests-acknowledgements.plist */,
+				91CBDB6778D38610256C19867162FD20 /* Pods-Tor_Tests-dummy.m */,
+				3B6AC7ABE4AED058BC9E482BCD133B18 /* Pods-Tor_Tests-Info.plist */,
+				6569090D3B008C70FB5317290579B858 /* Pods-Tor_Tests-umbrella.h */,
+				88D00D39E311EF7215B16A6332E01E96 /* Pods-Tor_Tests.debug.xcconfig */,
+				69F861AF9954588929DE37402123E86E /* Pods-Tor_Tests.release.xcconfig */,
+			);
+			name = "Pods-Tor_Tests";
+			path = "Target Support Files/Pods-Tor_Tests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		3B8B577BEAB8F5B90035ED069086DFBC /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFFD395294BFE80E465A6CCCA1E27EDA /* Pods-Tor_Example-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		406ADE16B4116C7767B7B7607ECB6AF8 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00C1B08CDC6D5C1E790C096838EC3F1B /* NSBundle+GeoIP.h in Headers */,
+				3A8654B6B695524B94148BB64A149371 /* NSCharacterSet+PredefinedSets.h in Headers */,
+				F88A89B76BC77F481DCB41DF26C5C213 /* Tor.h in Headers */,
+				26B35984F1D7A5F903D60198AA0BE188 /* Tor-iOS-umbrella.h in Headers */,
+				AED33A32283563CCC9145CD5FAB056E9 /* TORAuthKey.h in Headers */,
+				EDD0864C0B32A9A05E2B94200678B566 /* TORCircuit.h in Headers */,
+				2CE7731D92E7D8DAA4FAFDEBE975BD84 /* TORConfiguration.h in Headers */,
+				2FBBBB9B3E676ED4709D9C47476625E5 /* TORControlCommand.h in Headers */,
+				A5A1B8D2D2892235064CED4096942EAB /* TORController.h in Headers */,
+				30E857EE870D951CF4F3F8BD326DFCC9 /* TORControlReplyCode.h in Headers */,
+				F0685517D5CF8405AFE63DEF79BBD513 /* TORLogging.h in Headers */,
+				2766166AA1BAD46693F1450CFA4AA6CE /* TORNode.h in Headers */,
+				CDF9D72A71A1E5E64F4E6A5059B9FE3C /* TOROnionAuth.h in Headers */,
+				A88402F86DFCFCC7364ABEA0DC70F7D0 /* TORThread.h in Headers */,
+				F68FAE1582536A48B6E042557CC488BE /* TORX25519KeyPair.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		87AAFDF73B6E7BBBAEB77ED5EEBA11A2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B822BEEA19F6A1295B80A8E6D864AB1E /* Pods-Tor_Tests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAA998D6DD8B80461895EACC37EC86A2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				667402CD2C9AA5233004BB31603F3DC4 /* NSBundle+GeoIP.h in Headers */,
+				EFD4DEEDD5F2DB184114BF4AFACE5072 /* NSCharacterSet+PredefinedSets.h in Headers */,
+				E73FCBDB02216ABDD39C1CDE3E841ABE /* Tor.h in Headers */,
+				D2EEB24217FD565134C7AA9E79F95579 /* Tor-macOS-umbrella.h in Headers */,
+				955417BEDD51C4F2921742A31C9A4B6C /* TORAuthKey.h in Headers */,
+				9C743F389F71767F57080B9D87EBC34D /* TORCircuit.h in Headers */,
+				EAD47268DA0581BB228B9B24A467CA71 /* TORConfiguration.h in Headers */,
+				75A7602F605F955097A9338088891FA7 /* TORControlCommand.h in Headers */,
+				6BF6292D43D12E6747D2C711B9978B7C /* TORController.h in Headers */,
+				5F16C18A0A0A8D212316036421FB27BB /* TORControlReplyCode.h in Headers */,
+				88F996587684346E2293E410D2C89234 /* TORLogging.h in Headers */,
+				3DBE0BA3F47D8B276BE22ACAAED8B057 /* TORNode.h in Headers */,
+				BD42691BA302A0CDDD92FCB7392C01E7 /* TOROnionAuth.h in Headers */,
+				176F93DBB4833CCB2E4D2F7AC4F2E54A /* TORThread.h in Headers */,
+				92496419C48F0DF4E10BB751EC863ED4 /* TORX25519KeyPair.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB9DDB77D9438DB68B997F5076F29F31 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84B69C880F1761BD08130F8D7D1CE263 /* Pods-Tor_Example_Mac-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		21F7A2F76A3535A47F078C97887C85EA /* Pods-Tor_Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 660D03BC55BBD71D712EB5CAB6969D4C /* Build configuration list for PBXNativeTarget "Pods-Tor_Tests" */;
+			buildPhases = (
+				87AAFDF73B6E7BBBAEB77ED5EEBA11A2 /* Headers */,
+				DC070A0E5945E11F9B8F4A35842DE81E /* Sources */,
+				C5DCB898E01439792B5B8C2062730194 /* Frameworks */,
+				6B71984C4F0F30CAF94F5340B0F50984 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8DCB4BA78C0728D338EA2382EF52BBE6 /* PBXTargetDependency */,
+			);
+			name = "Pods-Tor_Tests";
+			productName = Pods_Tor_Tests;
+			productReference = C9AB3C075D5A3C53A5840FEF91627FC7 /* Pods-Tor_Tests */;
+			productType = "com.apple.product-type.framework";
+		};
+		44B955CCA4F2DE939B50A5A03B7A0525 /* Tor-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 16D83638773125EBC9A46A6CBB5D8576 /* Build configuration list for PBXNativeTarget "Tor-iOS" */;
+			buildPhases = (
+				406ADE16B4116C7767B7B7607ECB6AF8 /* Headers */,
+				7E5EB394EB8A3C2D078272ECEED58667 /* [CP-User] Build XZ */,
+				236E9F6CDED86FEBFA1349C8AD24D2F9 /* [CP-User] Build OpenSSL */,
+				52613F725DD3BBDF7869980DA24E65F9 /* [CP-User] Build libevent */,
+				2E4BDE0023E46368C8C0127BD8A6104D /* [CP-User] Build Tor */,
+				7CA99953E1433F8E6885307858DB5E29 /* [CP-User] Load GeoIP files */,
+				8863BF9BD082CAF1EE9B843A0805464B /* Sources */,
+				A18C814D6E604E9D8ED717B27D6E82D9 /* Frameworks */,
+				344CAAA4797F36E7D36610055FFF8D52 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9C306E6F9ADBC7E60F5DD708A510BB31 /* PBXTargetDependency */,
+			);
+			name = "Tor-iOS";
+			productName = Tor;
+			productReference = 691BEF9A6D5CA5D8BA9800F1B5D300A2 /* Tor-iOS */;
+			productType = "com.apple.product-type.framework";
+		};
+		47C2C040C7C017C3CBF93DC915229009 /* Pods-Tor_Example_Mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 324A084D3C85EC45664CA3F0FE1D0022 /* Build configuration list for PBXNativeTarget "Pods-Tor_Example_Mac" */;
+			buildPhases = (
+				DB9DDB77D9438DB68B997F5076F29F31 /* Headers */,
+				54B44C3C4D3A78DEC2CCDE1A70A3BF4F /* Sources */,
+				A74320B4506694ECA83D9AE52BC458CF /* Frameworks */,
+				91189E1CDF56351B47A1DEBE59A43917 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9E66BD45DDE5EBC24F6C7249C03D30CB /* PBXTargetDependency */,
+			);
+			name = "Pods-Tor_Example_Mac";
+			productName = Pods_Tor_Example_Mac;
+			productReference = D8E647450BCE7D81AEEDADBF94E3D999 /* Pods_Tor_Example_Mac.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		57334D5B49894DA73BAF8636AF47BFA7 /* Tor-iOS-GeoIP */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C56550A1B59566E9E8F6333F7BBCAB04 /* Build configuration list for PBXNativeTarget "Tor-iOS-GeoIP" */;
+			buildPhases = (
+				E4448807703E93974AD4DA561CA14CA7 /* Sources */,
+				792569D1E5B0E77F223E0E0489F21595 /* Frameworks */,
+				117793C45F170236EB537C771B130511 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Tor-iOS-GeoIP";
+			productName = GeoIP;
+			productReference = FB92E21AFB473E26978235656032FE13 /* Tor-iOS-GeoIP */;
+			productType = "com.apple.product-type.bundle";
+		};
+		9F04C66C15F5A64EA7E56E498C1B6BAB /* Pods-Tor_Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF49974BAB65519BF4C82749E2BC7D5A /* Build configuration list for PBXNativeTarget "Pods-Tor_Example" */;
+			buildPhases = (
+				3B8B577BEAB8F5B90035ED069086DFBC /* Headers */,
+				98F31A5A6D7194FD81D16A8C02EBAC3B /* Sources */,
+				7EAD162E5CCA78B9F2089323F549315C /* Frameworks */,
+				5B60FBF838984069ED554840B07C0E29 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				47D87DFEC7856277CC2B58CBCB76A4AE /* PBXTargetDependency */,
+			);
+			name = "Pods-Tor_Example";
+			productName = Pods_Tor_Example;
+			productReference = 588AE32481B5A5AA8CC04BBA3FEA203E /* Pods-Tor_Example */;
+			productType = "com.apple.product-type.framework";
+		};
+		E441EABB7B42E3DE1AA213A584274D9A /* Tor-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E706266ACB453BD9BCBE208E3FD4BCB9 /* Build configuration list for PBXNativeTarget "Tor-macOS" */;
+			buildPhases = (
+				DAA998D6DD8B80461895EACC37EC86A2 /* Headers */,
+				B5A263599E34E4003E2739D28DF53015 /* [CP-User] Build XZ */,
+				2A1776D5ECDCB2DF8376DD49C1843E2E /* [CP-User] Build OpenSSL */,
+				E728B398FC86E00458A26C91FFEE9FA7 /* [CP-User] Build libevent */,
+				74315AACEE554A4B40015FD4D513E7B5 /* [CP-User] Build Tor */,
+				81D293A259D1F4AB3BA56D0ED8691F6F /* [CP-User] Load GeoIP files */,
+				78F3F94A289AA090CB4870AFEE543B56 /* Sources */,
+				7EBFDE7EF32C4CFD1458EA47C55F2A75 /* Frameworks */,
+				5B736F5387D589EDB26F24FFADB6A89B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				105F135FC1131E95431372805FDEC84C /* PBXTargetDependency */,
+			);
+			name = "Tor-macOS";
+			productName = Tor;
+			productReference = 513B9F2981EDE92117FCFB5835EB6DA3 /* Tor.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		FAB1FC9BD36CC5A918D05007A1B852B4 /* Tor-macOS-GeoIP */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C9E20EB0B14D50439B89F66472B88280 /* Build configuration list for PBXNativeTarget "Tor-macOS-GeoIP" */;
+			buildPhases = (
+				5FF3B9C2F1A9CDE9D5939C137BDC851A /* Sources */,
+				9D056CF10E14DE2E98D7FF1C302BDA6C /* Frameworks */,
+				0301D6AD5E7C7B2AB7C70135A4884F0C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Tor-macOS-GeoIP";
+			productName = GeoIP;
+			productReference = 701B635117997C6B662EFC5C3CA41280 /* Tor-macOS-GeoIP */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1240;
+				LastUpgradeCheck = 1320;
+			};
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = 653FE5A1602F879FB4E539A6CD8B9FF9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9F04C66C15F5A64EA7E56E498C1B6BAB /* Pods-Tor_Example */,
+				47C2C040C7C017C3CBF93DC915229009 /* Pods-Tor_Example_Mac */,
+				21F7A2F76A3535A47F078C97887C85EA /* Pods-Tor_Tests */,
+				44B955CCA4F2DE939B50A5A03B7A0525 /* Tor-iOS */,
+				57334D5B49894DA73BAF8636AF47BFA7 /* Tor-iOS-GeoIP */,
+				E441EABB7B42E3DE1AA213A584274D9A /* Tor-macOS */,
+				FAB1FC9BD36CC5A918D05007A1B852B4 /* Tor-macOS-GeoIP */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0301D6AD5E7C7B2AB7C70135A4884F0C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E43745AFDD0714803C9CFD0D89D8A83 /* geoip in Resources */,
+				40FCAB92DAD7CC724EC6C70F4FCCACE8 /* geoip6 in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		117793C45F170236EB537C771B130511 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45D8E8B74D56AAA23C46EC9A7B8AC11D /* geoip in Resources */,
+				7D0980243629C80EAF32FB55B65DA21C /* geoip6 in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		344CAAA4797F36E7D36610055FFF8D52 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				41B5AE918224FA92B21AC2764956C296 /* Tor-iOS-GeoIP in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5B60FBF838984069ED554840B07C0E29 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5B736F5387D589EDB26F24FFADB6A89B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F7E63D7AC99208D506F02E94EFCCD544 /* Tor-macOS-GeoIP in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6B71984C4F0F30CAF94F5340B0F50984 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		91189E1CDF56351B47A1DEBE59A43917 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		236E9F6CDED86FEBFA1349C8AD24D2F9 /* [CP-User] Build OpenSSL */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "[CP-User] Build OpenSSL";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd $PODS_TARGET_SRCROOT/Tor/openssl && $PODS_TARGET_SRCROOT/Tor/openssl.sh";
+		};
+		2A1776D5ECDCB2DF8376DD49C1843E2E /* [CP-User] Build OpenSSL */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "[CP-User] Build OpenSSL";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd $PODS_TARGET_SRCROOT/Tor/openssl && $PODS_TARGET_SRCROOT/Tor/openssl.sh";
+		};
+		2E4BDE0023E46368C8C0127BD8A6104D /* [CP-User] Build Tor */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "[CP-User] Build Tor";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd $PODS_TARGET_SRCROOT/Tor/tor && $PODS_TARGET_SRCROOT/Tor/tor.sh";
+		};
+		52613F725DD3BBDF7869980DA24E65F9 /* [CP-User] Build libevent */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "[CP-User] Build libevent";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd $PODS_TARGET_SRCROOT/Tor/libevent && $PODS_TARGET_SRCROOT/Tor/libevent.sh";
+		};
+		74315AACEE554A4B40015FD4D513E7B5 /* [CP-User] Build Tor */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "[CP-User] Build Tor";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd $PODS_TARGET_SRCROOT/Tor/tor && $PODS_TARGET_SRCROOT/Tor/tor.sh";
+		};
+		7CA99953E1433F8E6885307858DB5E29 /* [CP-User] Load GeoIP files */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "[CP-User] Load GeoIP files";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "      if [ ! -f \"$PODS_TARGET_SRCROOT/geoip\" ] ||           test `find \"$PODS_TARGET_SRCROOT\" -name geoip -empty` ||           test `find \"$PODS_TARGET_SRCROOT\" -name geoip -mtime +1`\n      then\n        curl -Lo \"$PODS_TARGET_SRCROOT/geoip\" https://gitweb.torproject.org/tor.git/plain/src/config/geoip?h=tor-0.4.6.8\n      fi\n\n      if [ ! -f \"$PODS_TARGET_SRCROOT/geoip6\" ] ||           test `find \"$PODS_TARGET_SRCROOT\" -name geoip6 -empty` ||           test `find \"$PODS_TARGET_SRCROOT\" -name geoip6 -mtime +1`\n      then\n        curl -Lo \"$PODS_TARGET_SRCROOT/geoip6\" https://gitweb.torproject.org/tor.git/plain/src/config/geoip6?h=tor-0.4.6.8\n      fi\n";
+		};
+		7E5EB394EB8A3C2D078272ECEED58667 /* [CP-User] Build XZ */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "[CP-User] Build XZ";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd $PODS_TARGET_SRCROOT/Tor/xz && $PODS_TARGET_SRCROOT/Tor/xz.sh";
+		};
+		81D293A259D1F4AB3BA56D0ED8691F6F /* [CP-User] Load GeoIP files */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "[CP-User] Load GeoIP files";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "      if [ ! -f \"$PODS_TARGET_SRCROOT/geoip\" ] ||           test `find \"$PODS_TARGET_SRCROOT\" -name geoip -empty` ||           test `find \"$PODS_TARGET_SRCROOT\" -name geoip -mtime +1`\n      then\n        curl -Lo \"$PODS_TARGET_SRCROOT/geoip\" https://gitweb.torproject.org/tor.git/plain/src/config/geoip?h=tor-0.4.6.8\n      fi\n\n      if [ ! -f \"$PODS_TARGET_SRCROOT/geoip6\" ] ||           test `find \"$PODS_TARGET_SRCROOT\" -name geoip6 -empty` ||           test `find \"$PODS_TARGET_SRCROOT\" -name geoip6 -mtime +1`\n      then\n        curl -Lo \"$PODS_TARGET_SRCROOT/geoip6\" https://gitweb.torproject.org/tor.git/plain/src/config/geoip6?h=tor-0.4.6.8\n      fi\n";
+		};
+		B5A263599E34E4003E2739D28DF53015 /* [CP-User] Build XZ */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "[CP-User] Build XZ";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd $PODS_TARGET_SRCROOT/Tor/xz && $PODS_TARGET_SRCROOT/Tor/xz.sh";
+		};
+		E728B398FC86E00458A26C91FFEE9FA7 /* [CP-User] Build libevent */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "[CP-User] Build libevent";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd $PODS_TARGET_SRCROOT/Tor/libevent && $PODS_TARGET_SRCROOT/Tor/libevent.sh";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		54B44C3C4D3A78DEC2CCDE1A70A3BF4F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3498AD7EE66FE0F2EE6FF4A9E8BE7A9E /* Pods-Tor_Example_Mac-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5FF3B9C2F1A9CDE9D5939C137BDC851A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		78F3F94A289AA090CB4870AFEE543B56 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				331897641373B638544486B66F3D385C /* NSBundle+GeoIP.m in Sources */,
+				B3F46CABAB1F91372D5005E9814BEB04 /* NSCharacterSet+PredefinedSets.m in Sources */,
+				D46BF600A89C8B9B71C2935D891FF178 /* Tor-macOS-dummy.m in Sources */,
+				7598C0B00984E27827857BBE4A9E99CA /* TORAuthKey.m in Sources */,
+				9AFD620239A70D0065304C6B1729A65E /* TORCircuit.m in Sources */,
+				E030D7478C60026071572DD2D530F349 /* TORConfiguration.m in Sources */,
+				4EBBFB2117C6451AA96FC28D6860EC6D /* TORController.m in Sources */,
+				E4AC468A866B570323927357E275398E /* TORLogging.m in Sources */,
+				90AA69E22413F4CF9CAD0DC754336CEF /* TORNode.m in Sources */,
+				5749BBD296E8CBE9E9B7F3DE5BE0050F /* TOROnionAuth.m in Sources */,
+				A22EE06296651A4B6634B25CD3749A4E /* TORThread.m in Sources */,
+				5553B0A359A74C57B27C860C630D0935 /* TORX25519KeyPair.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8863BF9BD082CAF1EE9B843A0805464B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6EFF15F4079AD73CCF8271C89AEA2055 /* NSBundle+GeoIP.m in Sources */,
+				FE23706F4D1E9A0A0A20598DABCB8501 /* NSCharacterSet+PredefinedSets.m in Sources */,
+				1C3FF3472496B5CBFEE7E226CEB2D268 /* Tor-iOS-dummy.m in Sources */,
+				F4AEE111CAD7C43F4FC4A0DCB36B3A56 /* TORAuthKey.m in Sources */,
+				5B6FCB1BCDE2C69384F3D9DCD04A8BA4 /* TORCircuit.m in Sources */,
+				B7DBD946D9238D7BE742268B7CC5465D /* TORConfiguration.m in Sources */,
+				81F8035696FDB73F6E6E4C754031D301 /* TORController.m in Sources */,
+				8FD858AB05A2AB0663E591E30D0178D5 /* TORLogging.m in Sources */,
+				4E1F0BC09D3C89C912CA100244CC3AC7 /* TORNode.m in Sources */,
+				50D7737EAF96096C509AF433471F5EB1 /* TOROnionAuth.m in Sources */,
+				363AA92C3A5B99BAED378A928C3EA934 /* TORThread.m in Sources */,
+				E5713921BA234E773A12C65E28AA2378 /* TORX25519KeyPair.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		98F31A5A6D7194FD81D16A8C02EBAC3B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4B69C403EE5CC99F2F0E6084FD4C0989 /* Pods-Tor_Example-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC070A0E5945E11F9B8F4A35842DE81E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E08BEB9223A7B6F98DCFFB7D542E619 /* Pods-Tor_Tests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E4448807703E93974AD4DA561CA14CA7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		105F135FC1131E95431372805FDEC84C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Tor-macOS-GeoIP";
+			target = FAB1FC9BD36CC5A918D05007A1B852B4 /* Tor-macOS-GeoIP */;
+			targetProxy = 7DE65FBDAD8F55B59F40219EF6817349 /* PBXContainerItemProxy */;
+		};
+		47D87DFEC7856277CC2B58CBCB76A4AE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Tor-iOS";
+			target = 44B955CCA4F2DE939B50A5A03B7A0525 /* Tor-iOS */;
+			targetProxy = CDA350F06AA6DA296C3FD245623BF98A /* PBXContainerItemProxy */;
+		};
+		8DCB4BA78C0728D338EA2382EF52BBE6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-Tor_Example";
+			target = 9F04C66C15F5A64EA7E56E498C1B6BAB /* Pods-Tor_Example */;
+			targetProxy = A6FFC7FF9920A817E212C97319B41616 /* PBXContainerItemProxy */;
+		};
+		9C306E6F9ADBC7E60F5DD708A510BB31 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Tor-iOS-GeoIP";
+			target = 57334D5B49894DA73BAF8636AF47BFA7 /* Tor-iOS-GeoIP */;
+			targetProxy = 4A9DD498E252E7B4C03F14F580ABBC2C /* PBXContainerItemProxy */;
+		};
+		9E66BD45DDE5EBC24F6C7249C03D30CB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Tor-macOS";
+			target = E441EABB7B42E3DE1AA213A584274D9A /* Tor-macOS */;
+			targetProxy = F4063AADA9A1A5E8DF9E516B8BAAB913 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		3758F3F7E9566FC503A05696CF38BC10 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0B7CC2502ECF6A879B2C7DAE6BF67015 /* Pods-Tor_Example.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Tor_Example/Pods-Tor_Example-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Tor_Example/Pods-Tor_Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		44EF54FFDBEFE54877F93AD079EC2199 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A663FEE25812069963F55F40CF7A9370 /* Tor-macOS.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Tor-macOS/Tor-macOS-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Tor-macOS/Tor-macOS-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MODULEMAP_FILE = "Target Support Files/Tor-macOS/Tor-macOS.modulemap";
+				PRODUCT_MODULE_NAME = Tor;
+				PRODUCT_NAME = Tor;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		4FA30EFF9E137FBE3EEDCFDCE70710B4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0E449882D2C2472802E31313E2C79EC0 /* Tor-macOS.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Tor-macOS/Tor-macOS-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Tor-macOS/Tor-macOS-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MODULEMAP_FILE = "Target Support Files/Tor-macOS/Tor-macOS.modulemap";
+				PRODUCT_MODULE_NAME = Tor;
+				PRODUCT_NAME = Tor;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		82324C567F94FDF0069565EBAFA0FE45 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15505C1E1D0E6DE7B6EA59108EE46F3C /* Pods-Tor_Example.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Tor_Example/Pods-Tor_Example-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Tor_Example/Pods-Tor_Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		8B8ABE38C44AD6CECF1491EB03E61687 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6BF2ED49654C2C8466633A3EC19EA562 /* Tor-iOS.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Tor-iOS/Tor-iOS-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Tor-iOS/Tor-iOS-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Tor-iOS/Tor-iOS.modulemap";
+				PRODUCT_MODULE_NAME = Tor;
+				PRODUCT_NAME = Tor;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		983F1BE283FE7A93B91A671086AAA9AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6BF2ED49654C2C8466633A3EC19EA562 /* Tor-iOS.debug.xcconfig */;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Tor-iOS";
+				IBSC_MODULE = Tor;
+				INFOPLIST_FILE = "Target Support Files/Tor-iOS/ResourceBundle-GeoIP-Tor-iOS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				PRODUCT_NAME = GeoIP;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		9D27A1B1B662EBA162E9307B0D225274 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A663FEE25812069963F55F40CF7A9370 /* Tor-macOS.debug.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Tor-macOS";
+				IBSC_MODULE = Tor;
+				INFOPLIST_FILE = "Target Support Files/Tor-macOS/ResourceBundle-GeoIP-Tor-macOS-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = GeoIP;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		9FDC7F5E5C145D666F0FBABBB512A29D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		A4A52A5ECD5BDAB51BF5D1CF3611E134 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		AE080BF5D5BF7533C96F10BFB1BEAC65 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 88D00D39E311EF7215B16A6332E01E96 /* Pods-Tor_Tests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Tor_Tests/Pods-Tor_Tests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Tor_Tests/Pods-Tor_Tests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		C1FA5483274E6E6B3663620E1860488A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 69F861AF9954588929DE37402123E86E /* Pods-Tor_Tests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Tor_Tests/Pods-Tor_Tests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Tor_Tests/Pods-Tor_Tests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		C4D97831CB74F34E83AB1CB3EB068EC5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FE71243F4DFE82AC3D8BFAAE285A8F83 /* Tor-iOS.release.xcconfig */;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Tor-iOS";
+				IBSC_MODULE = Tor;
+				INFOPLIST_FILE = "Target Support Files/Tor-iOS/ResourceBundle-GeoIP-Tor-iOS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				PRODUCT_NAME = GeoIP;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		F03F7880AB9EF958E3EC2156985C2C8F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FE71243F4DFE82AC3D8BFAAE285A8F83 /* Tor-iOS.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Tor-iOS/Tor-iOS-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Tor-iOS/Tor-iOS-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Tor-iOS/Tor-iOS.modulemap";
+				PRODUCT_MODULE_NAME = Tor;
+				PRODUCT_NAME = Tor;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		F385B7F35D0643B84EDFE7C2EE77D3A6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D92AB0AC409874FE288BFFDACD6D1C25 /* Pods-Tor_Example_Mac.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Tor_Example_Mac/Pods-Tor_Example_Mac-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MODULEMAP_FILE = "Target Support Files/Pods-Tor_Example_Mac/Pods-Tor_Example_Mac.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		F84AAF1973AB06A908BAD486CE409CEB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 11B10FA423009FD8BE82C03D8744A39B /* Pods-Tor_Example_Mac.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Tor_Example_Mac/Pods-Tor_Example_Mac-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MODULEMAP_FILE = "Target Support Files/Pods-Tor_Example_Mac/Pods-Tor_Example_Mac.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		FB6D911F44D2F4B2C03EC7F68F0B8BC3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0E449882D2C2472802E31313E2C79EC0 /* Tor-macOS.release.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Tor-macOS";
+				IBSC_MODULE = Tor;
+				INFOPLIST_FILE = "Target Support Files/Tor-macOS/ResourceBundle-GeoIP-Tor-macOS-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = GeoIP;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		16D83638773125EBC9A46A6CBB5D8576 /* Build configuration list for PBXNativeTarget "Tor-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8B8ABE38C44AD6CECF1491EB03E61687 /* Debug */,
+				F03F7880AB9EF958E3EC2156985C2C8F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		324A084D3C85EC45664CA3F0FE1D0022 /* Build configuration list for PBXNativeTarget "Pods-Tor_Example_Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F84AAF1973AB06A908BAD486CE409CEB /* Debug */,
+				F385B7F35D0643B84EDFE7C2EE77D3A6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A4A52A5ECD5BDAB51BF5D1CF3611E134 /* Debug */,
+				9FDC7F5E5C145D666F0FBABBB512A29D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		660D03BC55BBD71D712EB5CAB6969D4C /* Build configuration list for PBXNativeTarget "Pods-Tor_Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AE080BF5D5BF7533C96F10BFB1BEAC65 /* Debug */,
+				C1FA5483274E6E6B3663620E1860488A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C56550A1B59566E9E8F6333F7BBCAB04 /* Build configuration list for PBXNativeTarget "Tor-iOS-GeoIP" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				983F1BE283FE7A93B91A671086AAA9AF /* Debug */,
+				C4D97831CB74F34E83AB1CB3EB068EC5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C9E20EB0B14D50439B89F66472B88280 /* Build configuration list for PBXNativeTarget "Tor-macOS-GeoIP" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9D27A1B1B662EBA162E9307B0D225274 /* Debug */,
+				FB6D911F44D2F4B2C03EC7F68F0B8BC3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E706266ACB453BD9BCBE208E3FD4BCB9 /* Build configuration list for PBXNativeTarget "Tor-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				44EF54FFDBEFE54877F93AD079EC2199 /* Debug */,
+				4FA30EFF9E137FBE3EEDCFDCE70710B4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EF49974BAB65519BF4C82749E2BC7D5A /* Build configuration list for PBXNativeTarget "Pods-Tor_Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				82324C567F94FDF0069565EBAFA0FE45 /* Debug */,
+				3758F3F7E9566FC503A05696CF38BC10 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+}

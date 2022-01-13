@@ -1,0 +1,6 @@
+framework module Pods_Tor_Tests {
+  umbrella header "Pods-Tor_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

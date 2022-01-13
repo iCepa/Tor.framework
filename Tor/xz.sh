@@ -61,7 +61,7 @@ fi
 for ARCH in "${ARCHS[@]}"
 do
     PREFIX="${CONFIGURATION_TEMP_DIR}/liblzma-${ARCH}"
-    ./configure --disable-shared --enable-static --disable-doc --disable-scripts --disable-xz --disable-xzdec --disable-lzmadec --disable-lzmainfo --disable-lzma-links ${DEBUG_FLAGS} --prefix="${PREFIX}" CC="$(xcrun -f --sdk ${PLATFORM_NAME} clang) -arch ${ARCH}" CPP="$(xcrun -f --sdk ${PLATFORM_NAME} clang) -E -arch ${ARCH}" CFLAGS="${DEBUG_CFLAGS} ${BITCODE_CFLAGS}" LDFLAGS="-L${BUILT_PRODUCTS_DIR} ${BITCODE_CFLAGS}" cross_compiling="yes" ac_cv_func_clock_gettime="no"
+    ./configure --disable-shared --enable-static --disable-doc --disable-scripts --disable-xz --disable-xzdec --disable-lzmadec --disable-lzmainfo --disable-lzma-links ${DEBUG_FLAGS} --prefix="${PREFIX}" CC="$(xcrun -f --sdk ${PLATFORM_NAME} clang) -arch ${ARCH}" CPP="$(xcrun -f --sdk ${PLATFORM_NAME} clang) -E -arch ${ARCH}" CFLAGS="${DEBUG_CFLAGS} ${BITCODE_CFLAGS} -Wno-unknown-warning-option" LDFLAGS="-L${BUILT_PRODUCTS_DIR} ${BITCODE_CFLAGS}" cross_compiling="yes" ac_cv_func_clock_gettime="no"
     make -j$(sysctl hw.ncpu | awk '{print $2}')
     make install
     make distclean

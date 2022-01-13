@@ -1,0 +1,18 @@
+use_frameworks!
+
+target 'Tor_Example' do
+  platform :ios, '9.0'
+
+  pod 'Tor/GeoIP', :path => '../'
+
+  target 'Tor_Tests' do
+    inherit! :search_paths
+  end
+
+end
+
+target 'Tor_Example_Mac' do
+  platform :macos, '10.9'
+
+  pod 'Tor/GeoIP', :path => '../'
+end

@@ -1,0 +1,18 @@
+PODS:
+  - Tor/Core (406.8.2)
+  - Tor/GeoIP (406.8.2):
+    - Tor/Core
+
+DEPENDENCIES:
+  - Tor/GeoIP (from `../`)
+
+EXTERNAL SOURCES:
+  Tor:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Tor: dd41464ed94b475b2a227588b37f2637665dcb86
+
+PODFILE CHECKSUM: 6779676febf635e815790b452d8094ce567ac31e
+
+COCOAPODS: 1.11.2
