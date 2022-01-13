@@ -23,7 +23,7 @@
     "ios": "9.0",
     "osx": "10.9"
   },
-  "prepare_command": "git submodule update --init --recursive\ntouch geoip\ntouch geoip6",
+  "prepare_command": "touch geoip\ntouch geoip6",
   "default_subspecs": "Core",
   "subspecs": [
     {
@@ -44,6 +44,11 @@
         }
       },
       "script_phases": [
+        {
+          "name": "Checkout Submodules",
+          "execution_position": "before_compile",
+          "script": "git submodule update --init --recursive"
+        },
         {
           "name": "Build XZ",
           "execution_position": "before_compile",
