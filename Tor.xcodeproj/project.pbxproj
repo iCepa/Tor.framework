@@ -60,14 +60,6 @@
 		A0F3439E23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.h in Headers */ = {isa = PBXBuildFile; fileRef = A0F3439B23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.h */; };
 		A0F3439F23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F3439C23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.m */; };
 		A0F343A023A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F3439C23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.m */; };
-		A0FB442A239EEC7E00E96E92 /* geoip6 in Resources */ = {isa = PBXBuildFile; fileRef = A0FB4428239EEC7D00E96E92 /* geoip6 */; };
-		A0FB442B239EEC7E00E96E92 /* geoip6 in Resources */ = {isa = PBXBuildFile; fileRef = A0FB4428239EEC7D00E96E92 /* geoip6 */; };
-		A0FB442C239EEC7E00E96E92 /* geoip6 in Resources */ = {isa = PBXBuildFile; fileRef = A0FB4428239EEC7D00E96E92 /* geoip6 */; };
-		A0FB442D239EEC7E00E96E92 /* geoip6 in Resources */ = {isa = PBXBuildFile; fileRef = A0FB4428239EEC7D00E96E92 /* geoip6 */; };
-		A0FB442E239EEC7E00E96E92 /* geoip in Resources */ = {isa = PBXBuildFile; fileRef = A0FB4429239EEC7D00E96E92 /* geoip */; };
-		A0FB442F239EEC7E00E96E92 /* geoip in Resources */ = {isa = PBXBuildFile; fileRef = A0FB4429239EEC7D00E96E92 /* geoip */; };
-		A0FB4430239EEC7E00E96E92 /* geoip in Resources */ = {isa = PBXBuildFile; fileRef = A0FB4429239EEC7D00E96E92 /* geoip */; };
-		A0FB4431239EEC7E00E96E92 /* geoip in Resources */ = {isa = PBXBuildFile; fileRef = A0FB4429239EEC7D00E96E92 /* geoip */; };
 		D012AB8D1BC2920C004BE7A6 /* TORController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FBEC941B79BCF6005C7577 /* TORController.m */; };
 		D012AB8E1BC2920E004BE7A6 /* Tor.h in Headers */ = {isa = PBXBuildFile; fileRef = D0FBEC701B79BAD7005C7577 /* Tor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D012AB8F1BC29220004BE7A6 /* TORConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B283AD1B79CF6600D0DDA9 /* TORConfiguration.m */; };
@@ -259,8 +251,6 @@
 		A0DE78A721F73B8E00B6B68B /* version.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = version.sh; path = Tor/version.sh; sourceTree = "<group>"; };
 		A0F3439B23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSCharacterSet+PredefinedSets.h"; sourceTree = "<group>"; };
 		A0F3439C23A1B1A400C99EEC /* NSCharacterSet+PredefinedSets.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSCharacterSet+PredefinedSets.m"; sourceTree = "<group>"; };
-		A0FB4428239EEC7D00E96E92 /* geoip6 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = geoip6; sourceTree = "<group>"; };
-		A0FB4429239EEC7D00E96E92 /* geoip */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = geoip; sourceTree = "<group>"; };
 		D012AB851BC290D0004BE7A6 /* Tor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Tor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D02437B31B79CF2C006B48E0 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		D03196E41F647A7100720808 /* iOS-StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "iOS-StaticLibrary.xcconfig"; path = "Carthage/Checkouts/xcconfigs/iOS/iOS-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
@@ -449,8 +439,6 @@
 		D0FBEC631B79BAD7005C7577 = {
 			isa = PBXGroup;
 			children = (
-				A0FB4429239EEC7D00E96E92 /* geoip */,
-				A0FB4428239EEC7D00E96E92 /* geoip6 */,
 				A0428A991FA0E72D00593F79 /* README.md */,
 				A0DE78A021F73B6000B6B68B /* Build */,
 				D0FBEC6F1B79BAD7005C7577 /* Tor */,
@@ -922,8 +910,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A0FB4431239EEC7E00E96E92 /* geoip in Resources */,
-				A0FB442D239EEC7E00E96E92 /* geoip6 in Resources */,
 				D08892ED1DDA69C1009DB0CD /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -932,8 +918,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A0FB442B239EEC7E00E96E92 /* geoip6 in Resources */,
-				A0FB442F239EEC7E00E96E92 /* geoip in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -941,8 +925,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A0FB442C239EEC7E00E96E92 /* geoip6 in Resources */,
-				A0FB4430239EEC7E00E96E92 /* geoip in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -950,8 +932,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A0FB442A239EEC7E00E96E92 /* geoip6 in Resources */,
-				A0FB442E239EEC7E00E96E92 /* geoip in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
