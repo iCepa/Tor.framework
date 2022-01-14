@@ -1,9 +1,6 @@
 Pod::Spec.new do |m|
 
   tor_version = 'tor-0.4.6.9'
-  xz_version = 'v5.2.5'
-  openssl_version = 'OpenSSL_1_1_1m'
-  libevent_version = 'release-2.1.12-stable'
 
   m.name             = 'Tor'
   m.version          = '406.9.1'
@@ -16,7 +13,10 @@ Pod::Spec.new do |m|
                          'Chris Ballinger' => 'chris@chatsecure.org',
                          'Mike Tigas' => 'mike@tig.as',
                          'Benjamin Erhart' => 'berhart@netzarchitekten.com', }
-  m.source           = { :git => 'https://github.com/iCepa/Tor.framework.git', :branch => 'pure_pod', :tag => "v#{m.version}" }
+  m.source           = { :git => 'https://github.com/iCepa/Tor.framework.git',
+                         :branch => 'pure_pod',
+                         :tag => "v#{m.version}",
+                         :submodules => true }
   m.social_media_url = 'https://twitter.com/tladesignz'
 
   m.ios.deployment_target = '9.0'
@@ -43,20 +43,7 @@ ENDSCRIPT
     }
 
     script = <<-ENDSCRIPT
-cd "${PODS_TARGET_SRCROOT}/Tor"
-
-if [ -d %1$s ] && [ ! `find . -name %1$s -empty` ]
-then
-  cd %1$s
-  rm -rf *
-  git checkout %2$s > /dev/null
-  git restore .
-  git submodule update --init --recursive
-else
-  git clone --branch %2$s --single-branch --recurse-submodules %3$s
-  cd %1$s
-fi
-
+cd "${PODS_TARGET_SRCROOT}/Tor/%1$s"
 ../%1$s.sh
 ENDSCRIPT
 
@@ -64,22 +51,22 @@ ENDSCRIPT
       {
         :name => 'Build XZ',
         :execution_position => :before_compile,
-        :script => sprintf(script, "xz", xz_version, "https://git.tukaani.org/xz.git")
+        :script => sprintf(script, "xz")
       },
       {
         :name => 'Build OpenSSL',
         :execution_position => :before_compile,
-        :script => sprintf(script, "openssl", openssl_version, "https://github.com/openssl/openssl.git")
+        :script => sprintf(script, "openssl")
       },
       {
         :name => 'Build libevent',
         :execution_position => :before_compile,
-        :script => sprintf(script, "libevent", libevent_version, "https://github.com/libevent/libevent.git")
+        :script => sprintf(script, "libevent")
       },
       {
         :name => 'Build Tor',
         :execution_position => :before_compile,
-        :script => sprintf(script, "tor", tor_version, "https://git.torproject.org/tor.git")
+        :script => sprintf(script, "tor")
       },
     ]
 
@@ -87,7 +74,7 @@ ENDSCRIPT
 
     s.source_files = 'Tor/Classes/**/*'
 
-    s.preserve_paths = 'Tor/include', 'Tor/libevent.sh', 'Tor/openssl.sh', 'Tor/tor.sh', 'Tor/xz.sh'
+    s.preserve_paths = 'Tor/include', 'Tor/libevent', 'Tor/libevent.sh', 'Tor/openssl', 'Tor/openssl.sh', 'Tor/tor', 'Tor/tor.sh', 'Tor/xz', 'Tor/xz.sh'
   end
 
   m.subspec 'GeoIP' do |s|

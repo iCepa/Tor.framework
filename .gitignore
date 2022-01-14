@@ -1,9 +1,5 @@
 geoip
 geoip6
-Tor/xz/
-Tor/openssl/
-Tor/libevent/
-Tor/tor/
 
 # Created by https://www.toptal.com/developers/gitignore/api/macos,xcode,swift,objective-c
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos,xcode,swift,objective-c
