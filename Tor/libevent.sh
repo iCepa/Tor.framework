@@ -66,7 +66,7 @@ for ARCH in "${ARCHS[@]}"
 do
     make clean
     PREFIX="${CONFIGURATION_TEMP_DIR}/libevent-${ARCH}"
-    ./configure --disable-shared --disable-openssl --enable-static --enable-gcc-hardening ${DEBUG_FLAGS} --prefix="${PREFIX}" CC="$(xcrun -f --sdk ${PLATFORM_NAME} clang) -arch ${ARCH}" CPP="$(xcrun -f --sdk ${PLATFORM_NAME} clang) -E -arch ${ARCH}" CFLAGS="${DEBUG_CFLAGS} ${BITCODE_CFLAGS} -I${XPC_INCLUDE_DIR}" LDFLAGS="-L${BUILT_PRODUCTS_DIR} ${BITCODE_CFLAGS}" cross_compiling="yes" ac_cv_func_clock_gettime="no"
+    ./configure --disable-shared --disable-openssl --disable-libevent-regress --disable-samples --disable-doxygen-html --enable-static --enable-gcc-hardening ${DEBUG_FLAGS} --prefix="${PREFIX}" CC="$(xcrun -f --sdk ${PLATFORM_NAME} clang) -arch ${ARCH}" CPP="$(xcrun -f --sdk ${PLATFORM_NAME} clang) -E -arch ${ARCH}" CFLAGS="${DEBUG_CFLAGS} ${BITCODE_CFLAGS} -I${XPC_INCLUDE_DIR}" LDFLAGS="-L${BUILT_PRODUCTS_DIR} ${BITCODE_CFLAGS}" cross_compiling="yes" ac_cv_func_clock_gettime="no"
     make -j$(sysctl hw.ncpu | awk '{print $2}')
     make install
     #make distclean
