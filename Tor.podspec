@@ -28,17 +28,17 @@ touch geoip6
 ENDSCRIPT
 
   m.subspec 'Core' do |s|
-    s.xcconfig = {
+    s.pod_target_xcconfig = {
       'APPLICATION_EXTENSION_API_ONLY' => 'YES',
       'HEADER_SEARCH_PATHS' => '"${PODS_TARGET_SRCROOT}/Tor/tor" "${PODS_TARGET_SRCROOT}/Tor/tor/src" "${PODS_TARGET_SRCROOT}/Tor/openssl/include" "${PODS_TARGET_SRCROOT}/Tor/libevent/include"',
       'OTHER_LDFLAGS' => '$(inherited) -L"${BUILT_PRODUCTS_DIR}/Tor" -l"z" -l"lzma" -l"crypto" -l"ssl" -l"event_core" -l"event_extra" -l"event_pthreads" -l"event" -l"tor"'
     }
 
-    s.ios.xcconfig = {
+    s.ios.pod_target_xcconfig = {
       'OTHER_LDFLAGS' => '$(inherited) -L"${BUILT_PRODUCTS_DIR}/Tor-iOS"'
     }
 
-    s.macos.xcconfig = {
+    s.macos.pod_target_xcconfig = {
       'OTHER_LDFLAGS' => '$(inherited) -L"${BUILT_PRODUCTS_DIR}/Tor-macOS"'
     }
 
