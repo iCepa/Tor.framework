@@ -16,7 +16,7 @@ Pod::Spec.new do |m|
                          'Chris Ballinger' => 'chris@chatsecure.org',
                          'Mike Tigas' => 'mike@tig.as',
                          'Benjamin Erhart' => 'berhart@netzarchitekten.com', }
-  m.source           = { :git => '"https://github.com/iCepa/Tor.framework.git', :tag => m.version.to_s }
+  m.source           = { :git => 'https://github.com/iCepa/Tor.framework.git', :branch => 'pure_pod', :tag => "v#{m.version}" }
   m.social_media_url = 'https://twitter.com/tladesignz'
 
   m.ios.deployment_target = '9.0'
@@ -86,6 +86,8 @@ ENDSCRIPT
     s.requires_arc = true
 
     s.source_files = 'Tor/Classes/**/*'
+
+    s.preserve_paths = 'Tor/include', 'Tor/libevent.sh', 'Tor/openssl.sh', 'Tor/tor.sh', 'Tor/xz.sh'
   end
 
   m.subspec 'GeoIP' do |s|
