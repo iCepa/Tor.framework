@@ -64,10 +64,12 @@ pod lib lint --verbose --allow-warnings
 If the linting went well, create a git tag for the version, push to GitHub and then publish to CocoaPods:
 
 ```sh
-pod trunk push --allow-warnings --skip-import-validation --skip-tests
+pod trunk push --verbose --allow-warnings
 ```
 
-(You don't want to do the linting *again*!)
+(Unfortunately, you can not not lint on publish, so you might skip the first lint. However, `pod trunk push`
+will take even longer, because it will clone everything fresh, too.)
+
 
 Then create a [release](https://github.com/iCepa/Tor.framework/releases) in GitHub which corresponds
 to the tag, and attach latest info as per older releases.
