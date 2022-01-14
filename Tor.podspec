@@ -1,6 +1,9 @@
 Pod::Spec.new do |m|
 
-  tor_version = '0.4.6.9'
+  tor_version = 'tor-0.4.6.9'
+  xz_version = 'v5.2.5'
+  openssl_version = 'OpenSSL_1_1_1m'
+  libevent_version = 'release-2.1.12-stable'
 
   m.name             = 'Tor'
   m.version          = '406.9.1'
@@ -39,70 +42,44 @@ ENDSCRIPT
       'OTHER_LDFLAGS' => '$(inherited) -L"${BUILT_PRODUCTS_DIR}/Tor-macOS"'
     }
 
+    script = <<-ENDSCRIPT
+cd "${PODS_TARGET_SRCROOT}/Tor"
+
+if [ -d %1$s ] && [ ! `find . -name %1$s -empty` ]
+then
+  cd %1$s
+  rm -rf *
+  git checkout %2$s > /dev/null
+  git restore .
+  git submodule update --init --recursive
+else
+  git clone --branch %2$s --single-branch --recurse-submodules %3$s
+  cd %1$s
+fi
+
+../%1$s.sh
+ENDSCRIPT
+
     s.script_phases = [
       {
         :name => 'Build XZ',
         :execution_position => :before_compile,
-        :script => <<-ENDSCRIPT
-cd "${PODS_TARGET_SRCROOT}/Tor"
-
-if [ ! -d xz ]
-then
-  git clone --branch v5.2.5 --single-branch --recurse-submodules https://git.tukaani.org/xz.git
-fi
-
-cd xz
-
-../xz.sh
-ENDSCRIPT
+        :script => sprintf(script, "xz", xz_version, "https://git.tukaani.org/xz.git")
       },
       {
         :name => 'Build OpenSSL',
         :execution_position => :before_compile,
-        :script => <<-ENDSCRIPT
-cd "${PODS_TARGET_SRCROOT}/Tor"
-
-if [ ! -d openssl ]
-then
-  git clone --branch OpenSSL_1_1_1m --single-branch --recurse-submodules https://github.com/openssl/openssl.git
-fi
-
-cd openssl
-
-../openssl.sh
-ENDSCRIPT
+        :script => sprintf(script, "openssl", openssl_version, "https://github.com/openssl/openssl.git")
       },
       {
         :name => 'Build libevent',
         :execution_position => :before_compile,
-        :script => <<-ENDSCRIPT
-cd "${PODS_TARGET_SRCROOT}/Tor"
-
-if [ ! -d libevent ]
-then
-  git clone --branch release-2.1.12-stable --single-branch --recurse-submodules https://github.com/libevent/libevent.git
-fi
-
-cd libevent
-
-../libevent.sh
-ENDSCRIPT
+        :script => sprintf(script, "libevent", libevent_version, "https://github.com/libevent/libevent.git")
       },
       {
         :name => 'Build Tor',
         :execution_position => :before_compile,
-        :script => <<-ENDSCRIPT
-cd "${PODS_TARGET_SRCROOT}/Tor"
-
-if [ ! -d tor ]
-then
-  git clone --branch tor-0.4.6.9 --single-branch --recurse-submodules https://git.torproject.org/tor.git
-fi
-
-cd tor
-
-../tor.sh
-ENDSCRIPT
+        :script => sprintf(script, "tor", tor_version, "https://git.torproject.org/tor.git")
       },
     ]
 
@@ -118,20 +95,17 @@ ENDSCRIPT
       :name => 'Load GeoIP files',
       :execution_position => :before_compile,
       :script => <<-ENDSCRIPT
-      if [ ! -f "$PODS_TARGET_SRCROOT/geoip" ] || \
-          test `find "$PODS_TARGET_SRCROOT" -name geoip -empty` || \
-          test `find "$PODS_TARGET_SRCROOT" -name geoip -mtime +1`
-      then
-        curl -Lo "$PODS_TARGET_SRCROOT/geoip" https://gitweb.torproject.org/tor.git/plain/src/config/geoip?h=tor-#{tor_version}
-      fi
+cd "${PODS_TARGET_SRCROOT}"
+if [ ! -f geoip ] || [ `find . -name geoip -empty` ] || [ `find . -name geoip -mtime +1` ]
+then
+  curl -Lo geoip https://gitweb.torproject.org/tor.git/plain/src/config/geoip?h=#{tor_version}
+fi
 
-      if [ ! -f "$PODS_TARGET_SRCROOT/geoip6" ] || \
-          test `find "$PODS_TARGET_SRCROOT" -name geoip6 -empty` || \
-          test `find "$PODS_TARGET_SRCROOT" -name geoip6 -mtime +1`
-      then
-        curl -Lo "$PODS_TARGET_SRCROOT/geoip6" https://gitweb.torproject.org/tor.git/plain/src/config/geoip6?h=tor-#{tor_version}
-      fi
-      ENDSCRIPT
+if [ ! -f geoip6 ] || [ `find . -name geoip6 -empty` ] || [ `find . -name geoip6 -mtime +1` ]
+then
+  curl -Lo geoip6 https://gitweb.torproject.org/tor.git/plain/src/config/geoip6?h=#{tor_version}
+fi
+ENDSCRIPT
     }
 
     s.resource_bundles = {
