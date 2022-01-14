@@ -64,7 +64,7 @@ pod lib lint --verbose --allow-warnings
 If the linting went well, create a git tag for the version, push to GitHub and then publish to CocoaPods:
 
 ```sh
-pod trunk push --allow-warnings --skip-import-validation  --skip-tests
+pod trunk push --allow-warnings --skip-import-validation --skip-tests
 ```
 
 (You don't want to do the linting *again*!)
