@@ -9,4 +9,4 @@
 	url = https://github.com/libevent/libevent.git
 [submodule "Tor/tor"]
 	path = Tor/tor
-	url = ttps://git.torproject.org/tor.git
+	url = https://git.torproject.org/tor.git
