@@ -5,7 +5,14 @@
 //  Created by Conrad Kramer on 5/10/14.
 //
 
-#import <Tor/Tor.h>
+#import <Foundation/Foundation.h>
+#import "TORCircuit.h"
+
+#ifdef __cplusplus
+#define TOR_EXTERN extern "C" __attribute__((visibility ("default")))
+#else
+#define TOR_EXTERN extern __attribute__((visibility ("default")))
+#endif
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -46,8 +53,7 @@ NS_SWIFT_NAME(TorController)
 
  @note There's no clear way to determine, which circuit actually was used by a specific request.
 
- @param completion The callback upon completion of the task.
- @param circuits A list of `TORCircuit`s . Empty if no circuit could be found.
+ @param completion The callback upon completion of the task. Will return A list of `TORCircuit`s . Empty if no circuit could be found.
  */
 - (void)getCircuits:(void (^)(NSArray<TORCircuit *> * _Nonnull circuits))completion;
 
@@ -56,8 +62,7 @@ NS_SWIFT_NAME(TorController)
 
  See https://torproject.gitlab.io/torspec/control-spec.html#signal
 
- @param completion Completion callback.
- @param success true, if signal calls where successful, false if not.
+ @param completion Completion callback. Will return true, if signal calls where successful, false if not.
  */
 - (void)resetConnection:(void (^__nullable)(BOOL success))completion;
 
@@ -68,8 +73,7 @@ NS_SWIFT_NAME(TorController)
  ID doesn't exist (anymore). So in many circumstances, you can still consider that an ok outcome.
 
  @param circuitIds List of circuit IDs.
- @param completion Completion callback.
- @param success true, if *all* closings were successful, false, if *at least one* closing failed.
+ @param completion Completion callback. Will return true, if *all* closings were successful, false, if *at least one* closing failed.
  */
 - (void)closeCircuitsByIds:(NSArray<NSString *> *)circuitIds completion:(void (^__nullable)(BOOL success))completion;
 
@@ -79,8 +83,7 @@ NS_SWIFT_NAME(TorController)
  The given circuits are invalid afterwards, as you just closed them. You should throw them away on completion.
 
 @param circuits List of circuits to close.
-@param completion  Completion callback.
-@param success true, if *all* closings were successful, false, if *at least one* closing failed.
+@param completion  Completion callback. Will return true, if *all* closings were successful, false, if *at least one* closing failed.
 */
 - (void)closeCircuits:(NSArray<TORCircuit *> *)circuits completion:(void (^__nullable)(BOOL success))completion;
 

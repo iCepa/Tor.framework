@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <Tor/TORAuthKey.h>
+#import "TORAuthKey.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
