@@ -39,9 +39,23 @@ brew install automake autoconf libtool gettext
 Tor is available through [CocoaPods](https://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
+If you use dynamic frameworks, use the root spec:
+
 ```ruby
+use_frameworks!
 pod 'Tor', '~> 406.9.1'
 ```
+
+(or `Tor/GeoIP` - see below.)
+
+
+If you need to add it as a static framework, use the `Static` subspec:
+
+```ruby
+pod 'Tor/Static', '~> 406.9.1'
+```
+
+(or `Tor/StaticGeoIP` - see below.)
 
 
 ## Preparing a new release
@@ -129,10 +143,16 @@ TORController *controller = [[TORController alloc] initWithSocketURL:configurati
 
 ### GeoIP
 
-In your `Podfile` use subspec `GeoIP` instead of the root spec:
+In your `Podfile` use the subspec `GeoIP` or `StaticGeoIP` instead of the root spec:
 
 ```ruby
+use_frameworks!
 pod 'Tor/GeoIP'
+```
+
+or
+```ruby
+pod `Tor/StaticGeoIP`
 ```
 
 The subspec will create a "GeoIP" bundle and install a run script phase which 

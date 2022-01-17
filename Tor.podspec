@@ -76,13 +76,31 @@ ENDSCRIPT
     s.preserve_paths = 'Tor/include', 'Tor/libevent', 'Tor/libevent.sh', 'Tor/openssl', 'Tor/openssl.sh', 'Tor/tor', 'Tor/tor.sh', 'Tor/xz', 'Tor/xz.sh'
   end
 
-  m.subspec 'GeoIP' do |s|
+  # TODO: Why the hell do I need to do this manually? CocoaPods should figure this out automatically, like with other pods.
+  m.subspec 'Static' do |s|
     s.dependency 'Tor/Core'
 
+    s.pod_target_xcconfig = {
+      'DEFINES_MODULE' => 'YES',
+    }
+
+    s.user_target_xcconfig = {
+      'HEADER_SEARCH_PATHS' => '$(inherited) "${PODS_ROOT}/Headers/Public"',
+      'OTHER_LDFLAGS' => '$(inherited) -l"z" -l"lzma" -l"crypto" -l"ssl" -l"event_core" -l"event_extra" -l"event_pthreads" -l"event" -l"tor"'
+    }
+
     s.script_phase = {
-      :name => 'Load GeoIP files',
+      :name => 'Link Headers',
       :execution_position => :before_compile,
       :script => <<-ENDSCRIPT
+mkdir -p "${PODS_ROOT}/Headers/Public/Tor"
+cd "${PODS_ROOT}/Headers/Public/Tor"
+find "${PODS_TARGET_SRCROOT}/Tor/Classes" -name "*.h" -maxdepth 1 -exec ln -s {} \\;
+ENDSCRIPT
+    }
+  end
+
+  geoscript = <<-ENDSCRIPT
 cd "${PODS_TARGET_SRCROOT}"
 if [ ! -f geoip ] || [ `find . -name geoip -empty -maxdepth 1` ] || [ `find . -name geoip -mtime +1 -maxdepth 1` ]
 then
@@ -94,6 +112,28 @@ then
   curl -Lo geoip6 https://gitweb.torproject.org/tor.git/plain/src/config/geoip6?h=#{tor_version}
 fi
 ENDSCRIPT
+
+  m.subspec 'GeoIP' do |s|
+    s.dependency 'Tor/Core'
+
+    s.script_phase = {
+      :name => 'Load GeoIP files',
+      :execution_position => :before_compile,
+      :script => geoscript
+    }
+
+    s.resource_bundles = {
+      'GeoIP' => ['geoip', 'geoip6']
+    }
+  end
+
+  m.subspec 'StaticGeoIP' do |s|
+    s.dependency 'Tor/Static'
+
+    s.script_phase = {
+      :name => 'Load GeoIP files',
+      :execution_position => :before_compile,
+      :script => geoscript
     }
 
     s.resource_bundles = {
