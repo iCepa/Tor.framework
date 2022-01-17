@@ -43,7 +43,7 @@ If you use dynamic frameworks, use the root spec:
 
 ```ruby
 use_frameworks!
-pod 'Tor', '~> 406.9.1'
+pod 'Tor', '~> 406.9.2'
 ```
 
 (or `Tor/GeoIP` - see below.)
@@ -52,7 +52,7 @@ pod 'Tor', '~> 406.9.1'
 If you need to add it as a static framework, use the `Static` subspec:
 
 ```ruby
-pod 'Tor/Static', '~> 406.9.1'
+pod 'Tor/Static', '~> 406.9.2'
 ```
 
 (or `Tor/StaticGeoIP` - see below.)
