@@ -29,7 +29,7 @@ ENDSCRIPT
 
   m.subspec 'Core' do |s|
     s.pod_target_xcconfig = {
-      'HEADER_SEARCH_PATHS' => '"${PODS_TARGET_SRCROOT}/Tor/tor" "${PODS_TARGET_SRCROOT}/Tor/tor/src" "${PODS_TARGET_SRCROOT}/Tor/openssl/include" "${PODS_TARGET_SRCROOT}/Tor/libevent/include"',
+      'HEADER_SEARCH_PATHS' => '$(inherited) "${PODS_TARGET_SRCROOT}/Tor/tor" "${PODS_TARGET_SRCROOT}/Tor/tor/src" "${PODS_TARGET_SRCROOT}/Tor/openssl/include" "${PODS_TARGET_SRCROOT}/Tor/libevent/include"',
       'OTHER_LDFLAGS' => '$(inherited) -L"${BUILT_PRODUCTS_DIR}/Tor" -l"z" -l"lzma" -l"crypto" -l"ssl" -l"event_core" -l"event_extra" -l"event_pthreads" -l"event" -l"tor"'
     }
 
@@ -84,12 +84,12 @@ ENDSCRIPT
       :execution_position => :before_compile,
       :script => <<-ENDSCRIPT
 cd "${PODS_TARGET_SRCROOT}"
-if [ ! -f geoip ] || [ `find . -name geoip -empty` ] || [ `find . -name geoip -mtime +1` ]
+if [ ! -f geoip ] || [ `find . -name geoip -empty -maxdepth 1` ] || [ `find . -name geoip -mtime +1 -maxdepth 1` ]
 then
   curl -Lo geoip https://gitweb.torproject.org/tor.git/plain/src/config/geoip?h=#{tor_version}
 fi
 
-if [ ! -f geoip6 ] || [ `find . -name geoip6 -empty` ] || [ `find . -name geoip6 -mtime +1` ]
+if [ ! -f geoip6 ] || [ `find . -name geoip6 -empty -maxdepth 1` ] || [ `find . -name geoip6 -mtime +1 -maxdepth 1` ]
 then
   curl -Lo geoip6 https://gitweb.torproject.org/tor.git/plain/src/config/geoip6?h=#{tor_version}
 fi
