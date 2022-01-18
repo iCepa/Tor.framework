@@ -1,5 +1,7 @@
 Pod::Spec.new do |m|
 
+  # TODO: Why the hell do I need to provide this manually? CocoaPods should figure this out automatically, like with other pods, when they're used as static libraries.
+
   tor_version = 'tor-0.4.6.9'
 
   m.name             = 'Tor'
@@ -29,6 +31,7 @@ ENDSCRIPT
 
   m.subspec 'Core' do |s|
     s.pod_target_xcconfig = {
+      'DEFINES_MODULE' => 'YES',
       'HEADER_SEARCH_PATHS' => '$(inherited) "${PODS_TARGET_SRCROOT}/Tor/tor" "${PODS_TARGET_SRCROOT}/Tor/tor/src" "${PODS_TARGET_SRCROOT}/Tor/openssl/include" "${PODS_TARGET_SRCROOT}/Tor/libevent/include"',
       'OTHER_LDFLAGS' => '$(inherited) -L"${BUILT_PRODUCTS_DIR}/Tor" -l"z" -l"lzma" -l"crypto" -l"ssl" -l"event_core" -l"event_extra" -l"event_pthreads" -l"event" -l"tor"'
     }
@@ -39,6 +42,11 @@ ENDSCRIPT
 
     s.macos.pod_target_xcconfig = {
       'OTHER_LDFLAGS' => '$(inherited) -L"${BUILT_PRODUCTS_DIR}/Tor-macOS"'
+    }
+
+    s.user_target_xcconfig = {
+      'HEADER_SEARCH_PATHS' => '$(inherited) "${PODS_ROOT}/Headers/Public"',
+      'OTHER_LDFLAGS' => '$(inherited) -l"z" -l"lzma" -l"crypto" -l"ssl" -l"event_core" -l"event_extra" -l"event_pthreads" -l"event" -l"tor"'
     }
 
     script = <<-ENDSCRIPT
@@ -67,6 +75,15 @@ ENDSCRIPT
         :execution_position => :before_compile,
         :script => sprintf(script, "tor")
       },
+      {
+        :name => 'Link Headers',
+        :execution_position => :before_compile,
+        :script => <<-ENDSCRIPT
+mkdir -p "${PODS_ROOT}/Headers/Public/Tor"
+cd "${PODS_ROOT}/Headers/Public/Tor"
+find "${PODS_TARGET_SRCROOT}/Tor/Classes" -name "*.h" -maxdepth 1 -exec ln -s {} \\;
+ENDSCRIPT
+      }
     ]
 
     s.requires_arc = true

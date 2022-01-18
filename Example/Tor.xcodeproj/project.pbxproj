@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		09B9862FF3354648278804E9 /* Pods_Tor_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A50F15750AF3C7D1A74A96F /* Pods_Tor_Tests.framework */; };
-		5D06684370B0061DF5E2F78F /* Pods_Tor_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6E8D277DF801A0EDACBDBDA /* Pods_Tor_Example.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -17,8 +15,9 @@
 		6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F5AF195388D20070C39A /* XCTest.framework */; };
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
+		7937101F0D8B3FD83E440E96 /* Pods_Tor_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41FBAFCD5EF66DBA46A401E8 /* Pods_Tor_Example.framework */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
-		936AEE5E56AFB22FD804BADE /* Pods_Tor_Example_Mac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC78D189D46F4D0DEAC51E05 /* Pods_Tor_Example_Mac.framework */; };
+		9DB9D78090DD84175542D5C4 /* Pods_Tor_Example_Mac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC0305F7E1D2E9AD6E996B6D /* Pods_Tor_Example_Mac.framework */; };
 		A0F008FC27906DBA0073D36D /* TORConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F008FA27906DBA0073D36D /* TORConfigurationTests.m */; };
 		A0F008FD27906DBA0073D36D /* TORControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F008FB27906DBA0073D36D /* TORControllerTests.m */; };
 		A0F0090D279070B40073D36D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F0090C279070B40073D36D /* AppDelegate.m */; };
@@ -26,6 +25,7 @@
 		A0F00915279070B40073D36D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0F00913279070B40073D36D /* Main.storyboard */; };
 		A0F00917279070B40073D36D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F00916279070B40073D36D /* main.m */; };
 		A0F0091D279072D60073D36D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F0091C279072D60073D36D /* main.m */; };
+		C9ACE5BD2F58337ED20A6241 /* Pods_Tor_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E5378DF07FFB85D14F42154 /* Pods_Tor_Tests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,7 +41,8 @@
 /* Begin PBXFileReference section */
 		1D7391AAD3752903BDA8A2CC /* Pods-Tor_Example_Mac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tor_Example_Mac.debug.xcconfig"; path = "Target Support Files/Pods-Tor_Example_Mac/Pods-Tor_Example_Mac.debug.xcconfig"; sourceTree = "<group>"; };
 		3369E201AA8D44290EFDB264 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		3A50F15750AF3C7D1A74A96F /* Pods_Tor_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tor_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E5378DF07FFB85D14F42154 /* Pods_Tor_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tor_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		41FBAFCD5EF66DBA46A401E8 /* Pods_Tor_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tor_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BD4F2E4E0599631250E97FC /* Pods-Tor_Example_Mac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tor_Example_Mac.release.xcconfig"; path = "Target Support Files/Pods-Tor_Example_Mac/Pods-Tor_Example_Mac.release.xcconfig"; sourceTree = "<group>"; };
 		591053441A46E47D764CDDAB /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* Tor_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tor_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,6 +63,7 @@
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		90700F7B59D5C0641E3250C1 /* Pods-Tor_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tor_Example.debug.xcconfig"; path = "Target Support Files/Pods-Tor_Example/Pods-Tor_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		93A4EA262BB0B20934ED644E /* Tor.podspec */ = {isa = PBXFileReference; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Tor.podspec; path = ../Tor.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A00545632796CA6700C9F635 /* TorStatic.podspec */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text; name = TorStatic.podspec; path = ../TorStatic.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A07DA5B42791AED000D62827 /* .gitmodules */ = {isa = PBXFileReference; lastKnownFileType = text; name = .gitmodules; path = ../.gitmodules; sourceTree = "<group>"; };
 		A0F008F727906CA30073D36D /* Podfile.lock */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
 		A0F008F827906CA30073D36D /* Podfile */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -82,8 +84,7 @@
 		A0F0091C279072D60073D36D /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A0F0091E279073DA0073D36D /* Tor-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tor-Prefix.pch"; sourceTree = "<group>"; };
 		A0F0092027907A8A0073D36D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		DC78D189D46F4D0DEAC51E05 /* Pods_Tor_Example_Mac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tor_Example_Mac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F6E8D277DF801A0EDACBDBDA /* Pods_Tor_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tor_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC0305F7E1D2E9AD6E996B6D /* Pods_Tor_Example_Mac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tor_Example_Mac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF35A366A1B1BD8B0C89AE24 /* Pods-Tor_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tor_Tests.release.xcconfig"; path = "Target Support Files/Pods-Tor_Tests/Pods-Tor_Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -95,7 +96,7 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				5D06684370B0061DF5E2F78F /* Pods_Tor_Example.framework in Frameworks */,
+				7937101F0D8B3FD83E440E96 /* Pods_Tor_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,7 +107,7 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				09B9862FF3354648278804E9 /* Pods_Tor_Tests.framework in Frameworks */,
+				C9ACE5BD2F58337ED20A6241 /* Pods_Tor_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,7 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				936AEE5E56AFB22FD804BADE /* Pods_Tor_Example_Mac.framework in Frameworks */,
+				9DB9D78090DD84175542D5C4 /* Pods_Tor_Example_Mac.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,9 +152,9 @@
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				F6E8D277DF801A0EDACBDBDA /* Pods_Tor_Example.framework */,
-				DC78D189D46F4D0DEAC51E05 /* Pods_Tor_Example_Mac.framework */,
-				3A50F15750AF3C7D1A74A96F /* Pods_Tor_Tests.framework */,
+				41FBAFCD5EF66DBA46A401E8 /* Pods_Tor_Example.framework */,
+				DC0305F7E1D2E9AD6E996B6D /* Pods_Tor_Example_Mac.framework */,
+				3E5378DF07FFB85D14F42154 /* Pods_Tor_Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -189,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				93A4EA262BB0B20934ED644E /* Tor.podspec */,
+				A00545632796CA6700C9F635 /* TorStatic.podspec */,
 				3369E201AA8D44290EFDB264 /* README.md */,
 				591053441A46E47D764CDDAB /* LICENSE */,
 				A0F008F827906CA30073D36D /* Podfile */,
@@ -241,7 +243,7 @@
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
-				0E46E97EEE888F696B5221B0 /* [CP] Embed Pods Frameworks */,
+				A30F42502F9DD6B4E341FA8E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -279,7 +281,7 @@
 				A0F00905279070B40073D36D /* Sources */,
 				A0F00906279070B40073D36D /* Frameworks */,
 				A0F00907279070B40073D36D /* Resources */,
-				571E9594338B21A862F7E75C /* [CP] Embed Pods Frameworks */,
+				298BC3EC5EFA4DCF1A98C5EB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -356,25 +358,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0E46E97EEE888F696B5221B0 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Tor_Example/Pods-Tor_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Tor-iOS/Tor.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Tor.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tor_Example/Pods-Tor_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		571E9594338B21A862F7E75C /* [CP] Embed Pods Frameworks */ = {
+		298BC3EC5EFA4DCF1A98C5EB /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -456,6 +440,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A30F42502F9DD6B4E341FA8E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tor_Example/Pods-Tor_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Tor-iOS/Tor.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Tor.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tor_Example/Pods-Tor_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
