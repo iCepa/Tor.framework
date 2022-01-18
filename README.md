@@ -78,7 +78,7 @@ pod lib lint --verbose --allow-warnings
 If the linting went well, create a git tag for the version, push to GitHub and then publish to CocoaPods:
 
 ```sh
-pod trunk push --verbose --allow-warnings
+pod trunk push Tor.podspec --verbose --allow-warnings
 ```
 
 (Unfortunately, you can not not lint on publish, so you might skip the first lint. However, `pod trunk push`
