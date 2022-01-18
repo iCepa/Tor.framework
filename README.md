@@ -52,7 +52,7 @@ pod 'Tor', '~> 406.9.2'
 If you need to add it as a static framework, you will need to add it from a modified podspec:
 
 ```ruby
-pod 'Tor', :podspec => 'https://github.com/iCepa/Tor.framework/blob/v406.9.2/TorStatic.podspec'
+pod 'Tor', :podspec => 'https://raw.githubusercontent.com/iCepa/Tor.framework/v406.9.2/TorStatic.podspec'
 ```
 
 (or `Tor/GeoIP` - see below.)
@@ -153,7 +153,7 @@ pod 'Tor/GeoIP'
 or
 
 ```ruby
-pod 'Tor/GeoIP', :podspec => 'https://github.com/iCepa/Tor.framework/blob/pure_pod/TorStatic.podspec'
+pod 'Tor/GeoIP', :podspec => 'https://raw.githubusercontent.com/iCepa/Tor.framework/pure_pod/TorStatic.podspec'
 ```
 
 The subspec will create a "GeoIP" bundle and install a run script phase which 
