@@ -95,7 +95,7 @@ done
 
 mkdir -p "${BUILT_PRODUCTS_DIR}"
 
-declare -a HEADERS=("opensslconf.h" "configuration.h" "macros.h" "opensslv.h")
+declare -a HEADERS=("opensslconf.h" "opensslv.h")
 
 # Copy the build products from the temporary directory to the built products directory
 for ARCH in "${ARCHS[@]}"
