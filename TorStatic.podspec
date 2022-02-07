@@ -25,14 +25,14 @@ Pod::Spec.new do |m|
   m.macos.deployment_target = '10.9'
 
   m.prepare_command = <<-ENDSCRIPT
-touch geoip
-touch geoip6
+touch 'geoip'
+touch 'geoip6'
 ENDSCRIPT
 
   m.subspec 'Core' do |s|
     s.pod_target_xcconfig = {
       'DEFINES_MODULE' => 'YES',
-      'HEADER_SEARCH_PATHS' => '$(inherited) "${PODS_TARGET_SRCROOT}/Tor/tor" "${PODS_TARGET_SRCROOT}/Tor/tor/src" "${PODS_TARGET_SRCROOT}/Tor/openssl/include" "${PODS_TARGET_SRCROOT}/Tor/libevent/include"',
+      'HEADER_SEARCH_PATHS' => '$(inherited) "${PODS_TARGET_SRCROOT}/Tor/tor" "${PODS_TARGET_SRCROOT}/Tor/tor/src" "${PODS_TARGET_SRCROOT}/Tor/openssl/include"   "${BUILT_PRODUCTS_DIR}/openssl" "${PODS_TARGET_SRCROOT}/Tor/libevent/include"',
       'OTHER_LDFLAGS' => '$(inherited) -L"${BUILT_PRODUCTS_DIR}/Tor" -l"z" -l"lzma" -l"crypto" -l"ssl" -l"event_core" -l"event_extra" -l"event_pthreads" -l"event" -l"tor"'
     }
 
@@ -103,12 +103,12 @@ ENDSCRIPT
 cd "${PODS_TARGET_SRCROOT}"
 if [ ! -f geoip ] || [ `find . -name geoip -empty -maxdepth 1` ] || [ `find . -name geoip -mtime +1 -maxdepth 1` ]
 then
-  curl -Lo geoip https://gitweb.torproject.org/tor.git/plain/src/config/geoip?h=#{tor_version}
+  curl -Lo 'geoip' 'https://gitweb.torproject.org/tor.git/plain/src/config/geoip?h=#{tor_version}'
 fi
 
 if [ ! -f geoip6 ] || [ `find . -name geoip6 -empty -maxdepth 1` ] || [ `find . -name geoip6 -mtime +1 -maxdepth 1` ]
 then
-  curl -Lo geoip6 https://gitweb.torproject.org/tor.git/plain/src/config/geoip6?h=#{tor_version}
+  curl -Lo 'geoip6' 'https://gitweb.torproject.org/tor.git/plain/src/config/geoip6?h=#{tor_version}'
 fi
 ENDSCRIPT
     }
