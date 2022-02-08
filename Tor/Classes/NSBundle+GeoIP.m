@@ -6,12 +6,13 @@
 //
 
 #import "NSBundle+GeoIP.h"
+#import "TORThread.h"
 
 @implementation NSBundle (GeoIP)
 
 + (NSBundle *)geoIpBundle
 {
-    NSURL *url = [NSBundle.mainBundle URLForResource:@"GeoIP" withExtension:@"bundle"];
+    NSURL *url = [[NSBundle bundleForClass:TORThread.class] URLForResource:@"GeoIP" withExtension:@"bundle"];
     if (!url) return nil;
 
     return [NSBundle bundleWithURL:url];
