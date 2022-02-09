@@ -6,7 +6,7 @@
 
 Tor.framework is the easiest way to embed Tor in your iOS application. The API is *not* stable yet, and subject to change.
 
-Currently, the framework compiles in static versions of `tor`, `libevent`, `openssl`, and `liblzma`:
+Currently, the framework compiles in the following versions of `tor`, `libevent`, `openssl`, and `liblzma`:
 
 |          |         |
 |:-------- | -------:|
@@ -23,7 +23,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 ## Requirements
 
 - iOS 9.0 or later
-- MacOS 10.9 or later
+- MacOS 12.0 or later
 - Xcode 13.0 or later
 - `autoconf`,  `automake`, `libtool` and  `gettext` in your `PATH`
 
@@ -49,11 +49,14 @@ pod 'Tor', '~> 406.9.2'
 (or `Tor/GeoIP` - see below.)
 
 
-If you need to add it as a static framework, you will need to add it from a modified podspec:
+If you need to add it as a static library, you will need to add it from a modified podspec:
 
 ```ruby
 pod 'Tor', :podspec => 'https://raw.githubusercontent.com/iCepa/Tor.framework/v406.9.2/TorStatic.podspec'
 ```
+
+Currently static library support is unstable. You might encounter build issues. 
+Every contribution to fix this is welcome!
 
 (or `Tor/GeoIP` - see below.)
 
