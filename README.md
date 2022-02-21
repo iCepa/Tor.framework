@@ -127,6 +127,15 @@ TORThread *thread = [[TORThread alloc] initWithConfiguration:configuration];
 
 NSData *cookie = configuration.cookie;
 TORController *controller = [[TORController alloc] initWithSocketURL:configuration.controlSocket];
+
+NSError *error;
+[controller connect:&error];
+
+if (error) {
+    NSLog(@"Error: %@", error);
+    return;
+}
+
 [controller authenticateWithData:cookie completion:^(BOOL success, NSError *error) {
     if (!success)
         return;
