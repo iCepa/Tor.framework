@@ -2,7 +2,7 @@ Pod::Spec.new do |m|
 
   # TODO: Why the hell do I need to provide this manually? CocoaPods should figure this out automatically, like with other pods, when they're used as static libraries.
 
-  tor_version = 'tor-0.4.6.9'
+  tor_version = 'tor-0.4.6.10'
 
   m.name             = 'Tor'
   m.version          = '406.9.2'
