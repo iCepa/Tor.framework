@@ -1,6 +1,6 @@
 PODS:
-  - Tor/Core (406.9.2)
-  - Tor/GeoIP (406.9.2):
+  - Tor/Core (406.10.1)
+  - Tor/GeoIP (406.10.1):
     - Tor/Core
 
 DEPENDENCIES:
@@ -11,7 +11,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Tor: e332fa0cb16ee79fcd32f9626301a86f34bcdde9
+  Tor: d68f73a29612bc5b9d79f15853eccebb60c8ef86
 
 PODFILE CHECKSUM: 2e6b5ce7c35de39ebc7cf8a7851f871a1d793275
 

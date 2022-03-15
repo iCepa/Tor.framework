@@ -43,7 +43,7 @@ If you use dynamic frameworks, use the root spec:
 
 ```ruby
 use_frameworks!
-pod 'Tor', '~> 406.9.2'
+pod 'Tor', '~> 406.10.1'
 ```
 
 (or `Tor/GeoIP` - see below.)
@@ -52,7 +52,7 @@ pod 'Tor', '~> 406.9.2'
 If you need to add it as a static library, you will need to add it from a modified podspec:
 
 ```ruby
-pod 'Tor', :podspec => 'https://raw.githubusercontent.com/iCepa/Tor.framework/v406.9.2/TorStatic.podspec'
+pod 'Tor', :podspec => 'https://raw.githubusercontent.com/iCepa/Tor.framework/v406.10.1/TorStatic.podspec'
 ```
 
 Currently static library support is unstable. You might encounter build issues. 
