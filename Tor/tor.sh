@@ -58,6 +58,15 @@ if [[ ! -f ./configure ]]; then
     # make show-libs needs a full configure, otherwise it will trigger that and return a lot of garbage.
     configure ${ARCHS[0]}
 
+    # FIXME: Remove, when implemented: https://gitlab.torproject.org/tpo/core/tor/-/issues/40629
+    #Apply SIGINT patch:
+
+    # Ignore SIGINT
+    perl -p -0777 -i -e 's/Interrupt: exiting cleanly\.\"\);\s+tor_shutdown_event_loop_and_exit\(0\);/Interrupt: Ignored."\);/' src/app/main/main.c
+
+    # Send SIGTERM on control port SIGNAL SHUTDOWN instead of SIGINT, which is now ignored.
+    perl -p -0777 -i -e 's/{\s*SIGINT\s*,\s*"SHUTDOWN"\s*}/{ SIGTERM, "SHUTDOWN" }/' src/feature/control/control.c
+
     REBUILD=1
 fi
 
