@@ -2,10 +2,10 @@ Pod::Spec.new do |m|
 
   # TODO: Why the hell do I need to provide this manually? CocoaPods should figure this out automatically, like with other pods, when they're used as static libraries.
 
-  tor_version = 'tor-0.4.7.7'
+  tor_version = 'tor-0.4.7.8'
 
   m.name             = 'Tor'
-  m.version          = '407.7.1'
+  m.version          = '407.8.1'
   m.summary          = 'Tor.framework is the easiest way to embed Tor in your iOS application.'
   m.description      = 'Tor.framework is the easiest way to embed Tor in your iOS application. Currently, the framework compiles in static versions of tor, libevent, openssl, and liblzma.'
 
