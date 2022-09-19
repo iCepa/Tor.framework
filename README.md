@@ -52,7 +52,7 @@ pod 'Tor', '~> 407.10.1'
 If you need to add it as a static library, you will need to add it from a modified podspec:
 
 ```ruby
-pod 'Tor', :podspec => 'https://raw.githubusercontent.com/iCepa/Tor.framework/v407.8.2/TorStatic.podspec'
+pod 'Tor', :podspec => 'https://raw.githubusercontent.com/iCepa/Tor.framework/v407.10.1/TorStatic.podspec'
 ```
 
 Currently static library support is unstable. You might encounter build issues. 
