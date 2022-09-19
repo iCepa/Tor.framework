@@ -44,6 +44,7 @@ function configure {
 }
 
 REBUILD=0
+LIB=libtor.a
 
 # Generate the configure script (necessary for version control distributions)
 if [[ ! -f ./configure ]]; then
@@ -55,35 +56,23 @@ if [[ ! -f ./configure ]]; then
     # FIXME: Undoes the patch. Remove, when it becomes unnecessary.
     rm autogen.sh && mv autogen.sh.backup autogen.sh
 
-    # make show-libs needs a full configure, otherwise it will trigger that and return a lot of garbage.
-    configure ${ARCHS[0]}
-
     REBUILD=1
 fi
 
-declare -a LIBS=$(make show-libs)
-echo "LIBRARIES: ${LIBS[@]}"
-
 # If the built binaries include a different set of architectures, then rebuild the target.
 if [[ ${ACTION:-build} = "build" ]] || [[ $ACTION = "install" ]]; then
-    for LIB in ${LIBS[@]}
+    for ARCH in ${ARCHS[@]}
     do
-        for ARCH in ${ARCHS[@]}
-        do
-            if [[ $(lipo -info "${BUILT_PRODUCTS_DIR}/$(basename $LIB)" 2>&1) != *"${ARCH}"* ]]; then
-                REBUILD=1;
-            fi
-        done
+        if [[ $(lipo -info "${BUILT_PRODUCTS_DIR}/$(basename $LIB)" 2>&1) != *"${ARCH}"* ]]; then
+            REBUILD=1;
+        fi
     done
 fi
 
 # If rebuilding or cleaning then delete the built products.
 if [[ ${ACTION:-build} = "clean" ]] || [[ $REBUILD = 1 ]]; then
     make clean 2> /dev/null
-    for LIB in ${LIBS[@]}
-    do
-        rm "${BUILT_PRODUCTS_DIR}/$(basename $LIB)" 2> /dev/null
-    done
+    rm "${BUILT_PRODUCTS_DIR}/$(basename $LIB)" 2> /dev/null
 fi
 
 # If cleaning or no rebuild, we're done.
@@ -105,23 +94,26 @@ do
     rm src/lib/cc/orconfig.h
     cp orconfig.h "src/lib/cc/"
 
-    make -j$(sysctl hw.ncpu | awk '{print $2}')
+    make $LIB -j$(sysctl hw.ncpu | awk '{print $2}') V=1
+
+    # Bugfix for Xcode 14: Remove "__.SYMDEF SORTED" from the lib, which somehow gets in there now.
+    mkdir "${BUILT_PRODUCTS_DIR}/repack"
+    cp $LIB "${BUILT_PRODUCTS_DIR}/repack/$(basename $LIB).${ARCH}.a"
+    cd "${BUILT_PRODUCTS_DIR}/repack"
+    "${AR:-ar}" x "$(basename $LIB).${ARCH}.a"
+    rm -f "__.SYMDEF SORTED"
+    rm "$(basename $LIB).${ARCH}.a"
+    libtool -static *.o -o "${BUILT_PRODUCTS_DIR}/$(basename $LIB).${ARCH}.a"
+    cd -
+    rm -r "${BUILT_PRODUCTS_DIR}/repack"
 
     cp micro-revision.i "${BUILT_PRODUCTS_DIR}/micro-revision.i"
-
-    for LIB in ${LIBS[@]}
-    do
-        cp $LIB "${BUILT_PRODUCTS_DIR}/$(basename $LIB).${ARCH}.a"
-    done
 
     make clean
 done
 
 # Combine the built products into a fat binary.
-for LIB in ${LIBS[@]}
-do
-    FILENAME=$(basename $LIB)
+FILENAME=$(basename $LIB)
 
-    xcrun --sdk $PLATFORM_NAME lipo -create "${BUILT_PRODUCTS_DIR}/$FILENAME."*.a -output "${BUILT_PRODUCTS_DIR}/$FILENAME"
-    rm "${BUILT_PRODUCTS_DIR}/$FILENAME."*.a
-done
+xcrun --sdk $PLATFORM_NAME lipo -create "${BUILT_PRODUCTS_DIR}/$FILENAME."*.a -output "${BUILT_PRODUCTS_DIR}/$FILENAME"
+rm "${BUILT_PRODUCTS_DIR}/$FILENAME."*.a
