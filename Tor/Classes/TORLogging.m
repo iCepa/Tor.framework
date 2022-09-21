@@ -32,6 +32,9 @@ static inline const char *TORLegacyLevelFromOSLogType(os_log_type_t type) {
     }
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+
 static void TORLegacyLog(os_log_type_t type, const char *msg) {
     static dispatch_once_t onceToken;
     static aslclient log = NULL;
@@ -52,6 +55,8 @@ static void TORLegacyLog(os_log_type_t type, const char *msg) {
         asl_free(message);
     }
 }
+
+#pragma clang diagnostic pop
 
 static inline os_log_type_t TORLogTypeFromEventSeverity(int severity) {
     switch (severity) {
