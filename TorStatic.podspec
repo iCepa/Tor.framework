@@ -58,31 +58,31 @@ ENDSCRIPT
       {
         :name => 'Build XZ',
         :execution_position => :before_compile,
-        :output_files => ['dummy-always-execute-this-but-supress warning-1'],
+        :output_files => ['xz-always-execute-this-but-supress-warning'],
         :script => sprintf(script, "xz")
       },
       {
         :name => 'Build OpenSSL',
         :execution_position => :before_compile,
-        :output_files => ['dummy-always-execute-this-but-supress warning-2'],
+        :output_files => ['openssl-always-execute-this-but-supress-warning'],
         :script => sprintf(script, "openssl")
       },
       {
         :name => 'Build libevent',
         :execution_position => :before_compile,
-        :output_files => ['dummy-always-execute-this-but-supress warning-3'],
+        :output_files => ['libevent-always-execute-this-but-supress-warning'],
         :script => sprintf(script, "libevent")
       },
       {
         :name => 'Build Tor',
         :execution_position => :before_compile,
-        :output_files => ['dummy-always-execute-this-but-supress warning-4'],
+        :output_files => ['tor-always-execute-this-but-supress-warning'],
         :script => sprintf(script, "tor")
       },
       {
         :name => 'Link Headers',
         :execution_position => :before_compile,
-        :output_files => ['dummy-always-execute-this-but-supress warning-5'],
+        :output_files => ['headers-always-execute-this-but-supress-warning'],
         :script => <<-ENDSCRIPT
 mkdir -p "${PODS_ROOT}/Headers/Public/Tor"
 cd "${PODS_ROOT}/Headers/Public/Tor"
@@ -104,7 +104,7 @@ ENDSCRIPT
     s.script_phase = {
       :name => 'Load GeoIP files',
       :execution_position => :before_compile,
-      :output_files => ['dummy-always-execute-this-but-supress warning'],
+      :output_files => ['geoip-always-execute-this-but-supress-warning'],
       :script => <<-ENDSCRIPT
 cd "${PODS_TARGET_SRCROOT}"
 if [ ! -f geoip ] || [ `find . -name geoip -empty -maxdepth 1` ] || [ `find . -name geoip -mtime +1 -maxdepth 1` ]
