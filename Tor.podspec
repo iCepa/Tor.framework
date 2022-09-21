@@ -50,25 +50,25 @@ ENDSCRIPT
       {
         :name => 'Build XZ',
         :execution_position => :before_compile,
-        :output_files => ['dummy-always-execute-this-but-supress warning'],
+        :output_files => ['dummy-always-execute-this-but-supress warning-1'],
         :script => sprintf(script, "xz")
       },
       {
         :name => 'Build OpenSSL',
         :execution_position => :before_compile,
-        :output_files => ['dummy-always-execute-this-but-supress warning'],
+        :output_files => ['dummy-always-execute-this-but-supress warning-2'],
         :script => sprintf(script, "openssl")
       },
       {
         :name => 'Build libevent',
         :execution_position => :before_compile,
-        :output_files => ['dummy-always-execute-this-but-supress warning'],
+        :output_files => ['dummy-always-execute-this-but-supress warning-3'],
         :script => sprintf(script, "libevent")
       },
       {
         :name => 'Build Tor',
         :execution_position => :before_compile,
-        :output_files => ['dummy-always-execute-this-but-supress warning'],
+        :output_files => ['dummy-always-execute-this-but-supress warning-4'],
         :script => sprintf(script, "tor")
       },
     ]
