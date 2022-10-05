@@ -3,7 +3,7 @@ Pod::Spec.new do |m|
   tor_version = 'tor-0.4.7.10'
 
   m.name             = 'Tor'
-  m.version          = '407.10.2'
+  m.version          = '407.10.3'
   m.summary          = 'Tor.framework is the easiest way to embed Tor in your iOS application.'
   m.description      = 'Tor.framework is the easiest way to embed Tor in your iOS application. Currently, the framework compiles in static versions of tor, libevent, openssl, and liblzma.'
 
