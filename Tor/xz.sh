@@ -50,11 +50,25 @@ else
     DEBUG_FLAGS=""
 fi
 
-# If there is a space in SRCROOT, make a symlink without a space and use that
+# If there is a space in SRCROOT, make a symlink without a space and use that.
 if [[ "${SRCROOT}" =~ \  ]]; then
     SYM_DIR="$(mktemp -d)/Tor"
     ln -s "${SRCROOT}" "${SYM_DIR}"
     SRCROOT="${SYM_DIR}"
+fi
+
+# If there is a space in BUILT_PRODUCTS_DIR, make a symlink without a space and use that.
+if [[ "${BUILT_PRODUCTS_DIR}" =~ \  ]]; then
+    SYM_DIR="$(mktemp -d)/bpd"
+    ln -s "${BUILT_PRODUCTS_DIR}" "${SYM_DIR}"
+    BUILT_PRODUCTS_DIR="${SYM_DIR}"
+fi
+
+# If there is a space in CONFIGURATION_TEMP_DIR, make a symlink without a space and use that.
+if [[ "${CONFIGURATION_TEMP_DIR}" =~ \  ]]; then
+    SYM_DIR="$(mktemp -d)/ctd"
+    ln -s "${CONFIGURATION_TEMP_DIR}" "${SYM_DIR}"
+    CONFIGURATION_TEMP_DIR="${SYM_DIR}"
 fi
 
 # Build each architecture one by one using clang

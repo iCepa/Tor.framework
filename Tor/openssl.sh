@@ -40,11 +40,25 @@ else
     DEBUG_FLAGS="--release"
 fi
 
+# If there is a space in BUILT_PRODUCTS_DIR, make a symlink without a space and use that.
+if [[ "${BUILT_PRODUCTS_DIR}" =~ \  ]]; then
+    SYM_DIR="$(mktemp -d)/bpd"
+    ln -s "${BUILT_PRODUCTS_DIR}" "${SYM_DIR}"
+    BUILT_PRODUCTS_DIR="${SYM_DIR}"
+fi
+
+# If there is a space in CONFIGURATION_TEMP_DIR, make a symlink without a space and use that.
+if [[ "${CONFIGURATION_TEMP_DIR}" =~ \  ]]; then
+    SYM_DIR="$(mktemp -d)/ctd"
+    ln -s "${CONFIGURATION_TEMP_DIR}" "${SYM_DIR}"
+    CONFIGURATION_TEMP_DIR="${SYM_DIR}"
+fi
+
 # Build each architecture one by one using clang
 for ARCH in "${ARCHS[@]}"
 do
     export CC="$(xcrun --sdk ${PLATFORM_NAME} --find clang) -isysroot $(xcrun --sdk ${PLATFORM_NAME} --show-sdk-path) -arch ${ARCH} ${BITCODE_CFLAGS}"
-    
+
     if [[ "${PLATFORM_NAME}" == "iphoneos" ]]; then
         if [[ "${ARCH}" == "arm64" ]]; then
             PLATFORM_FLAGS="no-async zlib-dynamic enable-ec_nistp_64_gcc_128"
@@ -53,7 +67,7 @@ do
             PLATFORM_FLAGS="no-async zlib-dynamic"
             CONFIG="ios-xcrun"
         else
-	        echo "OpenSSL configuration error: ${ARCH} on ${PLATFORM_NAME} not supported!"
+            echo "OpenSSL configuration error: ${ARCH} on ${PLATFORM_NAME} not supported!"
         fi
     elif [[ "${PLATFORM_NAME}" == "iphonesimulator" ]]; then
         if [[ "${ARCH}" == "arm64" ]]; then
@@ -66,8 +80,8 @@ do
             PLATFORM_FLAGS="no-asm enable-ec_nistp_64_gcc_128"
             CONFIG="iossimulator-xcrun"
         else
-	        echo "OpenSSL configuration error: ${ARCH} on ${PLATFORM_NAME} not supported!"
-        fi    
+            echo "OpenSSL configuration error: ${ARCH} on ${PLATFORM_NAME} not supported!"
+        fi
     elif [[ "${PLATFORM_NAME}" == "macosx" ]]; then
         if [[ "${ARCH}" == "i386" ]]; then
             PLATFORM_FLAGS="no-asm"
@@ -79,13 +93,13 @@ do
             PLATFORM_FLAGS="no-async zlib-dynamic enable-ec_nistp_64_gcc_128"
             CONFIG="darwin64-arm64-cc"
         else
-	        echo "OpenSSL configuration error: ${ARCH} on ${PLATFORM_NAME} not supported!"
+            echo "OpenSSL configuration error: ${ARCH} on ${PLATFORM_NAME} not supported!"
         fi
     fi
-    
+
     if [ -n "${CONFIG}" ]; then
         ./Configure no-shared ${PLATFORM_FLAGS} ${DEBUG_FLAGS} --prefix="${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}" ${CONFIG}
-        
+
         make depend
         make -j$(sysctl hw.ncpu | awk '{print $2}') build_libs
         make install_dev
