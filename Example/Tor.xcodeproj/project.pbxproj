@@ -45,7 +45,7 @@
 		41FBAFCD5EF66DBA46A401E8 /* Pods_Tor_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tor_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BD4F2E4E0599631250E97FC /* Pods-Tor_Example_Mac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tor_Example_Mac.release.xcconfig"; path = "Target Support Files/Pods-Tor_Example_Mac/Pods-Tor_Example_Mac.release.xcconfig"; sourceTree = "<group>"; };
 		591053441A46E47D764CDDAB /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		6003F58A195388D20070C39A /* Tor_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tor_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6003F58A195388D20070C39A /* Tor-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tor-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6003F591195388D20070C39A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -54,7 +54,7 @@
 		6003F59D195388D20070C39A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		6003F5A5195388D20070C39A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		6003F5A6195388D20070C39A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		6003F5AE195388D20070C39A /* Tor_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tor_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6003F5AE195388D20070C39A /* Tor-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tor-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6003F5B7195388D20070C39A /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
@@ -74,13 +74,13 @@
 		A0F0090227906F970073D36D /* xz.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = xz.sh; path = ../Tor/xz.sh; sourceTree = "<group>"; };
 		A0F0090327906F970073D36D /* libevent.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = libevent.sh; path = ../Tor/libevent.sh; sourceTree = "<group>"; };
 		A0F0090427906F970073D36D /* openssl.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = openssl.sh; path = ../Tor/openssl.sh; sourceTree = "<group>"; };
-		A0F00909279070B40073D36D /* Tor_Example_Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tor_Example_Mac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0F00909279070B40073D36D /* Tor-Example-Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tor-Example-Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0F0090B279070B40073D36D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A0F0090C279070B40073D36D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		A0F0090E279070B40073D36D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		A0F0090F279070B40073D36D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		A0F00916279070B40073D36D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		A0F00918279070B40073D36D /* Tor_Example_Mac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tor_Example_Mac.entitlements; sourceTree = "<group>"; };
+		A0F00918279070B40073D36D /* Example-Mac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Example-Mac.entitlements"; sourceTree = "<group>"; };
 		A0F0091C279072D60073D36D /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A0F0091E279073DA0073D36D /* Tor-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tor-Prefix.pch"; sourceTree = "<group>"; };
 		A0F0092027907A8A0073D36D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -138,9 +138,9 @@
 		6003F58B195388D20070C39A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6003F58A195388D20070C39A /* Tor_Example.app */,
-				6003F5AE195388D20070C39A /* Tor_Tests.xctest */,
-				A0F00909279070B40073D36D /* Tor_Example_Mac.app */,
+				6003F58A195388D20070C39A /* Tor-Example.app */,
+				6003F5AE195388D20070C39A /* Tor-Tests.xctest */,
+				A0F00909279070B40073D36D /* Tor-Example-Mac.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -227,7 +227,7 @@
 				A0F0090F279070B40073D36D /* ViewController.m */,
 				A0F00913279070B40073D36D /* Main.storyboard */,
 				A0F00916279070B40073D36D /* main.m */,
-				A0F00918279070B40073D36D /* Tor_Example_Mac.entitlements */,
+				A0F00918279070B40073D36D /* Example-Mac.entitlements */,
 			);
 			path = "Example-Mac";
 			sourceTree = "<group>";
@@ -235,9 +235,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6003F589195388D20070C39A /* Tor_Example */ = {
+		6003F589195388D20070C39A /* Tor-Example */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "Tor_Example" */;
+			buildConfigurationList = 6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "Tor-Example" */;
 			buildPhases = (
 				5A00F12FB130DF54E77A5584 /* [CP] Check Pods Manifest.lock */,
 				6003F586195388D20070C39A /* Sources */,
@@ -249,14 +249,14 @@
 			);
 			dependencies = (
 			);
-			name = Tor_Example;
+			name = "Tor-Example";
 			productName = Tor;
-			productReference = 6003F58A195388D20070C39A /* Tor_Example.app */;
+			productReference = 6003F58A195388D20070C39A /* Tor-Example.app */;
 			productType = "com.apple.product-type.application";
 		};
-		6003F5AD195388D20070C39A /* Tor_Tests */ = {
+		6003F5AD195388D20070C39A /* Tor-Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "Tor_Tests" */;
+			buildConfigurationList = 6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "Tor-Tests" */;
 			buildPhases = (
 				592117394F0AA9B0ADF3CF8F /* [CP] Check Pods Manifest.lock */,
 				6003F5AA195388D20070C39A /* Sources */,
@@ -268,14 +268,14 @@
 			dependencies = (
 				6003F5B4195388D20070C39A /* PBXTargetDependency */,
 			);
-			name = Tor_Tests;
+			name = "Tor-Tests";
 			productName = TorTests;
-			productReference = 6003F5AE195388D20070C39A /* Tor_Tests.xctest */;
+			productReference = 6003F5AE195388D20070C39A /* Tor-Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		A0F00908279070B40073D36D /* Tor_Example_Mac */ = {
+		A0F00908279070B40073D36D /* Tor-Example-Mac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A0F00919279070B40073D36D /* Build configuration list for PBXNativeTarget "Tor_Example_Mac" */;
+			buildConfigurationList = A0F00919279070B40073D36D /* Build configuration list for PBXNativeTarget "Tor-Example-Mac" */;
 			buildPhases = (
 				9A118950F57DB5601BC45C3C /* [CP] Check Pods Manifest.lock */,
 				A0F00905279070B40073D36D /* Sources */,
@@ -287,9 +287,9 @@
 			);
 			dependencies = (
 			);
-			name = Tor_Example_Mac;
+			name = "Tor-Example-Mac";
 			productName = Tor_Example_Mac;
-			productReference = A0F00909279070B40073D36D /* Tor_Example_Mac.app */;
+			productReference = A0F00909279070B40073D36D /* Tor-Example-Mac.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -324,9 +324,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6003F589195388D20070C39A /* Tor_Example */,
-				6003F5AD195388D20070C39A /* Tor_Tests */,
-				A0F00908279070B40073D36D /* Tor_Example_Mac */,
+				6003F589195388D20070C39A /* Tor-Example */,
+				6003F5AD195388D20070C39A /* Tor-Tests */,
+				A0F00908279070B40073D36D /* Tor-Example-Mac */,
 			);
 		};
 /* End PBXProject section */
@@ -497,7 +497,7 @@
 /* Begin PBXTargetDependency section */
 		6003F5B4195388D20070C39A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6003F589195388D20070C39A /* Tor_Example */;
+			target = 6003F589195388D20070C39A /* Tor-Example */;
 			targetProxy = 6003F5B3195388D20070C39A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -706,7 +706,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = Tor_Example_Mac/Tor_Example_Mac.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Example-Mac/Example-Mac.entitlements";
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -740,7 +740,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = Tor_Example_Mac/Tor_Example_Mac.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Example-Mac/Example-Mac.entitlements";
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -776,7 +776,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "Tor_Example" */ = {
+		6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "Tor-Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6003F5C0195388D20070C39A /* Debug */,
@@ -785,7 +785,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "Tor_Tests" */ = {
+		6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "Tor-Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6003F5C3195388D20070C39A /* Debug */,
@@ -794,7 +794,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A0F00919279070B40073D36D /* Build configuration list for PBXNativeTarget "Tor_Example_Mac" */ = {
+		A0F00919279070B40073D36D /* Build configuration list for PBXNativeTarget "Tor-Example-Mac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A0F0091A279070B40073D36D /* Debug */,
