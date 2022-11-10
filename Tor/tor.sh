@@ -77,7 +77,7 @@ fi
 if [[ ${ACTION:-build} = "build" ]] || [[ $ACTION = "install" ]]; then
     for ARCH in ${ARCHS[@]}
     do
-        if [[ $(lipo -info "${BUILT_PRODUCTS_DIR}/$(basename $LIB)" 2>&1) != *"${ARCH}"* ]]; then
+        if [[ $(lipo -info "${BUILT_PRODUCTS_DIR}/$LIB" 2>&1) != *"${ARCH}"* ]]; then
             REBUILD=1;
         fi
     done
@@ -86,7 +86,7 @@ fi
 # If rebuilding or cleaning then delete the built products.
 if [[ ${ACTION:-build} = "clean" ]] || [[ $REBUILD = 1 ]]; then
     make clean 2> /dev/null
-    rm "${BUILT_PRODUCTS_DIR}/$(basename $LIB)" 2> /dev/null
+    rm "${BUILT_PRODUCTS_DIR}/$LIB" 2> /dev/null
 fi
 
 # If cleaning or no rebuild, we're done.
@@ -110,16 +110,7 @@ do
 
     make $LIB -j$(sysctl hw.ncpu | awk '{print $2}') V=1
 
-    # Bugfix for Xcode 14: Remove "__.SYMDEF SORTED" from the lib, which somehow gets in there now.
-    mkdir "${BUILT_PRODUCTS_DIR}/repack"
-    cp $LIB "${BUILT_PRODUCTS_DIR}/repack/$(basename $LIB).${ARCH}.a"
-    cd "${BUILT_PRODUCTS_DIR}/repack"
-    "${AR:-ar}" x "$(basename $LIB).${ARCH}.a"
-    rm -f "__.SYMDEF SORTED"
-    rm "$(basename $LIB).${ARCH}.a"
-    libtool -static *.o -o "${BUILT_PRODUCTS_DIR}/$(basename $LIB).${ARCH}.a"
-    cd -
-    rm -r "${BUILT_PRODUCTS_DIR}/repack"
+    mv $LIB "${BUILT_PRODUCTS_DIR}/$LIB.${ARCH}.a"
 
     cp micro-revision.i "${BUILT_PRODUCTS_DIR}/micro-revision.i"
 
@@ -127,7 +118,5 @@ do
 done
 
 # Combine the built products into a fat binary.
-FILENAME=$(basename $LIB)
-
-xcrun --sdk $PLATFORM_NAME lipo -create "${BUILT_PRODUCTS_DIR}/$FILENAME."*.a -output "${BUILT_PRODUCTS_DIR}/$FILENAME"
-rm "${BUILT_PRODUCTS_DIR}/$FILENAME."*.a
+xcrun --sdk $PLATFORM_NAME lipo -create "${BUILT_PRODUCTS_DIR}/$LIB."*.a -output "${BUILT_PRODUCTS_DIR}/$LIB"
+rm "${BUILT_PRODUCTS_DIR}/$LIB."*.a
