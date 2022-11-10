@@ -185,10 +185,10 @@ to a limitation of CocoaPods!*
 
 ## Authors
 
-Conrad Kramer, conrad@conradkramer.com
-Chris Ballinger, chris@chatsecure.org
-Mike Tigas. mike@tig.as
-Benjamin Erhart, berhart@netzarchitekten.com
+- Conrad Kramer, conrad@conradkramer.com
+- Chris Ballinger, chris@chatsecure.org
+- Mike Tigas. mike@tig.as
+- Benjamin Erhart, berhart@netzarchitekten.com
 
 
 ## License
