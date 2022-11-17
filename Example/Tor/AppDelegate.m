@@ -49,6 +49,24 @@
                 [c getCircuits:^(NSArray<TORCircuit *> * _Nonnull circuits) {
                     NSLog(@"Circuits: %@", circuits);
                 }];
+
+//                [c getRawForKeys:@[@"ns/all"] completion:^(NSArray<NSNumber *> * _Nonnull codes, NSArray<NSData *> * _Nonnull lines) {
+//                    NSLog(@"Line count: %lu", lines.count);
+//
+//                    NSLog(@"Codes: %@", codes);
+//
+//                    NSUInteger size = 0;
+//
+//                    for (NSData *line in lines) {
+//                        size += line.length;
+//                    }
+//
+//                    NSLog(@"Size: %lu", size);
+//
+//                    for (NSData *line in lines) {
+//                        NSLog(@"%@", [[NSString alloc] initWithData:line encoding:NSUTF8StringEncoding]);
+//                    }
+//                }];
             }];
         }];
     });

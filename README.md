@@ -187,7 +187,7 @@ to a limitation of CocoaPods!*
 
 - Conrad Kramer, conrad@conradkramer.com
 - Chris Ballinger, chris@chatsecure.org
-- Mike Tigas. mike@tig.as
+- Mike Tigas, mike@tig.as
 - Benjamin Erhart, berhart@netzarchitekten.com
 
 
