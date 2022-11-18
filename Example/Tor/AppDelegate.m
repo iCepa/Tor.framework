@@ -38,34 +38,51 @@
             NSLog(@"authenticated success=%d", success);
 
             if (!success)
+            {
                 return;
+            }
 
             [c addObserverForCircuitEstablished:^(BOOL established) {
                 NSLog(@"established=%d", established);
 
                 if (!established)
+                {
                     return;
+                }
 
                 [c getCircuits:^(NSArray<TORCircuit *> * _Nonnull circuits) {
                     NSLog(@"Circuits: %@", circuits);
                 }];
 
-//                [c getRawForKeys:@[@"ns/all"] completion:^(NSArray<NSNumber *> * _Nonnull codes, NSArray<NSData *> * _Nonnull lines) {
-//                    NSLog(@"Line count: %lu", lines.count);
+//                CFTimeInterval startTime = CACurrentMediaTime();
 //
-//                    NSLog(@"Codes: %@", codes);
+//                [c getInfoForKeys:@[@"ns/all"] completion:^(NSArray<NSString *> * _Nonnull values) {
+//                    NSLog(@"Line count: %lu", values.count);
+//                    NSLog(@"Elapsed Time: %f", CACurrentMediaTime() - startTime);
 //
-//                    NSUInteger size = 0;
 //
-//                    for (NSData *line in lines) {
-//                        size += line.length;
+//                    NSArray<TORNode *> *nodes = [TORNode parseFromNsString:values.firstObject];
+//
+//                    NSMutableArray<TORNode *> *exitNodes = [NSMutableArray new];
+//
+//                    for (TORNode *node in nodes)
+//                    {
+//                        if (node.isExit)
+//                        {
+//                            [exitNodes addObject:node];
+//                        }
 //                    }
 //
-//                    NSLog(@"Size: %lu", size);
+//                    NSLog(@"#Nodes: %lu, #Exit Nodes: %lu", nodes.count, exitNodes.count);
+//                    NSLog(@"Elapsed Time: %f", CACurrentMediaTime() - startTime);
 //
-//                    for (NSData *line in lines) {
-//                        NSLog(@"%@", [[NSString alloc] initWithData:line encoding:NSUTF8StringEncoding]);
-//                    }
+//                    [c resolveCountriesOfNodes:exitNodes testCapabilities:NO completion:^{
+//                        for (TORNode *node in nodes) {
+//                            NSLog(@"Node: %@", node);
+//                        }
+//
+//                        NSLog(@"Elapsed Time: %f", CACurrentMediaTime() - startTime);
+//                    }];
 //                }];
             }];
         }];

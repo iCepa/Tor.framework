@@ -42,6 +42,48 @@ static NSRegularExpression *_ipv6Regex;
     return _ipv6Regex;
 }
 
+// MARK: Class Methods:
+
++ (NSArray<TORNode *>  * _Nonnull)parseFromNsString:(NSString * _Nullable)nsString
+{
+    NSMutableArray<TORNode *> *nodes = [NSMutableArray new];
+    NSMutableArray<NSString *> *raw = [NSMutableArray new];
+
+    // A typical NS string for a Tor node might look like this:
+    //  (Line breaks are not for readability but contained in original!)
+    //
+    // r ForPrivacyNET ADb6NqtDX9XQ9kBiZjaGfr+3LGg epP7Gxm+NYhwC3V7SPORQCPoVgc 2022-11-18 00:01:48 185.220.101.33 10133 0
+    // a [2a0b:f4c2:2::33]:10133
+    // s Exit Fast Running V2Dir Valid
+    // w Bandwidth=37000
+    //
+    // So, we watch out for a "r" line and add all lines which start with a valid prefix until the
+    // next "r" line to get the full description.
+    // But since we currently don't use the "w" line information, we ignore that as an optimization.
+
+    for (NSString *line in [nsString componentsSeparatedByCharactersInSet:NSCharacterSet.newlineCharacterSet]) {
+        if ([line hasPrefix:@"r"])
+        {
+            if (raw.count > 0)
+            {
+                [nodes addObject:[[TORNode alloc] initFromNsString:[raw componentsJoinedByString:@"\n"]]];
+                raw = [[NSMutableArray alloc] initWithObjects:line, nil];
+            }
+        }
+        else if ([line hasPrefix:@"a"] || [line hasPrefix:@"s"])
+        {
+            [raw addObject:line];
+        }
+    }
+
+    if (raw.count > 0)
+    {
+        [nodes addObject:[[TORNode alloc] initFromNsString:[raw componentsJoinedByString:@"\n"]]];
+    }
+
+    return nodes;
+}
+
 
 // MARK: Initializers
 
@@ -63,6 +105,33 @@ static NSRegularExpression *_ipv6Regex;
         {
             self.nickName = components[1];
         }
+    }
+
+    return self;
+}
+
+- (instancetype)initFromNsString:(NSString *)nsString
+{
+    self = [super init];
+
+    if (self)
+    {
+        NSRange r1 = [nsString rangeOfCharacterFromSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
+
+        if (r1.location != NSNotFound)
+        {
+            NSUInteger p1 = r1.location + r1.length;
+
+            NSRange r2 = [nsString rangeOfCharacterFromSet:NSCharacterSet.whitespaceAndNewlineCharacterSet
+                                                   options:0 range:NSMakeRange(p1, nsString.length - p1)];
+
+            if (r2.location != NSNotFound)
+            {
+                self.nickName = [nsString substringWithRange:NSMakeRange(p1, r2.location - p1)];
+            }
+        }
+
+        [self acquireIpAddressesFromNsResponse:nsString];
     }
 
     return self;
@@ -90,6 +159,11 @@ static NSRegularExpression *_ipv6Regex;
     if (matches.firstObject.numberOfRanges > 0)
     {
         self.ipv6Address = [response substringWithRange:[matches.firstObject rangeAtIndex:0]];
+    }
+
+    if ([response rangeOfString:@"Exit"].location != NSNotFound)
+    {
+        self.isExit = YES;
     }
 }
 

@@ -44,11 +44,7 @@ NS_SWIFT_NAME(TorController)
 - (void)setConfForKey:(NSString *)key withValue:(NSString *)value completion:(void (^__nullable)(BOOL success, NSError * __nullable error))completion;
 - (void)setConfs:(NSArray<NSDictionary *> *)configs completion:(void (^__nullable)(BOOL success, NSError * __nullable error))completion;
 - (void)listenForEvents:(NSArray<NSString *> *)events completion:(void (^__nullable)(BOOL success, NSError * __nullable error))completion;
-
-- (void)getRawForKeys:(NSArray<NSString *> *)keys completion:(void (^)(NSArray<NSNumber *> * _Nonnull codes, NSArray<NSData *> * _Nonnull lines))completion;
-
 - (void)getInfoForKeys:(NSArray<NSString *> *)keys completion:(void (^)(NSArray<NSString *> *values))completion; // TODO: Provide errors
-
 - (void)getSessionConfiguration:(void (^)(NSURLSessionConfiguration * __nullable configuration))completion;
 - (void)sendCommand:(NSString *)command arguments:(nullable NSArray<NSString *> *)arguments data:(nullable NSData *)data observer:(TORObserverBlock)observer;
 
@@ -90,6 +86,19 @@ NS_SWIFT_NAME(TorController)
 @param completion  Completion callback. Will return true, if *all* closings were successful, false, if *at least one* closing failed.
 */
 - (void)closeCircuits:(NSArray<TORCircuit *> *)circuits completion:(void (^__nullable)(BOOL success))completion;
+
+/**
+ Resolve countries of given `TORNode`s and updates their `countryCode` property on success.
+
+ Nodes which already contain a `countryCode` will be ignored.
+ IPv4 addresses will be preferred, if Tor is able to resolve IPv4 addresses (if it has loaded the IPv4 geoip database),
+ and if the node has a `ipv4Address` property of non-zero length.
+
+ @param nodes List of `TORNode`s to resolve countries for.
+ @param testCapabilities Ask Tor first, if it is actually able to resolve. (If GeoDB databases are loaded.) Pass NO, if you're sure that Tor is able to to save on queries.
+ @param completion Completion callback.
+ */
+- (void)resolveCountriesOfNodes:(NSArray<TORNode *> * _Nullable)nodes testCapabilities:(BOOL)testCapabilities completion:(void (^__nullable)(void))completion;
 
 // Observers
 - (id)addObserverForCircuitEstablished:(void (^)(BOOL established))block;

@@ -525,19 +525,18 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
     }];
 }
 
-- (void)getRawForKeys:(NSArray<NSString *> *)keys
-           completion:(void (^)(NSArray<NSNumber *> * _Nonnull codes, NSArray<NSData *> * _Nonnull lines))completion
+- (void)getInfoForKeys:(NSArray<NSString *> *)keys completion:(void (^)(NSArray<NSString *> *values))completion
 {
     NSData *ok = [NSData dataWithBytes:"OK" length:2];
 
     [self sendCommand:TORCommandGetInfo arguments:keys data:nil observer:^BOOL(NSArray<NSNumber *> *codes, NSArray<NSData *> *lines, BOOL *stop) {
         *stop = YES;
 
-        if (lines.count - 1 != keys.count)
+        if (lines.count - 1 != keys.count || codes.count != lines.count)
         {
             if (completion)
             {
-                completion(@[], @[]);
+                completion(@[]);
             }
 
             return NO;
@@ -547,73 +546,52 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
         {
             if (completion)
             {
-                completion(@[], @[]);
+                completion(@[]);
             }
 
             return NO;
         }
 
-        if (completion)
-        {
-            completion(codes, lines);
-        }
-
-        return YES;
-    }];
-}
-
-- (void)getInfoForKeys:(NSArray<NSString *> *)keys completion:(void (^)(NSArray<NSString *> *values))completion
-{
-    [self getRawForKeys:keys completion:^(NSArray<NSNumber *> * _Nonnull codes, NSArray<NSData *> * _Nonnull lines) {
-        NSMutableArray *values = [NSMutableArray new];
-
-        NSMutableArray<NSString *> *strings = [NSMutableArray new];
-
-        for (NSData *line in lines)
-        {
-            NSString *string = [[NSString alloc] initWithData:line encoding:NSUTF8StringEncoding];
-
-            if (!string)
-            {
-                if (completion)
-                {
-                    completion(values);
-                }
-            }
-
-            [strings addObject:string];
-        }
-
         NSMutableDictionary<NSString *, NSString *> *info = [NSMutableDictionary new];
 
-        for (NSUInteger idx = 0; idx < strings.count - 1; idx++)
+        for (NSUInteger i = 0; i < codes.count - 1; i++)
         {
-            if (codes[idx].integerValue == TORControlReplyCodeOK)
+            if (codes[i].integerValue == TORControlReplyCodeOK)
             {
-                NSMutableArray<NSString *> *components = [[strings[idx] componentsSeparatedByString:@"="] mutableCopy];
+                NSString *string = [[NSString alloc] initWithData:lines[i] encoding:NSUTF8StringEncoding];
 
-                if (components.count > 1)
+                if (!string)
                 {
-                    NSString *key = [components.firstObject stringByTrimmingCharactersInSet:
-                                     NSCharacterSet.doubleQuote];
+                    completion(@[]);
 
-                    [components removeObjectAtIndex:0];
-                    NSString* value = [[components componentsJoinedByString:@"="]
-                                       stringByTrimmingCharactersInSet:NSCharacterSet.doubleQuote];
+                    return NO;
+                }
+
+                NSRange pos = [string rangeOfString:@"="];
+
+                if (pos.location != NSNotFound)
+                {
+                    NSString *key = [[string substringToIndex:pos.location] stringByTrimmingCharactersInSet:
+                                     NSCharacterSet.doubleQuote];
 
                     if ([keys containsObject:key])
                     {
-                        info[key] = value;
+                        info[key] = [[string substringFromIndex:pos.location + pos.length]
+                                     stringByTrimmingCharactersInSet:NSCharacterSet.doubleQuote];
                     }
                     else {
                         if (completion)
                         {
-                            completion(values);
+                            completion(@[]);
+
+                            return NO;
                         }
                     }
                 }
             }
         }
+
+        NSMutableArray *values = [NSMutableArray new];
 
         for (NSString *key in keys)
         {
@@ -624,6 +602,8 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
         {
             completion(values);
         }
+
+        return YES;
     }];
 }
 
@@ -714,7 +694,7 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
         {
             if (completion)
             {
-                completion([NSArray new]);
+                completion(@[]);
             }
 
             return;
@@ -739,52 +719,18 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
                 [map[i] acquireIpAddressesFromNsResponse:values[i]];
             }
 
-            [self getInfoForKeys:@[@"ip-to-country/ipv4-available", @"ip-to-country/ipv6-available"] completion:^(NSArray<NSString *> * _Nonnull values) {
+            NSMutableArray<TORNode *> *nodes = [NSMutableArray new];
 
-                BOOL ipv4Available = [values.firstObject isEqualToString:@"1"];
-                BOOL ipv6Available = [values.lastObject isEqualToString:@"1"];
+            for (TORCircuit *circuit in circuits)
+            {
+                [nodes addObjectsFromArray:circuit.nodes];
+            }
 
-                NSMutableArray<NSString *> *geoipResolveCalls = [NSMutableArray new];
-                NSMutableArray<TORNode *> *map = [NSMutableArray new];
-
-                for (TORCircuit *circuit in circuits)
+            [self resolveCountriesOfNodes:nodes testCapabilities:YES completion:^{
+                if (completion)
                 {
-                    for (TORNode *node in circuit.nodes)
-                    {
-                        if (ipv4Available && node.ipv4Address)
-                        {
-                            [geoipResolveCalls addObject:[NSString stringWithFormat:@"ip-to-country/%@", node.ipv4Address]];
-                            [map addObject:node];
-                        }
-                        else if (ipv6Available && node.ipv6Address)
-                        {
-                            [geoipResolveCalls addObject:[NSString stringWithFormat:@"ip-to-country/%@", node.ipv6Address]];
-                            [map addObject:node];
-                        }
-                    }
+                    completion(circuits);
                 }
-
-                if (geoipResolveCalls.count < 1)
-                {
-                    if (completion)
-                    {
-                        completion(circuits);
-                    }
-
-                    return;
-                }
-
-                [self getInfoForKeys:geoipResolveCalls completion:^(NSArray<NSString *> * _Nonnull values) {
-                    for (NSUInteger i = 0; i < values.count; i++)
-                    {
-                        map[i].countryCode = values[i];
-                    }
-
-                    if (completion)
-                    {
-                        completion(circuits);
-                    }
-                }];
             }];
         }];
     }];
@@ -835,26 +781,26 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
     dispatch_async(dispatch_get_global_queue(queueId, 0), ^{
         __block BOOL success = YES;
 
+        dispatch_group_t group = dispatch_group_create();
+
         for (NSString *circuitId in circuitIds)
         {
-            __block BOOL done = NO;
+            dispatch_group_enter(group);
 
             [self sendCommand:TORCommandCloseCircuit arguments:@[circuitId] data:nil observer:
              ^BOOL(NSArray<NSNumber *> * _Nonnull codes, NSArray<NSData *> * _Nonnull __unused lines, BOOL * _Nonnull stop) {
 
                 success = success && codes.firstObject.integerValue == TORControlReplyCodeOK;
 
-                done = YES;
+                // Need to deparallelize to not mix up responses.
+                dispatch_group_leave(group);
 
                 *stop = YES;
                 return YES;
             }];
-
-            // Need to deparallelize to not mix up responses.
-            while (!done) {
-                [NSThread sleepForTimeInterval:0.1];
-            }
         }
+
+        dispatch_group_wait(group, dispatch_time(DISPATCH_TIME_NOW, 10000000000)); // Wait 10 seconds.
 
         dispatch_async(dispatch_get_main_queue(), ^{
             if (completion)
@@ -878,6 +824,82 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
     }
 
     [self closeCircuitsByIds:circuitIds completion:completion];
+}
+
+- (void)resolveCountriesOfNodes:(NSArray<TORNode *> * _Nullable)nodes testCapabilities:(BOOL)testCapabilities completion:(void (^__nullable)(void))completion
+{
+    BOOL __block ipv4Available = YES;
+    BOOL __block ipv6Available = YES;
+
+    if (testCapabilities)
+    {
+        dispatch_group_t group = dispatch_group_create();
+        dispatch_group_enter(group);
+
+        [self getInfoForKeys:@[@"ip-to-country/ipv4-available", @"ip-to-country/ipv6-available"] completion:^(NSArray<NSString *> * _Nonnull values) {
+
+            ipv4Available = [values.firstObject isEqualToString:@"1"];
+            ipv6Available = [values.lastObject isEqualToString:@"1"];
+
+            dispatch_group_leave(group);
+        }];
+
+        dispatch_group_wait(group, dispatch_time(DISPATCH_TIME_NOW, 1000000000)); // Wait 1 second.
+    }
+
+    if (!ipv4Available && !ipv6Available)
+    {
+        if (completion)
+        {
+            completion();
+        }
+
+        return;
+    }
+
+    NSMutableArray<NSString *> *geoipResolveCalls = [NSMutableArray new];
+    NSMutableArray<TORNode *> *map = [NSMutableArray new];
+
+    for (TORNode *node in nodes)
+    {
+        if (node.countryCode.length)
+        {
+            continue;
+        }
+
+        if (ipv4Available && node.ipv4Address.length)
+        {
+            [geoipResolveCalls addObject:[NSString stringWithFormat:@"ip-to-country/%@", node.ipv4Address]];
+            [map addObject:node];
+        }
+        else if (ipv6Available && node.ipv6Address.length)
+        {
+            [geoipResolveCalls addObject:[NSString stringWithFormat:@"ip-to-country/%@", node.ipv6Address]];
+            [map addObject:node];
+        }
+    }
+
+    if (geoipResolveCalls.count < 1)
+    {
+        if (completion)
+        {
+            completion();
+        }
+
+        return;
+    }
+
+    [self getInfoForKeys:geoipResolveCalls completion:^(NSArray<NSString *> * _Nonnull values) {
+        for (NSUInteger i = 0; i < values.count; i++)
+        {
+            map[i].countryCode = values[i];
+        }
+
+        if (completion)
+        {
+            completion();
+        }
+    }];
 }
 
 @end
