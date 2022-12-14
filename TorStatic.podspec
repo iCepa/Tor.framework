@@ -2,8 +2,6 @@ Pod::Spec.new do |m|
 
   # TODO: Why the hell do I need to provide this manually? CocoaPods should figure this out automatically, like with other pods, when they're used as static libraries.
 
-  tor_version = 'tor-0.4.7.11'
-
   m.name             = 'Tor'
   m.version          = '407.11.1'
   m.summary          = 'Tor.framework is the easiest way to embed Tor in your iOS application.'
@@ -101,26 +99,8 @@ ENDSCRIPT
   m.subspec 'GeoIP' do |s|
     s.dependency 'Tor/Core'
 
-    s.script_phase = {
-      :name => 'Load GeoIP files',
-      :execution_position => :before_compile,
-      :output_files => ['geoip-always-execute-this-but-supress-warning'],
-      :script => <<-ENDSCRIPT
-cd "${PODS_TARGET_SRCROOT}"
-if [ ! -f geoip ] || [ `find . -name geoip -empty -maxdepth 1` ] || [ `find . -name geoip -mtime +1 -maxdepth 1` ]
-then
-  curl -Lo 'geoip' 'https://gitweb.torproject.org/tor.git/plain/src/config/geoip?h=#{tor_version}'
-fi
-
-if [ ! -f geoip6 ] || [ `find . -name geoip6 -empty -maxdepth 1` ] || [ `find . -name geoip6 -mtime +1 -maxdepth 1` ]
-then
-  curl -Lo 'geoip6' 'https://gitweb.torproject.org/tor.git/plain/src/config/geoip6?h=#{tor_version}'
-fi
-ENDSCRIPT
-    }
-
     s.resource_bundles = {
-      'GeoIP' => ['geoip', 'geoip6']
+      'GeoIP' => ['Tor/tor/src/config/geoip', 'Tor/tor/src/config/geoip6']
     }
   end
 
