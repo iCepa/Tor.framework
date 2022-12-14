@@ -78,7 +78,7 @@ Taken from https://nbviewer.jupyter.org/github/rasbt/python_reference/blob/maste
  @param nsString Response from `ns/[*]` call, identifying one or more Tor nodes.
  @return a list of `TORNode`s discovered in the given string. Might be empty.
  */
-+ (NSArray<TORNode *>  * _Nonnull)parseFromNsString:(NSString * _Nullable)nsString;
++ (NSArray<TORNode *>  * _Nonnull)parseFromNsString:(NSString * _Nullable)nsString exitOnly:(BOOL)exitOnly;
 
 
 /**

@@ -44,7 +44,7 @@ static NSRegularExpression *_ipv6Regex;
 
 // MARK: Class Methods:
 
-+ (NSArray<TORNode *>  * _Nonnull)parseFromNsString:(NSString * _Nullable)nsString
++ (NSArray<TORNode *>  * _Nonnull)parseFromNsString:(NSString * _Nullable)nsString exitOnly:(BOOL)exitOnly
 {
     NSMutableArray<TORNode *> *nodes = [NSMutableArray new];
     NSMutableArray<NSString *> *raw = [NSMutableArray new];
@@ -66,7 +66,11 @@ static NSRegularExpression *_ipv6Regex;
         {
             if (raw.count > 0)
             {
-                [nodes addObject:[[TORNode alloc] initFromNsString:[raw componentsJoinedByString:@"\n"]]];
+                if (!exitOnly || [raw.lastObject rangeOfString:@"Exit"].location != NSNotFound)
+                {
+                    [nodes addObject:[[TORNode alloc] initFromNsString:[raw componentsJoinedByString:@"\n"]]];
+                }
+
                 raw = [[NSMutableArray alloc] initWithObjects:line, nil];
             }
         }
@@ -76,7 +80,7 @@ static NSRegularExpression *_ipv6Regex;
         }
     }
 
-    if (raw.count > 0)
+    if (raw.count > 0 && (!exitOnly || [raw.lastObject rangeOfString:@"Exit"].location != NSNotFound))
     {
         [nodes addObject:[[TORNode alloc] initFromNsString:[raw componentsJoinedByString:@"\n"]]];
     }

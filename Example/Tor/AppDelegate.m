@@ -50,34 +50,26 @@
                     return;
                 }
 
+                CFTimeInterval startTime = CACurrentMediaTime();
+
                 [c getCircuits:^(NSArray<TORCircuit *> * _Nonnull circuits) {
                     NSLog(@"Circuits: %@", circuits);
+
+                    NSLog(@"Elapsed Time: %f", CACurrentMediaTime() - startTime);
                 }];
 
-//                CFTimeInterval startTime = CACurrentMediaTime();
-//
 //                [c getInfoForKeys:@[@"ns/all"] completion:^(NSArray<NSString *> * _Nonnull values) {
 //                    NSLog(@"Line count: %lu", values.count);
 //                    NSLog(@"Elapsed Time: %f", CACurrentMediaTime() - startTime);
 //
 //
-//                    NSArray<TORNode *> *nodes = [TORNode parseFromNsString:values.firstObject];
+//                    NSArray<TORNode *> *exitNodes = [TORNode parseFromNsString:values.firstObject exitOnly:YES];
 //
-//                    NSMutableArray<TORNode *> *exitNodes = [NSMutableArray new];
-//
-//                    for (TORNode *node in nodes)
-//                    {
-//                        if (node.isExit)
-//                        {
-//                            [exitNodes addObject:node];
-//                        }
-//                    }
-//
-//                    NSLog(@"#Nodes: %lu, #Exit Nodes: %lu", nodes.count, exitNodes.count);
+//                    NSLog(@"#Exit Nodes: %lu", exitNodes.count);
 //                    NSLog(@"Elapsed Time: %f", CACurrentMediaTime() - startTime);
 //
 //                    [c resolveCountriesOfNodes:exitNodes testCapabilities:NO completion:^{
-//                        for (TORNode *node in nodes) {
+//                        for (TORNode *node in exitNodes) {
 //                            NSLog(@"Node: %@", node);
 //                        }
 //
