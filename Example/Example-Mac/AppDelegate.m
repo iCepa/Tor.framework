@@ -42,16 +42,24 @@
             NSLog(@"authenticated success=%d", success);
 
             if (!success)
+            {
                 return;
+            }
 
             [c addObserverForCircuitEstablished:^(BOOL established) {
                 NSLog(@"established=%d", established);
 
                 if (!established)
+                {
                     return;
+                }
+
+                CFTimeInterval startTime = CACurrentMediaTime();
 
                 [c getCircuits:^(NSArray<TORCircuit *> * _Nonnull circuits) {
                     NSLog(@"Circuits: %@", circuits);
+
+                    NSLog(@"Elapsed Time: %f", CACurrentMediaTime() - startTime);
                 }];
             }];
         }];
