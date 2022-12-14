@@ -1,18 +1,18 @@
 use_frameworks!
 
-target 'Tor_Example' do
-  platform :ios, '9.0'
+target 'Tor-Example' do
+  platform :ios, '11.0'
 
   pod 'Tor/GeoIP', :path => '../' # :podspec => '../TorStatic.podspec'
 
-  target 'Tor_Tests' do
+  target 'Tor-Tests' do
     inherit! :search_paths
   end
 
 end
 
-target 'Tor_Example_Mac' do
-  platform :macos, '10.9'
+target 'Tor-Example-Mac' do
+  platform :macos, '10.13'
 
   pod 'Tor/GeoIP', :path => '../' # :podspec => '../TorStatic.podspec'
 end

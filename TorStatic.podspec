@@ -21,8 +21,8 @@ Pod::Spec.new do |m|
                          :submodules => true }
   m.social_media_url = 'https://twitter.com/tladesignz'
 
-  m.ios.deployment_target = '9.0'
-  m.macos.deployment_target = '10.9'
+  m.ios.deployment_target = '11.0'
+  m.macos.deployment_target = '10.13'
 
   m.prepare_command = <<-ENDSCRIPT
 touch 'geoip'
