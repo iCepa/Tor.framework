@@ -179,10 +179,6 @@ configuration.geoipFile = NSBundle.geoIpBundle.geoipFile;
 configuration.geoip6File = NSBundle.geoIpBundle.geoip6File;
 ```
 
-*ATTENTION: You might need to build two times to acquire the geoip files, due
-to a limitation of CocoaPods!*
-
-
 ## Authors
 
 - Conrad Kramer, conrad@conradkramer.com
