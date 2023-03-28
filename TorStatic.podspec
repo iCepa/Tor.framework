@@ -22,11 +22,6 @@ Pod::Spec.new do |m|
   m.ios.deployment_target = '11.0'
   m.macos.deployment_target = '10.13'
 
-  m.prepare_command = <<-ENDSCRIPT
-touch 'geoip'
-touch 'geoip6'
-ENDSCRIPT
-
   m.subspec 'Core' do |s|
     s.pod_target_xcconfig = {
       'DEFINES_MODULE' => 'YES',

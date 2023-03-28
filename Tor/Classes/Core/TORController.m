@@ -12,7 +12,6 @@
 #import <netinet/in.h>
 #import <arpa/inet.h>
 
-#import "TORThread.h"
 #import "TORControlReplyCode.h"
 #import "TORControlCommand.h"
 #import "NSCharacterSet+PredefinedSets.h"

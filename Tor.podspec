@@ -7,25 +7,37 @@ Pod::Spec.new do |m|
 
   m.homepage         = 'https://github.com/iCepa/Tor.framework'
   m.license          = { :type => 'MIT', :file => 'LICENSE' }
-  m.authors          = { 'Conrad Kramer' => 'conrad@conradkramer.com',
-                         'Chris Ballinger' => 'chris@chatsecure.org',
-                         'Mike Tigas' => 'mike@tig.as',
-                         'Benjamin Erhart' => 'berhart@netzarchitekten.com', }
-  m.source           = { :git => 'https://github.com/iCepa/Tor.framework.git',
-                         :branch => 'pure_pod',
-                         :tag => "v#{m.version}",
-                         :submodules => true }
+  m.authors          = {
+    'Conrad Kramer' => 'conrad@conradkramer.com',
+    'Chris Ballinger' => 'chris@chatsecure.org',
+    'Mike Tigas' => 'mike@tig.as',
+    'Benjamin Erhart' => 'berhart@netzarchitekten.com', }
+  m.source           = {
+    :git => 'https://github.com/iCepa/Tor.framework.git',
+    :branch => 'pure_pod',
+    :tag => "v#{m.version}",
+    :submodules => true }
   m.social_media_url = 'https://twitter.com/tladesignz'
 
   m.ios.deployment_target = '11.0'
   m.macos.deployment_target = '10.13'
 
-  m.prepare_command = <<-ENDSCRIPT
-touch 'geoip'
-touch 'geoip6'
-ENDSCRIPT
+  script = <<-ENDSCRIPT
+cd "${PODS_TARGET_SRCROOT}/Tor/%1$s"
+../%1$s.sh
+  ENDSCRIPT
 
   m.subspec 'Core' do |s|
+    s.requires_arc = true
+
+    s.source_files = 'Tor/Classes/Core/**/*'
+  end
+
+  m.subspec 'CTor' do |s|
+    s.dependency 'Tor/Core'
+
+    s.source_files = 'Tor/Classes/CTor/**/*'
+
     s.pod_target_xcconfig = {
       'HEADER_SEARCH_PATHS' => '$(inherited) "${PODS_TARGET_SRCROOT}/Tor/tor" "${PODS_TARGET_SRCROOT}/Tor/tor/src" "${PODS_TARGET_SRCROOT}/Tor/openssl/include" "${BUILT_PRODUCTS_DIR}/openssl" "${PODS_TARGET_SRCROOT}/Tor/libevent/include"',
       'OTHER_LDFLAGS' => '$(inherited) -L"${BUILT_PRODUCTS_DIR}/Tor" -l"z" -l"lzma" -l"crypto" -l"ssl" -l"event_core" -l"event_extra" -l"event_pthreads" -l"event" -l"tor"',
@@ -39,53 +51,44 @@ ENDSCRIPT
       'OTHER_LDFLAGS' => '$(inherited) -L"${BUILT_PRODUCTS_DIR}/Tor-macOS"'
     }
 
-    script = <<-ENDSCRIPT
-cd "${PODS_TARGET_SRCROOT}/Tor/%1$s"
-../%1$s.sh
-ENDSCRIPT
-
     s.script_phases = [
-      {
-        :name => 'Build XZ',
-        :execution_position => :before_compile,
-        :output_files => ['xz-always-execute-this-but-supress-warning'],
-        :script => sprintf(script, "xz")
-      },
-      {
-        :name => 'Build OpenSSL',
-        :execution_position => :before_compile,
-        :output_files => ['openssl-always-execute-this-but-supress-warning'],
-        :script => sprintf(script, "openssl")
-      },
-      {
-        :name => 'Build libevent',
-        :execution_position => :before_compile,
-        :output_files => ['libevent-always-execute-this-but-supress-warning'],
-        :script => sprintf(script, "libevent")
-      },
-      {
-        :name => 'Build Tor',
-        :execution_position => :before_compile,
-        :output_files => ['tor-always-execute-this-but-supress-warning'],
-        :script => sprintf(script, "tor")
-      },
+    {
+      :name => 'Build XZ',
+      :execution_position => :before_compile,
+      :output_files => ['xz-always-execute-this-but-supress-warning'],
+      :script => sprintf(script, "xz")
+    },
+    {
+      :name => 'Build OpenSSL',
+      :execution_position => :before_compile,
+      :output_files => ['openssl-always-execute-this-but-supress-warning'],
+      :script => sprintf(script, "openssl")
+    },
+    {
+      :name => 'Build libevent',
+      :execution_position => :before_compile,
+      :output_files => ['libevent-always-execute-this-but-supress-warning'],
+      :script => sprintf(script, "libevent")
+    },
+    {
+      :name => 'Build Tor',
+      :execution_position => :before_compile,
+      :output_files => ['tor-always-execute-this-but-supress-warning'],
+      :script => sprintf(script, "tor")
+    },
     ]
-
-    s.requires_arc = true
-
-    s.source_files = 'Tor/Classes/**/*'
 
     s.preserve_paths = 'Tor/include', 'Tor/libevent', 'Tor/libevent.sh', 'Tor/openssl', 'Tor/openssl.sh', 'Tor/tor', 'Tor/tor.sh', 'Tor/xz', 'Tor/xz.sh'
   end
 
   m.subspec 'GeoIP' do |s|
-    s.dependency 'Tor/Core'
+    s.dependency 'Tor/CTor'
 
     s.resource_bundles = {
       'GeoIP' => ['Tor/tor/src/config/geoip', 'Tor/tor/src/config/geoip6']
     }
   end
 
-  m.default_subspecs = 'Core'
+  m.default_subspecs = 'CTor'
 
 end
