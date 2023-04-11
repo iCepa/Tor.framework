@@ -8,7 +8,7 @@
 //  https://torproject.gitlab.io/torspec/control-spec.html#circuit-status-changed
 
 #import <Foundation/Foundation.h>
-#import "TORNode.h"
+#import <Tor/TORNode.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
