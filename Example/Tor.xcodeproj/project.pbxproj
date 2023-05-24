@@ -68,6 +68,8 @@
 		93A4EA262BB0B20934ED644E /* Tor.podspec */ = {isa = PBXFileReference; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Tor.podspec; path = ../Tor.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A00545632796CA6700C9F635 /* TorStatic.podspec */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text; name = TorStatic.podspec; path = ../TorStatic.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A07DA5B42791AED000D62827 /* .gitmodules */ = {isa = PBXFileReference; lastKnownFileType = text; name = .gitmodules; path = ../.gitmodules; sourceTree = "<group>"; };
+		A0E5E59A298BC74000727C4F /* arti.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = arti.sh; path = ../Tor/arti.sh; sourceTree = "<group>"; };
+		A0E5E59B298BC8A100727C4F /* arti */ = {isa = PBXFileReference; lastKnownFileType = folder; name = arti; path = ../Tor/arti; sourceTree = "<group>"; };
 		A0F008F727906CA30073D36D /* Podfile.lock */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
 		A0F008F827906CA30073D36D /* Podfile */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A0F008FA27906DBA0073D36D /* TORConfigurationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TORConfigurationTests.m; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				6003F593195388D20070C39A /* Example for Tor */,
 				6003F5B5195388D20070C39A /* Tests */,
 				A0F0090A279070B40073D36D /* Example-Mac */,
+				A0E5E59B298BC8A100727C4F /* arti */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
 				8C50D6DACFD9A136564A1BEC /* Pods */,
@@ -207,6 +210,7 @@
 				A0F0090427906F970073D36D /* openssl.sh */,
 				A0F0090327906F970073D36D /* libevent.sh */,
 				A0F0090127906F970073D36D /* tor.sh */,
+				A0E5E59A298BC74000727C4F /* arti.sh */,
 			);
 			name = "Podspec Metadata";
 			sourceTree = "<group>";

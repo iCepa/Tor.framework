@@ -10,7 +10,12 @@
 #import <Tor/NSBundle+GeoIP.h>
 #import <Tor/TORConfiguration.h>
 #import <Tor/TORController.h>
+
+#ifdef USE_ARTI
+#import <Tor/TORArti.h>
+#else
 #import <Tor/TORThread.h>
+#endif
 
 @interface AppDelegate ()
 
@@ -29,6 +34,18 @@
     configuration.dataDirectory = [NSURL fileURLWithPath:NSTemporaryDirectory()];
     configuration.geoipFile = NSBundle.geoIpBundle.geoipFile;
     configuration.geoip6File = NSBundle.geoIpBundle.geoip6File;
+
+#ifdef USE_ARTI
+
+    NSURL *logfile = [[[NSFileManager.defaultManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask]
+                       firstObject]
+                      URLByAppendingPathComponent:@"arti.log"];
+
+    NSLog(@"Logfile: %@", logfile.path);
+
+    [TORArti startWithSocksPort:9150 dnsPort:9151 logfile:logfile];
+
+#else
 
     TORThread *thread = [[TORThread alloc] initWithConfiguration:configuration];
     [thread start];
@@ -64,6 +81,8 @@
             }];
         }];
     });
+
+#endif
 }
 
 
