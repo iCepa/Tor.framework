@@ -68,6 +68,11 @@ NS_ASSUME_NONNULL_BEGIN
         [arguments addObjectsFromArray:@[@"--DataDirectory", dataDir]];
     }
 
+    NSString *cacheDir = self.cacheDirectory.path;
+    if (self.cacheDirectory.isFileURL && cacheDir) {
+        [arguments addObjectsFromArray:@[@"--CacheDirectory", cacheDir]];
+    }
+
     if (self.cookieAuthentication) {
         [arguments addObjectsFromArray:@[@"--CookieAuthentication", @"1"]];
     }
@@ -85,6 +90,14 @@ NS_ASSUME_NONNULL_BEGIN
     NSString *socksPath = self.socksURL.path;
     if (self.socksURL.isFileURL && socksPath) {
         [arguments addObjectsFromArray:@[@"--SocksPort", [NSString stringWithFormat:@"unix:%@", socksPath]]];
+    }
+
+    if (self.socksPort > 0) {
+        [arguments addObjectsFromArray:@[@"--SocksPort", [NSString stringWithFormat:@"%lu", (unsigned long)self.socksPort]]];
+    }
+
+    if (self.dnsPort > 0) {
+        [arguments addObjectsFromArray:@[@"--DnsPort", [NSString stringWithFormat:@"%lu", (unsigned long)self.dnsPort]]];
     }
 
     NSString *clientAuthDir = self.clientAuthDirectory.path;
@@ -105,6 +118,11 @@ NS_ASSUME_NONNULL_BEGIN
     NSString *geoip6File = self.geoip6File.path;
     if (self.geoip6File.isFileURL && geoip6File) {
         [arguments addObjectsFromArray:@[@"--GeoIPv6File", geoip6File]];
+    }
+
+    NSString *logfile = self.logfile.path;
+    if (self.logfile.isFileURL && logfile) {
+        [arguments addObjectsFromArray:@[@"--Log", [NSString stringWithFormat:@"notice file %@", logfile]]];
     }
 
     [arguments addObjectsFromArray:self.arguments];

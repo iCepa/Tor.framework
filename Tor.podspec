@@ -101,6 +101,7 @@ cd "${PODS_TARGET_SRCROOT}/Tor/%1$s"
 
     s.user_target_xcconfig = {
       'GCC_PREPROCESSOR_DEFINITIONS' => 'USE_ARTI=1',
+      'SWIFT_ACTIVE_COMPILATION_CONDITIONS' => '$(inherited) USE_ARTI',
     }
 
     s.script_phases = [
