@@ -9,7 +9,7 @@
 	url = https://github.com/libevent/libevent.git
 [submodule "Tor/tor"]
 	path = Tor/tor
-	url = https://git.torproject.org/tor.git
+	url = https://gitlab.torproject.org/tpo/core/tor.git
 [submodule "Tor/arti"]
 	path = Tor/arti
 	url = https://gitlab.com/guardianproject/arti-mobile-ex.git
