@@ -116,10 +116,7 @@ for ARCH in "${ARCHS[@]}"
 do
     mkdir -p "${BUILT_PRODUCTS_DIR}/openssl-${ARCH}/openssl"
 
-    for HEADER in "${HEADERS[@]}"
-    do
-        cp "${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}/include/openssl/${HEADER}" "${BUILT_PRODUCTS_DIR}/openssl-${ARCH}/openssl"
-    done
+    cp -r "${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}/include/openssl" "${BUILT_PRODUCTS_DIR}/openssl-${ARCH}/"
 
     for LIBRARY in "${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}/lib/"*.a;
     do
