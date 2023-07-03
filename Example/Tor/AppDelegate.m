@@ -21,25 +21,34 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    NSFileManager *fm = NSFileManager.defaultManager;
+    NSURL *docDir = [fm URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask].firstObject;
+
     TORConfiguration *configuration = [TORConfiguration new];
     configuration.ignoreMissingTorrc = YES;
     configuration.avoidDiskWrites = YES;
     configuration.clientOnly = YES;
     configuration.cookieAuthentication = YES;
     configuration.autoControlPort = YES;
-    configuration.dataDirectory = [NSURL fileURLWithPath:NSTemporaryDirectory()];
+    configuration.dataDirectory = [docDir URLByAppendingPathComponent:@"tor"];
     configuration.geoipFile = NSBundle.geoIpBundle.geoipFile;
     configuration.geoip6File = NSBundle.geoIpBundle.geoip6File;
 
 #ifdef USE_ARTI
 
-    NSURL *logfile = [[[NSFileManager.defaultManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask]
-                       firstObject]
-                      URLByAppendingPathComponent:@"arti.log"];
+    NSURL *cacheDir = [fm URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask].firstObject;
 
-    NSLog(@"Logfile: %@", logfile.path);
+    configuration.socksPort = 9150;
+    configuration.dnsPort = 1951;
+    configuration.dataDirectory = [docDir URLByAppendingPathComponent:@"org.torproject.Arti"];
+    configuration.logfile = [docDir URLByAppendingPathComponent:@"arti.log"];
+    configuration.cacheDirectory = [cacheDir URLByAppendingPathComponent:@"org.torproject.Arti"];
 
-    [TORArti startWithSocksPort:9150 dnsPort:9151 logfile:logfile];
+    NSLog(@"Configuration:\n%@", [configuration compile]);
+
+    [TORArti startWithConfiguration:configuration completed:^{
+        NSLog(@"established");
+    }];
 
 #else
 
