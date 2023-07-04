@@ -90,7 +90,7 @@ do
             PLATFORM_FLAGS="no-asm enable-ec_nistp_64_gcc_128"
             CONFIG="darwin64-x86_64-cc"
         elif [[ "${ARCH}" == "arm64" ]]; then
-            PLATFORM_FLAGS="no-async zlib-dynamic enable-ec_nistp_64_gcc_128"
+            PLATFORM_FLAGS="no-asm enable-ec_nistp_64_gcc_128"
             CONFIG="darwin64-arm64-cc"
         else
             echo "OpenSSL configuration error: ${ARCH} on ${PLATFORM_NAME} not supported!"
@@ -109,17 +109,12 @@ done
 
 mkdir -p "${BUILT_PRODUCTS_DIR}"
 
-declare -a HEADERS=("opensslconf.h" "opensslv.h")
-
 # Copy the build products from the temporary directory to the built products directory
 for ARCH in "${ARCHS[@]}"
 do
     mkdir -p "${BUILT_PRODUCTS_DIR}/openssl-${ARCH}/openssl"
 
-    for HEADER in "${HEADERS[@]}"
-    do
-        cp "${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}/include/openssl/${HEADER}" "${BUILT_PRODUCTS_DIR}/openssl-${ARCH}/openssl"
-    done
+    cp -r "${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}/include/openssl" "${BUILT_PRODUCTS_DIR}/openssl-${ARCH}"
 
     for LIBRARY in "${CONFIGURATION_TEMP_DIR}/openssl-${ARCH}/lib/"*.a;
     do
