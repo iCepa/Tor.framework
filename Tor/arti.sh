@@ -25,7 +25,7 @@ cd "$WORKDIR"
 # However, this is here for documentary purposes and in case you want to set
 # this manually as an "external target" script.
 # See https://kelan.io/2009/run-script-while-cleaning-in-xcode/
-if [ $ACTION = "clean" ]; then
+if [ "$ACTION" = "clean" ]; then
     make clean
 
     exit 0
@@ -33,13 +33,13 @@ fi
 
 CONF_LOWER="$(echo $CONFIGURATION | tr '[:upper:]' '[:lower:]')"
 
-if [ $PLATFORM_NAME = "macosx" ]; then
-    if [ $CONF_LOWER = "release" ]; then
+if [ "${PLATFORM_NAME:-iphoneos}" = "macosx" ]; then
+    if [ "${CONF_LOWER:-debug}" = "release" ]; then
         TARGET_PLATFORM="universal-macos"
 
         make "macos-${CONF_LOWER}"
     else
-        if [ $ARCHS = "arm64" ]; then
+        if [ "${ARCHS:-x86}" = "arm64" ]; then
             TARGET_PLATFORM="aarch64-apple-darwin"
         else
             TARGET_PLATFORM="x86_64-apple-darwin"
@@ -48,8 +48,8 @@ if [ $PLATFORM_NAME = "macosx" ]; then
         make "macos-${CONF_LOWER}-${TARGET_PLATFORM}"
     fi
 
-elif [ $PLATFORM_NAME = "iphonesimulator" ]; then
-    if [ $ARCHS = "arm64" ]; then
+elif [ "${PLATFORM_NAME:-iphoneos}" = "iphonesimulator" ]; then
+    if [ "${ARCHS:-x86}" = "arm64" ]; then
         TARGET_PLATFORM="aarch64-apple-ios-sim"
     else
         TARGET_PLATFORM="x86_64-apple-ios"
