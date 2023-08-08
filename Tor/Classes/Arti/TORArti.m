@@ -70,7 +70,7 @@ void loggingCb(const char * message)
 {
     NSMutableString *msg = [[NSMutableString alloc] initWithUTF8String:message];
 
-    if ([msg containsString:@"Directory is complete"]) {
+    if (completedBlock && [msg containsString:@"Directory is complete"]) {
         completedBlock();
         completedBlock = nil;
     }
