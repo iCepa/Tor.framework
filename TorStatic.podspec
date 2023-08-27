@@ -49,9 +49,9 @@ ENDSCRIPT
 
     s.script_phases = [
       {
-        :name => 'Build XZ',
+        :name => 'Build LZMA',
         :execution_position => :before_compile,
-        :output_files => ['xz-always-execute-this-but-supress-warning'],
+        :output_files => ['lzma-always-execute-this-but-supress-warning'],
         :script => sprintf(script, "xz")
       },
       {
