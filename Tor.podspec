@@ -1,7 +1,7 @@
 Pod::Spec.new do |m|
 
   m.name             = 'Tor'
-  m.version          = '407.14.2'
+  m.version          = '408.4.1'
   m.summary          = 'Tor.framework is the easiest way to embed Tor in your iOS application.'
   m.description      = 'Tor.framework is the easiest way to embed Tor in your iOS application. Currently, the framework compiles in static versions of tor, libevent, openssl, and liblzma.'
 
@@ -167,6 +167,17 @@ cd "${PODS_TARGET_SRCROOT}/Tor/tor"
     ]
 
     s.preserve_paths = 'Tor/arti', 'Tor/arti.sh'
+
+#    s.pod_target_xcconfig = {
+#      'HEADER_SEARCH_PATHS' => '$(inherited) "${PODS_TARGET_SRCROOT}/Tor"',
+#      'OTHER_LDFLAGS' => '$(inherited) -L"${PODS_TARGET_SRCROOT}/Tor" -l"libonionmasq_apple"',
+#    }
+
+#    s.vendored_library = 'Tor/libonionmasq_apple.a'
+#
+#    s.private_header_files = 'Tor/libonionmasq_apple.h'
+#
+#    s.preserve_paths = 'Tor/libonionmasq_apple.a', 'Tor/libonionmasq_apple.h'
   end
 
   m.default_subspecs = 'CTor'

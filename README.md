@@ -10,7 +10,7 @@ Currently, the framework compiles in the following versions of `tor`, `libevent`
 
 |          |          |
 |:-------- | --------:|
-| tor      | 0.4.7.14 |
+| tor      | 0.4.8.4  |
 | libevent | 2.1.12   |
 | OpenSSL  | 3.1.2    |
 | liblzma  | 5.4.4    |
