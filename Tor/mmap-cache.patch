@@ -1,0 +1,151 @@
+From 4d6875d271dd5208e2c89a174fbff2e74004921b Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Alexander=20F=C3=A6r=C3=B8y?= <ahf@torproject.org>
+Date: Sun, 27 Aug 2023 23:12:05 +0200
+Subject: [PATCH] Memory map our journal file instead of reading directly.
+
+See: tpo/core/tor#40832
+---
+ src/feature/nodelist/microdesc.c | 65 ++++++++++++++++++++------------
+ 1 file changed, 41 insertions(+), 24 deletions(-)
+
+diff --git a/src/feature/nodelist/microdesc.c b/src/feature/nodelist/microdesc.c
+index 9e5f0bb9a4..64a25abb92 100644
+--- a/src/feature/nodelist/microdesc.c
++++ b/src/feature/nodelist/microdesc.c
+@@ -56,8 +56,8 @@ struct microdesc_cache_t {
+   char *journal_fname;
+   /** Mmap'd contents of the cache file, or NULL if there is none. */
+   tor_mmap_t *cache_content;
+-  /** Number of bytes used in the journal file. */
+-  size_t journal_len;
++  /** Mmap'd contents of the journal file, or NULL if there is none. */
++  tor_mmap_t *journal_content;
+   /** Number of bytes in descriptors removed as too old. */
+   size_t bytes_dropped;
+ 
+@@ -422,9 +422,6 @@ microdescs_add_list_to_cache(microdesc_cache_t *cache,
+         /* we already warned in dump_microdescriptor */
+         abort_writing_to_file(open_file);
+         fd = -1;
+-      } else {
+-        md->saved_location = SAVED_IN_JOURNAL;
+-        cache->journal_len += size;
+       }
+     } else {
+       md->saved_location = where;
+@@ -483,6 +480,17 @@ microdesc_cache_clear(microdesc_cache_t *cache)
+     }
+     cache->cache_content = NULL;
+   }
++
++  if (cache->journal_content) {
++    int res = tor_munmap_file(cache->journal_content);
++    if (res != 0) {
++      log_warn(LD_FS,
++               "tor_munmap_file() failed clearing journal cache; "
++               "we are probably about to leak memory.");
++      /* TODO something smarter? */
++    }
++  }
++
+   cache->total_len_seen = 0;
+   cache->n_seen = 0;
+   cache->bytes_dropped = 0;
+@@ -514,20 +522,19 @@ warn_if_nul_found(const char *inp, size_t len, int64_t offset,
+ int
+ microdesc_cache_reload(microdesc_cache_t *cache)
+ {
+-  struct stat st;
+-  char *journal_content;
+   smartlist_t *added;
+-  tor_mmap_t *mm;
++  tor_mmap_t *mm_cache;
++  tor_mmap_t *mm_journal;
+   int total = 0;
+ 
+   microdesc_cache_clear(cache);
+ 
+   cache->is_loaded = 1;
+ 
+-  mm = cache->cache_content = tor_mmap_file(cache->cache_fname);
+-  if (mm) {
+-    warn_if_nul_found(mm->data, mm->size, 0, "scanning microdesc cache");
+-    added = microdescs_add_to_cache(cache, mm->data, mm->data+mm->size,
++  mm_cache = cache->cache_content = tor_mmap_file(cache->cache_fname);
++  if (mm_cache) {
++    warn_if_nul_found(mm_cache->data, mm_cache->size, 0, "scanning microdesc cache");
++    added = microdescs_add_to_cache(cache, mm_cache->data, mm_cache->data+mm_cache->size,
+                                     SAVED_IN_CACHE, 0, -1, NULL);
+     if (added) {
+       total += smartlist_len(added);
+@@ -535,21 +542,19 @@ microdesc_cache_reload(microdesc_cache_t *cache)
+     }
+   }
+ 
+-  journal_content = read_file_to_str(cache->journal_fname,
+-                                     RFTS_IGNORE_MISSING, &st);
+-  if (journal_content) {
+-    cache->journal_len = strlen(journal_content);
+-    warn_if_nul_found(journal_content, (size_t)st.st_size, 0,
+-                      "reading microdesc journal");
+-    added = microdescs_add_to_cache(cache, journal_content,
+-                                    journal_content+st.st_size,
++  mm_journal = cache->journal_content = tor_mmap_file(cache->journal_fname);
++
++  if (mm_journal) {
++    warn_if_nul_found(mm_journal->data, mm_journal->size, 0, "reading microdesc journal");
++    added = microdescs_add_to_cache(cache, mm_journal->data,
++                                    mm_journal->data+mm_journal->size,
+                                     SAVED_IN_JOURNAL, 0, -1, NULL);
+     if (added) {
+       total += smartlist_len(added);
+       smartlist_free(added);
+     }
+-    tor_free(journal_content);
+   }
++
+   log_info(LD_DIR, "Reloaded microdescriptor cache. Found %d descriptors.",
+            total);
+ 
+@@ -664,7 +669,8 @@ should_rebuild_md_cache(microdesc_cache_t *cache)
+ {
+     const size_t old_len =
+       cache->cache_content ? cache->cache_content->size : 0;
+-    const size_t journal_len = cache->journal_len;
++    const size_t journal_len =
++      cache->journal_content ? cache->journal_content->size : 0;
+     const size_t dropped = cache->bytes_dropped;
+ 
+     if (journal_len < 16384)
+@@ -727,7 +733,7 @@ microdesc_cache_rebuild(microdesc_cache_t *cache, int force)
+   log_info(LD_DIR, "Rebuilding the microdescriptor cache...");
+ 
+   orig_size = (int)(cache->cache_content ? cache->cache_content->size : 0);
+-  orig_size += (int)cache->journal_len;
++  orig_size += (int)(cache->journal_content ? cache->journal_content->size : 0);
+ 
+   fd = start_writing_to_file(cache->cache_fname,
+                              OPEN_FLAGS_REPLACE|O_BINARY,
+@@ -826,8 +832,19 @@ microdesc_cache_rebuild(microdesc_cache_t *cache, int force)
+ 
+   smartlist_free(wrote);
+ 
++  // We unmap the journal file and use write_str_to_file() to empty it.
++  res = tor_munmap_file(cache->journal_content);
++
++  if (res != 0) {
++    log_warn(LD_FS,
++             "tor_munmap_file() failed clearing journal; "
++             "we are probably about to leak memory.");
++    /* TODO something smarter? */
++  }
++
++  cache->journal_content = NULL;
+   write_str_to_file(cache->journal_fname, "", 1);
+-  cache->journal_len = 0;
++
+   cache->bytes_dropped = 0;
+ 
+   new_size = cache->cache_content ? (int)cache->cache_content->size : 0;
+-- 
+2.41.0

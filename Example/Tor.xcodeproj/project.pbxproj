@@ -68,6 +68,7 @@
 		93A4EA262BB0B20934ED644E /* Tor.podspec */ = {isa = PBXFileReference; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Tor.podspec; path = ../Tor.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A00545632796CA6700C9F635 /* TorStatic.podspec */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text; name = TorStatic.podspec; path = ../TorStatic.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A07DA5B42791AED000D62827 /* .gitmodules */ = {isa = PBXFileReference; lastKnownFileType = text; name = .gitmodules; path = ../.gitmodules; sourceTree = "<group>"; };
+		A0C981E32A9F52D100E265EE /* mmap-cache.patch */ = {isa = PBXFileReference; lastKnownFileType = text; name = "mmap-cache.patch"; path = "../Tor/mmap-cache.patch"; sourceTree = "<group>"; };
 		A0E5E59A298BC74000727C4F /* arti.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = arti.sh; path = ../Tor/arti.sh; sourceTree = "<group>"; };
 		A0E5E59B298BC8A100727C4F /* arti */ = {isa = PBXFileReference; lastKnownFileType = folder; name = arti; path = ../Tor/arti; sourceTree = "<group>"; };
 		A0F008F727906CA30073D36D /* Podfile.lock */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
@@ -211,6 +212,7 @@
 				A0F0090327906F970073D36D /* libevent.sh */,
 				A0F0090127906F970073D36D /* tor.sh */,
 				A0E5E59A298BC74000727C4F /* arti.sh */,
+				A0C981E32A9F52D100E265EE /* mmap-cache.patch */,
 			);
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
