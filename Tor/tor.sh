@@ -12,8 +12,9 @@ ARCHS=($ARCHS)
 # This extends the path to look in some common locations (for example, if installed via Homebrew).
 PATH=$PATH:/usr/local/bin:/usr/local/opt/gettext/bin:/usr/local/opt/automake/bin:/usr/local/opt/aclocal/bin:/opt/homebrew/bin
 
-## Apply mmap-cache patch:
+## Apply patches:
 git apply --quiet ../mmap-cache.patch
+git apply --quiet ../remove-assertion.patch 
 
 # If there is a space in BUILT_PRODUCTS_DIR, make a symlink without a space and use that.
 if [[ "${BUILT_PRODUCTS_DIR}" =~ \  ]]; then
