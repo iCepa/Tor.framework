@@ -67,6 +67,7 @@
 		90700F7B59D5C0641E3250C1 /* Pods-Tor_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tor_Example.debug.xcconfig"; path = "Target Support Files/Pods-Tor_Example/Pods-Tor_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		93A4EA262BB0B20934ED644E /* Tor.podspec */ = {isa = PBXFileReference; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Tor.podspec; path = ../Tor.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A00545632796CA6700C9F635 /* TorStatic.podspec */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text; name = TorStatic.podspec; path = ../TorStatic.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A0463DB82AA0DB0700AC9925 /* onionmasq.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = onionmasq.sh; path = ../Tor/onionmasq.sh; sourceTree = "<group>"; };
 		A07DA5B42791AED000D62827 /* .gitmodules */ = {isa = PBXFileReference; lastKnownFileType = text; name = .gitmodules; path = ../.gitmodules; sourceTree = "<group>"; };
 		A0C981E32A9F52D100E265EE /* mmap-cache.patch */ = {isa = PBXFileReference; lastKnownFileType = text; name = "mmap-cache.patch"; path = "../Tor/mmap-cache.patch"; sourceTree = "<group>"; };
 		A0D9AA352A9F7514009BA44F /* remove-assertion.patch */ = {isa = PBXFileReference; lastKnownFileType = text; name = "remove-assertion.patch"; path = "../Tor/remove-assertion.patch"; sourceTree = "<group>"; };
@@ -213,6 +214,7 @@
 				A0F0090327906F970073D36D /* libevent.sh */,
 				A0F0090127906F970073D36D /* tor.sh */,
 				A0E5E59A298BC74000727C4F /* arti.sh */,
+				A0463DB82AA0DB0700AC9925 /* onionmasq.sh */,
 				A0C981E32A9F52D100E265EE /* mmap-cache.patch */,
 				A0D9AA352A9F7514009BA44F /* remove-assertion.patch */,
 			);

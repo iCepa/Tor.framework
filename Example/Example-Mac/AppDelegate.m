@@ -12,9 +12,13 @@
 #import <Tor/TORController.h>
 
 #ifdef USE_ARTI
-#import <Tor/TORArti.h>
+    #import <Tor/TORArti.h>
 #else
-#import <Tor/TORThread.h>
+    #ifdef USE_ONIONMASQ
+        #import <Tor/Onionmasq.h>
+    #else
+        #import <Tor/TORThread.h>
+    #endif
 #endif
 
 @interface AppDelegate ()
@@ -38,9 +42,10 @@
     configuration.geoipFile = NSBundle.geoIpBundle.geoipFile;
     configuration.geoip6File = NSBundle.geoIpBundle.geoip6File;
 
-#ifdef USE_ARTI
-
     NSURL *cacheDir = [fm URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask].firstObject;
+
+
+#ifdef USE_ARTI
 
     configuration.socksPort = 9150;
     configuration.dnsPort = 1951;
@@ -55,6 +60,17 @@
     }];
 
 #else
+
+    #ifdef USE_ONIONMASQ
+
+    [Onionmasq startWithFd:0
+                  stateDir:appSuppDir
+                  cacheDir:cacheDir
+                   onEvent:^(NSString *event){
+        NSLog(@"[%@] event: \"%@\"", self.className, event);
+    }];
+
+    #else
 
     TORThread *thread = [[TORThread alloc] initWithConfiguration:configuration];
     [thread start];
@@ -90,6 +106,8 @@
             }];
         }];
     });
+
+    #endif
 
 #endif
 }

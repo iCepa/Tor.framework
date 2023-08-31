@@ -167,17 +167,40 @@ cd "${PODS_TARGET_SRCROOT}/Tor/tor"
     ]
 
     s.preserve_paths = 'Tor/arti', 'Tor/arti.sh'
+  end
 
-#    s.pod_target_xcconfig = {
-#      'HEADER_SEARCH_PATHS' => '$(inherited) "${PODS_TARGET_SRCROOT}/Tor"',
-#      'OTHER_LDFLAGS' => '$(inherited) -L"${PODS_TARGET_SRCROOT}/Tor" -l"libonionmasq_apple"',
-#    }
+  m.subspec 'Onionmasq' do |s|
+    s.dependency 'Tor/Core'
 
-#    s.vendored_library = 'Tor/libonionmasq_apple.a'
-#
-#    s.private_header_files = 'Tor/libonionmasq_apple.h'
-#
-#    s.preserve_paths = 'Tor/libonionmasq_apple.a', 'Tor/libonionmasq_apple.h'
+    s.source_files = 'Tor/Classes/Onionmasq/**/*'
+
+    s.pod_target_xcconfig = {
+      'HEADER_SEARCH_PATHS' => '$(inherited) "${PODS_TARGET_SRCROOT}/Tor/onionmasq"',
+      'OTHER_LDFLAGS' => '$(inherited) -L"${BUILT_PRODUCTS_DIR}/Tor" -l"onionmasq_apple" -l"z" -l"lzma"',
+    }
+
+    s.user_target_xcconfig = {
+      'GCC_PREPROCESSOR_DEFINITIONS' => 'USE_ONIONMASQ=1',
+      'SWIFT_ACTIVE_COMPILATION_CONDITIONS' => '$(inherited) USE_ONIONMASQ',
+    }
+
+    s.script_phases = [
+    {
+      :name => 'Build LZMA',
+      :execution_position => :before_compile,
+      :output_files => ['lzma-always-execute-this-but-supress-warning'],
+      :script => sprintf(script, "xz")
+    },
+    {
+      :name => 'Build Onionmasq',
+      :execution_position => :before_compile,
+      :output_files => ['onionmasq-always-execute-this-but-supress-warning'],
+      :script => sprintf(script, "onionmasq")
+    },
+    ]
+
+    s.preserve_paths = 'Tor/onionmasq', 'Tor/onionmasq.sh'
+
   end
 
   m.default_subspecs = 'CTor'
