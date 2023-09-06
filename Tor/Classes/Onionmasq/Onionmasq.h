@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^EventCb)(id);
 
+typedef void (^LogCb)(NSString *);
 
 /**
  Start Onionmasq.
@@ -22,9 +23,10 @@ typedef void (^EventCb)(id);
  @param fd The file descriptor of the TUN interface.
  @param stateDir Directory, where Arti can store its state. OPTIONAL. If not provided, will use \c Library/Application \c Support/org.torproject.Arti.
  @param cacheDir Directory, where Arti can store its caching data. OPTIONAL. If not providied, will use \c Library/Cache/org.torproject.Arti.
- @param callback Callback, when an event happens.
+ @param eventCallback Callback, when an event happens.
+ @param logCallback Callback, when a log message arrives.
  */
-+ (void)startWithFd:(int32_t)fd stateDir:(NSURL * _Nullable)stateDir cacheDir:(NSURL * _Nullable)cacheDir onEvent:(nullable EventCb)callback;
++ (void)startWithFd:(int32_t)fd stateDir:(NSURL * _Nullable)stateDir cacheDir:(NSURL * _Nullable)cacheDir onEvent:(nullable EventCb)eventCallback onLog:(nullable LogCb)logCallback;
 
 /**
  Stop Onionmasq.

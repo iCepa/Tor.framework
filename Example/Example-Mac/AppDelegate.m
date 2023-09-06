@@ -66,9 +66,13 @@
     [Onionmasq startWithFd:0
                   stateDir:appSuppDir
                   cacheDir:cacheDir
-                   onEvent:^(NSString *event){
-        NSLog(@"[%@] event: \"%@\"", self.className, event);
-    }];
+                   onEvent:^(id event) {
+        NSLog(@"[Event] %@", event);
+    }
+                     onLog:^(NSString *log) {
+        NSLog(@"[Log] %@", log);
+    }
+    ];
 
     #else
 

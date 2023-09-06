@@ -14,13 +14,19 @@ BOOL initialized;
 
 EventCb eventBlock;
 
+LogCb logBlock;
+
+NSRegularExpression *regex;
+
 
 + (void)startWithFd:(int32_t)fd
            stateDir:(NSURL * _Nullable)stateDir
            cacheDir:(NSURL * _Nullable)cacheDir
-            onEvent:(nullable EventCb)callback
+            onEvent:(nullable EventCb)eventCallback
+              onLog:(nullable LogCb)logCallback
 {
-    eventBlock = callback;
+    eventBlock = eventCallback;
+    logBlock = logCallback;
 
     NSFileManager *fm = NSFileManager.defaultManager;
 
@@ -35,7 +41,10 @@ EventCb eventBlock;
     }
 
     if (!initialized) {
-        init(&eventCb);
+        // Remove ANSI colors.
+        regex = [[NSRegularExpression alloc] initWithPattern:@"\\x1b\\[[0-9;]*m" options:NSRegularExpressionDotMatchesLineSeparators error:nil];
+
+        init(&eventCb, &logCb);
     }
 
     runProxy(fd,
@@ -79,19 +88,33 @@ EventCb eventBlock;
 
 void eventCb(const char * event)
 {
-    if (eventBlock) {
-        NSMutableString *evt = [[NSMutableString alloc] initWithUTF8String:event];
+    if (eventBlock)
+    {
+        NSString *evt = [[NSString alloc] initWithUTF8String:event];
         NSData *data = [evt dataUsingEncoding:NSUTF8StringEncoding];
         NSError *error = nil;
 
         id object = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
 
-        if (error) {
+        if (error)
+        {
             eventBlock(evt);
         }
         else {
             eventBlock(object);
         }
+    }
+}
+
+void logCb(const char * log)
+{
+    if (logBlock)
+    {
+        NSMutableString *msg = [[NSMutableString alloc] initWithUTF8String:log];
+
+        [regex replaceMatchesInString:msg options:0 range:NSMakeRange(0, msg.length) withTemplate:@""];
+
+        logBlock(msg);
     }
 }
 
