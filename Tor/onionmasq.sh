@@ -47,7 +47,7 @@ if [ "${PLATFORM_NAME:-iphoneos}" = "macosx" ]; then
             TARGET_PLATFORM="x86_64-apple-darwin"
         fi
 
-        make "macos-${CONF_LOWER}-${TARGET_PLATFORM}"
+        make "macos-verbose-${TARGET_PLATFORM}"
     fi
 
 elif [ "${PLATFORM_NAME:-iphoneos}" = "iphonesimulator" ]; then

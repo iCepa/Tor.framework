@@ -63,16 +63,27 @@
 
     #ifdef USE_ONIONMASQ
 
-    [Onionmasq startWithFd:0
-                  stateDir:appSuppDir
-                  cacheDir:cacheDir
-                   onEvent:^(id event) {
+    [Onionmasq startWithReader:^{
+        NSLog(@"[Read]");
+
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [Onionmasq receive:@[]];
+        });
+    }
+                        writer:^_Bool(NSData * _Nonnull packet, NSNumber * _Nonnull version) {
+        NSLog(@"[Write] version=%@, packet=%@", version, packet);
+
+        return false;
+    }
+                      stateDir:appSuppDir
+                      cacheDir:cacheDir
+                      pcapFile:nil
+                       onEvent:^(id event) {
         NSLog(@"[Event] %@", event);
     }
-                     onLog:^(NSString *log) {
-        NSLog(@"[Log] %@", log);
-    }
-    ];
+                         onLog:^(NSString * _Nonnull message) {
+        NSLog(@"[Log] %@", message);
+    }];
 
     #else
 

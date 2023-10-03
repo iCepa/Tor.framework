@@ -13,20 +13,29 @@ NS_ASSUME_NONNULL_BEGIN
 @interface Onionmasq : NSObject
 
 
+typedef void (^ReaderCb)(void);
+typedef bool (^WriterCb)(NSData *packet, NSNumber *version);
 typedef void (^EventCb)(id);
-
-typedef void (^LogCb)(NSString *);
+typedef void (^LogCb)(NSString *message);
 
 /**
  Start Onionmasq.
 
- @param fd The file descriptor of the TUN interface.
+ @param readerCallback Called, when Onionmasq wants to read to the TUN interface. After read, this method **needs to call** `receive`!
+ @param writerCallback Called, when Onionmasq wants to write to the TUN interface.
  @param stateDir Directory, where Arti can store its state. OPTIONAL. If not provided, will use \c Library/Application \c Support/org.torproject.Arti.
  @param cacheDir Directory, where Arti can store its caching data. OPTIONAL. If not providied, will use \c Library/Cache/org.torproject.Arti.
+ @param pcapFile File to write a network trace in PCAP format to.
  @param eventCallback Callback, when an event happens.
  @param logCallback Callback, when a log message arrives.
  */
-+ (void)startWithFd:(int32_t)fd stateDir:(NSURL * _Nullable)stateDir cacheDir:(NSURL * _Nullable)cacheDir onEvent:(nullable EventCb)eventCallback onLog:(nullable LogCb)logCallback;
++ (void)startWithReader:(ReaderCb)readerCallback
+                 writer:(WriterCb)writerCallback
+               stateDir:(NSURL * _Nullable)stateDir
+               cacheDir:(NSURL * _Nullable)cacheDir
+               pcapFile:(NSURL * _Nullable)pcapFile
+                onEvent:(nullable EventCb)eventCallback
+                  onLog:(nullable LogCb)logCallback;
 
 /**
  Stop Onionmasq.
@@ -39,6 +48,10 @@ typedef void (^LogCb)(NSString *);
  This causes all new connections after the command is sent to use different circuits to the set currently used.
  */
 + (void)refreshCircuits;
+
+
++ (void)setPcapPath:(NSURL *)path;
+
 
 /**
  Get the current count of received bytes since last reset.
@@ -61,6 +74,13 @@ typedef void (^LogCb)(NSString *);
  You can clear it back to "no country code" by passing in `nil`.
  */
 + (void)setCountryCodeWith:(NSString * _Nullable)countryCode;
+
+/**
+ You need to call this, when your `readerCallback` has read data from the TUN device.
+
+ @param packets Packets of data.
+ */
++ (void)receive:(NSArray<NSData *> *)packets;
 
 
 @end

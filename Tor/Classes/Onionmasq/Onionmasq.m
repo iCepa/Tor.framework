@@ -12,19 +12,26 @@
 
 BOOL initialized;
 
+ReaderCb readerBlock;
+
+WriterCb writerBlock;
+
 EventCb eventBlock;
 
 LogCb logBlock;
 
 NSRegularExpression *regex;
 
-
-+ (void)startWithFd:(int32_t)fd
-           stateDir:(NSURL * _Nullable)stateDir
-           cacheDir:(NSURL * _Nullable)cacheDir
-            onEvent:(nullable EventCb)eventCallback
-              onLog:(nullable LogCb)logCallback
++ (void)startWithReader:(ReaderCb)readerCallback
+                 writer:(WriterCb)writerCallback
+               stateDir:(NSURL * _Nullable)stateDir
+               cacheDir:(NSURL * _Nullable)cacheDir
+               pcapFile:(NSURL * _Nullable)pcapFile
+                onEvent:(nullable EventCb)eventCallback
+                  onLog:(nullable LogCb)logCallback
 {
+    readerBlock = readerCallback;
+    writerBlock = writerCallback;
     eventBlock = eventCallback;
     logBlock = logCallback;
 
@@ -40,14 +47,22 @@ NSRegularExpression *regex;
                      firstObject];
     }
 
+    assert(stateDir.isFileURL);
+    assert(cacheDir.isFileURL);
+
     if (!initialized) {
         // Remove ANSI colors.
         regex = [[NSRegularExpression alloc] initWithPattern:@"\\x1b\\[[0-9;]*m" options:NSRegularExpressionDotMatchesLineSeparators error:nil];
 
         init(&eventCb, &logCb);
+
+        if (pcapFile) {
+            [self setPcapPath:pcapFile];
+        }
     }
 
-    runProxy(fd,
+    runProxy(&readerCb,
+             &writerCb,
              [cacheDir.path cStringUsingEncoding:NSUTF8StringEncoding],
              [stateDir.path cStringUsingEncoding:NSUTF8StringEncoding]);
 }
@@ -56,13 +71,30 @@ NSRegularExpression *regex;
 {
     closeProxy();
 
+    readerBlock = nil;
+    writerBlock = nil;
     eventBlock = nil;
+    logBlock = nil;
 }
 
 + (void)refreshCircuits
 {
     refreshCircuits();
 }
+
++ (void)setPcapPath:(NSURL *)path
+{
+    assert(path.isFileURL);
+
+    NSFileManager *fm = NSFileManager.defaultManager;
+
+    if (![fm fileExistsAtPath:path.path]) {
+        [fm createFileAtPath:path.path contents:nil attributes:nil];
+    }
+
+    setPcapPath([path.path cStringUsingEncoding:NSUTF8StringEncoding]);
+}
+
 
 + (long long)getBytesReceived
 {
@@ -84,7 +116,42 @@ NSRegularExpression *regex;
     setCountryCode([countryCode cStringUsingEncoding:NSUTF8StringEncoding]);
 }
 
++ (void)receive:(NSArray<NSData *> *)packets
+{
+    const uint8_t * pointers[packets.count];
+    unsigned long lens[packets.count];
 
+    for (NSUInteger i = 0; i < packets.count; i++) {
+        pointers[i] = packets[i].bytes;
+        lens[i] = packets[i].length;
+    }
+
+    receive(pointers, lens, packets.count);
+}
+
+
+void readerCb(void)
+{
+    if (readerBlock)
+    {
+        readerBlock();
+    }
+}
+
+bool writerCb(const uint8_t *packet, size_t len)
+{
+    if (writerBlock)
+    {
+        NSData *data = [[NSData alloc] initWithBytes:packet length:len];
+
+        NSNumber *v = [[NSNumber alloc] initWithShort:((const unsigned char *)data.bytes)[0] >> 4];
+
+        return writerBlock(data, v);
+    }
+    else {
+        return false;
+    }
+}
 
 void eventCb(const char * event)
 {
