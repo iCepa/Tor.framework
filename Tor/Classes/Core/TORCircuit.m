@@ -106,6 +106,11 @@ static NSDateFormatter *_timestampFormatter;
     return @"HS_SERVICE_REND";
 }
 
++ (NSString *)purposeHsVanguards
+{
+    return @"HS_VANGUARDS";
+}
+
 + (NSString *)purposeTesting
 {
     return @"TESTING";
@@ -119,6 +124,16 @@ static NSDateFormatter *_timestampFormatter;
 + (NSString *)purposeMeasureTimeout
 {
     return @"MEASURE_TIMEOUT";
+}
+
++ (NSString *)purposeConfluxLinked
+{
+    return @"CONFLUX_LINKED";
+}
+
++ (NSString *)purposeConfluxUnlinked
+{
+    return @"CONFLUX_UNLINKED";
 }
 
 + (NSString *)hsStateHsciConnecting

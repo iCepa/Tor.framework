@@ -5,7 +5,9 @@
 //  Created by Benjamin Erhart on 11.12.19.
 //
 //  Documentation this class is modelled after:
-//  https://torproject.gitlab.io/torspec/control-spec.html#circuit-status-changed
+
+//  https://gitlab.torproject.org/tpo/core/torspec/-/raw/main/control-spec.txt
+//  Chapter 4.1.1 Circuit status changed
 
 #import <Foundation/Foundation.h>
 #import <Tor/TORNode.h>
@@ -100,6 +102,11 @@ NS_SWIFT_NAME(TorCircuit)
 @property (class, readonly) NSString *purposeHsServiceRend;
 
 /**
+ Circuit created ahead of time when using HS vanguards, and later repurposed as needed.
+ */
+@property (class, readonly) NSString *purposeHsVanguards;
+
+/**
  Reachability-testing circuit; carries no traffic.
  */
 @property (class, readonly) NSString *purposeTesting;
@@ -113,6 +120,20 @@ NS_SWIFT_NAME(TorCircuit)
  Circuit being kept around to see how long it takes.
  */
 @property (class, readonly) NSString *purposeMeasureTimeout;
+
+/**
+ Circuit is part of a conflux multi-path circuit set.
+
+ https://tpo.pages.torproject.net/core/doc/tor/structcircuit__t.html#a7826adee26af5def133c43d2fe5f83fa
+ */
+@property (class, readonly) NSString *purposeConfluxLinked;
+
+/**
+ Circuit is in the pending pool usable in future circuit sets.
+
+ https://tpo.pages.torproject.net/core/doc/tor/structcircuit__t.html#acabcbac5225591a5b7731a6994f438e4
+ */
+@property (class, readonly) NSString *purposeConfluxUnlinked;
 
 /**
  Client-side introduction-point circuit state: Connecting to intro point.
