@@ -14,7 +14,6 @@ PATH=$PATH:/usr/local/bin:/usr/local/opt/gettext/bin:/usr/local/opt/automake/bin
 
 ## Apply patches:
 git apply --quiet ../mmap-cache.patch
-git apply --quiet ../remove-assertion.patch 
 
 # If there is a space in BUILT_PRODUCTS_DIR, make a symlink without a space and use that.
 if [[ "${BUILT_PRODUCTS_DIR}" =~ \  ]]; then
