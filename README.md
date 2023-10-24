@@ -43,7 +43,7 @@ If you use dynamic frameworks, use the root spec:
 
 ```ruby
 use_frameworks!
-pod 'Tor', '~> 407.13'
+pod 'Tor', '~> 408'
 ```
 
 (or `Tor/GeoIP` - see below.)
