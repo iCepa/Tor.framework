@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <Tor/TORCircuit.h>
+#import "TORCircuit.h"
 
 #ifdef __cplusplus
 #define TOR_EXTERN extern "C" __attribute__((visibility ("default")))

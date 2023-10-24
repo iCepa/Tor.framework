@@ -22,10 +22,27 @@ Pod::Spec.new do |m|
   m.ios.deployment_target = '12.0'
   m.macos.deployment_target = '10.13'
 
+  script = <<-ENDSCRIPT
+cd "${PODS_TARGET_SRCROOT}/Tor/%1$s"
+../%1$s.sh
+ENDSCRIPT
+
   m.subspec 'Core' do |s|
+    s.requires_arc = true
+
+    s.source_files = 'Tor/Classes/Core/**/*'
+  end
+
+  m.subspec 'CTor' do |s|
+    s.dependency 'Tor/Core'
+
+    s.requires_arc = true
+
+    s.source_files = 'Tor/Classes/CTor/**/*'
+
     s.pod_target_xcconfig = {
       'DEFINES_MODULE' => 'YES',
-      'HEADER_SEARCH_PATHS' => '$(inherited) "${PODS_TARGET_SRCROOT}/Tor/tor" "${PODS_TARGET_SRCROOT}/Tor/tor/src" "${PODS_TARGET_SRCROOT}/Tor/openssl/include"   "${BUILT_PRODUCTS_DIR}/openssl" "${PODS_TARGET_SRCROOT}/Tor/libevent/include"',
+      'HEADER_SEARCH_PATHS' => '$(inherited) "${PODS_TARGET_SRCROOT}/Tor/tor" "${PODS_TARGET_SRCROOT}/Tor/tor/src" "${PODS_TARGET_SRCROOT}/Tor/openssl/include" "${BUILT_PRODUCTS_DIR}/openssl" "${PODS_TARGET_SRCROOT}/Tor/libevent/include"',
       'OTHER_LDFLAGS' => '$(inherited) -L"${BUILT_PRODUCTS_DIR}/Tor" -l"z" -l"lzma" -l"crypto" -l"ssl" -l"event_core" -l"event_extra" -l"event_pthreads" -l"event" -l"tor"'
     }
 
@@ -41,11 +58,6 @@ Pod::Spec.new do |m|
       'HEADER_SEARCH_PATHS' => '$(inherited) "${PODS_ROOT}/Headers/Public"',
       'OTHER_LDFLAGS' => '$(inherited) -l"z" -l"lzma" -l"crypto" -l"ssl" -l"event_core" -l"event_extra" -l"event_pthreads" -l"event" -l"tor"'
     }
-
-    script = <<-ENDSCRIPT
-cd "${PODS_TARGET_SRCROOT}/Tor/%1$s"
-../%1$s.sh
-ENDSCRIPT
 
     s.script_phases = [
       {
@@ -79,26 +91,23 @@ ENDSCRIPT
         :script => <<-ENDSCRIPT
 mkdir -p "${PODS_ROOT}/Headers/Public/Tor"
 cd "${PODS_ROOT}/Headers/Public/Tor"
-find "${PODS_TARGET_SRCROOT}/Tor/Classes" -name "*.h" -maxdepth 1 -exec ln -s {} \\;
+find "${PODS_TARGET_SRCROOT}/Tor/Classes/Core" -name "*.h" -maxdepth 1 -exec ln -s {} \\;
+find "${PODS_TARGET_SRCROOT}/Tor/Classes/CTor" -name "*.h" -maxdepth 1 -exec ln -s {} \\;
 ENDSCRIPT
       }
     ]
-
-    s.requires_arc = true
-
-    s.source_files = 'Tor/Classes/**/*'
 
     s.preserve_paths = 'Tor/include', 'Tor/libevent', 'Tor/libevent.sh', 'Tor/openssl', 'Tor/openssl.sh', 'Tor/tor', 'Tor/tor.sh', 'Tor/xz', 'Tor/xz.sh'
   end
 
   m.subspec 'GeoIP' do |s|
-    s.dependency 'Tor/Core'
+    s.dependency 'Tor/CTor'
 
     s.resource_bundles = {
       'GeoIP' => ['Tor/tor/src/config/geoip', 'Tor/tor/src/config/geoip6']
     }
   end
 
-  m.default_subspecs = 'Core'
+  m.default_subspecs = 'CTor'
 
 end

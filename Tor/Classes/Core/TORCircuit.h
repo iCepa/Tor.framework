@@ -10,7 +10,7 @@
 //  Chapter 4.1.1 Circuit status changed
 
 #import <Foundation/Foundation.h>
-#import <Tor/TORNode.h>
+#import "TORNode.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
