@@ -1,7 +1,7 @@
 Pod::Spec.new do |m|
 
   m.name             = 'Tor'
-  m.version          = '408.7.2'
+  m.version          = '408.9.1'
   m.summary          = 'Tor.framework is the easiest way to embed Tor in your iOS application.'
   m.description      = 'Tor.framework is the easiest way to embed Tor in your iOS application.'
 
