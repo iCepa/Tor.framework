@@ -67,7 +67,7 @@ cd "${PODS_TARGET_SRCROOT}/Tor/%1$s"
 
     s.pod_target_xcconfig = {
       'HEADER_SEARCH_PATHS' => '$(inherited) "${PODS_TARGET_SRCROOT}/Tor/onionmasq"',
-      'OTHER_LDFLAGS' => '$(inherited) -L"${BUILT_PRODUCTS_DIR}/Tor" -l"onionmasq_apple" -l"z" -l"lzma"',
+      'OTHER_LDFLAGS' => '$(inherited) -L"${BUILT_PRODUCTS_DIR}/Tor" -l"onionmasq_apple"',
     }
 
     s.user_target_xcconfig = {
@@ -76,12 +76,6 @@ cd "${PODS_TARGET_SRCROOT}/Tor/%1$s"
     }
 
     s.script_phases = [
-    {
-      :name => 'Build LZMA',
-      :execution_position => :before_compile,
-      :output_files => ['lzma-always-execute-this-but-supress-warning'],
-      :script => sprintf(script, "xz")
-    },
     {
       :name => 'Build Onionmasq',
       :execution_position => :before_compile,
