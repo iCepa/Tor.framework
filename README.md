@@ -179,6 +179,11 @@ configuration.geoipFile = NSBundle.geoIpBundle.geoipFile;
 configuration.geoip6File = NSBundle.geoIpBundle.geoip6File;
 ```
 
+## Further reading
+
+https://tordev.guardianproject.info
+
+
 ## Authors
 
 - Conrad Kramer, conrad@conradkramer.com
