@@ -15,4 +15,4 @@
 	url = https://gitlab.com/guardianproject/arti-mobile-ex.git
 [submodule "Tor/onionmasq"]
 	path = Tor/onionmasq
-	url = https://gitlab.torproject.org/tla/onionmasq.git
+	url = https://gitlab.torproject.org/tpo/core/onionmasq.git
