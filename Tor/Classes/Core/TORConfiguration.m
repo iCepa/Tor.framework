@@ -11,27 +11,32 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation TORConfiguration
 
-- (NSDictionary *)options {
-    if (!_options) _options = [NSDictionary new];
-    
+- (NSMutableDictionary *)options
+{
+    if (!_options) _options = [NSMutableDictionary new];
+
     return _options;
 }
 
-- (NSArray *)arguments {
-    if (!_arguments) _arguments = [NSArray new];
+- (NSMutableArray *)arguments
+{
+    if (!_arguments) _arguments = [NSMutableArray new];
     
     return _arguments;
 }
 
-- (nullable NSURL *)controlPortFile {
+- (nullable NSURL *)controlPortFile
+{
     return [self.dataDirectory URLByAppendingPathComponent:@"controlport"];
 }
 
-- (nullable NSURL *)serviceAuthDirectory {
+- (nullable NSURL *)serviceAuthDirectory
+{
     return [self.hiddenServiceDirectory URLByAppendingPathComponent:@"authorized_clients"];
 }
 
-- (BOOL)isLocked {
+- (BOOL)isLocked
+{
     NSURL *url = [self.dataDirectory URLByAppendingPathComponent:@"lock"];
     NSString *path = url.path;
 
@@ -40,7 +45,8 @@ NS_ASSUME_NONNULL_BEGIN
     return [NSFileManager.defaultManager fileExistsAtPath:path];
 }
 
-- (nullable NSData *)cookie {
+- (nullable NSData *)cookie
+{
     NSURL *url = [self.dataDirectory URLByAppendingPathComponent:@"control_auth_cookie"];
 
     if (!url || !url.isFileURL) return nil;
@@ -48,7 +54,31 @@ NS_ASSUME_NONNULL_BEGIN
     return [[NSData alloc] initWithContentsOfURL:url];
 }
 
-- (NSArray<NSString *> *)compile {
+- (NSString *)valueOf:(NSString *)key
+{
+    for (NSString *dictKey in self.options.allKeys) {
+        if ([dictKey caseInsensitiveCompare:key] == NSOrderedSame) {
+            return self.options[dictKey];
+        }
+    }
+
+    key = [[NSString alloc] initWithFormat:@"--%@", key];
+
+    for (NSString *arg in self.arguments) {
+        if ([arg caseInsensitiveCompare:key] == NSOrderedSame) {
+            NSUInteger i = [self.arguments indexOfObject:arg];
+
+            if (i + 1 < self.arguments.count) {
+                return self.arguments[i + 1];
+            }
+        }
+    }
+
+    return nil;
+}
+
+- (NSArray<NSString *> *)compile
+{
     NSMutableArray<NSString *> *arguments = [NSMutableArray new];
 
     if (self.ignoreMissingTorrc) {

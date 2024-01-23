@@ -35,9 +35,10 @@ NS_SWIFT_NAME(TorConfiguration)
 @property (nonatomic, readonly) BOOL isLocked;
 @property (nonatomic, copy, nullable, readonly) NSData *cookie;
 
-@property (nonatomic, copy, null_resettable) NSDictionary<NSString *, NSString *> *options;
-@property (nonatomic, copy, null_resettable) NSArray<NSString *> *arguments;
+@property (nonatomic, copy, null_resettable) NSMutableDictionary<NSString *, NSString *> *options;
+@property (nonatomic, copy, null_resettable) NSMutableArray<NSString *> *arguments;
 
+- (NSString *)valueOf:(NSString *)key;
 - (NSArray<NSString *> *)compile;
 
 @end
