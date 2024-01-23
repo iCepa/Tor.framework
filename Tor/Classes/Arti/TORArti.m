@@ -24,6 +24,8 @@ Completed completedBlock;
                    logfile:(NSURL * _Nullable)logfile
                   stateDir:(NSURL * _Nullable)stateDir
                   cacheDir:(NSURL * _Nullable)cacheDir
+           obfs4proxyPath:(NSURL * _Nullable)obfs4proxyPath
+                    bridge:(NSString * _Nullable)bridge
                  completed:(nullable void (^)(void))completed
 {
     logfilePath = logfile.path;
@@ -52,17 +54,35 @@ Completed completedBlock;
 
     start_arti([stateDir.path cStringUsingEncoding:NSUTF8StringEncoding],
                [cacheDir.path cStringUsingEncoding:NSUTF8StringEncoding],
+               [obfs4proxyPath.path cStringUsingEncoding:NSUTF8StringEncoding],
+               [bridge cStringUsingEncoding:NSUTF8StringEncoding],
                (int)socksPort, (int)dnsPort, &loggingCb);
 }
 
 + (void)startWithConfiguration:(TORConfiguration * _Nonnull)configuration
                      completed:(nullable void (^)(void))completed
 {
+    NSURL *obfs4proxyPath = nil;
+    NSString *bridge = nil;
+
+    if ([configuration valueOf:@"UseBridges"]) {
+        NSString *ctp = [configuration valueOf:@"ClientTransportPlugin"];
+        NSArray* pieces = [ctp componentsSeparatedByCharactersInSet:NSCharacterSet.whitespaceCharacterSet];
+
+        if (pieces.count > 1 && ((NSString *)pieces[1]).length > 0) {
+            obfs4proxyPath = [[NSURL alloc] initFileURLWithPath:pieces[1] isDirectory:NO];
+
+            bridge = [configuration valueOf:@"Bridge"];
+        }
+    }
+
     [self startWithSocksPort:configuration.socksPort
                      dnsPort:configuration.dnsPort
                      logfile:configuration.logfile
                     stateDir:configuration.dataDirectory
                     cacheDir:configuration.cacheDirectory
+              obfs4proxyPath:obfs4proxyPath
+                      bridge:bridge
                    completed:completed];
 }
 
