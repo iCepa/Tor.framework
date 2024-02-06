@@ -60,6 +60,12 @@ Every contribution to fix this is welcome!
 
 (or `Tor/GeoIP` - see below.)
 
+If you check out this repository directly, you will also need to fetch the submodules:
+
+`git submodule update --init --recursive`
+
+If you use it as a normal CocoaPods dependency, that will be done by CocoaPods.
+
 
 ## Preparing a new release
 
