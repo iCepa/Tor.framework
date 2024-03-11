@@ -117,6 +117,13 @@ Check build output in the Report Navigator. (Last tab in the left pane.)
 
 ## Usage
 
+### All-in-one `TorManager`
+
+For a headache-free start into the world of Tor on iOS and macOS, check out
+the new [`TorManager` project](https://github.com/tladesignz/TorManager)!
+
+### Do-it-yourself
+
 Starting an instance of Tor involves using three classes: `TORThread`, `TORConfiguration` and `TORController`.
 
 Here is an example of integrating Tor with `NSURLSession`:
