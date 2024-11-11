@@ -1,0 +1,87 @@
+From 4759350b9a020d735506479e2d51c76d38566017 Mon Sep 17 00:00:00 2001
+From: Waldemar Zimpel <w.zimpel@dev.utilizer.de>
+Date: Wed, 30 Oct 2024 02:51:20 +0100
+Subject: [PATCH] Fix: Use FREE_AND_NULL() for releasing workqueue resources
+
+See issue #40989
+---
+ changes/ticket40989        |  4 ++++
+ src/lib/evloop/workqueue.c | 14 +++++++++-----
+ src/lib/evloop/workqueue.h |  4 +++-
+ 3 files changed, 16 insertions(+), 6 deletions(-)
+ create mode 100644 changes/ticket40989
+
+diff --git a/changes/ticket40989 b/changes/ticket40989
+new file mode 100644
+index 0000000000..26e4b030c6
+--- /dev/null
++++ b/changes/ticket40989
+@@ -0,0 +1,4 @@
++  o Minor bugfixes (memory):
++    - Fix a pointer free that wasn't set to NULL afterwards which could be
++      reused by calling back in the free all function. Fixes bug 40989; bugfix
++      on 0.4.8.13.
+diff --git a/src/lib/evloop/workqueue.c b/src/lib/evloop/workqueue.c
+index 20b611f7cb..17ab44e3ab 100644
+--- a/src/lib/evloop/workqueue.c
++++ b/src/lib/evloop/workqueue.c
+@@ -143,8 +143,12 @@ typedef struct workerthread_t {
+ } workerthread_t;
+ 
+ static void queue_reply(replyqueue_t *queue, workqueue_entry_t *work);
+-static void workerthread_free(workerthread_t *thread);
+-static void replyqueue_free(replyqueue_t *queue);
++static void workerthread_free_(workerthread_t *thread);
++#define workerthread_free(thread) \
++  FREE_AND_NULL(workerthread_t, workerthread_free_, (thread))
++static void replyqueue_free_(replyqueue_t *queue);
++#define replyqueue_free(queue) \
++  FREE_AND_NULL(replyqueue_t, replyqueue_free_, (queue))
+ 
+ /** Allocate and return a new workqueue_entry_t, set up to run the function
+  * <b>fn</b> in the worker thread, and <b>reply_fn</b> in the main
+@@ -369,7 +373,7 @@ workerthread_new(int32_t lower_priority_chance,
+  * Free up the resources allocated by a worker thread.
+  */
+ static void
+-workerthread_free(workerthread_t *thread)
++workerthread_free_(workerthread_t *thread)
+ {
+   tor_free(thread);
+ }
+@@ -589,7 +593,7 @@ threadpool_new(int n_threads,
+  * Free up the resources allocated by worker threads, worker thread pool, ...
+  */
+ void
+-threadpool_free(threadpool_t *pool)
++threadpool_free_(threadpool_t *pool)
+ {
+   if (!pool)
+     return;
+@@ -652,7 +656,7 @@ replyqueue_new(uint32_t alertsocks_flags)
+  * Free up the resources allocated by a reply queue.
+  */
+ static void
+-replyqueue_free(replyqueue_t *queue)
++replyqueue_free_(replyqueue_t *queue)
+ {
+   if (!queue)
+     return;
+diff --git a/src/lib/evloop/workqueue.h b/src/lib/evloop/workqueue.h
+index 9ed504249a..cd892a14c8 100644
+--- a/src/lib/evloop/workqueue.h
++++ b/src/lib/evloop/workqueue.h
+@@ -58,7 +58,9 @@ threadpool_t *threadpool_new(int n_threads,
+                              void *(*new_thread_state_fn)(void*),
+                              void (*free_thread_state_fn)(void*),
+                              void *arg);
+-void threadpool_free(threadpool_t *tp);
++void threadpool_free_(threadpool_t *tp);
++#define threadpool_free(pool) \
++  FREE_AND_NULL(threadpool_t, threadpool_free_, (pool))
+ replyqueue_t *threadpool_get_replyqueue(threadpool_t *tp);
+ 
+ replyqueue_t *replyqueue_new(uint32_t alertsocks_flags);
+-- 
+GitLab
+

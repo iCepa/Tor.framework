@@ -71,6 +71,7 @@
 		A00545632796CA6700C9F635 /* TorStatic.podspec */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text; name = TorStatic.podspec; path = ../TorStatic.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A0463DB82AA0DB0700AC9925 /* onionmasq.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = onionmasq.sh; path = ../Tor/onionmasq.sh; sourceTree = "<group>"; };
 		A07DA5B42791AED000D62827 /* .gitmodules */ = {isa = PBXFileReference; lastKnownFileType = text; name = .gitmodules; path = ../.gitmodules; sourceTree = "<group>"; };
+		A08EE8202CE22C290006BEDD /* free-and-null.patch */ = {isa = PBXFileReference; lastKnownFileType = text; name = "free-and-null.patch"; path = "../Tor/free-and-null.patch"; sourceTree = SOURCE_ROOT; };
 		A0C582562AE8FCA000A81084 /* Arti.podspec */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text; name = Arti.podspec; path = ../Arti.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A0C981E32A9F52D100E265EE /* mmap-cache.patch */ = {isa = PBXFileReference; lastKnownFileType = text; name = "mmap-cache.patch"; path = "../Tor/mmap-cache.patch"; sourceTree = "<group>"; };
 		A0E5E59A298BC74000727C4F /* arti.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = arti.sh; path = ../Tor/arti.sh; sourceTree = "<group>"; };
@@ -217,6 +218,7 @@
 				A0E5E59A298BC74000727C4F /* arti.sh */,
 				A0463DB82AA0DB0700AC9925 /* onionmasq.sh */,
 				A0C981E32A9F52D100E265EE /* mmap-cache.patch */,
+				A08EE8202CE22C290006BEDD /* free-and-null.patch */,
 			);
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
