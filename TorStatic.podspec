@@ -17,7 +17,7 @@ Pod::Spec.new do |m|
                          :branch => 'pure_pod',
                          :tag => "v#{m.version}",
                          :submodules => true }
-  m.social_media_url = 'https://twitter.com/tladesignz'
+  m.social_media_url = 'https://chaos.social/@tla'
 
   m.ios.deployment_target = '12.0'
   m.macos.deployment_target = '10.13'
