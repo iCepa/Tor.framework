@@ -43,7 +43,7 @@ fi
 
 if [[ "${CONFIGURATION}" = "Debug" ]]; then
     DEBUG_CFLAGS="-g -O0"
-    DEBUG_FLAGS="--enable-verbose-debug"
+    DEBUG_FLAGS="--enable-debug"
 else
     DEBUG_FLAGS=""
 fi
