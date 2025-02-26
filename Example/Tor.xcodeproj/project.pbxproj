@@ -324,7 +324,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				CLASSPREFIX = TOR;
-				LastUpgradeCheck = 1600;
+				LastUpgradeCheck = 1620;
 				ORGANIZATIONNAME = "Benjamin Erhart";
 				TargetAttributes = {
 					6003F5AD195388D20070C39A = {
