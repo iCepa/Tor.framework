@@ -222,6 +222,7 @@
 				A0463DB82AA0DB0700AC9925 /* onionmasq.sh */,
 				A0C981E32A9F52D100E265EE /* mmap-cache.patch */,
 				A08EE8202CE22C290006BEDD /* free-and-null.patch */,
+				A091B5002DEDF93000071F53 /* build-xcframework.sh */,
 			);
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
