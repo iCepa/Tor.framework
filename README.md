@@ -34,7 +34,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 Install build tools via [Homebrew](https://brew.sh):
 
 ```sh
-brew install automake autoconf libtool gettext
+brew bundle
 ```
 
 Tor is available through [CocoaPods](https://cocoapods.org). To install
