@@ -3,21 +3,19 @@
 PATH=$PATH:/usr/local/bin:/usr/local/opt/gettext/bin:/usr/local/opt/automake/bin:/usr/local/opt/aclocal/bin:/opt/homebrew/bin
 
 XZ_VERSION="v5.8.1"
-OPENSSL_VERSION="openssl-3.4.1"
+OPENSSL_VERSION="openssl-3.5.1"
 LIBEVENT_VERSION="release-2.1.12-stable"
-TOR_VERSION="tor-0.4.8.16"
+TOR_VERSION="tor-0.4.8.17"
 
 cd "$(dirname "$0")"
 ROOT="$(pwd -P)"
 
 DEBUG=""
-LZMA="yes"
 
 while getopts dl flag
 do
     case "$flag" in
         d) DEBUG="1";;
-        l) LZMA="no";;
     esac
 done
 
@@ -34,10 +32,6 @@ build_liblzma() {
     SDK=$1
     ARCH=$2
     MIN=$3
-
-    if [ "$LZMA" != "yes" ]; then
-        return
-    fi
 
     SOURCE="$BUILDDIR/xz"
     LOG="$BUILDDIR/liblzma-$SDK-$ARCH.log"
@@ -217,9 +211,19 @@ build_libtor() {
     SDK=$1
     ARCH=$2
     MIN=$3
+    NO_LZMA=$4
 
     SOURCE="$BUILDDIR/tor"
-    LOG="$BUILDDIR/libtor-$SDK-$ARCH.log"
+
+    if [ -z "$NO_LZMA" ]; then
+        LOG="$BUILDDIR/libtor-$SDK-$ARCH.log"
+        LZMA="yes"
+        DEST="$BUILDDIR/$SDK/libtor-$ARCH"
+    else
+        LOG="$BUILDDIR/libtor-nolzma-$SDK-$ARCH.log"
+        LZMA="no"
+        DEST="$BUILDDIR/$SDK/libtor-nolzma-$ARCH"
+    fi
 
     if [ ! -d "$SOURCE" ]; then
         echo "- Check out Tor project"
@@ -228,7 +232,11 @@ build_libtor() {
         git clone --recursive --shallow-submodules --depth 1 --branch "$TOR_VERSION" https://gitlab.torproject.org/tpo/core/tor.git >> "$LOG" 2>&1
     fi
 
-    echo "- Build libtor for $ARCH ($SDK)"
+    if [ -z "$NO_LZMA" ]; then
+        echo "- Build libtor for $ARCH ($SDK)"
+    else
+        echo "- Build libtor-nolzma for $ARCH ($SDK)"
+    fi
 
     cd "$SOURCE"
 
@@ -250,7 +258,6 @@ build_libtor() {
 
     CLANG="$(xcrun -f --sdk ${SDK} clang)"
     SDKPATH="$(xcrun --sdk ${SDK} --show-sdk-path)"
-    DEST="$BUILDDIR/$SDK/libtor-$ARCH"
 
     ./configure \
         --enable-silent-rules \
@@ -307,10 +314,6 @@ fatten() {
     SDK=$2
     LIB=${3:-$NAME}
 
-    if [ "$LZMA" != "yes" -a "$NAME" == "liblzma" ]; then
-        return
-    fi
-
     echo "- Fatten $LIB in $NAME ($SDK)"
 
     mkdir -p "$BUILDDIR/$SDK/$NAME/lib"
@@ -324,9 +327,16 @@ fatten() {
 create_framework() {
     SDK=$1
     IS_FAT=$2
+    NO_LZMA=$3
 
-    rm -rf "$BUILDDIR/$SDK/tor.framework"
-    mkdir -p "$BUILDDIR/$SDK/tor.framework/Headers"
+    if [ -z "$NO_LZMA" ]; then
+        NAME="tor"
+    else
+        NAME="tor-nolzma"
+    fi
+
+    rm -rf "$BUILDDIR/$SDK/$NAME.framework"
+    mkdir -p "$BUILDDIR/$SDK/$NAME.framework/Headers"
 
     if [ -z "$IS_FAT" ]; then
         echo "- Create framework for $SDK"
@@ -338,33 +348,39 @@ create_framework() {
         POSTFIX=""
     fi
 
-    LIBS=("$BUILDDIR/$SDK/libssl$POSTFIX/lib/libssl.a" \
-        "$BUILDDIR/$SDK/libssl$POSTFIX/lib/libcrypto.a" \
-        "$BUILDDIR/$SDK/libevent$POSTFIX/lib/libevent.a" \
-        "$BUILDDIR/$SDK/libtor$POSTFIX/lib/libtor.a")
-
-    if [ "$LZMA" == "yes" ]; then
-        LIBS=("$BUILDDIR/$SDK/liblzma$POSTFIX/lib/liblzma.a" "${LIBS[@]}")
+    if [ -z "$NO_LZMA" ]; then
+        LIBS=("$BUILDDIR/$SDK/libssl$POSTFIX/lib/libssl.a" \
+            "$BUILDDIR/$SDK/libssl$POSTFIX/lib/libcrypto.a" \
+            "$BUILDDIR/$SDK/libevent$POSTFIX/lib/libevent.a" \
+            "$BUILDDIR/$SDK/liblzma$POSTFIX/lib/liblzma.a" \
+            "$BUILDDIR/$SDK/libtor$POSTFIX/lib/libtor.a")
+    else
+        LIBS=("$BUILDDIR/$SDK/libssl$POSTFIX/lib/libssl.a" \
+            "$BUILDDIR/$SDK/libssl$POSTFIX/lib/libcrypto.a" \
+            "$BUILDDIR/$SDK/libevent$POSTFIX/lib/libevent.a" \
+            "$BUILDDIR/$SDK/libtor-nolzma$POSTFIX/lib/libtor.a")
     fi
 
-    libtool -static -o "$BUILDDIR/$SDK/tor.framework/tor" "${LIBS[@]}"
+    libtool -static -o "$BUILDDIR/$SDK/$NAME.framework/$NAME" "${LIBS[@]}"
 
     HEADERS=("$BUILDDIR/$SDK/libssl-arm64/include"/* \
         "$BUILDDIR/$SDK/libevent-arm64/include"/* \
         "$BUILDDIR/$SDK/libtor-arm64/include"/*)
 
-    if [ "$LZMA" == "yes" ]; then
+    if [ ! -z "$NO_LZMA" ]; then
         HEADERS=("$BUILDDIR/$SDK/liblzma-arm64/include"/* "${HEADERS[@]}")
     fi
 
-    cp -r "${HEADERS[@]}" "$BUILDDIR/$SDK/tor.framework/Headers"
+    cp -r "${HEADERS[@]}" "$BUILDDIR/$SDK/$NAME.framework/Headers"
 }
 
 build_liblzma       iphoneos            arm64           12.0
 build_libssl        iphoneos            arm64           12.0
 build_libevent      iphoneos            arm64           12.0
 build_libtor        iphoneos            arm64           12.0
+build_libtor        iphoneos            arm64           12.0    nolzma
 create_framework    iphoneos
+create_framework    iphoneos            ""              nolzma
 
 build_liblzma       iphonesimulator     arm64           12.0
 build_liblzma       iphonesimulator     x86_64          12.0
@@ -379,7 +395,11 @@ fatten              libevent            iphonesimulator
 build_libtor        iphonesimulator     arm64           12.0
 build_libtor        iphonesimulator     x86_64          12.0
 fatten              libtor              iphonesimulator
+build_libtor        iphonesimulator     arm64           12.0    nolzma
+build_libtor        iphonesimulator     x86_64          12.0    nolzma
+fatten              libtor-nolzma       iphonesimulator libtor
 create_framework    iphonesimulator     fat
+create_framework    iphonesimulator     fat             nolzma
 
 build_liblzma       macosx              arm64           10.13
 build_liblzma       macosx              x86_64          10.13
@@ -394,17 +414,27 @@ fatten              libevent            macosx
 build_libtor        macosx              arm64           10.13
 build_libtor        macosx              x86_64          10.13
 fatten              libtor              macosx
+build_libtor        macosx              arm64           10.13    nolzma
+build_libtor        macosx              x86_64          10.13    nolzma
+fatten              libtor-nolzma       macosx          libtor
 create_framework    macosx              fat
+create_framework    macosx              fat             nolzma
 
 echo "- Create xcframework"
 
-rm -rf "$ROOT/tor.xcframework"
+rm -rf "$ROOT/tor.xcframework" "$ROOT/tor-nolzma.xcframework"
 
 xcodebuild -create-xcframework \
     -framework "$BUILDDIR/iphoneos/tor.framework" \
     -framework "$BUILDDIR/iphonesimulator/tor.framework" \
     -framework "$BUILDDIR/macosx/tor.framework" \
     -output "$ROOT/tor.xcframework"
+
+xcodebuild -create-xcframework \
+    -framework "$BUILDDIR/iphoneos/tor-nolzma.framework" \
+    -framework "$BUILDDIR/iphonesimulator/tor-nolzma.framework" \
+    -framework "$BUILDDIR/macosx/tor-nolzma.framework" \
+    -output "$ROOT/tor-nolzma.xcframework"
 
 if [ -z $DEBUG ]; then
     rm -rf "$BUILDDIR"

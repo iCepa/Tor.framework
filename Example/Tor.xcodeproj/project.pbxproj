@@ -68,10 +68,9 @@
 		8AA26438ED97EA21E1B6572D /* Pods-Tor-Example-Mac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tor-Example-Mac.release.xcconfig"; path = "Target Support Files/Pods-Tor-Example-Mac/Pods-Tor-Example-Mac.release.xcconfig"; sourceTree = "<group>"; };
 		90700F7B59D5C0641E3250C1 /* Pods-Tor_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tor_Example.debug.xcconfig"; path = "Target Support Files/Pods-Tor_Example/Pods-Tor_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		93A4EA262BB0B20934ED644E /* Tor.podspec */ = {isa = PBXFileReference; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Tor.podspec; path = ../Tor.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A00545632796CA6700C9F635 /* TorStatic.podspec */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text; name = TorStatic.podspec; path = ../TorStatic.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A0463DB82AA0DB0700AC9925 /* onionmasq.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = onionmasq.sh; path = ../Tor/onionmasq.sh; sourceTree = "<group>"; };
+		A05D84CE2E180D4200D15D76 /* download.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = download.sh; path = ../Tor/download.sh; sourceTree = SOURCE_ROOT; };
 		A07DA5B42791AED000D62827 /* .gitmodules */ = {isa = PBXFileReference; lastKnownFileType = text; name = .gitmodules; path = ../.gitmodules; sourceTree = "<group>"; };
-		A08EE8202CE22C290006BEDD /* free-and-null.patch */ = {isa = PBXFileReference; lastKnownFileType = text; name = "free-and-null.patch"; path = "../Tor/free-and-null.patch"; sourceTree = SOURCE_ROOT; };
 		A0912FD12DEE026600071F53 /* Brewfile */ = {isa = PBXFileReference; lastKnownFileType = text; name = Brewfile; path = ../Brewfile; sourceTree = SOURCE_ROOT; };
 		A091B5002DEDF93000071F53 /* build-xcframework.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "build-xcframework.sh"; path = "../build-xcframework.sh"; sourceTree = SOURCE_ROOT; };
 		A0C582562AE8FCA000A81084 /* Arti.podspec */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text; name = Arti.podspec; path = ../Arti.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -83,10 +82,6 @@
 		A0F008FA27906DBA0073D36D /* TORConfigurationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TORConfigurationTests.m; sourceTree = "<group>"; };
 		A0F008FB27906DBA0073D36D /* TORControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TORControllerTests.m; sourceTree = "<group>"; };
 		A0F008FE27906F620073D36D /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; name = .gitignore; path = ../.gitignore; sourceTree = "<group>"; };
-		A0F0090127906F970073D36D /* tor.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = tor.sh; path = ../Tor/tor.sh; sourceTree = "<group>"; };
-		A0F0090227906F970073D36D /* xz.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = xz.sh; path = ../Tor/xz.sh; sourceTree = "<group>"; };
-		A0F0090327906F970073D36D /* libevent.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = libevent.sh; path = ../Tor/libevent.sh; sourceTree = "<group>"; };
-		A0F0090427906F970073D36D /* openssl.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = openssl.sh; path = ../Tor/openssl.sh; sourceTree = "<group>"; };
 		A0F00909279070B40073D36D /* Tor-Example-Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tor-Example-Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0F0090B279070B40073D36D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A0F0090C279070B40073D36D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -207,21 +202,16 @@
 				A0912FD12DEE026600071F53 /* Brewfile */,
 				93A4EA262BB0B20934ED644E /* Tor.podspec */,
 				A0C582562AE8FCA000A81084 /* Arti.podspec */,
-				A00545632796CA6700C9F635 /* TorStatic.podspec */,
 				3369E201AA8D44290EFDB264 /* README.md */,
 				591053441A46E47D764CDDAB /* LICENSE */,
 				A0F008F827906CA30073D36D /* Podfile */,
 				A0F008F727906CA30073D36D /* Podfile.lock */,
 				A0F008FE27906F620073D36D /* .gitignore */,
 				A07DA5B42791AED000D62827 /* .gitmodules */,
-				A0F0090227906F970073D36D /* xz.sh */,
-				A0F0090427906F970073D36D /* openssl.sh */,
-				A0F0090327906F970073D36D /* libevent.sh */,
-				A0F0090127906F970073D36D /* tor.sh */,
+				A05D84CE2E180D4200D15D76 /* download.sh */,
 				A0E5E59A298BC74000727C4F /* arti.sh */,
 				A0463DB82AA0DB0700AC9925 /* onionmasq.sh */,
 				A0C981E32A9F52D100E265EE /* mmap-cache.patch */,
-				A08EE8202CE22C290006BEDD /* free-and-null.patch */,
 				A091B5002DEDF93000071F53 /* build-xcframework.sh */,
 			);
 			name = "Podspec Metadata";
@@ -395,9 +385,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Tor-Example/Pods-Tor-Example-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Tor-Example/Pods-Tor-Example-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -478,9 +472,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Tor-Example-Mac/Pods-Tor-Example-Mac-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Tor-Example-Mac/Pods-Tor-Example-Mac-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

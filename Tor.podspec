@@ -1,7 +1,7 @@
 Pod::Spec.new do |m|
 
   m.name             = 'Tor'
-  m.version          = '408.16.1'
+  m.version          = '408.17.1'
   m.summary          = 'Tor.framework is the easiest way to embed Tor in your iOS application.'
   m.description      = 'Tor.framework is the easiest way to embed Tor in your iOS application. Currently, the framework compiles in static versions of tor, libevent, openssl, and liblzma.'
 
@@ -15,17 +15,13 @@ Pod::Spec.new do |m|
   m.source           = {
     :git => 'https://github.com/iCepa/Tor.framework.git',
     :branch => 'pure_pod',
-    :tag => "v#{m.version}",
-    :submodules => true }
+    :tag => "v#{m.version}" }
   m.social_media_url = 'https://chaos.social/@tla'
 
   m.ios.deployment_target = '12.0'
   m.macos.deployment_target = '10.13'
 
-  script = <<-ENDSCRIPT
-cd "${PODS_TARGET_SRCROOT}/Tor/%1$s"
-../%1$s.sh
-  ENDSCRIPT
+  m.prepare_command = "Tor/download.sh v#{m.version}"
 
   m.subspec 'Core' do |s|
     s.requires_arc = true
@@ -38,47 +34,14 @@ cd "${PODS_TARGET_SRCROOT}/Tor/%1$s"
 
     s.source_files = 'Tor/Classes/CTor/**/*'
 
+    s.vendored_frameworks = 'tor.xcframework'
+    s.libraries = 'z'
+
     s.pod_target_xcconfig = {
-      'HEADER_SEARCH_PATHS' => '$(inherited) "${PODS_TARGET_SRCROOT}/Tor/tor" "${PODS_TARGET_SRCROOT}/Tor/tor/src" "${PODS_TARGET_SRCROOT}/Tor/openssl/include" "${BUILT_PRODUCTS_DIR}/openssl" "${PODS_TARGET_SRCROOT}/Tor/libevent/include"',
-      'OTHER_LDFLAGS' => '$(inherited) -L"${BUILT_PRODUCTS_DIR}/Tor" -l"z" -l"lzma" -l"crypto" -l"ssl" -l"event_core" -l"event_extra" -l"event_pthreads" -l"event" -l"tor"',
+      'HEADER_SEARCH_PATHS' => '$(inherited) "${PODS_TARGET_SRCROOT}/tor.xcframework/ios-arm64/tor.framework/Headers"',
     }
 
-    s.ios.pod_target_xcconfig = {
-      'OTHER_LDFLAGS' => '$(inherited) -L"${BUILT_PRODUCTS_DIR}/Tor-iOS"'
-    }
-
-    s.macos.pod_target_xcconfig = {
-      'OTHER_LDFLAGS' => '$(inherited) -L"${BUILT_PRODUCTS_DIR}/Tor-macOS"'
-    }
-
-    s.script_phases = [
-    {
-      :name => 'Build LZMA',
-      :execution_position => :before_compile,
-      :output_files => ['lzma-always-execute-this-but-supress-warning'],
-      :script => sprintf(script, "xz")
-    },
-    {
-      :name => 'Build OpenSSL',
-      :execution_position => :before_compile,
-      :output_files => ['openssl-always-execute-this-but-supress-warning'],
-      :script => sprintf(script, "openssl")
-    },
-    {
-      :name => 'Build libevent',
-      :execution_position => :before_compile,
-      :output_files => ['libevent-always-execute-this-but-supress-warning'],
-      :script => sprintf(script, "libevent")
-    },
-    {
-      :name => 'Build Tor',
-      :execution_position => :before_compile,
-      :output_files => ['tor-always-execute-this-but-supress-warning'],
-      :script => sprintf(script, "tor")
-    },
-    ]
-
-    s.preserve_paths = 'Tor/include', 'Tor/libevent', 'Tor/libevent.sh', 'Tor/openssl', 'Tor/openssl.sh', 'Tor/tor', 'Tor/tor.sh', 'Tor/xz', 'Tor/xz.sh'
+    s.preserve_paths = 'build-xcframework.sh', 'tor.xcframework', 'tor-nolzma.xcframework', 'download.sh'
   end
 
   m.subspec 'CTor-NoLZMA' do |s|
@@ -86,51 +49,21 @@ cd "${PODS_TARGET_SRCROOT}/Tor/%1$s"
 
     s.source_files = 'Tor/Classes/CTor/**/*'
 
+    s.vendored_frameworks = 'tor-nolzma.xcframework'
+    s.libraries = 'z'
+
     s.pod_target_xcconfig = {
-      'HEADER_SEARCH_PATHS' => '$(inherited) "${PODS_TARGET_SRCROOT}/Tor/tor" "${PODS_TARGET_SRCROOT}/Tor/tor/src" "${PODS_TARGET_SRCROOT}/Tor/openssl/include" "${BUILT_PRODUCTS_DIR}/openssl" "${PODS_TARGET_SRCROOT}/Tor/libevent/include"',
-      'OTHER_LDFLAGS' => '$(inherited) -L"${BUILT_PRODUCTS_DIR}/Tor" -l"z" -l"crypto" -l"ssl" -l"event_core" -l"event_extra" -l"event_pthreads" -l"event" -l"tor"',
+      'HEADER_SEARCH_PATHS' => '$(inherited) "${PODS_TARGET_SRCROOT}/tor-nolzma.xcframework/ios-arm64/tor-nolzma.framework/Headers"',
     }
 
-    s.ios.pod_target_xcconfig = {
-      'OTHER_LDFLAGS' => '$(inherited) -L"${BUILT_PRODUCTS_DIR}/Tor-iOS"'
-    }
-
-    s.macos.pod_target_xcconfig = {
-      'OTHER_LDFLAGS' => '$(inherited) -L"${BUILT_PRODUCTS_DIR}/Tor-macOS"'
-    }
-
-    s.script_phases = [
-    {
-      :name => 'Build OpenSSL',
-      :execution_position => :before_compile,
-      :output_files => ['openssl-always-execute-this-but-supress-warning'],
-      :script => sprintf(script, "openssl")
-    },
-    {
-      :name => 'Build libevent',
-      :execution_position => :before_compile,
-      :output_files => ['libevent-always-execute-this-but-supress-warning'],
-      :script => sprintf(script, "libevent")
-    },
-    {
-      :name => 'Build Tor',
-      :execution_position => :before_compile,
-      :output_files => ['tor-always-execute-this-but-supress-warning'],
-      :script => <<-ENDSCRIPT
-cd "${PODS_TARGET_SRCROOT}/Tor/tor"
-../tor.sh --no-lzma
-  ENDSCRIPT
-    },
-    ]
-
-    s.preserve_paths = 'Tor/include', 'Tor/libevent', 'Tor/libevent.sh', 'Tor/openssl', 'Tor/openssl.sh', 'Tor/tor', 'Tor/tor.sh'
+    s.preserve_paths = 'build-xcframework.sh', 'tor.xcframework', 'tor-nolzma.xcframework', 'Tor/download.sh'
   end
 
   m.subspec 'GeoIP' do |s|
     s.dependency 'Tor/CTor'
 
     s.resource_bundles = {
-      'GeoIP' => ['Tor/tor/src/config/geoip', 'Tor/tor/src/config/geoip6']
+      'GeoIP' => ['Tor/Assets/geoip', 'Tor/Assets/geoip6']
     }
   end
 
@@ -138,7 +71,7 @@ cd "${PODS_TARGET_SRCROOT}/Tor/tor"
     s.dependency 'Tor/CTor-NoLZMA'
 
     s.resource_bundles = {
-      'GeoIP' => ['Tor/tor/src/config/geoip', 'Tor/tor/src/config/geoip6']
+      'GeoIP' => ['Tor/Assets/geoip', 'Tor/Assets/geoip6']
     }
   end
 
