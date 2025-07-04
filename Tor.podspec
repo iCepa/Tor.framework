@@ -1,7 +1,7 @@
 Pod::Spec.new do |m|
 
   m.name             = 'Tor'
-  m.version          = '408.17.1'
+  m.version          = '408.17.2'
   m.summary          = 'Tor.framework is the easiest way to embed Tor in your iOS application.'
   m.description      = 'Tor.framework is the easiest way to embed Tor in your iOS application. Currently, the framework compiles in static versions of tor, libevent, openssl, and liblzma.'
 
@@ -41,7 +41,7 @@ Pod::Spec.new do |m|
       'HEADER_SEARCH_PATHS' => '$(inherited) "${PODS_TARGET_SRCROOT}/tor.xcframework/ios-arm64/tor.framework/Headers"',
     }
 
-    s.preserve_paths = 'build-xcframework.sh', 'tor.xcframework', 'tor-nolzma.xcframework', 'download.sh'
+    s.preserve_paths = 'tor.xcframework', 'download.sh'
   end
 
   m.subspec 'CTor-NoLZMA' do |s|
@@ -56,7 +56,7 @@ Pod::Spec.new do |m|
       'HEADER_SEARCH_PATHS' => '$(inherited) "${PODS_TARGET_SRCROOT}/tor-nolzma.xcframework/ios-arm64/tor-nolzma.framework/Headers"',
     }
 
-    s.preserve_paths = 'build-xcframework.sh', 'tor.xcframework', 'tor-nolzma.xcframework', 'Tor/download.sh'
+    s.preserve_paths = 'tor-nolzma.xcframework', 'Tor/download.sh'
   end
 
   m.subspec 'GeoIP' do |s|

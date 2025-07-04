@@ -69,15 +69,9 @@ brew bundle
 
 - Commit, tag and push new release.
 
-- Zip `tor.framework` and `tor-nolzma.framework`:
-
-```sh
-zip -r -9 tor.xcframework.zip tor.xcframework
-zip -r -9 tor-nolzma.xcframework.zip tor-lzma.xcframework
-```
-
 - Create a pre-release on https://github.com/iCepa/Tor.framework/releases with the latest 
-  info as per older releases and zip and upload the created `tor.xcframework` and `tor-nolzma.framework`.
+  info as per older releases and upload the created `tor.xcframework.zip` and 
+  `tor-nolzma.framework.zip` files.
 
 - Then lint like this:
 

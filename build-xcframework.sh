@@ -314,14 +314,16 @@ fatten() {
     SDK=$2
     LIB=${3:-$NAME}
 
+    LOG="$BUILDDIR/framework.log"
+
     echo "- Fatten $LIB in $NAME ($SDK)"
 
-    mkdir -p "$BUILDDIR/$SDK/$NAME/lib"
+    mkdir -p "$BUILDDIR/$SDK/$NAME/lib" >> "$LOG" 2>&1
 
     lipo \
         -arch arm64 "$BUILDDIR/$SDK/$NAME-arm64/lib/$LIB.a" \
         -arch x86_64 "$BUILDDIR/$SDK/$NAME-x86_64/lib/$LIB.a" \
-        -create -output "$BUILDDIR/$SDK/$NAME/lib/$LIB.a"
+        -create -output "$BUILDDIR/$SDK/$NAME/lib/$LIB.a" >> "$LOG" 2>&1
 }
 
 create_framework() {
@@ -329,14 +331,16 @@ create_framework() {
     IS_FAT=$2
     NO_LZMA=$3
 
+    LOG="$BUILDDIR/framework.log"
+
     if [ -z "$NO_LZMA" ]; then
         NAME="tor"
     else
         NAME="tor-nolzma"
     fi
 
-    rm -rf "$BUILDDIR/$SDK/$NAME.framework"
-    mkdir -p "$BUILDDIR/$SDK/$NAME.framework/Headers"
+    rm -rf "$BUILDDIR/$SDK/$NAME.framework" >> "$LOG" 2>&1
+    mkdir -p "$BUILDDIR/$SDK/$NAME.framework/Headers" >> "$LOG" 2>&1
 
     if [ -z "$IS_FAT" ]; then
         echo "- Create framework for $SDK"
@@ -361,7 +365,7 @@ create_framework() {
             "$BUILDDIR/$SDK/libtor-nolzma$POSTFIX/lib/libtor.a")
     fi
 
-    libtool -static -o "$BUILDDIR/$SDK/$NAME.framework/$NAME" "${LIBS[@]}"
+    libtool -static -o "$BUILDDIR/$SDK/$NAME.framework/$NAME" "${LIBS[@]}" >> "$LOG" 2>&1
 
     HEADERS=("$BUILDDIR/$SDK/libssl-arm64/include"/* \
         "$BUILDDIR/$SDK/libevent-arm64/include"/* \
@@ -371,7 +375,7 @@ create_framework() {
         HEADERS=("$BUILDDIR/$SDK/liblzma-arm64/include"/* "${HEADERS[@]}")
     fi
 
-    cp -r "${HEADERS[@]}" "$BUILDDIR/$SDK/$NAME.framework/Headers"
+    cp -r "${HEADERS[@]}" "$BUILDDIR/$SDK/$NAME.framework/Headers" >> "$LOG" 2>&1
 }
 
 build_liblzma       iphoneos            arm64           12.0
@@ -422,19 +426,22 @@ create_framework    macosx              fat             nolzma
 
 echo "- Create xcframework"
 
-rm -rf "$ROOT/tor.xcframework" "$ROOT/tor-nolzma.xcframework"
+LOG="$BUILDDIR/framework.log"
 
-xcodebuild -create-xcframework \
-    -framework "$BUILDDIR/iphoneos/tor.framework" \
-    -framework "$BUILDDIR/iphonesimulator/tor.framework" \
-    -framework "$BUILDDIR/macosx/tor.framework" \
-    -output "$ROOT/tor.xcframework"
+for name in "tor" "tor-nolzma"
+do
+    rm -rf "$ROOT/$name.xcframework" "$ROOT/$name.xcframework.zip" >> "$LOG" 2>&1
 
-xcodebuild -create-xcframework \
-    -framework "$BUILDDIR/iphoneos/tor-nolzma.framework" \
-    -framework "$BUILDDIR/iphonesimulator/tor-nolzma.framework" \
-    -framework "$BUILDDIR/macosx/tor-nolzma.framework" \
-    -output "$ROOT/tor-nolzma.xcframework"
+    xcodebuild -create-xcframework \
+        -framework "$BUILDDIR/iphoneos/$name.framework" \
+        -framework "$BUILDDIR/iphonesimulator/$name.framework" \
+        -framework "$BUILDDIR/macosx/$name.framework" \
+        -output "$ROOT/$name.xcframework" >> "$LOG" 2>&1
+
+    cd "$ROOT"
+
+    zip -r -9 "$name.xcframework.zip" "$name.xcframework" >> "$LOG" 2>&1
+done
 
 if [ -z $DEBUG ]; then
     rm -rf "$BUILDDIR"

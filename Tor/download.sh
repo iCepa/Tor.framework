@@ -15,20 +15,14 @@ fi
 
 cd ../..
 
-# Test if folder is older then 1 week.
-OLD="$(find tor.xcframework -mmin +10080 2>/dev/null)"
+for name in "tor" "tor-nolzma"
+do
+    # Test if folder is older then 1 week.
+    OLD="$(find "$name.xcframework" -mmin +10080 2>/dev/null)"
 
-if [ ! -d tor.xcframework -o ! -z "$OLD" ]; then
-    wget "https://github.com/iCepa/Tor.framework/releases/download/$VERSION/tor.xcframework.zip"
-    unzip tor.xcframework.zip
-    rm tor.xcframework.zip
-fi
-
-# Test if folder is older then 1 week.
-OLD="$(find tor-nolzma.xcframework -mmin +10080 2>/dev/null)"
-
-if [ ! -d tor-nolzma.xcframework -o ! -z "$OLD" ]; then
-    wget "https://github.com/iCepa/Tor.framework/releases/download/$VERSION/tor-nolzma.xcframework.zip"
-    unzip tor-nolzma.xcframework.zip
-    rm tor-nolzma.xcframework.zip
-fi
+    if [ ! -d "$name.xcframework" -o ! -z "$OLD" ]; then
+        wget "https://github.com/iCepa/Tor.framework/releases/download/$VERSION/$name.xcframework.zip"
+        unzip "$name.xcframework.zip"
+        rm "$name.xcframework.zip"
+    fi
+done
