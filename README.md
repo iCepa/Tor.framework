@@ -76,13 +76,13 @@ brew bundle
 - Then lint like this:
 
 ```sh
-pod lib lint --allow-warnings
+pod lib lint --allow-warnings Tor.podspec
 ```
 
 - If the linting went well, publish to CocoaPods:
 
 ```sh
-pod trunk push --allow-warnings
+pod trunk push --allow-warnings Tor.podspec 
 ```
 
 - Then update the [release](https://github.com/iCepa/Tor.framework/releases) in GitHub, 
