@@ -383,8 +383,8 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
         NSString *replyString = lines.firstObject ? [[NSString alloc] initWithData:(NSData * _Nonnull)lines.firstObject encoding:NSUTF8StringEncoding] : @"";
         if (![replyString hasPrefix:@"STATUS_"])
             return NO;
-        
-        NSArray<NSString *> *components = [replyString componentsSeparatedByString:@" "];
+
+        NSArray<NSString *> *components = [TORController parseStatus:replyString];
         if (components.count < 3)
             return NO;
         
@@ -394,7 +394,9 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
             for (NSString *argument in [components subarrayWithRange:NSMakeRange(3, components.count - 3)]) {
                 NSArray<NSString *> *keyValuePair = [argument componentsSeparatedByString:@"="];
                 if (keyValuePair.count == 2) {
-                    [arguments setObject:keyValuePair[1] forKey:keyValuePair[0]];
+                    NSString *value = [keyValuePair[1] stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+
+                    [arguments setObject:value forKey:keyValuePair[0]];
                 }
             }
         }
@@ -899,6 +901,21 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
             completion();
         }
     }];
+}
+
++ (NSArray<NSString *> *)parseStatus:(NSString *)status
+{
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[^\\s\"]+=\"[^\"]*\"|[^\\s]+" options:0 error:nil];
+
+    NSArray<NSTextCheckingResult *> *matches = [regex matchesInString:status options:0 range:NSMakeRange(0, status.length)];
+
+    NSMutableArray *tokens = [NSMutableArray new];
+
+    for (NSTextCheckingResult *match in matches) {
+        [tokens addObject:[status substringWithRange:match.range]];
+    }
+
+    return tokens;
 }
 
 @end
