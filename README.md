@@ -48,22 +48,31 @@ pod 'Tor', '~> 408'
 
 (or `Tor/GeoIP` - see below.)
 
+## Compiling yourself
+
+Prerequesite:
+- [Homebrew](https://brew.sh)
+
+```sh
+git clone https://github.com/iCepa/Tor.framework.git
+cd Tor.framework
+brew bundle
+./build-xcframework.sh
+```
+
+*NOTE*: Builds are not reproducible.
 
 ## Preparing a new release
 
 For maintainers/contributors of Tor.framework, a new release should be prepared by 
 doing the following:
 
-- Install build tools via [Homebrew](https://brew.sh):
-
-```sh
-brew bundle
-```
-
 - Update the version numbers of the libraries used in [`build-xcframework.sh`](build-xcframework.sh).
 
-- Run [`build-xcframework.sh`](build-xcframework.sh), check the logs and test the created `tor.xcframework`
-  and `tor-nolzma.xcframework` with the contained example apps.
+- Follow the instructions in [Compiling yourself](#markdown-header-compiling-yourself)
+
+- Check the logs and test the created `tor.xcframework` and `tor-nolzma.xcframework` with the 
+  contained example apps.
 
 - Update info and version numbers in `README.md` and `Tor.podspec`!
 
