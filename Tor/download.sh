@@ -21,10 +21,7 @@ cd ../..
 
 for name in "tor" "tor-nolzma"
 do
-    # Test if folder is older then 1 week.
-    OLD="$(find "$name.xcframework" -mmin +10080 2>/dev/null)"
-
-    if [ ! -d "$name.xcframework" -o ! -z "$OLD" ]; then
+    if [ ! -d "$name.xcframework" ]; then
         load "https://github.com/iCepa/Tor.framework/releases/download/$VERSION/$name.xcframework.zip"
         unzip "$name.xcframework.zip"
         rm "$name.xcframework.zip"
