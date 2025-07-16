@@ -69,7 +69,7 @@ doing the following:
 
 - Update the version numbers of the libraries used in [`build-xcframework.sh`](build-xcframework.sh).
 
-- Follow the instructions in [Compiling yourself](#markdown-header-compiling-yourself)
+- Follow the instructions in [Compiling yourself](#compiling-yourself)
 
 - Check the logs and test the created `tor.xcframework` and `tor-nolzma.xcframework` with the 
   contained example apps.
