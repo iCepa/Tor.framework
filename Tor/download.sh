@@ -1,6 +1,8 @@
 #!/bin/sh
 
 VERSION=$1
+shift
+checksums=( "$@" )
 
 load() {
     curl --remote-name --progress-bar --location $1
@@ -19,11 +21,24 @@ fi
 
 cd ../..
 
+declare -i i=0
+
 for name in "tor" "tor-nolzma"
 do
     if [ ! -d "$name.xcframework" ]; then
         load "https://github.com/iCepa/Tor.framework/releases/download/$VERSION/$name.xcframework.zip"
+
+        actual=$(shasum -a 256 "$name.xcframework.zip" | awk '{print $1}')
+
+        if [ "$actual" != "${checksums[$i]}" ]; then
+            echo "ERROR: Checksum verification failed: $actual != ${checksums[$i]}"
+
+            exit 1
+        fi
+
         unzip "$name.xcframework.zip"
         rm "$name.xcframework.zip"
     fi
+
+    i+=1
 done

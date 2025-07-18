@@ -73,8 +73,8 @@ doing the following:
 
 - Check the logs and test the created `tor.xcframework` and `tor-nolzma.xcframework` with the 
   contained example apps.
-
-- Update info and version numbers in `README.md` and `Tor.podspec`!
+  
+- Update info, version numbers and checksums in `README.md` and `Tor.podspec`!
 
 - Commit, tag and push new release.
 

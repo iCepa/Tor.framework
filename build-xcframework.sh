@@ -441,6 +441,7 @@ do
     cd "$ROOT"
 
     zip -r -9 "$name.xcframework.zip" "$name.xcframework" >> "$LOG" 2>&1
+    shasum -a 256 "$name.xcframework.zip"
 done
 
 if [ -z $DEBUG ]; then

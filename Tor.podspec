@@ -21,7 +21,7 @@ Pod::Spec.new do |m|
   m.ios.deployment_target = '12.0'
   m.macos.deployment_target = '10.13'
 
-  m.prepare_command = "Tor/download.sh v#{m.version}"
+  m.prepare_command = "Tor/download.sh v#{m.version} ce6ce2e611e1820ee5272cc3142151e7ac4ac203e8c91a1d03e361031775fa92 e77872c6bb55712582f205ddbcf6ed4636940bc6889b8269135363516442e769"
 
   m.subspec 'Core' do |s|
     s.requires_arc = true
