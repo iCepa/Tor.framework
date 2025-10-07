@@ -3,9 +3,9 @@
 PATH=$PATH:/usr/local/bin:/usr/local/opt/gettext/bin:/usr/local/opt/automake/bin:/usr/local/opt/aclocal/bin:/opt/homebrew/bin
 
 XZ_VERSION="v5.8.1"
-OPENSSL_VERSION="openssl-3.5.3"
+OPENSSL_VERSION="openssl-3.6.0"
 LIBEVENT_VERSION="release-2.1.12-stable"
-TOR_VERSION="tor-0.4.8.18"
+TOR_VERSION="tor-0.4.8.19"
 
 cd "$(dirname "$0")"
 ROOT="$(pwd -P)"
