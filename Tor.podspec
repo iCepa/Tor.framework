@@ -1,7 +1,7 @@
 Pod::Spec.new do |m|
 
   m.name             = 'Tor'
-  m.version          = '408.19.1'
+  m.version          = '408.20.1'
   m.summary          = 'Tor.framework is the easiest way to embed Tor in your iOS application.'
   m.description      = 'Tor.framework is the easiest way to embed Tor in your iOS application. Currently, the framework compiles in static versions of tor, libevent, openssl, and liblzma.'
 
@@ -21,7 +21,7 @@ Pod::Spec.new do |m|
   m.ios.deployment_target = '15.0'
   m.macos.deployment_target = '11.0'
 
-  m.prepare_command = "Tor/download.sh v#{m.version} a6dfc50744f22106fff86cfee025e518c90d9f5918770040b61c8a4828f26172 95d5a25a7ebc14c3670b14e64522d70d2e980ed79090929ed4947bf0427a27d7"
+  m.prepare_command = "Tor/download.sh v#{m.version} c3908860219b39fca73f3d9a890f290c92c74fd720e537c40777f5d992300a4c 6e297b5e4f153824b17ffbcabd95f67c8aa13420fb6de9a6563096459c668f1a"
 
   m.subspec 'Core' do |s|
     s.requires_arc = true
