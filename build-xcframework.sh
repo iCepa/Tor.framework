@@ -378,48 +378,48 @@ create_framework() {
     cp -r "${HEADERS[@]}" "$BUILDDIR/$SDK/$NAME.framework/Headers" >> "$LOG" 2>&1
 }
 
-build_liblzma       iphoneos            arm64           12.0
-build_libssl        iphoneos            arm64           12.0
-build_libevent      iphoneos            arm64           12.0
-build_libtor        iphoneos            arm64           12.0
-build_libtor        iphoneos            arm64           12.0    nolzma
+build_liblzma       iphoneos            arm64           15.0
+build_libssl        iphoneos            arm64           15.0
+build_libevent      iphoneos            arm64           15.0
+build_libtor        iphoneos            arm64           15.0
+build_libtor        iphoneos            arm64           15.0    nolzma
 create_framework    iphoneos
 create_framework    iphoneos            ""              nolzma
 
-build_liblzma       iphonesimulator     arm64           12.0
-build_liblzma       iphonesimulator     x86_64          12.0
+build_liblzma       iphonesimulator     arm64           15.0
+build_liblzma       iphonesimulator     x86_64          15.0
 fatten              liblzma             iphonesimulator
-build_libssl        iphonesimulator     arm64           12.0
-build_libssl        iphonesimulator     x86_64          12.0
+build_libssl        iphonesimulator     arm64           15.0
+build_libssl        iphonesimulator     x86_64          15.0
 fatten              libssl              iphonesimulator
 fatten              libssl              iphonesimulator libcrypto
-build_libevent      iphonesimulator     arm64           12.0
-build_libevent      iphonesimulator     x86_64          12.0
+build_libevent      iphonesimulator     arm64           15.0
+build_libevent      iphonesimulator     x86_64          15.0
 fatten              libevent            iphonesimulator
-build_libtor        iphonesimulator     arm64           12.0
-build_libtor        iphonesimulator     x86_64          12.0
+build_libtor        iphonesimulator     arm64           15.0
+build_libtor        iphonesimulator     x86_64          15.0
 fatten              libtor              iphonesimulator
-build_libtor        iphonesimulator     arm64           12.0    nolzma
-build_libtor        iphonesimulator     x86_64          12.0    nolzma
+build_libtor        iphonesimulator     arm64           15.0    nolzma
+build_libtor        iphonesimulator     x86_64          15.0    nolzma
 fatten              libtor-nolzma       iphonesimulator libtor
 create_framework    iphonesimulator     fat
 create_framework    iphonesimulator     fat             nolzma
 
-build_liblzma       macosx              arm64           10.13
-build_liblzma       macosx              x86_64          10.13
+build_liblzma       macosx              arm64           11.0
+build_liblzma       macosx              x86_64          11.0
 fatten              liblzma             macosx
-build_libssl        macosx              arm64           10.13
-build_libssl        macosx              x86_64          10.13
+build_libssl        macosx              arm64           11.0
+build_libssl        macosx              x86_64          11.0
 fatten              libssl              macosx
 fatten              libssl              macosx          libcrypto
-build_libevent      macosx              arm64           10.13
-build_libevent      macosx              x86_64          10.13
+build_libevent      macosx              arm64           11.0
+build_libevent      macosx              x86_64          11.0
 fatten              libevent            macosx
-build_libtor        macosx              arm64           10.13
-build_libtor        macosx              x86_64          10.13
+build_libtor        macosx              arm64           11.0
+build_libtor        macosx              x86_64          11.0
 fatten              libtor              macosx
-build_libtor        macosx              arm64           10.13    nolzma
-build_libtor        macosx              x86_64          10.13    nolzma
+build_libtor        macosx              arm64           11.0    nolzma
+build_libtor        macosx              x86_64          11.0    nolzma
 fatten              libtor-nolzma       macosx          libtor
 create_framework    macosx              fat
 create_framework    macosx              fat             nolzma
