@@ -19,8 +19,8 @@ Pod::Spec.new do |m|
     :submodules => true }
   m.social_media_url = 'https://chaos.social/@tla'
 
-  m.ios.deployment_target = '12.0'
-  m.macos.deployment_target = '10.13'
+  m.ios.deployment_target = '15.0'
+  m.macos.deployment_target = '11.0'
 
   script = <<-ENDSCRIPT
 cd "${PODS_TARGET_SRCROOT}/Tor/%1$s"
