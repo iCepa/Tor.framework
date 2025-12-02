@@ -57,6 +57,10 @@
 
     [TORArti startWithConfiguration:configuration completed:^{
         NSLog(@"established");
+
+        [NSNotificationCenter.defaultCenter
+         postNotificationName:@"tor-ready"
+         object:[[NSNumber alloc] initWithUnsignedInteger:configuration.socksPort]];
     }];
 
 #else
@@ -113,10 +117,24 @@
 
                 CFTimeInterval startTime = CACurrentMediaTime();
 
-                [c getCircuits:^(NSArray<TORCircuit *> * _Nonnull circuits) {
-                    NSLog(@"Circuits: %@", circuits);
+                [c getInfoForKeys:@[@"net/listeners/socks"] completion:^(NSArray<NSString *> * _Nonnull values) {
+                    if (values.count > 0) {
+                        NSArray<NSString *> *parts = [values[0] componentsSeparatedByString:@":"];
 
-                    NSLog(@"Elapsed Time: %f", CACurrentMediaTime() - startTime);
+                        if (parts.count > 1) {
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                [NSNotificationCenter.defaultCenter
+                                 postNotificationName:@"tor-ready"
+                                 object:[[NSNumber alloc] initWithInteger:parts[1].integerValue]];
+                            });
+                        }
+                    }
+
+                    [c getCircuits:^(NSArray<TORCircuit *> * _Nonnull circuits) {
+                        NSLog(@"Circuits: %@", circuits);
+
+                        NSLog(@"Elapsed Time: %f", CACurrentMediaTime() - startTime);
+                    }];
                 }];
             }];
         }];

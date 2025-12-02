@@ -1,7 +1,8 @@
 use_frameworks!
 
 def tor
-#  pod 'Tor/Onionmasq',
+#  pod 'Tor/Arti',
+#    :path => '../'
 #    :podspec => '../Arti.podspec'
   pod 'Tor/GeoIP', # -NoLZMA',
     :path => '../'

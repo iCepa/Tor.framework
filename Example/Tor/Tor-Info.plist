@@ -29,12 +29,14 @@
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
-		<true/>
+		<false/>
 		<key>UISceneConfigurations</key>
 		<dict/>
 	</dict>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+    <key>UILaunchStoryboardName</key>
+    <string>Launch Screen</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
