@@ -14,14 +14,15 @@ Currently, the framework compiles in the following versions of `tor`, `libevent`
 | libevent  | 2.1.12   |
 | OpenSSL   | 3.6.0    |
 | liblzma   | 5.8.1    |
+| Arti      | 1.7.0    |
 | Onionmasq | 0.6.2    |
 
 
 ## LATEST CHANGES
 
-- No inline compilation necessary anymore: Now uses precompiled `tor.xcframework` resp. 
-  `tor-nolzma.xcframework` which will be downloaded from https://github.com/iCepa/Tor.framework/releases 
-  on install/update. 
+- No inline compilation necessary anymore: Now uses precompiled `tor.xcframework`, 
+  `tor-nolzma.xcframework` and `arti.xcframework`which will be downloaded from 
+  https://github.com/iCepa/Tor.framework/releases on install/update. 
 - Finally removed `TorStatic.podspec` as there was no feedback about it and it started to be in the way.
 
 
@@ -31,15 +32,15 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Requirements
 
-- iOS 12.0 or later
-- MacOS 10.13 or later
-- Xcode 13.0 or later
+- iOS 15.0 or later
+- MacOS 11.0 or later
+- Xcode 26.0 or later
 
 
 ## Installation
 
-Tor is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+C-Tor is available through [CocoaPods](https://cocoapods.org). To install it, 
+simply add the following line to your Podfile:
 
 ```ruby
 use_frameworks!
@@ -47,6 +48,16 @@ pod 'Tor', '~> 408'
 ```
 
 (or `Tor/GeoIP` - see below.)
+
+
+Arti is available through it's own Podspec. To install it,
+simply add the following line to your Podfile:
+
+```ruby
+use_frameworks!
+pod 'Tor/Arti', 
+  :podspec => 'https://raw.githubusercontent.com/iCepa/Tor.framework/refs/heads/pure_pod/Arti.podspec'
+```
 
 ## Compiling yourself
 
@@ -57,7 +68,14 @@ Prerequesite:
 git clone https://github.com/iCepa/Tor.framework.git
 cd Tor.framework
 brew bundle
-./build-xcframework.sh
+rustup default stable 
+rustup target add aarch64-apple-darwin
+rustup target add x86_64-apple-darwin
+rustup target add aarch64-apple-ios
+rustup target add aarch64-apple-ios-sim
+rustup target add x86_64-apple-ios
+cargo install cbindgen
+./build-xcframework.sh -ac
 ```
 
 *NOTE*: Builds are not reproducible.
@@ -74,13 +92,13 @@ doing the following:
 - Check the logs and test the created `tor.xcframework` and `tor-nolzma.xcframework` with the 
   contained example apps.
   
-- Update info, version numbers and checksums in `README.md` and `Tor.podspec`!
+- Update info, version numbers and checksums in `README.md`, `Tor.podspec` and `Arti.podspec`!
 
 - Commit, tag and push new release.
 
 - Create a pre-release on https://github.com/iCepa/Tor.framework/releases with the latest 
-  info as per older releases and upload the created `tor.xcframework.zip` and 
-  `tor-nolzma.framework.zip` files.
+  info as per older releases and upload the created `tor.xcframework.zip`, 
+  `tor-nolzma.framework.zip` and `arti.framework.zip` files.
 
 - Then lint like this:
 
