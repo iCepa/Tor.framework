@@ -348,7 +348,7 @@ build_libarti() {
         fi
     fi
 
-    cargo build --target "$TARGET" --release --target-dir "$BUILDDIR/$SDK/libarti-$ARCH" >> "$LOG" 2>&1
+    cargo build --locked --target "$TARGET" --release --target-dir "$BUILDDIR/$SDK/libarti-$ARCH" >> "$LOG" 2>&1
 
     mkdir "$BUILDDIR/$SDK/libarti-$ARCH/lib" >> "$LOG" 2>&1
     mv "$BUILDDIR/$SDK/libarti-$ARCH/$TARGET/release/libarti_mobile_ex.a" "$BUILDDIR/$SDK/libarti-$ARCH/lib/" >> "$LOG" 2>&1
