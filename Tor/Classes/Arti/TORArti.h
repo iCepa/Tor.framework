@@ -38,6 +38,8 @@ NS_SWIFT_NAME(TorArti)
 
 + (void)startWithConfiguration:(TORConfiguration * _Nonnull)configuration completed:(nullable void (^)(void))completed;
 
++ (void)stop;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -129,6 +129,11 @@ Completed completedBlock;
                    completed:completed];
 }
 
++ (void)stop
+{
+    stop_arti();
+}
+
 void loggingCb(const char * message)
 {
     NSMutableString *msg = [[NSMutableString alloc] initWithUTF8String:message];
