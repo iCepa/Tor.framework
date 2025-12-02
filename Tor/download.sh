@@ -3,6 +3,7 @@
 VERSION=$1
 NAMES=$2
 shift
+shift
 checksums=( "$@" )
 
 load() {

@@ -89,8 +89,8 @@ doing the following:
 
 - Follow the instructions in [Compiling yourself](#compiling-yourself)
 
-- Check the logs and test the created `tor.xcframework` and `tor-nolzma.xcframework` with the 
-  contained example apps.
+- Check the logs and test the created `tor.xcframework`, `tor-nolzma.xcframework` and `arti.xcframework` 
+  with the contained example apps.
   
 - Update info, version numbers and checksums in `README.md`, `Tor.podspec` and `Arti.podspec`!
 
