@@ -6,16 +6,21 @@ XZ_VERSION="v5.8.1"
 OPENSSL_VERSION="openssl-3.6.0"
 LIBEVENT_VERSION="release-2.1.12-stable"
 TOR_VERSION="tor-0.4.8.21"
+ARTI_VERSION="arti-1.7.0"
 
 cd "$(dirname "$0")"
 ROOT="$(pwd -P)"
 
 DEBUG=""
+WITH_CTOR=""
+WITH_ARTI=""
 
-while getopts dl flag
+while getopts acdl flag
 do
     case "$flag" in
         d) DEBUG="1";;
+        c) WITH_CTOR="1";;
+        a) WITH_ARTI="1";;
     esac
 done
 
@@ -309,6 +314,46 @@ build_libtor() {
     mv micro-revision.i "$DEST" >> "$LOG" 2>&1
 }
 
+build_libarti() {
+    SDK=$1
+    ARCH=$2
+
+    SOURCE="$BUILDDIR/arti-mobile-ex"
+    LOG="$BUILDDIR/arti-$SDK-$ARCH.log"
+
+    if [ ! -d "$SOURCE" ]; then
+        echo "- Check out Arti-mobile-ex project"
+
+        cd "$BUILDDIR"
+        git clone --recursive --shallow-submodules --depth 1 --branch "$ARTI_VERSION" https://gitlab.com/guardianproject/tormobile/arti-mobile-ex.git >> "$LOG" 2>&1
+    fi
+
+    echo "- Build arti-mobile-ex for $ARCH ($SDK)"
+
+    cd "$SOURCE/common"
+
+    TARGET="aarch64-apple-ios"
+
+    if [ "${SDK:-iphoneos}" = "macosx" ]; then
+        if [ "${ARCH:-x86}" = "arm64" ]; then
+            TARGET="aarch64-apple-darwin"
+        else
+            TARGET="x86_64-apple-darwin"
+        fi
+    elif [ "${SDK:-iphoneos}" = "iphonesimulator" ]; then
+        if [ "${ARCH:-x86}" = "arm64" ]; then
+            TARGET="aarch64-apple-ios-sim"
+        else
+            TARGET="x86_64-apple-ios"
+        fi
+    fi
+
+    cargo build --target "$TARGET" --release --target-dir "$BUILDDIR/$SDK/libarti-$ARCH" >> "$LOG" 2>&1
+
+    mkdir "$BUILDDIR/$SDK/libarti-$ARCH/lib" >> "$LOG" 2>&1
+    mv "$BUILDDIR/$SDK/libarti-$ARCH/$TARGET/release/libarti_mobile_ex.a" "$BUILDDIR/$SDK/libarti-$ARCH/lib/" >> "$LOG" 2>&1
+}
+
 fatten() {
     NAME=$1
     SDK=$2
@@ -378,71 +423,122 @@ create_framework() {
     cp -r "${HEADERS[@]}" "$BUILDDIR/$SDK/$NAME.framework/Headers" >> "$LOG" 2>&1
 }
 
-build_liblzma       iphoneos            arm64           15.0
-build_libssl        iphoneos            arm64           15.0
-build_libevent      iphoneos            arm64           15.0
-build_libtor        iphoneos            arm64           15.0
-build_libtor        iphoneos            arm64           15.0    nolzma
-create_framework    iphoneos
-create_framework    iphoneos            ""              nolzma
+create_framework_a() {
+    SDK=$1
+    IS_FAT=$2
 
-build_liblzma       iphonesimulator     arm64           15.0
-build_liblzma       iphonesimulator     x86_64          15.0
-fatten              liblzma             iphonesimulator
-build_libssl        iphonesimulator     arm64           15.0
-build_libssl        iphonesimulator     x86_64          15.0
-fatten              libssl              iphonesimulator
-fatten              libssl              iphonesimulator libcrypto
-build_libevent      iphonesimulator     arm64           15.0
-build_libevent      iphonesimulator     x86_64          15.0
-fatten              libevent            iphonesimulator
-build_libtor        iphonesimulator     arm64           15.0
-build_libtor        iphonesimulator     x86_64          15.0
-fatten              libtor              iphonesimulator
-build_libtor        iphonesimulator     arm64           15.0    nolzma
-build_libtor        iphonesimulator     x86_64          15.0    nolzma
-fatten              libtor-nolzma       iphonesimulator libtor
-create_framework    iphonesimulator     fat
-create_framework    iphonesimulator     fat             nolzma
+    LOG="$BUILDDIR/framework.log"
 
-build_liblzma       macosx              arm64           11.0
-build_liblzma       macosx              x86_64          11.0
-fatten              liblzma             macosx
-build_libssl        macosx              arm64           11.0
-build_libssl        macosx              x86_64          11.0
-fatten              libssl              macosx
-fatten              libssl              macosx          libcrypto
-build_libevent      macosx              arm64           11.0
-build_libevent      macosx              x86_64          11.0
-fatten              libevent            macosx
-build_libtor        macosx              arm64           11.0
-build_libtor        macosx              x86_64          11.0
-fatten              libtor              macosx
-build_libtor        macosx              arm64           11.0    nolzma
-build_libtor        macosx              x86_64          11.0    nolzma
-fatten              libtor-nolzma       macosx          libtor
-create_framework    macosx              fat
-create_framework    macosx              fat             nolzma
+    NAME="arti"
 
-echo "- Create xcframework"
+    rm -rf "$BUILDDIR/$SDK/$NAME.framework" >> "$LOG" 2>&1
+    mkdir -p "$BUILDDIR/$SDK/$NAME.framework/Headers" >> "$LOG" 2>&1
 
-LOG="$BUILDDIR/framework.log"
+    if [ -z "$IS_FAT" ]; then
+        echo "- Create framework for $SDK"
 
-for name in "tor" "tor-nolzma"
-do
-    rm -rf "$ROOT/$name.xcframework" "$ROOT/$name.xcframework.zip" >> "$LOG" 2>&1
+        POSTFIX="-arm64"
+    else
+        echo "- Create framework for fat $SDK"
 
-    xcodebuild -create-xcframework \
-        -framework "$BUILDDIR/iphoneos/$name.framework" \
-        -framework "$BUILDDIR/iphonesimulator/$name.framework" \
-        -framework "$BUILDDIR/macosx/$name.framework" \
-        -output "$ROOT/$name.xcframework" >> "$LOG" 2>&1
+        POSTFIX=""
+    fi
 
-    cd "$ROOT"
+    LIBS=("$BUILDDIR/$SDK/libarti$POSTFIX/lib/libarti_mobile_ex.a")
 
-    zip -r -9 "$name.xcframework.zip" "$name.xcframework" >> "$LOG" 2>&1
-    shasum -a 256 "$name.xcframework.zip"
-done
+    libtool -static -o "$BUILDDIR/$SDK/$NAME.framework/$NAME" "${LIBS[@]}" >> "$LOG" 2>&1
+
+    cd "$BUILDDIR/arti-mobile-ex/common"
+
+    cbindgen src/apple.rs -l c > "$BUILDDIR/$SDK/$NAME.framework/Headers/arti-mobile.h"
+}
+
+create_xcframework() {
+    NAMES=$1
+
+    LOG="$BUILDDIR/framework.log"
+
+    for name in $NAMES
+    do
+        echo "- Create xcframework for $name"
+
+        rm -rf "$ROOT/$name.xcframework" "$ROOT/$name.xcframework.zip" >> "$LOG" 2>&1
+
+        xcodebuild -create-xcframework \
+            -framework "$BUILDDIR/iphoneos/$name.framework" \
+            -framework "$BUILDDIR/iphonesimulator/$name.framework" \
+            -framework "$BUILDDIR/macosx/$name.framework" \
+            -output "$ROOT/$name.xcframework" >> "$LOG" 2>&1
+
+        cd "$ROOT"
+
+        zip -r -9 "$name.xcframework.zip" "$name.xcframework" >> "$LOG" 2>&1
+        shasum -a 256 "$name.xcframework.zip"
+    done
+}
+
+if [ ! -z $WITH_CTOR ]; then
+    build_liblzma       iphoneos            arm64           15.0
+    build_libssl        iphoneos            arm64           15.0
+    build_libevent      iphoneos            arm64           15.0
+    build_libtor        iphoneos            arm64           15.0
+    build_libtor        iphoneos            arm64           15.0    nolzma
+    create_framework    iphoneos
+    create_framework    iphoneos            ""              nolzma
+
+    build_liblzma       iphonesimulator     arm64           15.0
+    build_liblzma       iphonesimulator     x86_64          15.0
+    fatten              liblzma             iphonesimulator
+    build_libssl        iphonesimulator     arm64           15.0
+    build_libssl        iphonesimulator     x86_64          15.0
+    fatten              libssl              iphonesimulator
+    fatten              libssl              iphonesimulator libcrypto
+    build_libevent      iphonesimulator     arm64           15.0
+    build_libevent      iphonesimulator     x86_64          15.0
+    fatten              libevent            iphonesimulator
+    build_libtor        iphonesimulator     arm64           15.0
+    build_libtor        iphonesimulator     x86_64          15.0
+    fatten              libtor              iphonesimulator
+    build_libtor        iphonesimulator     arm64           15.0    nolzma
+    build_libtor        iphonesimulator     x86_64          15.0    nolzma
+    fatten              libtor-nolzma       iphonesimulator libtor
+    create_framework    iphonesimulator     fat
+    create_framework    iphonesimulator     fat             nolzma
+
+    build_liblzma       macosx              arm64           11.0
+    build_liblzma       macosx              x86_64          11.0
+    fatten              liblzma             macosx
+    build_libssl        macosx              arm64           11.0
+    build_libssl        macosx              x86_64          11.0
+    fatten              libssl              macosx
+    fatten              libssl              macosx          libcrypto
+    build_libevent      macosx              arm64           11.0
+    build_libevent      macosx              x86_64          11.0
+    fatten              libevent            macosx
+    build_libtor        macosx              arm64           11.0
+    build_libtor        macosx              x86_64          11.0
+    fatten              libtor              macosx
+    build_libtor        macosx              arm64           11.0    nolzma
+    build_libtor        macosx              x86_64          11.0    nolzma
+    fatten              libtor-nolzma       macosx          libtor
+    create_framework    macosx              fat
+    create_framework    macosx              fat             nolzma
+    create_xcframework  "tor tor-nolzma"
+fi
+
+if [ ! -z $WITH_ARTI ]; then
+    build_libarti       iphoneos            arm64
+    create_framework_a  iphoneos
+    build_libarti       iphonesimulator     arm64
+    build_libarti       iphonesimulator     x86_64
+    fatten              libarti             iphonesimulator libarti_mobile_ex
+    create_framework_a  iphonesimulator     fat
+    build_libarti       macosx              arm64
+    build_libarti       macosx              x86_64
+    fatten              libarti             macosx          libarti_mobile_ex
+    create_framework_a  macosx              fat
+    create_xcframework  arti
+fi
 
 if [ -z $DEBUG ]; then
     rm -rf "$BUILDDIR"

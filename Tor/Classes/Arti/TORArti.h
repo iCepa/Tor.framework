@@ -27,6 +27,8 @@ NS_SWIFT_NAME(TorArti)
  */
 + (void)startWithSocksPort:(NSUInteger)socksPort 
                    dnsPort:(NSUInteger)dnsPort
+                 obfs4Port:(NSUInteger)obfs4Port
+             snowflakePort:(NSUInteger)snowflakePort
                    logfile:(NSURL * _Nullable)logfile
                   stateDir:(NSURL * _Nullable)stateDir
                   cacheDir:(NSURL * _Nullable)cacheDir

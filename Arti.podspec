@@ -22,6 +22,8 @@ Pod::Spec.new do |m|
   m.ios.deployment_target = '15.0'
   m.macos.deployment_target = '11.0'
 
+  m.prepare_command = "Tor/download.sh v#{m.version} arti 45065181050d5c0be9032b997ebab7cedb4d9f87c9cd49e8f29a66b794599246"
+
   script = <<-ENDSCRIPT
 cd "${PODS_TARGET_SRCROOT}/Tor/%1$s"
 ../%1$s.sh
@@ -38,26 +40,18 @@ cd "${PODS_TARGET_SRCROOT}/Tor/%1$s"
 
     s.source_files = 'Tor/Classes/Arti/**/*'
 
+    s.vendored_frameworks = 'arti.xcframework'
+
     s.pod_target_xcconfig = {
-      'HEADER_SEARCH_PATHS' => '$(inherited) "${PODS_TARGET_SRCROOT}/Tor/arti/common"',
-      'OTHER_LDFLAGS' => '$(inherited) -L"${BUILT_PRODUCTS_DIR}/Tor" -l"arti_mobile_ex"',
+      'HEADER_SEARCH_PATHS' => '$(inherited) "${PODS_TARGET_SRCROOT}/arti.xcframework/ios-arm64/arti.framework/Headers"',
     }
+
+    s.preserve_paths = 'arti.xcframework', 'download.sh'
 
     s.user_target_xcconfig = {
       'GCC_PREPROCESSOR_DEFINITIONS' => 'USE_ARTI=1',
       'SWIFT_ACTIVE_COMPILATION_CONDITIONS' => '$(inherited) USE_ARTI',
     }
-
-    s.script_phases = [
-    {
-      :name => 'Build Arti',
-      :execution_position => :before_compile,
-      :output_files => ['arti-always-execute-this-but-supress-warning'],
-      :script => sprintf(script, "arti")
-    },
-    ]
-
-    s.preserve_paths = 'Tor/arti', 'Tor/arti.sh'
   end
 
   m.subspec 'Onionmasq' do |s|

@@ -1,6 +1,7 @@
 #!/bin/sh
 
 VERSION=$1
+NAMES=$2
 shift
 checksums=( "$@" )
 
@@ -23,7 +24,7 @@ cd ../..
 
 declare -i i=0
 
-for name in "tor" "tor-nolzma"
+for name in $NAMES
 do
     if [ ! -d "$name.xcframework" ]; then
         load "https://github.com/iCepa/Tor.framework/releases/download/$VERSION/$name.xcframework.zip"
