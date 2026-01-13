@@ -1,7 +1,7 @@
 Pod::Spec.new do |m|
 
   m.name             = 'Tor'
-  m.version          = '408.21.2'
+  m.version          = '408.21.3'
   m.summary          = 'Tor.framework is the easiest way to embed Tor in your iOS application.'
   m.description      = 'Tor.framework is the easiest way to embed Tor in your iOS application.'
 
@@ -22,7 +22,7 @@ Pod::Spec.new do |m|
   m.ios.deployment_target = '15.0'
   m.macos.deployment_target = '11.0'
 
-  m.prepare_command = "Tor/download.sh v#{m.version} arti 45065181050d5c0be9032b997ebab7cedb4d9f87c9cd49e8f29a66b794599246"
+  m.prepare_command = "Tor/download.sh v#{m.version} arti 16a8f88e8b4f09b39462733cefb8b1c5f715b36c03c4745a6a5c6a8eb370c48f"
 
   script = <<-ENDSCRIPT
 cd "${PODS_TARGET_SRCROOT}/Tor/%1$s"
