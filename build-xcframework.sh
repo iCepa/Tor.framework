@@ -410,6 +410,40 @@ fatten() {
         -create -output "$BUILDDIR/$SDK/$NAME/lib/$LIB.a" >> "$LOG" 2>&1
 }
 
+write_info_plist() {
+    SDK=$1
+    NAME=$2
+    VERSION=$3
+
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html#//apple_ref/doc/uid/20001431-102088
+    cat > "$BUILDDIR/$SDK/$NAME.framework/Info.plist" <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>CFBundleExecutable</key>
+  <string>$NAME</string>
+  <key>CFBundleIdentifier</key>
+  <string>org.torproject.$NAME</string>
+  <key>CFBundleInfoDictionaryVersion</key>
+  <string>6.0</string>
+  <key>CFBundleName</key>
+  <string>$NAME</string>
+  <key>CFBundlePackageType</key>
+  <string>FMWK</string>
+  <key>CFBundleShortVersionString</key>
+  <string>$VERSION</string>
+  <key>CFBundleSupportedPlatforms</key>
+  <array>
+    <string>$SDK</string>
+  </array>
+  <key>CFBundleVersion</key>
+  <string>$VERSION</string>
+</dict>
+</plist>
+EOF
+}
+
 create_framework() {
     SDK=$1
     IS_FAT=$2
@@ -460,6 +494,8 @@ create_framework() {
     fi
 
     cp -r "${HEADERS[@]}" "$BUILDDIR/$SDK/$NAME.framework/Headers" >> "$LOG" 2>&1
+
+    write_info_plist "$SDK" "$NAME" "${TOR_VERSION##*-}"
 }
 
 create_framework_a() {
@@ -493,6 +529,8 @@ create_framework_a() {
 
 #    cp "$BUILDDIR/arti/crates/arti-rpc-client-core/arti-rpc-client-core.h" \
 #    "$BUILDDIR/$SDK/$NAME.framework/Headers" >> "$LOG" 2>&1
+
+    write_info_plist "$SDK" "$NAME" "${ARTI_MOBILE_VERSION##*-}"
 }
 
 create_xcframework() {
