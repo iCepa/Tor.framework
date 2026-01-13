@@ -6,7 +6,9 @@ XZ_VERSION="v5.8.1"
 OPENSSL_VERSION="openssl-3.6.0"
 LIBEVENT_VERSION="release-2.1.12-stable"
 TOR_VERSION="tor-0.4.8.21"
-ARTI_VERSION="arti-1.7.0"
+ARTI_MOBILE_VERSION="arti-1.7.0"
+ARTI_VERSION="main"
+
 
 cd "$(dirname "$0")"
 ROOT="$(pwd -P)"
@@ -314,23 +316,12 @@ build_libtor() {
     mv micro-revision.i "$DEST" >> "$LOG" 2>&1
 }
 
-build_libarti() {
+rust_target() {
     SDK=$1
     ARCH=$2
 
-    SOURCE="$BUILDDIR/arti-mobile-ex"
-    LOG="$BUILDDIR/arti-$SDK-$ARCH.log"
-
-    if [ ! -d "$SOURCE" ]; then
-        echo "- Check out Arti-mobile-ex project"
-
-        cd "$BUILDDIR"
-        git clone --recursive --shallow-submodules --depth 1 --branch "$ARTI_VERSION" https://gitlab.com/guardianproject/tormobile/arti-mobile-ex.git >> "$LOG" 2>&1
-    fi
-
-    echo "- Build arti-mobile-ex for $ARCH ($SDK)"
-
-    cd "$SOURCE/common"
+    export IPHONEOS_DEPLOYMENT_TARGET=15.0
+    export MACOSX_DEPLOYMENT_TARGET=11.0
 
     TARGET="aarch64-apple-ios"
 
@@ -347,12 +338,60 @@ build_libarti() {
             TARGET="x86_64-apple-ios"
         fi
     fi
+}
+
+build_libarti() {
+    SDK=$1
+    ARCH=$2
+
+    SOURCE="$BUILDDIR/arti-mobile-ex"
+    LOG="$BUILDDIR/arti-$SDK-$ARCH.log"
+
+    if [ ! -d "$SOURCE" ]; then
+        echo "- Check out arti-mobile-ex project"
+
+        cd "$BUILDDIR"
+        git clone --recursive --shallow-submodules --depth 1 --branch "$ARTI_MOBILE_VERSION" https://gitlab.com/guardianproject/tormobile/arti-mobile-ex.git >> "$LOG" 2>&1
+    fi
+
+    echo "- Build arti-mobile-ex for $ARCH ($SDK)"
+
+    cd "$SOURCE/common"
+
+    rust_target $SDK $ARCH
 
     cargo build --locked --target "$TARGET" --release --target-dir "$BUILDDIR/$SDK/libarti-$ARCH" >> "$LOG" 2>&1
 
-    mkdir "$BUILDDIR/$SDK/libarti-$ARCH/lib" >> "$LOG" 2>&1
+    mkdir -p "$BUILDDIR/$SDK/libarti-$ARCH/lib" >> "$LOG" 2>&1
     mv "$BUILDDIR/$SDK/libarti-$ARCH/$TARGET/release/libarti_mobile_ex.a" "$BUILDDIR/$SDK/libarti-$ARCH/lib/" >> "$LOG" 2>&1
 }
+
+### Experimental! Not working.
+#build_libartirpc() {
+#    SDK=$1
+#    ARCH=$2
+#
+#    SOURCE="$BUILDDIR/arti"
+#    LOG="$BUILDDIR/artirpc-$SDK-$ARCH.log"
+#
+#    if [ ! -d "$SOURCE" ]; then
+#        echo "- Check out arti project"
+#
+#        cd "$BUILDDIR"
+#        git clone --recursive --shallow-submodules --depth 1 --branch "$ARTI_VERSION" https://gitlab.torproject.org/tpo/core/arti.git >> "$LOG" 2>&1
+#    fi
+#
+#    echo "- Build arti-rpc-client-core for $ARCH ($SDK)"
+#
+#    cd "$SOURCE"
+#
+#    rust_target $SDK $ARCH
+#
+#    cargo build --locked --package arti-rpc-client-core --features=full --target "$TARGET" --release --target-dir "$BUILDDIR/$SDK/libartirpc-$ARCH" >> "$LOG" 2>&1
+#
+#    mkdir -p "$BUILDDIR/$SDK/libartirpc-$ARCH/lib" >> "$LOG" 2>&1
+#    mv "$BUILDDIR/$SDK/libartirpc-$ARCH/$TARGET/release/libarti_rpc_client_core.a" "$BUILDDIR/$SDK/libartirpc-$ARCH/lib/" >> "$LOG" 2>&1
+#}
 
 fatten() {
     NAME=$1
@@ -445,12 +484,15 @@ create_framework_a() {
     fi
 
     LIBS=("$BUILDDIR/$SDK/libarti$POSTFIX/lib/libarti_mobile_ex.a")
+#        "$BUILDDIR/$SDK/libartirpc$POSTFIX/lib/libarti_rpc_client_core.a")
 
     libtool -static -o "$BUILDDIR/$SDK/$NAME.framework/$NAME" "${LIBS[@]}" >> "$LOG" 2>&1
 
     cd "$BUILDDIR/arti-mobile-ex/common"
+    cbindgen --lang c --output "$BUILDDIR/$SDK/$NAME.framework/Headers/arti-mobile.h" src/apple.rs >> "$LOG" 2>&1
 
-    cbindgen src/apple.rs -l c > "$BUILDDIR/$SDK/$NAME.framework/Headers/arti-mobile.h"
+#    cp "$BUILDDIR/arti/crates/arti-rpc-client-core/arti-rpc-client-core.h" \
+#    "$BUILDDIR/$SDK/$NAME.framework/Headers" >> "$LOG" 2>&1
 }
 
 create_xcframework() {
@@ -528,14 +570,21 @@ fi
 
 if [ ! -z $WITH_ARTI ]; then
     build_libarti       iphoneos            arm64
+#    build_libartirpc    iphoneos            arm64
     create_framework_a  iphoneos
     build_libarti       iphonesimulator     arm64
     build_libarti       iphonesimulator     x86_64
     fatten              libarti             iphonesimulator libarti_mobile_ex
+#    build_libartirpc    iphonesimulator     arm64
+#    build_libartirpc    iphonesimulator     x86_64
+#    fatten              libartirpc          iphonesimulator libarti_rpc_client_core
     create_framework_a  iphonesimulator     fat
     build_libarti       macosx              arm64
     build_libarti       macosx              x86_64
     fatten              libarti             macosx          libarti_mobile_ex
+#    build_libartirpc    macosx              arm64
+#    build_libartirpc    macosx              x86_64
+#    fatten              libartirpc          macosx          libarti_rpc_client_core
     create_framework_a  macosx              fat
     create_xcframework  arti
 fi

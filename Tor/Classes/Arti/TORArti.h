@@ -40,6 +40,8 @@ NS_SWIFT_NAME(TorArti)
 
 + (void)stop;
 
+//+ (NSError *)status;
+
 @end
 
 NS_ASSUME_NONNULL_END

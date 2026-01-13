@@ -7,6 +7,7 @@
 
 #import "TORArti.h"
 #import "arti-mobile.h"
+//#import "arti-rpc-client-core.h"
 
 @implementation TORArti
 
@@ -133,6 +134,64 @@ Completed completedBlock;
 {
     stop_arti();
 }
+
+// Experimental! Not working.
+//+ (NSError *)status
+//{
+//    ArtiRpcConnBuilder *builder;
+//    ArtiRpcError *error;
+//
+//    if (arti_rpc_conn_builder_new(&builder, &error) != ARTI_RPC_STATUS_SUCCESS)
+//    {
+//        return [self nsErrorFromArti:error];
+//    }
+//
+//    ArtiRpcConn *conn;
+//
+//    if (arti_rpc_conn_builder_connect(builder, &conn, &error) != ARTI_RPC_STATUS_SUCCESS)
+//    {
+//        arti_rpc_conn_builder_free(builder);
+//
+//        return [self nsErrorFromArti:error];
+//    }
+//
+//    arti_rpc_conn_builder_free(builder);
+//
+//    const char *sessionId = arti_rpc_conn_get_session_id(conn);
+//
+//    NSLog(@"sessionId=%s", sessionId);
+//
+//    ArtiRpcStr *response;
+//
+//    if (arti_rpc_conn_execute(conn, [@"arti:get_client_status" cStringUsingEncoding:NSUTF8StringEncoding], &response, &error) != ARTI_RPC_STATUS_SUCCESS)
+//    {
+//        arti_rpc_conn_free(conn);
+//
+//        return [self nsErrorFromArti:error];
+//    }
+//
+//    NSLog(@"response=%s", arti_rpc_str_get(response));
+//
+//    arti_rpc_str_free(response);
+//
+//    arti_rpc_conn_free(conn);
+//
+//    return nil;
+//}
+//
+//+ (NSError *)nsErrorFromArti:(ArtiRpcError *)error
+//{
+//    NSString *msg = [NSString stringWithCString:arti_rpc_err_message(error) encoding:NSUTF8StringEncoding];
+//    ArtiRpcStatus code = arti_rpc_err_status(error);
+//
+//    NSError *err = [[NSError alloc] initWithDomain:@"Arti" code:code userInfo:@{NSLocalizedDescriptionKey: msg}];
+//
+//    arti_rpc_err_free(error);
+//
+//    NSLog(@"Arti Error=%@", err);
+//
+//    return err;
+//}
 
 void loggingCb(const char * message)
 {
