@@ -2,10 +2,10 @@
 
 PATH=$PATH:/usr/local/bin:/usr/local/opt/gettext/bin:/usr/local/opt/automake/bin:/usr/local/opt/aclocal/bin:/opt/homebrew/bin
 
-XZ_VERSION="v5.8.1"
-OPENSSL_VERSION="openssl-3.6.0"
+XZ_VERSION="v5.8.2"
+OPENSSL_VERSION="openssl-3.6.1"
 LIBEVENT_VERSION="release-2.1.12-stable"
-TOR_VERSION="tor-0.4.8.21"
+TOR_VERSION="tor-0.4.8.22"
 ARTI_MOBILE_VERSION="arti-1.7.0"
 ARTI_VERSION="main"
 
