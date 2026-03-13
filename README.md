@@ -44,7 +44,7 @@ simply add the following line to your Podfile:
 
 ```ruby
 use_frameworks!
-pod 'Tor', '~> 408'
+pod 'Tor', '~> 409'
 ```
 
 (or `Tor/GeoIP` - see below.)
