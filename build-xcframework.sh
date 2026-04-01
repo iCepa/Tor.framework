@@ -217,6 +217,7 @@ build_libevent() {
         LDFLAGS="-isysroot ${SDKPATH} -L$DEST -fembed-bitcode" \
         cross_compiling="yes" \
         ac_cv_func_clock_gettime="no" \
+        ac_cv_func_pipe2="no" \
         >> "$LOG" 2>&1
 
     make -j$(sysctl -n hw.logicalcpu_max) >> "$LOG" 2>&1
@@ -309,6 +310,7 @@ build_libtor() {
         ac_cv_func__NSGetEnviron="no" \
         ac_cv_func_clock_gettime="no" \
         ac_cv_func_getentropy="no" \
+        ac_cv_func_pipe2="no" \
         >> "$LOG" 2>&1
 
     # There seems to be a race condition with the above configure and the later cp.
