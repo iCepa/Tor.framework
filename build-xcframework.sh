@@ -7,7 +7,7 @@ PATH=$PATH:/usr/local/bin:/usr/local/opt/gettext/bin:/usr/local/opt/automake/bin
 XZ_VERSION="v5.8.3"
 OPENSSL_VERSION="openssl-3.6.3"
 LIBEVENT_VERSION="release-2.1.12-stable"
-TOR_VERSION="tor-0.4.9.10"
+TOR_VERSION="tor-0.4.9.11"
 ARTI_MOBILE_VERSION="arti-1.7.0"
 ARTI_VERSION="main"
 
