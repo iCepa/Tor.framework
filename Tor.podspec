@@ -37,9 +37,6 @@ Pod::Spec.new do |m|
     s.vendored_frameworks = 'tor.xcframework'
     s.libraries = 'z'
 
-    s.pod_target_xcconfig = {
-      'HEADER_SEARCH_PATHS' => '$(inherited) "${PODS_TARGET_SRCROOT}/tor.xcframework/ios-arm64/tor.framework/Headers"',
-    }
 
     s.preserve_paths = 'tor.xcframework', 'download.sh'
   end
@@ -52,9 +49,6 @@ Pod::Spec.new do |m|
     s.vendored_frameworks = 'tor-nolzma.xcframework'
     s.libraries = 'z'
 
-    s.pod_target_xcconfig = {
-      'HEADER_SEARCH_PATHS' => '$(inherited) "${PODS_TARGET_SRCROOT}/tor-nolzma.xcframework/ios-arm64/tor-nolzma.framework/Headers"',
-    }
 
     s.preserve_paths = 'tor-nolzma.xcframework', 'Tor/download.sh'
   end

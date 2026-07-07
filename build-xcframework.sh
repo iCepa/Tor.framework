@@ -425,12 +425,11 @@ fatten() {
 }
 
 write_info_plist() {
-    SDK=$1
-    NAME=$2
-    VERSION=$3
+    TARGET=$1
+    VERSION=$2
 
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html#//apple_ref/doc/uid/20001431-102088
-    cat > "$BUILDDIR/$SDK/$NAME.framework/Info.plist" <<EOF
+    cat > "$TARGET/Info.plist" <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -472,7 +471,6 @@ create_framework() {
     fi
 
     rm -rf "$BUILDDIR/$SDK/$NAME.framework" >> "$LOG" 2>&1
-    mkdir -p "$BUILDDIR/$SDK/$NAME.framework/Headers" >> "$LOG" 2>&1
 
     if [ -z "$IS_FAT" ]; then
         echo "- Create framework for $SDK"
@@ -483,6 +481,22 @@ create_framework() {
 
         POSTFIX=""
     fi
+
+    # Create "deep" framework structure instead of a "shallow" framework for better compatibility.
+    mkdir -p "$BUILDDIR/$SDK/$NAME.framework/Versions/A/Headers" >> "$LOG" 2>&1
+    mkdir -p "$BUILDDIR/$SDK/$NAME.framework/Versions/A/Modules" >> "$LOG" 2>&1
+    mkdir -p "$BUILDDIR/$SDK/$NAME.framework/Versions/A/Resources" >> "$LOG" 2>&1
+
+    cd "$BUILDDIR/$SDK/$NAME.framework/Versions"
+    ln -s "A" "Current"
+    cd -
+
+    cd "$BUILDDIR/$SDK/$NAME.framework"
+    ln -s "Versions/Current/Headers" "Headers"
+    ln -s "Versions/Current/Modules" "Modules"
+    ln -s "Versions/Current/Resources" "Resources"
+    ln -s "Versions/Current/$NAME" "$NAME"
+    cd -
 
     if [ -z "$NO_LZMA" ]; then
         LIBS=("$BUILDDIR/$SDK/libssl$POSTFIX/lib/libssl.a" \
@@ -497,7 +511,7 @@ create_framework() {
             "$BUILDDIR/$SDK/libtor-nolzma$POSTFIX/lib/libtor.a")
     fi
 
-    libtool -static -o "$BUILDDIR/$SDK/$NAME.framework/$NAME" "${LIBS[@]}" >> "$LOG" 2>&1
+    libtool -static -o "$BUILDDIR/$SDK/$NAME.framework/Versions/A/$NAME" "${LIBS[@]}" >> "$LOG" 2>&1
 
     HEADERS=("$BUILDDIR/$SDK/libssl-arm64/include"/* \
         "$BUILDDIR/$SDK/libevent-arm64/include"/* \
@@ -507,9 +521,38 @@ create_framework() {
         HEADERS=("$BUILDDIR/$SDK/liblzma-arm64/include"/* "${HEADERS[@]}")
     fi
 
-    cp -r "${HEADERS[@]}" "$BUILDDIR/$SDK/$NAME.framework/Headers" >> "$LOG" 2>&1
+    cp -r "${HEADERS[@]}" "$BUILDDIR/$SDK/$NAME.framework/Versions/A/Headers" >> "$LOG" 2>&1
 
-    write_info_plist "$SDK" "$NAME" "${TOR_VERSION##*-}"
+    # Make sure all `#import` statements point to local header files, so we can get
+    # rid of the need to inject `HEADER_SEARCH_PATHS`.
+    "$ROOT/fix_includes.pl" "$BUILDDIR/$SDK/$NAME.framework/Versions/A/Headers" >> "$LOG" 2>&1
+
+    # The umbrella header should contain only headers needed for the `CTor` wrapper code.
+    # Don't try to include all of them, you'll fail miserably, as some are leading into
+    # a dead end only available on other platforms.
+    cat > "$BUILDDIR/$SDK/$NAME.framework/Versions/A/Headers/tor_umbrella.h" <<EOF
+#ifndef Tor_Umbrella_h
+#define Tor_Umbrella_h
+
+#import "event2/event.h"
+#import "lib/log/log.h"
+#import "feature/api/tor_api.h"
+#import "lib/malloc/malloc.h"
+#import "lib/crypt_ops/crypto_curve25519.h"
+#import "lib/encoding/binascii.h"
+
+#endif
+EOF
+
+    # Write a modulemap, which makes this be usable with `@import tor;` in Objective-C.
+    cat > "$BUILDDIR/$SDK/$NAME.framework/Versions/A/Modules/module.modulemap" <<EOF
+framework module tor {
+    umbrella header "tor_umbrella.h"
+    export *
+}
+EOF
+
+    write_info_plist "$BUILDDIR/$SDK/$NAME.framework/Versions/A/Resources" "${TOR_VERSION##*-}"
 }
 
 create_framework_a() {

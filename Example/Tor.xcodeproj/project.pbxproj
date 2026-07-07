@@ -115,6 +115,7 @@
 		A0F0091C279072D60073D36D /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A0F0091E279073DA0073D36D /* Tor-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tor-Prefix.pch"; sourceTree = "<group>"; };
 		A0F0092027907A8A0073D36D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A0F652B12FFBC931002371C3 /* fix_includes.pl */ = {isa = PBXFileReference; lastKnownFileType = text.script.perl; name = fix_includes.pl; path = ../fix_includes.pl; sourceTree = SOURCE_ROOT; };
 		C2C4B3C67BC4AA29D918DFE0 /* Pods-Tor-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tor-Tests.debug.xcconfig"; path = "Target Support Files/Pods-Tor-Tests/Pods-Tor-Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		CCD44E911F9C4625A303B626 /* Pods-Tor-Example-Mac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tor-Example-Mac.debug.xcconfig"; path = "Target Support Files/Pods-Tor-Example-Mac/Pods-Tor-Example-Mac.debug.xcconfig"; sourceTree = "<group>"; };
 		FF35A366A1B1BD8B0C89AE24 /* Pods-Tor_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tor_Tests.release.xcconfig"; path = "Target Support Files/Pods-Tor_Tests/Pods-Tor_Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -235,6 +236,7 @@
 				A0463DB82AA0DB0700AC9925 /* onionmasq.sh */,
 				A0C981E32A9F52D100E265EE /* mmap-cache.patch */,
 				A091B5002DEDF93000071F53 /* build-xcframework.sh */,
+				A0F652B12FFBC931002371C3 /* fix_includes.pl */,
 			);
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
