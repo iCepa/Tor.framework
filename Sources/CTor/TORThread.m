@@ -5,11 +5,11 @@
 //  Created by Conrad Kramer on 7/19/15.
 //
 
-#import <feature/api/tor_api.h>
-
 #import "TORThread.h"
 #import "TORLogging.h"
 #import "TORConfiguration.h"
+
+@import tor;
 
 NS_ASSUME_NONNULL_BEGIN
 

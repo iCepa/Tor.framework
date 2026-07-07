@@ -7,6 +7,13 @@ tor-nolzma.xcframework.zip
 arti.xcframework
 arti.xcframework.zip
 
+# Swift Package Manager
+/.build
+/Packages
+.swiftpm/configuration/registries.json
+.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
+.netrc
+
 # Created by https://www.toptal.com/developers/gitignore/api/macos,xcode,swift,objective-c
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos,xcode,swift,objective-c
 

@@ -26,13 +26,13 @@ Pod::Spec.new do |m|
   m.subspec 'Core' do |s|
     s.requires_arc = true
 
-    s.source_files = 'Tor/Classes/Core/**/*'
+    s.source_files = 'Sources/TorCore/**/*'
   end
 
   m.subspec 'CTor' do |s|
     s.dependency 'Tor/Core'
 
-    s.source_files = 'Tor/Classes/CTor/**/*'
+    s.source_files = 'Sources/CTor/**/*'
 
     s.vendored_frameworks = 'tor.xcframework'
     s.libraries = 'z'

@@ -98,6 +98,7 @@
 		A057DDA42EDDE7800044B431 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A057DDA62EDDEEC80044B431 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		A05D84CE2E180D4200D15D76 /* download.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = download.sh; path = ../Tor/download.sh; sourceTree = SOURCE_ROOT; };
+		A06CF6682FF697D100B1F56B /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Package.swift; path = ../Package.swift; sourceTree = SOURCE_ROOT; };
 		A07DA5B42791AED000D62827 /* .gitmodules */ = {isa = PBXFileReference; lastKnownFileType = text; name = .gitmodules; path = ../.gitmodules; sourceTree = "<group>"; };
 		A0912FD12DEE026600071F53 /* Brewfile */ = {isa = PBXFileReference; lastKnownFileType = text; name = Brewfile; path = ../Brewfile; sourceTree = SOURCE_ROOT; };
 		A091B5002DEDF93000071F53 /* build-xcframework.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "build-xcframework.sh"; path = "../build-xcframework.sh"; sourceTree = SOURCE_ROOT; };
@@ -226,6 +227,7 @@
 				A0912FD12DEE026600071F53 /* Brewfile */,
 				93A4EA262BB0B20934ED644E /* Tor.podspec */,
 				A0C582562AE8FCA000A81084 /* Arti.podspec */,
+				A06CF6682FF697D100B1F56B /* Package.swift */,
 				3369E201AA8D44290EFDB264 /* README.md */,
 				591053441A46E47D764CDDAB /* LICENSE */,
 				A0F008F827906CA30073D36D /* Podfile */,

@@ -6,10 +6,8 @@
 //
 
 #import "TORX25519KeyPair.h"
-#import <lib/malloc/malloc.h>
-#import <lib/crypt_ops/crypto_curve25519.h>
-#import <lib/encoding/binascii.h>
 
+@import tor;
 
 @implementation TORX25519KeyPair
 
