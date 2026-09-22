@@ -21,7 +21,7 @@ target 'Tor-Example' do
 end
 
 target 'Tor-Example-Mac' do
-  platform :macos, '11.0'
+  platform :macos, '12.0'
 
   tor
 end

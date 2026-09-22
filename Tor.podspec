@@ -19,7 +19,7 @@ Pod::Spec.new do |m|
   m.social_media_url = 'https://chaos.social/@tla'
 
   m.ios.deployment_target = '15.0'
-  m.macos.deployment_target = '11.0'
+  m.macos.deployment_target = '12.0'
 
   m.prepare_command = "Tor/download.sh v#{m.version} \"tor tor-nolzma\" a72b44b96e1205bedc29796cb77a84088cfdc41f1093db6ca0a27c802e16d7c4 8ced1cde92b15dc32b2a407f76cefb00339cc1a00bdc8576e0ad5499d00b2b09"
 
