@@ -10,10 +10,10 @@ Currently, the framework compiles in the following versions of `tor`, `libevent`
 
 | Component | Version  |
 |:--------- | --------:|
-| tor       | 0.4.9.11 |
+| tor       | 0.4.9.12 |
 | libevent  | 2.1.13   |
-| OpenSSL   | 3.6.3    |
-| liblzma   | 5.8.3    |
+| OpenSSL   | 3.6.4    |
+| liblzma   | 5.8.4    |
 | Arti      | 1.7.0    |
 | Onionmasq | 0.6.2    |
 
@@ -33,8 +33,8 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 ## Requirements
 
 - iOS 15.0 or later
-- MacOS 11.0 or later
-- Xcode 26.0 or later
+- MacOS 12.0 or later
+- Xcode 27.0 or later
 
 
 ## Installation
