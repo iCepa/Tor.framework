@@ -424,40 +424,7 @@ fatten() {
         -create -output "$BUILDDIR/$SDK/$NAME/lib/$LIB.a" >> "$LOG" 2>&1
 }
 
-write_info_plist() {
-    TARGET=$1
-    VERSION=$2
-
-# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html#//apple_ref/doc/uid/20001431-102088
-    cat > "$TARGET/Info.plist" <<EOF
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-  <key>CFBundleExecutable</key>
-  <string>$NAME</string>
-  <key>CFBundleIdentifier</key>
-  <string>org.torproject.$NAME</string>
-  <key>CFBundleInfoDictionaryVersion</key>
-  <string>6.0</string>
-  <key>CFBundleName</key>
-  <string>$NAME</string>
-  <key>CFBundlePackageType</key>
-  <string>FMWK</string>
-  <key>CFBundleShortVersionString</key>
-  <string>$VERSION</string>
-  <key>CFBundleSupportedPlatforms</key>
-  <array>
-    <string>$SDK</string>
-  </array>
-  <key>CFBundleVersion</key>
-  <string>$VERSION</string>
-</dict>
-</plist>
-EOF
-}
-
-create_framework() {
+create_static_lib() {
     SDK=$1
     IS_FAT=$2
     NO_LZMA=$3
@@ -470,33 +437,13 @@ create_framework() {
         NAME="tor-nolzma"
     fi
 
-    rm -rf "$BUILDDIR/$SDK/$NAME.framework" >> "$LOG" 2>&1
-
     if [ -z "$IS_FAT" ]; then
-        echo "- Create framework for $SDK"
-
+        echo "- Create static library for $SDK"
         POSTFIX="-arm64"
     else
-        echo "- Create framework for fat $SDK"
-
+        echo "- Create static library for fat $SDK"
         POSTFIX=""
     fi
-
-    # Create "deep" framework structure instead of a "shallow" framework for better compatibility.
-    mkdir -p "$BUILDDIR/$SDK/$NAME.framework/Versions/A/Headers" >> "$LOG" 2>&1
-    mkdir -p "$BUILDDIR/$SDK/$NAME.framework/Versions/A/Modules" >> "$LOG" 2>&1
-    mkdir -p "$BUILDDIR/$SDK/$NAME.framework/Versions/A/Resources" >> "$LOG" 2>&1
-
-    cd "$BUILDDIR/$SDK/$NAME.framework/Versions"
-    ln -s "A" "Current"
-    cd -
-
-    cd "$BUILDDIR/$SDK/$NAME.framework"
-    ln -s "Versions/Current/Headers" "Headers"
-    ln -s "Versions/Current/Modules" "Modules"
-    ln -s "Versions/Current/Resources" "Resources"
-    ln -s "Versions/Current/$NAME" "$NAME"
-    cd -
 
     if [ -z "$NO_LZMA" ]; then
         LIBS=("$BUILDDIR/$SDK/libssl$POSTFIX/lib/libssl.a" \
@@ -511,7 +458,7 @@ create_framework() {
             "$BUILDDIR/$SDK/libtor-nolzma$POSTFIX/lib/libtor.a")
     fi
 
-    libtool -static -o "$BUILDDIR/$SDK/$NAME.framework/Versions/A/$NAME" "${LIBS[@]}" >> "$LOG" 2>&1
+    libtool -static -o "$BUILDDIR/$SDK/$NAME.a" "${LIBS[@]}" >> "$LOG" 2>&1
 
     HEADERS=("$BUILDDIR/$SDK/libssl-arm64/include"/* \
         "$BUILDDIR/$SDK/libevent-arm64/include"/* \
@@ -521,41 +468,17 @@ create_framework() {
         HEADERS=("$BUILDDIR/$SDK/liblzma-arm64/include"/* "${HEADERS[@]}")
     fi
 
-    cp -r "${HEADERS[@]}" "$BUILDDIR/$SDK/$NAME.framework/Versions/A/Headers" >> "$LOG" 2>&1
+    HDR_DEST="$BUILDDIR/$SDK/$NAME-headers"
+    rm -rf "$HDR_DEST" >> "$LOG" 2>&1
+    mkdir -p "$HDR_DEST" >> "$LOG" 2>&1
+    cp -r "${HEADERS[@]}" "$HDR_DEST" >> "$LOG" 2>&1
 
     # Make sure all `#import` statements point to local header files, so we can get
     # rid of the need to inject `HEADER_SEARCH_PATHS`.
-    "$ROOT/fix_includes.pl" "$BUILDDIR/$SDK/$NAME.framework/Versions/A/Headers" >> "$LOG" 2>&1
-
-    # The umbrella header should contain only headers needed for the `CTor` wrapper code.
-    # Don't try to include all of them, you'll fail miserably, as some are leading into
-    # a dead end only available on other platforms.
-    cat > "$BUILDDIR/$SDK/$NAME.framework/Versions/A/Headers/tor_umbrella.h" <<EOF
-#ifndef Tor_Umbrella_h
-#define Tor_Umbrella_h
-
-#import "event2/event.h"
-#import "lib/log/log.h"
-#import "feature/api/tor_api.h"
-#import "lib/malloc/malloc.h"
-#import "lib/crypt_ops/crypto_curve25519.h"
-#import "lib/encoding/binascii.h"
-
-#endif
-EOF
-
-    # Write a modulemap, which makes this be usable with `@import tor;` in Objective-C.
-    cat > "$BUILDDIR/$SDK/$NAME.framework/Versions/A/Modules/module.modulemap" <<EOF
-framework module tor {
-    umbrella header "tor_umbrella.h"
-    export *
-}
-EOF
-
-    write_info_plist "$BUILDDIR/$SDK/$NAME.framework/Versions/A/Resources" "${TOR_VERSION##*-}"
+    "$ROOT/fix_includes.pl" "$HDR_DEST" >> "$LOG" 2>&1
 }
 
-create_framework_a() {
+create_static_lib_a() {
     SDK=$1
     IS_FAT=$2
 
@@ -563,15 +486,12 @@ create_framework_a() {
 
     NAME="arti"
 
-    rm -rf "$BUILDDIR/$SDK/$NAME.framework" >> "$LOG" 2>&1
-    mkdir -p "$BUILDDIR/$SDK/$NAME.framework/Headers" >> "$LOG" 2>&1
-
     if [ -z "$IS_FAT" ]; then
-        echo "- Create framework for $SDK"
+        echo "- Create static library for $SDK"
 
         POSTFIX="-arm64"
     else
-        echo "- Create framework for fat $SDK"
+        echo "- Create static library for fat $SDK"
 
         POSTFIX=""
     fi
@@ -579,15 +499,17 @@ create_framework_a() {
     LIBS=("$BUILDDIR/$SDK/libarti$POSTFIX/lib/libarti_mobile_ex.a")
 #        "$BUILDDIR/$SDK/libartirpc$POSTFIX/lib/libarti_rpc_client_core.a")
 
-    libtool -static -o "$BUILDDIR/$SDK/$NAME.framework/$NAME" "${LIBS[@]}" >> "$LOG" 2>&1
+    libtool -static -o "$BUILDDIR/$SDK/$NAME.a" "${LIBS[@]}" >> "$LOG" 2>&1
+
+    HDR_DEST="$BUILDDIR/$SDK/$NAME-headers"
+    rm -rf "$HDR_DEST" >> "$LOG" 2>&1
+    mkdir -p "$HDR_DEST" >> "$LOG" 2>&1
 
     cd "$BUILDDIR/arti-mobile-ex/common"
-    cbindgen --lang c --output "$BUILDDIR/$SDK/$NAME.framework/Headers/arti-mobile.h" src/apple.rs >> "$LOG" 2>&1
+    cbindgen --lang c --output "$HDR_DEST/arti-mobile.h" src/apple.rs >> "$LOG" 2>&1
 
 #    cp "$BUILDDIR/arti/crates/arti-rpc-client-core/arti-rpc-client-core.h" \
-#    "$BUILDDIR/$SDK/$NAME.framework/Headers" >> "$LOG" 2>&1
-
-    write_info_plist "$SDK" "$NAME" "${ARTI_MOBILE_VERSION##*-}"
+#    "$HDR_DEST" >> "$LOG" 2>&1
 }
 
 create_xcframework() {
@@ -602,9 +524,9 @@ create_xcframework() {
         rm -rf "$ROOT/$name.xcframework" "$ROOT/$name.xcframework.zip" >> "$LOG" 2>&1
 
         xcodebuild -create-xcframework \
-            -framework "$BUILDDIR/iphoneos/$name.framework" \
-            -framework "$BUILDDIR/iphonesimulator/$name.framework" \
-            -framework "$BUILDDIR/macosx/$name.framework" \
+            -library "$BUILDDIR/iphoneos/$name.a" -headers "$BUILDDIR/iphoneos/$name-headers" \
+            -library "$BUILDDIR/iphonesimulator/$name.a" -headers "$BUILDDIR/iphonesimulator/$name-headers" \
+            -library "$BUILDDIR/macosx/$name.a" -headers "$BUILDDIR/macosx/$name-headers" \
             -output "$ROOT/$name.xcframework" >> "$LOG" 2>&1
 
         cd "$ROOT"
@@ -620,8 +542,8 @@ if [ ! -z $WITH_CTOR ]; then
     build_libevent      iphoneos            arm64           15.0
     build_libtor        iphoneos            arm64           15.0
     build_libtor        iphoneos            arm64           15.0    nolzma
-    create_framework    iphoneos
-    create_framework    iphoneos            ""              nolzma
+    create_static_lib   iphoneos
+    create_static_lib   iphoneos            ""              nolzma
 
     build_liblzma       iphonesimulator     arm64           15.0
     build_liblzma       iphonesimulator     x86_64          15.0
@@ -639,8 +561,8 @@ if [ ! -z $WITH_CTOR ]; then
     build_libtor        iphonesimulator     arm64           15.0    nolzma
     build_libtor        iphonesimulator     x86_64          15.0    nolzma
     fatten              libtor-nolzma       iphonesimulator libtor
-    create_framework    iphonesimulator     fat
-    create_framework    iphonesimulator     fat             nolzma
+    create_static_lib   iphonesimulator     fat
+    create_static_lib   iphonesimulator     fat             nolzma
 
     build_liblzma       macosx              arm64           11.0
     build_liblzma       macosx              x86_64          11.0
@@ -658,29 +580,29 @@ if [ ! -z $WITH_CTOR ]; then
     build_libtor        macosx              arm64           11.0    nolzma
     build_libtor        macosx              x86_64          11.0    nolzma
     fatten              libtor-nolzma       macosx          libtor
-    create_framework    macosx              fat
-    create_framework    macosx              fat             nolzma
+    create_static_lib   macosx              fat
+    create_static_lib   macosx              fat             nolzma
     create_xcframework  "tor tor-nolzma"
 fi
 
 if [ ! -z $WITH_ARTI ]; then
     build_libarti       iphoneos            arm64
 #    build_libartirpc    iphoneos            arm64
-    create_framework_a  iphoneos
+    create_static_lib_a iphoneos
     build_libarti       iphonesimulator     arm64
     build_libarti       iphonesimulator     x86_64
     fatten              libarti             iphonesimulator libarti_mobile_ex
 #    build_libartirpc    iphonesimulator     arm64
 #    build_libartirpc    iphonesimulator     x86_64
 #    fatten              libartirpc          iphonesimulator libarti_rpc_client_core
-    create_framework_a  iphonesimulator     fat
+    create_static_lib_a iphonesimulator     fat
     build_libarti       macosx              arm64
     build_libarti       macosx              x86_64
     fatten              libarti             macosx          libarti_mobile_ex
 #    build_libartirpc    macosx              arm64
 #    build_libartirpc    macosx              x86_64
 #    fatten              libartirpc          macosx          libarti_rpc_client_core
-    create_framework_a  macosx              fat
+    create_static_lib_a macosx              fat
     create_xcframework  arti
 fi
 
