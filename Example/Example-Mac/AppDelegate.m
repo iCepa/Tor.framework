@@ -6,18 +6,20 @@
 //  Copyright © 2022 Benjamin Erhart. All rights reserved.
 //
 
+//#define USE_ARTI 1
+
+
 #import "AppDelegate.h"
-#import <Tor/NSBundle+GeoIP.h>
-#import <Tor/TORConfiguration.h>
-#import <Tor/TORController.h>
+#import <TORConfiguration.h>
+#import <TORController.h>
 
 #ifdef USE_ARTI
-    #import <Tor/TORArti.h>
+    #import <TORArti.h>
 #else
     #ifdef USE_ONIONMASQ
-        #import <Tor/Onionmasq.h>
+        #import <Onionmasq.h>
     #else
-        #import <Tor/TORThread.h>
+        #import <TORThread.h>
     #endif
 #endif
 
@@ -39,8 +41,8 @@
     configuration.cookieAuthentication = YES;
     configuration.autoControlPort = YES;
     configuration.dataDirectory = [appSuppDir URLByAppendingPathComponent:@"tor"];
-    configuration.geoipFile = NSBundle.geoIpBundle.geoipFile;
-    configuration.geoip6File = NSBundle.geoIpBundle.geoip6File;
+    configuration.geoipFile = [NSBundle.mainBundle URLForResource:@"geoip" withExtension:nil];
+    configuration.geoip6File = [NSBundle.mainBundle URLForResource:@"geoip6" withExtension:nil];
 
     NSURL *cacheDir = [fm URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask].firstObject;
 

@@ -18,6 +18,9 @@
 		A057DD272ED9F2800044B431 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A057DD262ED9F2800044B431 /* ViewController.swift */; };
 		A057DDA52EDDE7800044B431 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A057DDA42EDDE7800044B431 /* ViewController.swift */; };
 		A057DDA72EDDEEC80044B431 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A057DDA62EDDEEC80044B431 /* Launch Screen.storyboard */; };
+		A0D845DC3093BB68007886E8 /* CTorNoLzma in Frameworks */ = {isa = PBXBuildFile; productRef = A0D845DB3093BB68007886E8 /* CTorNoLzma */; };
+		A0D845E43093BE19007886E8 /* CTor in Frameworks */ = {isa = PBXBuildFile; productRef = A0D845E33093BE19007886E8 /* CTor */; };
+		A0D845E63093BE19007886E8 /* CTorNoLzma in Frameworks */ = {isa = PBXBuildFile; productRef = A0D845E53093BE19007886E8 /* CTorNoLzma */; };
 		A0F008FC27906DBA0073D36D /* TORConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F008FA27906DBA0073D36D /* TORConfigurationTests.m */; };
 		A0F008FD27906DBA0073D36D /* TORControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F008FB27906DBA0073D36D /* TORControllerTests.m */; };
 		A0F0090D279070B40073D36D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F0090C279070B40073D36D /* AppDelegate.m */; };
@@ -57,7 +60,6 @@
 		A057DDA32EDDE7800044B431 /* Tor-Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tor-Example-Bridging-Header.h"; sourceTree = "<group>"; };
 		A057DDA42EDDE7800044B431 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A057DDA62EDDEEC80044B431 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		A05D84CE2E180D4200D15D76 /* download.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = download.sh; path = ../Tor/download.sh; sourceTree = SOURCE_ROOT; };
 		A06CF6682FF697D100B1F56B /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Package.swift; path = ../Package.swift; sourceTree = SOURCE_ROOT; };
 		A07DA5B42791AED000D62827 /* .gitmodules */ = {isa = PBXFileReference; lastKnownFileType = text; name = .gitmodules; path = ../.gitmodules; sourceTree = "<group>"; };
 		A0912FD12DEE026600071F53 /* Brewfile */ = {isa = PBXFileReference; lastKnownFileType = text; name = Brewfile; path = ../Brewfile; sourceTree = SOURCE_ROOT; };
@@ -76,11 +78,20 @@
 		A0F652B12FFBC931002371C3 /* fix_includes.pl */ = {isa = PBXFileReference; lastKnownFileType = text.script.perl; name = fix_includes.pl; path = ../fix_includes.pl; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		A0D845CE3093B7CB007886E8 /* Resources */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Resources;
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		6003F587195388D20070C39A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0D845E43093BE19007886E8 /* CTor in Frameworks */,
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
@@ -101,7 +112,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7913583D7355D84D17A5203C /* Pods_Tor_Example_Mac.framework in Frameworks */,
+				A0D845DC3093BB68007886E8 /* CTorNoLzma in Frameworks */,
+				A0D845E63093BE19007886E8 /* CTorNoLzma in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,6 +125,7 @@
 			children = (
 				60FF7A9C1954A5C5007DD14C /* Podspec Metadata */,
 				6003F593195388D20070C39A /* Example for Tor */,
+				A0D845CE3093B7CB007886E8 /* Resources */,
 				6003F5B5195388D20070C39A /* Tests */,
 				A0F0090A279070B40073D36D /* Example-Mac */,
 				6003F58C195388D20070C39A /* Frameworks */,
@@ -178,7 +191,6 @@
 				591053441A46E47D764CDDAB /* LICENSE */,
 				A0F008FE27906F620073D36D /* .gitignore */,
 				A07DA5B42791AED000D62827 /* .gitmodules */,
-				A05D84CE2E180D4200D15D76 /* download.sh */,
 				A0463DB82AA0DB0700AC9925 /* onionmasq.sh */,
 				A0C981E32A9F52D100E265EE /* mmap-cache.patch */,
 				A091B5002DEDF93000071F53 /* build-xcframework.sh */,
@@ -209,13 +221,20 @@
 			buildPhases = (
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
+				A0D845CA3093B5C5007886E8 /* Update GeoIP files */,
 				6003F588195388D20070C39A /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				A0D845CE3093B7CB007886E8 /* Resources */,
+			);
 			name = "Tor-Example";
+			packageProductDependencies = (
+				A0D845E33093BE19007886E8 /* CTor */,
+			);
 			productName = Tor;
 			productReference = 6003F58A195388D20070C39A /* Tor-Example.app */;
 			productType = "com.apple.product-type.application";
@@ -244,13 +263,21 @@
 			buildPhases = (
 				A0F00905279070B40073D36D /* Sources */,
 				A0F00906279070B40073D36D /* Frameworks */,
+				A0D845CB3093B7A3007886E8 /* Update GeoIP files */,
 				A0F00907279070B40073D36D /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				A0D845CE3093B7CB007886E8 /* Resources */,
+			);
 			name = "Tor-Example-Mac";
+			packageProductDependencies = (
+				A0D845DB3093BB68007886E8 /* CTorNoLzma */,
+				A0D845E53093BE19007886E8 /* CTorNoLzma */,
+			);
 			productName = Tor_Example_Mac;
 			productReference = A0F00909279070B40073D36D /* Tor-Example-Mac.app */;
 			productType = "com.apple.product-type.application";
@@ -287,6 +314,9 @@
 				Base,
 			);
 			mainGroup = 6003F581195388D10070C39A;
+			packageReferences = (
+				A0D845E23093BE19007886E8 /* XCLocalSwiftPackageReference "../../Tor.framework" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 6003F58B195388D20070C39A /* Products */;
 			projectDirPath = "";
@@ -325,6 +355,47 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A0D845CA3093B5C5007886E8 /* Update GeoIP files */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Update GeoIP files";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/sh\n\nDEST=\"$PROJECT_DIR/Resources\"\n\nmkdir -p \"$DEST\"\ncd \"$DEST\"\n\n# Test if file is older then 1 week.\nOLD=\"$(find geoip -mmin +10080 2>/dev/null)\"\n\n# Only download, if files are not existing or older than 1 week.\nif [ ! -f geoip -o ! -z \"$OLD\" ]; then\n    curl --remote-name --location https://gitlab.torproject.org/tpo/core/tor/-/raw/main/src/config/geoip\n    curl --remote-name --location https://gitlab.torproject.org/tpo/core/tor/-/raw/main/src/config/geoip6\nfi\n";
+		};
+		A0D845CB3093B7A3007886E8 /* Update GeoIP files */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Update GeoIP files";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/sh\n\nDEST=\"$PROJECT_DIR/Resources\"\n\nmkdir -p \"$DEST\"\ncd \"$DEST\"\n\n# Test if file is older then 1 week.\nOLD=\"$(find geoip -mmin +10080 2>/dev/null)\"\n\n# Only download, if files are not existing or older than 1 week.\nif [ ! -f geoip -o ! -z \"$OLD\" ]; then\n    curl --remote-name --location https://gitlab.torproject.org/tpo/core/tor/-/raw/main/src/config/geoip\n    curl --remote-name --location https://gitlab.torproject.org/tpo/core/tor/-/raw/main/src/config/geoip6\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6003F586195388D20070C39A /* Sources */ = {
@@ -412,6 +483,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -469,6 +541,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -491,6 +564,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tor/Tor-Prefix.pch";
 				INFOPLIST_FILE = "Tor/Tor-Info.plist";
@@ -510,6 +584,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tor/Tor-Prefix.pch";
 				INFOPLIST_FILE = "Tor/Tor-Info.plist";
@@ -589,6 +664,7 @@
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_INCOMING_NETWORK_CONNECTIONS = YES;
 				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -634,6 +710,7 @@
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_INCOMING_NETWORK_CONNECTIONS = YES;
 				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -697,6 +774,28 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		A0D845E23093BE19007886E8 /* XCLocalSwiftPackageReference "../../Tor.framework" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../Tor.framework;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A0D845DB3093BB68007886E8 /* CTorNoLzma */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CTorNoLzma;
+		};
+		A0D845E33093BE19007886E8 /* CTor */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CTor;
+		};
+		A0D845E53093BE19007886E8 /* CTorNoLzma */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CTorNoLzma;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6003F582195388D10070C39A /* Project object */;
 }
