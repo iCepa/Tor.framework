@@ -1,7 +1,7 @@
 Pod::Spec.new do |m|
 
   m.name             = 'Tor'
-  m.version          = '409.11.1'
+  m.version          = '409.14.1'
   m.summary          = 'Tor.framework is the easiest way to embed Tor in your iOS application.'
   m.description      = 'Tor.framework is the easiest way to embed Tor in your iOS application. Currently, the framework compiles in static versions of tor, libevent, openssl, and liblzma.'
 
@@ -19,9 +19,9 @@ Pod::Spec.new do |m|
   m.social_media_url = 'https://chaos.social/@tla'
 
   m.ios.deployment_target = '15.0'
-  m.macos.deployment_target = '11.0'
+  m.macos.deployment_target = '12.0'
 
-  m.prepare_command = "Tor/download.sh v#{m.version} \"tor tor-nolzma\" 80711b4f831a0de8128038c044da07afabca32ccc7ee7affaddbbd2e3e313196 8c2b0ae078e89e1aaab2d5310fe2d19eed7d6a249c6fd6bcf7e8caf9435e19f1"
+  m.prepare_command = "Tor/download.sh v#{m.version} \"tor tor-nolzma\" 823d98fcafd8eba089f31b32989ad70e15a0e8a1b5709bc0d5941fb09ef1b625 3582f1ebaeeff3e0b7178de6ff536c54b61ca1b598332affd6631e34ecbdf531"
 
   m.subspec 'Core' do |s|
     s.requires_arc = true
@@ -37,6 +37,9 @@ Pod::Spec.new do |m|
     s.vendored_frameworks = 'tor.xcframework'
     s.libraries = 'z'
 
+    s.pod_target_xcconfig = {
+      'HEADER_SEARCH_PATHS' => '$(inherited) "${PODS_TARGET_SRCROOT}/tor.xcframework/ios-arm64/tor.framework/Headers"',
+    }
 
     s.preserve_paths = 'tor.xcframework', 'download.sh'
   end
@@ -49,6 +52,9 @@ Pod::Spec.new do |m|
     s.vendored_frameworks = 'tor-nolzma.xcframework'
     s.libraries = 'z'
 
+    s.pod_target_xcconfig = {
+      'HEADER_SEARCH_PATHS' => '$(inherited) "${PODS_TARGET_SRCROOT}/tor-nolzma.xcframework/ios-arm64/tor-nolzma.framework/Headers"',
+    }
 
     s.preserve_paths = 'tor-nolzma.xcframework', 'Tor/download.sh'
   end
