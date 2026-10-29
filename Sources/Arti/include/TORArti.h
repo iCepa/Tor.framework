@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <Tor/TORConfiguration.h>
+#import <TORConfiguration.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

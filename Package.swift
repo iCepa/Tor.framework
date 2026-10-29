@@ -16,6 +16,9 @@ let package = Package(
             name: "CTorNoLzma",
             targets: ["CTorNoLzma"]
         ),
+        .library(
+            name: "Arti",
+            targets: ["Arti"]),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -46,6 +49,16 @@ let package = Package(
             publicHeadersPath: "include",
             // Needed for tor.xcframework, but not allowed in `.binaryTarget`. Hrgrml. But works this way.
             linkerSettings: [.linkedLibrary("z")]),
+        .binaryTarget(
+            name: "arti",
+            path: "arti.xcframework"
+//            url: "https://github.com/iCepa/Tor.framework/releases/download/v409.15.2/arti.xcframework.zip",
+//            checksum: ""
+        ),
+        .target(
+            name: "Arti",
+            dependencies: ["TorCore", "arti"],
+            publicHeadersPath: "include"),
     ],
     swiftLanguageModes: [.v6]
 )
