@@ -335,7 +335,7 @@ rust_target() {
     ARCH=$2
 
     export IPHONEOS_DEPLOYMENT_TARGET=15.0
-    export MACOSX_DEPLOYMENT_TARGET=11.0
+    export MACOSX_DEPLOYMENT_TARGET=12.0
 
     TARGET="aarch64-apple-ios"
 
@@ -564,21 +564,21 @@ if [ ! -z $WITH_CTOR ]; then
     create_static_lib   iphonesimulator     fat
     create_static_lib   iphonesimulator     fat             nolzma
 
-    build_liblzma       macosx              arm64           11.0
-    build_liblzma       macosx              x86_64          11.0
+    build_liblzma       macosx              arm64           12.0
+    build_liblzma       macosx              x86_64          12.0
     fatten              liblzma             macosx
-    build_libssl        macosx              arm64           11.0
-    build_libssl        macosx              x86_64          11.0
+    build_libssl        macosx              arm64           12.0
+    build_libssl        macosx              x86_64          12.0
     fatten              libssl              macosx
     fatten              libssl              macosx          libcrypto
-    build_libevent      macosx              arm64           11.0
-    build_libevent      macosx              x86_64          11.0
+    build_libevent      macosx              arm64           12.0
+    build_libevent      macosx              x86_64          12.0
     fatten              libevent            macosx
-    build_libtor        macosx              arm64           11.0
-    build_libtor        macosx              x86_64          11.0
+    build_libtor        macosx              arm64           12.0
+    build_libtor        macosx              x86_64          12.0
     fatten              libtor              macosx
-    build_libtor        macosx              arm64           11.0    nolzma
-    build_libtor        macosx              x86_64          11.0    nolzma
+    build_libtor        macosx              arm64           12.0    nolzma
+    build_libtor        macosx              x86_64          12.0    nolzma
     fatten              libtor-nolzma       macosx          libtor
     create_static_lib   macosx              fat
     create_static_lib   macosx              fat             nolzma
