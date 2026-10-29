@@ -9,7 +9,7 @@
 #import "TORLogging.h"
 #import "TORConfiguration.h"
 
-@import tor;
+#import <feature/api/tor_api.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -7,7 +7,9 @@
 
 #import "TORLogging.h"
 
-@import tor;
+#import <event2/event.h>
+#import <asl.h>
+#import <lib/log/log.h>
 
 #import <asl.h>
 
