@@ -30,8 +30,8 @@ let package = Package(
         .binaryTarget(
             name: "tor",
 //            path: "tor.xcframework"
-            url: "https://github.com/iCepa/Tor.framework/releases/download/v409.11.1/tor.xcframework.zip",
-            checksum: "80711b4f831a0de8128038c044da07afabca32ccc7ee7affaddbbd2e3e313196"
+            url: "https://github.com/iCepa/Tor.framework/releases/download/409.15.2/tor.xcframework.zip",
+            checksum: "a365013b33229a20f773e4dc7dc3f1c8ed6653a3e6c05ff9b67dc8286cc63528"
         ),
         .target(
             name: "CTor",
@@ -41,8 +41,10 @@ let package = Package(
             linkerSettings: [.linkedLibrary("z")]),
         .binaryTarget(
             name: "tor-nolzma",
-            url: "https://github.com/iCepa/Tor.framework/releases/download/v409.11.1/tor-nolzma.xcframework.zip",
-            checksum: "8c2b0ae078e89e1aaab2d5310fe2d19eed7d6a249c6fd6bcf7e8caf9435e19f1"),
+//            path: "tor-nolzma.xcframework"
+            url: "https://github.com/iCepa/Tor.framework/releases/download/409.15.2/tor-nolzma.xcframework.zip",
+            checksum: "0c3921c9fc58631428904f77d9c4afd49fa4c77ad608abf547bf7c409bb33b70"
+        ),
         .target(
             name: "CTorNoLzma",
             dependencies: ["TorCore", "tor-nolzma"],
@@ -51,9 +53,9 @@ let package = Package(
             linkerSettings: [.linkedLibrary("z")]),
         .binaryTarget(
             name: "arti",
-            path: "arti.xcframework"
-//            url: "https://github.com/iCepa/Tor.framework/releases/download/v409.15.2/arti.xcframework.zip",
-//            checksum: ""
+//            path: "arti.xcframework"
+            url: "https://github.com/iCepa/Tor.framework/releases/download/409.15.2/arti.xcframework.zip",
+            checksum: "f2e22a1ff1d9dc92554764b3fbc7eee0b30d9481d59478e01c01a93cbe947d12"
         ),
         .target(
             name: "Arti",

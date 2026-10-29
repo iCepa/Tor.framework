@@ -1,12 +1,14 @@
 # Tor.framework
 
-[![Version](https://img.shields.io/cocoapods/v/Tor.svg?style=flat)](https://cocoapods.org/pods/Tor)
-[![License](https://img.shields.io/cocoapods/l/Tor.svg?style=flat)](https://cocoapods.org/pods/Tor)
-[![Platform](https://img.shields.io/cocoapods/p/Tor.svg?style=flat)](https://cocoapods.org/pods/Tor)
+[![Swift Package](https://img.shields.io/badge/SPM-Compatible-swift.svg?style=flat)](https://github.com/apple/swift-package-manager)
+[![Version](https://img.shields.io/github/v/tag/iCepa/Tor.framework.svg?style=flat)](https://github.com/iCepa/Tor.framework/releases)
+[![License](https://img.shields.io/badge/license-MIT-blue?style=flat)](https://github.com/iCepa/Tor.framework/blob/spm/LICENSE)
+[![Platform](https://img.shields.io/badge/platform-iOS%20%7C%20macOS-lightgrey.svg?style=flat)](https://github.com/iCepa/Tor.framework/blob/spm/Package.swift)
 
-Tor.framework is the easiest way to embed Tor in your iOS application. The API is *not* stable yet, and subject to change.
 
-Currently, the framework compiles in the following versions of `tor`, `libevent`, `openssl`, and `liblzma`:
+Tor.framework is the easiest way to embed Tor in your iOS application. The API is *not* stable, and subject to change. But also didn't change in a very long time.
+
+Currently, the framework compiles in the following versions:
 
 | Component | Version  |
 |:--------- | --------:|
@@ -20,6 +22,7 @@ Currently, the framework compiles in the following versions of `tor`, `libevent`
 
 ## LATEST CHANGES
 
+- Moved to Swift Package Manager. CocoaPods is going into read-only mode in 2027.
 - No inline compilation necessary anymore: Now uses precompiled `tor.xcframework`, 
   `tor-nolzma.xcframework` and `arti.xcframework`which will be downloaded from 
   https://github.com/iCepa/Tor.framework/releases on install/update. 
@@ -28,7 +31,7 @@ Currently, the framework compiles in the following versions of `tor`, `libevent`
 
 ## Example
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+To run the example project, clone the repo, and run `open Example/Tor.xcodeproj` .
 
 ## Requirements
 
@@ -39,25 +42,49 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Installation
 
-C-Tor is available through [CocoaPods](https://cocoapods.org). To install it, 
-simply add the following line to your Podfile:
+C-Tor and Arti are available through [SPM](https://github.com/apple/swift-package-manager). 
+To install them, simply add this repository to your Xcode project.
 
-```ruby
-use_frameworks!
-pod 'Tor', '~> 409'
+### GeoIP
+
+To make sure you have the latest GeoIP files available which lets Tor resolve the geolocation of Tor nodes,
+
+-  add below script as a "Run Script Phase" to your app's target, which should execute on every build.
+
+- Disable "User Script Sandboxing".
+
+- Adapt the `DEST` variable accordingly.
+
+- Make sure it runs before the "Copy Bundle Resources" phase.
+
+- Add the loaded `geoip` and `geoip6` files to the necessary target(s).
+
+```sh
+#!/bin/sh
+
+DEST="$PROJECT_DIR/Resources"
+
+mkdir -p "$DEST"
+cd "$DEST"
+
+# Test if file is older then 1 week.
+OLD="$(find geoip -mmin +10080 2>/dev/null)"
+
+# Only download, if files are not existing or older than 1 week.
+if [ ! -f geoip -o ! -z "$OLD" ]; then
+    curl --remote-name --location https://gitlab.torproject.org/tpo/core/tor/-/raw/main/src/config/geoip
+    curl --remote-name --location https://gitlab.torproject.org/tpo/core/tor/-/raw/main/src/config/geoip6
+fi
 ```
 
-(or `Tor/GeoIP` - see below.)
+To use it with Tor, add this to your configuration:
 
-
-Arti is available through it's own Podspec. To install it,
-simply add the following line to your Podfile:
-
-```ruby
-use_frameworks!
-pod 'Tor/Arti', 
-  :podspec => 'https://raw.githubusercontent.com/iCepa/Tor.framework/refs/heads/pure_pod/Arti.podspec'
+```objc
+TORConfiguration *configuration = [TORConfiguration new];
+configuration.geoipFile = [NSBundle.mainBundle URLForResource:@"geoip" withExtension:nil];
+configuration.geoip6File = [NSBundle.mainBundle URLForResource:@"geoip6" withExtension:nil];
 ```
+
 
 ## Compiling yourself
 
@@ -92,7 +119,7 @@ doing the following:
 - Check the logs and test the created `tor.xcframework`, `tor-nolzma.xcframework` and `arti.xcframework` 
   with the contained example apps.
   
-- Update info, version numbers and checksums in `README.md`, `Tor.podspec` and `Arti.podspec`!
+- Update info, version numbers and checksums in `README.md` and `Package.swift`!
 
 - Commit, tag and push new release.
 
@@ -100,17 +127,7 @@ doing the following:
   info as per older releases and upload the created `tor.xcframework.zip`, 
   `tor-nolzma.framework.zip` and `arti.framework.zip` files.
 
-- Then lint like this:
-
-```sh
-pod lib lint --allow-warnings Tor.podspec
-```
-
-- If the linting went well, publish to CocoaPods:
-
-```sh
-pod trunk push --allow-warnings Tor.podspec 
-```
+- Update another project with the latest release and test drive the libraries.
 
 - Then update the [release](https://github.com/iCepa/Tor.framework/releases) in GitHub, 
   setting it as the latest release.
@@ -120,8 +137,8 @@ pod trunk push --allow-warnings Tor.podspec
 
 ### All-in-one `TorManager`
 
-For a headache-free start into the world of Tor on iOS and macOS, check out
-the new [`TorManager` project](https://github.com/tladesignz/TorManager)!
+There's a slightly outdated `TorManager` project, which still gives you a good idea
+on how to use Tor in your project: [`TorManager`](https://github.com/tladesignz/TorManager)!
 
 ### Do-it-yourself
 
@@ -167,28 +184,9 @@ if (error) {
 ```
 
 
-### GeoIP
+### Experimental Arti target
 
-In your `Podfile` use the subspec `GeoIP` instead of the root spec:
-
-```ruby
-use_frameworks!
-pod 'Tor/GeoIP'
-```
-
-The subspec will create a "GeoIP" bundle with the appropriate GeoIP files.
-
-To use it with Tor, add this to your configuration:
-
-```objc
-TORConfiguration *configuration = [TORConfiguration new];
-configuration.geoipFile = NSBundle.geoIpBundle.geoipFile;
-configuration.geoip6File = NSBundle.geoIpBundle.geoip6File;
-```
-
-### Experimental Arti and Onionmasq podspec
-
-Since I while, this project also contains a podspec, which uses Arti (A Rust Tor Implementation)
+Since a while, this project also contains a target, which uses Arti (A Rust Tor Implementation)
 or Onionmasq (Arti with a wrapper taking in IP packets, useful for VPN-style apps.)
 
 ```ruby
