@@ -137,8 +137,7 @@ doing the following:
 
 ### All-in-one `TorManager`
 
-There's a slightly outdated `TorManager` project, which still gives you a good idea
-on how to use Tor in your project: [`TorManager`](https://github.com/tladesignz/TorManager)!
+For a headache-free start into the world of Tor on iOS and macOS, check out the new [`TorManager project`](https://github.com/tladesignz/TorManager)!
 
 ### Do-it-yourself
 
@@ -189,11 +188,10 @@ if (error) {
 Since a while, this project also contains a target, which uses Arti (A Rust Tor Implementation)
 or Onionmasq (Arti with a wrapper taking in IP packets, useful for VPN-style apps.)
 
-```ruby
-pod 'Tor/Arti', :podspec => 'https://raw.githubusercontent.com/iCepa/Tor.framework/pure_pod/Arti.podspec'
-```
+Arti already made it to SPM, so just use that. However, it is currently unmaintained, so it's an old version.
 
-or
+Onionmasq is still only available through CocoaPods:
+
 
 ```ruby
 pod 'Tor/Onionmasq', :podspec => 'https://raw.githubusercontent.com/iCepa/Tor.framework/pure_pod/Arti.podspec'
