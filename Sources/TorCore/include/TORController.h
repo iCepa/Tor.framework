@@ -103,7 +103,7 @@ NS_SWIFT_NAME(TorController)
 // Observers
 - (id)addObserverForCircuitEstablished:(void (^)(BOOL established))block;
 - (id)addObserverForStatusEvents:(BOOL (^)(NSString *type, NSString *severity, NSString *action, NSDictionary<NSString *, NSString *> * __nullable arguments))block;
-- (void)removeObserver:(nullable id)observer;
+- (void)removeObserver:(nullable id)token;
 
 @end
 

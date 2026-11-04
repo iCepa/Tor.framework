@@ -18,6 +18,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@interface TORObserverEntry : NSObject
+
+@property (nonatomic, strong) id token;
+@property (nonatomic, copy) TORObserverBlock block;
+
+@end
+
+@implementation TORObserverEntry
+@end
+
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 100000
 NSErrorDomain const TORControllerErrorDomain = @"TORControllerErrorDomain";
 #else
@@ -33,7 +43,7 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
     NSString *_host;
     in_port_t _port;
     dispatch_io_t _channel;
-    NSMutableArray<TORObserverBlock> *_blocks;
+    NSMutableArray<TORObserverEntry *> *_blocks;
     int sock;
 }
 
@@ -298,13 +308,13 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
                     continue;
                 }
                 
-                for (TORObserverBlock observer in [strongSelf->_blocks copy]) {
+                for (TORObserverEntry *entry in [strongSelf->_blocks copy]) {
                     BOOL stop = NO;
-                    BOOL handled = observer(commandCodes, commandLines, &stop);
+                    BOOL handled = entry.block(commandCodes, commandLines, &stop);
 
                     if (stop)
                     {
-                        [strongSelf->_blocks removeObject:observer];
+                        [strongSelf->_blocks removeObject:entry];
                     }
 
                     if (handled)
@@ -434,18 +444,38 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
 - (id)addObserver:(TORObserverBlock)observer
 {
     NSParameterAssert(observer);
+
+    TORObserverEntry *entry = [TORObserverEntry new];
+    entry.token = [NSUUID UUID];
+    entry.block = observer;
+
+    // Fixed: Blocks are copied when used in another queue.
+    // So we need to use a simpler object, like a UUID as a token
+    // instead, otherwise a retained observer ID and
+    // the stored blocks will never be the same, hence cannot be removed anymore.
     dispatch_async([self.class controlQueue], ^{
-        [self->_blocks addObject:observer];
+        [self->_blocks addObject:entry];
     });
-    return observer;
+
+    return entry.token;
 }
 
-- (void)removeObserver:(nullable id)observer {
-    if (!observer)
+- (void)removeObserver:(nullable id)token
+{
+    if (!token)
+    {
         return;
-    
+    }
+
     dispatch_async([self.class controlQueue], ^{
-        [self->_blocks removeObject:(id _Nonnull)observer];
+        for (TORObserverEntry *entry in self->_blocks)
+        {
+            if (entry.token == token)
+            {
+                [self->_blocks removeObject:entry];
+                break;
+            }
+        }
     });
 }
 
@@ -728,7 +758,11 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
 
     dispatch_io_write(_channel, 0, dispatchData, [self.class controlQueue], ^(bool done, dispatch_data_t __unused data, int error) {
         if (done && !error && observer) {
-            [self->_blocks insertObject:observer atIndex:0];
+            TORObserverEntry *entry = [TORObserverEntry new];
+            entry.token = [NSUUID UUID];
+            entry.block = observer;
+
+            [self->_blocks insertObject:entry atIndex:0];
         }
     });
 }
