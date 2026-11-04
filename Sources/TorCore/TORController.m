@@ -320,93 +320,119 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
 }
 
 - (void)disconnect {
-    [self sendCommand:TORCommandSignalShutdown arguments:nil data:nil observer:^BOOL(NSArray<NSNumber *> * __unused codes, NSArray<NSData *> * __unused lines, BOOL * __unused stop) {
+    [self sendCommand:TORCommandSignalShutdown arguments:nil data:nil observer:
+     ^BOOL(NSArray<NSNumber *> * __unused codes, NSArray<NSData *> * __unused lines, BOOL * __unused stop) {
         shutdown(self->sock, SHUT_RDWR);
         self->_channel = nil;
-     
+
         return YES;
-     }];
+    }];
 }
 
 #pragma mark - Receiving Responses
 
-- (id)addObserverForCircuitEstablished:(void (^)(BOOL established))block {
+- (id)addObserverForCircuitEstablished:(void (^)(BOOL established))block
+{
     NSParameterAssert(block);
-    
+
     NSString *event = @"STATUS_CLIENT";
+
     id observer = [self addObserverForStatusEvents:^(NSString *type, NSString * __unused severity, NSString *action, NSDictionary<NSString *, NSString *> * __unused arguments) {
-        if ([type isEqualToString:event]) {
-            if ([action isEqualToString:@"CIRCUIT_ESTABLISHED"]) {
+        if ([type isEqualToString:event])
+        {
+            if ([action isEqualToString:@"CIRCUIT_ESTABLISHED"])
+            {
                 block(YES);
                 return YES;
-            } else if ([action isEqualToString:@"CIRCUIT_NOT_ESTABLISHED"]) {
+            }
+            else if ([action isEqualToString:@"CIRCUIT_NOT_ESTABLISHED"])
+            {
                 block(NO);
                 return YES;
             }
         }
-        
+
         return NO;
     }];
-    
+
     void (^completion)(BOOL, NSError *) = ^(BOOL success, NSError * __unused error) {
         if (!success)
+        {
             [self removeObserver:observer];
-        
+        }
+
         [self getInfoForKeys:@[@"status/circuit-established"] completion:^(NSArray<NSString *> *values) {
             if (values.count != 1)
+            {
                 return [self removeObserver:observer];
-            
+            }
+
             if (block)
+            {
                 block([values[0] boolValue]);
+            }
         }];
     };
-    
+
     dispatch_async([self.class controlQueue], ^{
-        if ([self->_events containsObject:event]) {
+        if ([self.events containsObject:event])
+        {
             completion(YES, nil);
-        } else {
-            NSMutableOrderedSet *events = [self->_events mutableCopy];
+        }
+        else {
+            NSMutableOrderedSet *events = [self.events mutableCopy];
             [events addObject:event];
             [self listenForEvents:events.array completion:completion];
         }
     });
-    
+
     return observer;
 }
 
-- (id)addObserverForStatusEvents:(BOOL (^)(NSString *type, NSString *severity, NSString *action, NSDictionary<NSString *, NSString *> *arguments))block {
+- (id)addObserverForStatusEvents:(BOOL (^)(NSString *type, NSString *severity, NSString *action, NSDictionary<NSString *, NSString *> *arguments))block
+{
     NSParameterAssert(block);
     return [self addObserver:^(NSArray<NSNumber *> *codes, NSArray<NSData *> *lines, BOOL * __unused stop) {
         if (codes.firstObject.integerValue != 650)
+        {
             return NO;
-        
+        }
+
         NSString *replyString = lines.firstObject ? [[NSString alloc] initWithData:(NSData * _Nonnull)lines.firstObject encoding:NSUTF8StringEncoding] : @"";
         if (![replyString hasPrefix:@"STATUS_"])
+        {
             return NO;
+        }
 
         NSArray<NSString *> *components = [TORController parseStatus:replyString];
         if (components.count < 3)
+        {
             return NO;
-        
-        NSMutableDictionary<NSString *, NSString *> *arguments = nil;
-        if (components.count > 3) {
-            arguments = [NSMutableDictionary new];
-            for (NSString *argument in [components subarrayWithRange:NSMakeRange(3, components.count - 3)]) {
-                NSArray<NSString *> *keyValuePair = [argument componentsSeparatedByString:@"="];
-                if (keyValuePair.count == 2) {
-                    NSString *value = [keyValuePair[1] stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+        }
 
-                    [arguments setObject:value forKey:keyValuePair[0]];
+        NSMutableDictionary<NSString *, NSString *> *arguments = nil;
+        if (components.count > 3)
+        {
+            arguments = [NSMutableDictionary new];
+
+            for (NSString *argument in [components subarrayWithRange:NSMakeRange(3, components.count - 3)])
+            {
+                NSArray<NSString *> *keyValuePair = [argument componentsSeparatedByString:@"="];
+                if (keyValuePair.count == 2)
+                {
+                    arguments[keyValuePair[0]] = [keyValuePair[1] stringByReplacingOccurrencesOfString:@"\"" withString:@""];
                 }
             }
         }
 
         NSString *type = (NSString * _Nonnull)components.firstObject;
+
         return block(type, components[1], components[2], arguments);
     }];
 }
 
-- (id)addObserver:(TORObserverBlock)observer {
+- (id)addObserver:(TORObserverBlock)observer
+{
     NSParameterAssert(observer);
     dispatch_async([self.class controlQueue], ^{
         [self->_blocks addObject:observer];
@@ -507,20 +533,40 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
 
 }
 
-- (void)listenForEvents:(NSArray<NSString *> *)events completion:(void (^__nullable)(BOOL success, NSError * __nullable error))completion {
-    [self sendCommand:TORCommandSetEvents arguments:events data:nil observer:^BOOL(NSArray<NSNumber *> *codes, NSArray<NSData *> *lines, BOOL *stop) {
+- (void)listenForEvents:(NSArray<NSString *> *)events completion:(void (^__nullable)(BOOL success, NSError * __nullable error))completion
+{
+    [self sendCommand:TORCommandSetEvents
+            arguments:events
+                 data:nil
+             observer:^BOOL(NSArray<NSNumber *> *codes, NSArray<NSData *> *lines, BOOL *stop)
+     {
         NSUInteger code = codes.firstObject.unsignedIntegerValue;
         if (code != TORControlReplyCodeOK && code != TORControlReplyCodeUnrecognizedEntity)
+        {
             return NO;
+        }
 
-        NSString *message = lines.firstObject ? [[NSString alloc] initWithData:(NSData * _Nonnull)lines.firstObject encoding:NSUTF8StringEncoding] : @"";
-        NSDictionary<NSString *, NSString *> *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:message, NSLocalizedDescriptionKey, nil];
+        NSString *message = lines.firstObject ? [[NSString alloc] initWithData:lines.firstObject encoding:NSUTF8StringEncoding] : @"";
+
         BOOL success = (code == TORControlReplyCodeOK && [message isEqualToString:@"OK"]);
+
         if (success)
+        {
             self->_events = [NSOrderedSet orderedSetWithArray:events];
+        }
+
         if (completion)
-            completion(success, success ? nil : [NSError errorWithDomain:TORControllerErrorDomain code:code userInfo:userInfo]);
-        
+        {
+            NSError *error = nil;
+
+            if (!success)
+            {
+                error = [NSError errorWithDomain:TORControllerErrorDomain code:code userInfo:@{NSLocalizedDescriptionKey: message}];
+            }
+
+            completion(success, error);
+        }
+
         *stop = YES;
         return YES;
     }];
