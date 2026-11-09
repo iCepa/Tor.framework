@@ -30,8 +30,8 @@ let package = Package(
         .binaryTarget(
             name: "tor",
 //            path: "tor.xcframework"
-            url: "https://github.com/iCepa/Tor.framework/releases/download/409.15.3/tor.xcframework.zip",
-            checksum: "a365013b33229a20f773e4dc7dc3f1c8ed6653a3e6c05ff9b67dc8286cc63528"
+            url: "https://github.com/iCepa/Tor.framework/releases/download/409.16.1/tor.xcframework.zip",
+            checksum: "b815217038c9846e207f7734b1052eaa100b223f2ff6e6122729639744591d07"
         ),
         .target(
             name: "CTor",
@@ -42,8 +42,8 @@ let package = Package(
         .binaryTarget(
             name: "tor-nolzma",
 //            path: "tor-nolzma.xcframework"
-            url: "https://github.com/iCepa/Tor.framework/releases/download/409.15.3/tor-nolzma.xcframework.zip",
-            checksum: "0c3921c9fc58631428904f77d9c4afd49fa4c77ad608abf547bf7c409bb33b70"
+            url: "https://github.com/iCepa/Tor.framework/releases/download/409.16.1/tor-nolzma.xcframework.zip",
+            checksum: "2c77a1dfe31043de0ec2386235a7bf567f5b735595f8542989d5e196768527fa"
         ),
         .target(
             name: "CTorNoLzma",

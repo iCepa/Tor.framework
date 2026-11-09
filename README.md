@@ -12,7 +12,7 @@ Currently, the framework compiles in the following versions:
 
 | Component | Version  |
 |:--------- | --------:|
-| tor       | 0.4.9.15 |
+| tor       | 0.4.9.16 |
 | libevent  | 2.1.13   |
 | OpenSSL   | 3.6.5    |
 | liblzma   | 5.8.4    |
