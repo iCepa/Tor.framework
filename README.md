@@ -12,7 +12,7 @@ Currently, the framework compiles in the following versions:
 
 | Component | Version  |
 |:--------- | --------:|
-| tor       | 0.4.9.16 |
+| tor       | 0.4.9.17 |
 | libevent  | 2.1.13   |
 | OpenSSL   | 3.6.5    |
 | liblzma   | 5.8.4    |
@@ -58,6 +58,8 @@ To make sure you have the latest GeoIP files available which lets Tor resolve th
 - Make sure it runs before the "Copy Bundle Resources" phase.
 
 - Add the loaded `geoip` and `geoip6` files to the necessary target(s).
+
+- Add `geoip` and `geoip6` to the respective `.gitignore` file.
 
 ```sh
 #!/bin/sh
@@ -137,7 +139,7 @@ doing the following:
 
 ### All-in-one `TorManager`
 
-For a headache-free start into the world of Tor on iOS and macOS, check out the new [`TorManager project`](https://github.com/tladesignz/TorManager)!
+For a headache-free start into the world of Tor on iOS and macOS, check out the [`TorManager project`](https://github.com/tladesignz/TorManager)!
 
 ### Do-it-yourself
 
