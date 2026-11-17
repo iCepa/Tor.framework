@@ -21,13 +21,15 @@ class ViewController: UIViewController {
 
     @objc
     func load(_ notification: Notification) {
-        let port = notification.object as? UInt16
+        let dictionary = notification.object as? [CFString: AnyObject]
 
         Task { @MainActor in
             let conf = WKWebViewConfiguration()
 
-            if #available(iOS 17.0, macOS 14.0, *), let port = port {
-                let endpoint = NWEndpoint.hostPort(host: .ipv4(.init("127.0.0.1")!), port: .init(integerLiteral: port))
+            if #available(iOS 17.0, macOS 14.0, *), let port = dictionary?[kCFStreamPropertySOCKSProxyPort] as? UInt16 {
+                let endpoint = NWEndpoint.hostPort(
+                    host: getHost(dictionary?[kCFStreamPropertySOCKSProxyHost] as? String),
+                    port: .init(integerLiteral: port))
 
                 conf.websiteDataStore.proxyConfigurations.removeAll()
                 conf.websiteDataStore.proxyConfigurations.append(ProxyConfiguration(socksv5Proxy: endpoint))
@@ -44,5 +46,21 @@ class ViewController: UIViewController {
 
             webView.load(.init(url: .init(string: "https://check.torproject.org")!))
         }
+    }
+
+    private func getHost(_ hostString: String?) -> NWEndpoint.Host {
+        if let hostString, !hostString.isEmpty {
+            if let ipv4 = IPv4Address(hostString) {
+                return .ipv4(ipv4)
+            }
+
+            if let ipv6 = IPv6Address(hostString) {
+                return .ipv6(ipv6)
+            }
+
+            return .name(hostString, nil)
+        }
+
+        return .ipv4(.loopback)
     }
 }

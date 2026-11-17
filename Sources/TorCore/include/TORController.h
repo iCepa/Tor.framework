@@ -45,7 +45,11 @@ NS_SWIFT_NAME(TorController)
 - (void)setConfs:(NSArray<NSDictionary *> *)configs completion:(void (^__nullable)(BOOL success, NSError * __nullable error))completion;
 - (void)listenForEvents:(NSArray<NSString *> *)events completion:(void (^__nullable)(BOOL success, NSError * __nullable error))completion;
 - (void)getInfoForKeys:(NSArray<NSString *> *)keys completion:(void (^)(NSArray<NSString *> *values))completion; // TODO: Provide errors
-- (void)getSessionConfiguration:(void (^)(NSURLSessionConfiguration * __nullable configuration))completion;
+
+- (void)getSocks5Address:(void (^)(NSString * __nullable host, NSNumber * __nullable port, NSError * __nullable error))completion;
+- (void)getConnectionProxyDictionary:(void (^)(NSDictionary * __nullable dictionary, NSError * __nullable error))completion;
+- (void)getSessionConfiguration:(void (^)(NSURLSessionConfiguration * __nullable configuration, NSError * __nullable error))completion;
+
 - (void)sendCommand:(NSString *)command arguments:(nullable NSArray<NSString *> *)arguments data:(nullable NSData *)data observer:(TORObserverBlock)observer;
 
 /**

@@ -119,17 +119,16 @@
 
                 CFTimeInterval startTime = CACurrentMediaTime();
 
-                [c getInfoForKeys:@[@"net/listeners/socks"] completion:^(NSArray<NSString *> * _Nonnull values) {
-                    if (values.count > 0) {
-                        NSArray<NSString *> *parts = [values[0] componentsSeparatedByString:@":"];
-
-                        if (parts.count > 1) {
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                [NSNotificationCenter.defaultCenter
-                                 postNotificationName:@"tor-ready"
-                                 object:[[NSNumber alloc] initWithInteger:parts[1].integerValue]];
-                            });
-                        }
+                [c getConnectionProxyDictionary:^(NSDictionary * _Nullable dictionary, NSError * _Nullable error) {
+                    if (dictionary.count) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [NSNotificationCenter.defaultCenter
+                             postNotificationName:@"tor-ready"
+                             object:dictionary];
+                        });
+                    }
+                    else {
+                        NSLog(@"Error: %@", error.localizedDescription);
                     }
 
                     [c getCircuits:^(NSArray<TORCircuit *> * _Nonnull circuits) {

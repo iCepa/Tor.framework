@@ -684,21 +684,45 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
     }];
 }
 
-- (void)getSessionConfiguration:(void (^)(NSURLSessionConfiguration * __nullable configuration))completion
+- (void)getSocks5Address:(void (^)(NSString * __nullable host, NSNumber * __nullable port, NSError * __nullable error))completion
 {
     [self getInfoForKeys:@[@"net/listeners/socks"] completion:^(NSArray<NSString *> *values) {
-        if (values.count != 1)
-            return completion(nil);
-        
+        if (values.count != 1) {
+            NSError *error = [[NSError alloc]
+                              initWithDomain:TORControllerErrorDomain
+                              code:191
+                              userInfo:@{NSLocalizedDescriptionKey: @"No SOCKS5 address returned."}];
+
+            return completion(nil, nil, error);
+        }
+
         NSArray<NSString *> *components = [values.firstObject componentsSeparatedByString:@":"];
-        if (components.count != 2)
-            return completion(nil);
-        
-        if ([components[0] isEqualToString:@"unix"])
-            return completion(nil); // TODO: Provide error
-        
-        if ([components[1] rangeOfCharacterFromSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]].location != NSNotFound)
-            return completion(nil); // TODO: Provide error
+        if (components.count != 2) {
+            NSError *error = [[NSError alloc]
+                              initWithDomain:TORControllerErrorDomain
+                              code:192
+                              userInfo:@{NSLocalizedDescriptionKey: @"Unexpected format of SOCKS5 address."}];
+
+            return completion(nil, nil, error);
+        }
+
+        if ([components[0] isEqualToString:@"unix"]) {
+            NSError *error = [[NSError alloc]
+                              initWithDomain:TORControllerErrorDomain
+                              code:193
+                              userInfo:@{NSLocalizedDescriptionKey: @"SOCKS5 address is UNIX domain socket."}];
+
+            return completion(nil, nil, error);
+        }
+
+        if ([components[1] rangeOfCharacterFromSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]].location != NSNotFound) {
+            NSError *error = [[NSError alloc]
+                              initWithDomain:TORControllerErrorDomain
+                              code:194
+                              userInfo:@{NSLocalizedDescriptionKey: @"SOCKS5 address port is not a number."}];
+
+            return completion(nil, nil, error);
+        }
 
         NSString *host = components[0];
 
@@ -711,11 +735,38 @@ static NSString * const TORControllerEndReplyLineSeparator = @" ";
             host = @"localhost";
         }
 
+        completion(host, @([components[1] integerValue]), nil);
+    }];
+}
+
+- (void)getConnectionProxyDictionary:(void (^)(NSDictionary * __nullable dictionary, NSError * __nullable error))completion
+{
+    [self getSocks5Address:^(NSString * _Nullable host, NSNumber * _Nullable port, NSError * _Nullable error) {
+        if (error) {
+            return completion(nil, error);
+        }
+
+        completion(@{
+            (id)kCFProxyTypeKey: (id)kCFProxyTypeSOCKS,
+            (id)kCFStreamPropertySOCKSVersion: (id)kCFStreamSocketSOCKSVersion5,
+            (id)kCFStreamPropertySOCKSProxyHost: host,
+            (id)kCFStreamPropertySOCKSProxyPort: port
+        }, nil);
+    }];
+
+}
+
+- (void)getSessionConfiguration:(void (^)(NSURLSessionConfiguration * __nullable configuration, NSError * __nullable error))completion
+{
+    [self getConnectionProxyDictionary:^(NSDictionary * _Nullable dictionary, NSError * _Nullable error) {
+        if (error) {
+            return completion(nil, error);
+        }
+
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-        configuration.connectionProxyDictionary = @{(id)kCFProxyTypeKey: (id)kCFProxyTypeSOCKS,
-                                                    (id)kCFStreamPropertySOCKSProxyHost: host,
-                                                    (id)kCFStreamPropertySOCKSProxyPort: @([components[1] integerValue])};
-        completion(configuration);
+        configuration.connectionProxyDictionary = dictionary;
+
+        completion(configuration, nil);
     }];
 }
 
